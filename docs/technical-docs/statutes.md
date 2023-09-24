@@ -1,6 +1,7 @@
 ---
 id: statutes
 title: Statutes
+sidebar_position: 9
 ---
 
 # Statutes

@@ -1,6 +1,7 @@
 ---
 id: emergency-shutdown
 title: Emergency Shutdown
+sidebar_position: 6
 ---
 
 # Emergency Shutdown

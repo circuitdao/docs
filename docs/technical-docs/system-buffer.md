@@ -1,6 +1,7 @@
 ---
 id: system-buffer
 title: System Buffer
+sidebar_position: 4
 ---
 
 # System Buffer
@@ -11,10 +12,12 @@ Funds from the system buffer are used to pay for liquidation incentives. For thi
 
 If the amount of BYC in the system buffer exceeds A + B, then an amount B of BYC will be auctioned off in the market for CRT. Any CRT obtained this way will be melted immediately, thereby reducing the CRT supply.
 
+## Notes
 
+:::info
 
+The system buffer acquires CRT tokens by selling of excess BYC. Any such CRT is burned. This reduces the supply of CRT.
 
+:::
 
-
-
-
+## Parameters

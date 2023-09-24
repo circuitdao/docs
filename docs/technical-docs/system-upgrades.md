@@ -1,6 +1,7 @@
 ---
 id: system-upgrades
 title: System Upgrades
+sidebar_position: 9
 ---
 
 # System Upgrades

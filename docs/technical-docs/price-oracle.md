@@ -1,6 +1,7 @@
 ---
 id: price-oracle
 title: Price Oracle
+sidebar_position: 6
 ---
 
 # Price Oracle

@@ -1,6 +1,7 @@
 ---
 id: bad-debt
 title: Bad Debt
+sidebar_position: 3
 ---
 
 
@@ -24,7 +25,9 @@ Keepers monitor the blockchain to keep track of which vaults have incurred bad d
 
 Bad debt auctions are reverse auctions in which bidders offer BYC in return for the XCH in the bad debt auction coin plus a specified amount of CRT tokens. The amount of BYC offered must be exactly the BDL. The winning bid is the one that offered the least amount of CRT.
 
-The auction begins as soon as it has been triggered by a keeper and the **bad debt auction start delay** (BDASD) has passed. The maximum initial amount of CRT that may be requested by bidders is the **Bad Debt Auction Lot Size** (BDALS). The amount of CRT requested by bidders must decrease by at least the **Minimum Bid Decrease** (MBD).
+![Bad debt auction process](./../../static/img/Bad_debt_diagram.png)
+
+The auction begins as soon as it has been triggered by a keeper and the **Bad Debt Auction Start Delay** (BDASD) has passed. The maximum initial amount of CRT that may be requested by bidders is the **Bad Debt Auction Lot Size** (BDALS). The amount of CRT requested by bidders must decrease by at least the **Minimum Bid Decrease** (MBD).
 
 Any bad debt that hasn't been recovered is returned to the system, potentially allowing for another bad debt auction being triggered immediately. A bad debt auction that follows a bad debt auction that has failed starts with a BDALS that equals the previous auction's lot size plus the **Bad Debt Auction Lot Size Increase** (BDALSI).
 
