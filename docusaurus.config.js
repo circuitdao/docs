@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Circuit DAO API docs',
-  tagline: 'Circui DAO detailed technical documentation',
+  title: 'CircuitDAO Documentation',
+  tagline: 'A Guide to the CircuitDAO Protocol',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -18,7 +18,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'circuitdao', // Usually your GitHub org/user name.
+  organizationName: 'CircuitDAO', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -38,18 +38,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+	  routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,21 +54,19 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'CircuitDAO Docs',
         logo: {
-          alt: 'CircuitDAO',
+          alt: 'CircuitDAO Logo',
           src: 'img/logo.svg',
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
-          },
-          { to: '/blog', label: 'Blog', position: 'left' },
+            href: 'https://circuitdao.com',
+            label: 'CircuitDAO',
+            position: 'right',
+          },	    
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/circuitdao',
             label: 'GitHub',
             position: 'right',
           },
@@ -91,7 +79,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Introduction',
                 to: '/docs/intro',
               },
             ],
@@ -100,16 +88,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Twitter',
+                href: 'https://twitter.com/Circuit_DAO',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.gg/4ke8bAhG',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Medium',
+                href: 'https://medium.com/@circuitdao',
               },
             ],
           },
@@ -117,8 +105,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'CircuitDAO',
+                href: 'https://circuitdao.com',
               },
               {
                 label: 'GitHub',
@@ -127,7 +115,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} CircuitDAO. Built with &#128154;.`,
+        copyright: `Copyright © ${new Date().getFullYear()} CircuitDAO`,
       },
       prism: {
         theme: lightCodeTheme,

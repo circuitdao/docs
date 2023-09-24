@@ -1,16 +1,32 @@
 ---
+id: intro
+title: Introduction
 sidebar_position: 1
+slug: /
 ---
 
-# Tutorial Intro
+# About CircuitDAO
 
-Let's discover **Docusaurus in less than 5 minutes**.
+CircuitDAO is an on-chain collateralized stablecoin protocol built on [Chia](https://www.chia.net).
+
+Users can borrow **Bytecash** (**BYC**), the stablecoin issued by CircuitDAO, against XCH deposited in vaults as collateral.
+
+
+## Overview
+
+This documentation is split into two parts, a user guide that explains how CircuitDAO works on a high-level, and a technical documentation, which delves into the details of the underlying puzzles.
+
+
+## Coin set model
+
+Because Chia utilizes the [coin set model](https://docs.chia.net/coin-set-intro/), the terminology used is different to that of Ethereum and other blockchains. Smart contracts on Chia are called puzzles. The only objects the blockchain is aware of are coins, and each coin contains the hash of a puzzle. To spend a coin, the puzzle matching its puzzle hash needs to be revealed, and a list of arguments (called the solution) to run the puzzle with provided. The result is a number of conditions being generated. Conditions are instructions to the blockchain, and include operations such as creating new coins, making announcements, and requiring cryptographic signatures.
+
+The fact that puzzles are only revealed when coins are spent, means that executing operations in DeFi protocols such as CircuitDAO typically requires multiple simultaneous coin spends. This way coins can interact with each other via announcements, ensuring that even complex protocols remain in a consistent state.
+
 
 ## Getting Started
 
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+To get started, head over to the [CirduitDAO dapp](https://circuitdao.com) and connect your wallet.
 
 ### What you'll need
 

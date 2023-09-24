@@ -1,0 +1,8 @@
+{
+  "label": "Technical Docs",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "A detailed technical description of the CircuitDAO protocol.",
+  }
+}
