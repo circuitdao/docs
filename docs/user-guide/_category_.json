@@ -1,6 +1,6 @@
 {
   "label": "User Guide",
-  "position": 2,
+  "position": 8,
   "link": {
     "type": "generated-index",
     "description": "A complete overview of the CircuitDAO protocol.\nEach component of the protocol makes use of a number of parameters that can be changed by governance. These paramters are listed in a Parameters section at the end of the respective section.",
