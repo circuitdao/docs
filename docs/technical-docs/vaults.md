@@ -6,23 +6,6 @@ sidebar_position: 1
 
 # Vaults
 
-A **vault** is a smart coin in which XCH can be deposited. Anyone can create a vault. By depositing XCH in a vault, the vault owner can borrow BYC from the vault. XCH deposited in a vault is referred to as **collateral** as it backs any BYC borrowed.
-
-The amount of BYC that can be borrowed from a vault is capped by the **liquidation threshold**. The liquidation threshold is a function of the **Liquidation Ratio** (LR) and the amount of collateral in the vault.
-
-    liquidation threshold = value of collateral in USD / Liquidation Ratio
-
-If the value drops below the liquidation threshold, keepers can trigger a vault liquidation. Note that for the purposes of determining whether the outstanding BYC debt is below or above the liquidatio threshold, BYC is always valued at 1 USD. This ensures that if BYC depegs to the downside the effective Liquidation Ratio is higher, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio is lower, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
-
-![Borrowing BYC](./../../static/img/Vault_diagram.png)
-
-
-## Fees
-
-* Vault creation fee
-* Stability fee
-* Liquidation penalty
-
 ## Chialisp considerations
 
 Not a singleton puzzle, but a normal coin with some restrictions. This makes it much cheaper, but also implies people might have many small vaults and we should be careful if that can produce side effects.
@@ -54,13 +37,3 @@ Decreases BYC_MINTED. If collateral ratio is below min required we fail. Amount 
 Zero amount lineage check. Since we can’t enforce what kind of things coins have curried in, we need to ensure that XCH vaults always start with zero amount. This ensures that curried parameters are always correct. Otherwise someone could curry in XCH deposit and BYC deposit that are not correct to mess with the system. This requires us to pass lineage information into the puzzle and use it to verify lineage on every spend. 
 When coin is first spent, it provides only parent information: parent id and puzzle hash for launcher. We check that our parent indeed had a zero value and that we have a zero value as well. Next lineage information contains parent id and inner puzzle. We then regenerate parent id inside the puzzle to check our parent indeed was spawned from a coin that had zero amount.
 Filter out REMARK conditions. We don’t need to return REMARK conditions as it’s only needed to parse and special instructions and run operations in the VAULT.
-
-## Parameters
-
-* **Liquidation Ratio (LR)**
-    * recorded in: Statutes
-    * initial value: 150% of outstanding debt (valued at 1 BYC = 1 USD)
-    * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations: The higher the LR, the more overcollateralized the system becomes, and the less likely a depeg to the downside becomes. On the other hand, a higher LR makes it less attractive to borrow BYC, due to the higher associated capital costs of having to lock up more XCH.
-

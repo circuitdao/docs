@@ -1,7 +1,7 @@
 ---
 id: emergency-shutdown
 title: Emergency Shutdown
-sidebar_position: 6
+sidebar_position: 60
 ---
 
 # Emergency Shutdown
@@ -39,3 +39,14 @@ When an emergency shutdown is executed:
 * Price oracles provide a final price feed for XCH and BYC in the system.
 * Vault owners can claim the net value of their collateral based on the final price feed.
 * BYC holders can redeem their BYC for a proportional share of the collateral in the system based on the final oracle prices.
+
+
+## Parameters
+
+* **ES Minimum Vote (ESMV)**
+    * recorded in: Statutes
+    * initial value: 5% of all CRT
+    * updatable: yes
+    * votes requied: XYZ CRT
+    * considerations: Must be large enough to make an ES expensive, disincentivizing malicious use. Must not be too large, so that it is unlikely an ES would be triggered in a situation where it should be triggered.
+

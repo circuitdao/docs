@@ -1,7 +1,7 @@
 ---
 id: crt-token
 title: CRT Token
-sidebar_position: 8
+sidebar_position: 80
 ---
 
 # CRT Token

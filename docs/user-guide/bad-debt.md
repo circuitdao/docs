@@ -1,7 +1,7 @@
 ---
 id: bad-debt
 title: Bad Debt
-sidebar_position: 3
+sidebar_position: 35
 ---
 
 
@@ -11,6 +11,7 @@ The protocol incurs **bad debt** if the system if the liquidation auction proces
 
 The system accrues bad debt up to the **Bad Debt Limit** (BDL). Once bad debt exceeds the BDL, keepers can trigger a **bad debt auction**. In a bad debt auction, the protocol auctions off CRT, and potentially some XCH, in exchange for BYC.
 
+If the System Buffer contains enough BYC to pay off the bad debt, no bad debt auction needs to be held. Keepers can transfer any remaining collateral from vaults that have incurred bad debt to the System Buffer, and extinguish the bad debt by burning a corresponding amount of BYC from the system buffer and dissolving the respective vaults.
 
 ## Bad Debt Auction Incentive
 
