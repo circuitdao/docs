@@ -31,17 +31,18 @@ The loan-to-value (LTV) ratio determines how much BYC can be borrowed against th
 
 The Stability Fee can be thought of as an interest rate charged on BYC loans. It accrues per second on the outstanding principal. Because the SF applies to principal only and not to any accrued SFs, it doesn't compound.
 
-The SF is the primary mechanism by which BYC maintains its 1:1 peg to the US Dollar. If BYC trades at > 1 USD in the market, the price can be brought down by lowering the SF, so that borrowing BYC becomes more attractive, thereby increasing the BYC supply. If BYC trades at < 1 USD in the market, the SF can be increased in order to make holding BYC more expensive, encouring repayment of BYC loans, which tightens the supply and pushes up the price of BYC.
+The SF is the primary mechanism by which BYC maintains its 1:1 peg to the US Dollar.
 
-Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, CircuitDAO will hold a monthly **risk call** in which market developments and the need for any SF adjustements will be discussed. A governance vote is held two days after each risk call to implement any changes to the SF.
+* If BYC trades at > 1 USD in the market, the price can be brought down by lowering the SF, so that borrowing BYC becomes more attractive, thereby increasing the BYC supply.
+* If BYC trades at < 1 USD in the market, the SF can be increased in order to make holding BYC more expensive, encouring repayment of BYC loans, which tightens the supply and pushes up the price of BYC.
+
+Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, CircuitDAO will hold a monthly **risk call** in which market developments and the need for any SF adjustements will be discussed. A governance vote is held two days after the risk call to implement any changes to the SF.
 
 ## Repaying loans
 
 A borrower can repay their loans partially or fully by returning BYC plus a proportional share of the accrued SF to the vault.
 
 For example, if a vault is owed 1000 BYC in principal and has accrued 15 BYC in SFs, the borrower can reduce their loan balance by 25% by repaying 250 + 3.75 = 253.75 BYC.
-
-<!--Although the SF accrues in BYC as per the formula above, it must be paid in CRT tokens. The reason for this is that otherwise a borrower might not be able to find BYC in the market to pay the SF [TODO: move this to Notes section?].-->
 
 ![Repaying a BYC loan](./../../static/img/Repay_diagram.png)
 
@@ -53,12 +54,9 @@ If the value of the collateral in a vault drops below the liquidation threshold,
 
 For details on the liqudation process please see the [Liquidation](./liquidation) page.
 
-
 ## Vault constraints
 
-<!--The protocol charges a **Vault Creation Fee** (VCF) whenever a new vault is created. The fee protects the protocol against too many small vaults being as a way of spamming the system and resulting in excessive blockspace use in the case of liquidations.-->
-
-The protocol enforces a **minimum debt** (MD) that must be drawn when taking out a loan. This is to prevent too many small loans being taken out, which could be used as a form of attack on the protocol.
+The protocol enforces a **minimum debt** (MD) that must be drawn when taking out a loan. This prevents too many small loans being taken out, which could be used as a form of attack on the protocol by clogging up block space with liquidations.
 
 ## Notes
 
@@ -82,6 +80,9 @@ When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the 
     * updatable: yes
     * votes requied: XYZ CRT
     * considerations: Should be high enough so as to discourage spam attacks, in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. The MD should also be large enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > AIL / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not prevent legitimate users from taking out small loans.
+
+
+<!--The protocol charges a **Vault Creation Fee** (VCF) whenever a new vault is created. The fee protects the protocol against too many small vaults being as a way of spamming the system and resulting in excessive blockspace use in the case of liquidations.-->
 
 <!--
 Other parameters used by MakerDAO:

@@ -67,23 +67,23 @@ ALI and RLI are paid to the keeper once the liquidation auction has concluded. A
 
 ## Liquidation Auction
 
-Once a liquidation has been triggered, a liquidation auction starts in which the vault's XCH collateral is sold for BYC to recover the debt owed to the vault. Liquidation auctions are descending price auctions, also known as [Dutch auctions](https://en.wikipedia.org/wiki/Dutch_auction).
+Once a liquidation has been triggered, a liquidation auction starts in which the vault's collateral is sold for BYC to recover the debt owed to the vault. Liquidation auctions are descending price auctions, also known as [Dutch auctions](https://en.wikipedia.org/wiki/Dutch_auction).
 
-The purpose of a Liquidation Auction is to recover debt as quickly as possible to avoid an undercollateralization of the vault. Dutch auctions are particularly well suited for this. Firstly, because XCH is a fungible asset with a market price, one can let auctions start near the market price, as bidders would not pay above market price for a commoditized asset. This is different from auctions in which non-fungible assets such as artworks are sold, and it is impossible predict in advance how much a bidder might be willing to pay. Dutch auctions force keepers to submit a bid as soon as an acceptable price has been reached, as otherwise a bidder would most likely miss out to other bidders. There is no scope for tactical bidding behaviour(minimal price increases, or last minute bids) as is often the case with English (pay-as-bid) auctions. With Dutch auctions there is also no need to wait until enough bids to cover the entire debt have been submitted, before being able to determine winning bids. As soon as a bidder is happy with the current auction price, they can submit a bid for a all or part of the debt, which will immediately get accepted.
+The purpose of a Liquidation Auction is to recover debt as quickly as possible to avoid an undercollateralization of the vault. Dutch auctions are particularly well suited for this as they largely prevent tactical bidding and drawn out bidding wars. As soon as a bidder is happy with the latest auction price they can repay all or part of the outstanding debt at this price. Bids can be settled immediately as there is no need to wait for counter-offers as is the case with [English auctions](https://en.wikipedia.org/wiki/English_auction).
 
 ![Liquidation auction](./../../static/img/Liquidation_Auction_diagram.png)
 
 The auction starts with a **Start Price** (SP), calculated as the latest oracle price multiplied by the **Start Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for scenarios a potential rebound in the XCH market price by the time the auction starts.
 
-The auction price is lowered in according to a **Price Decrease** (PD) parameter. The Price Decrease is calculated as a percentage of the Start Price, and gets substracted from the latest auction price each time the auction price gets decreased.
+As the auction goes on, the auction price automatically decreases step-by-step every few blocks as defined by the **Price Validity** (PV) parameter.
 
-As the auction goes on, the price automatically decreases every few blocks as defined by the **Price Validity** (PV) parameter.
+The amount by which the auction price is lowered in each step is given by the **Price Decrease** (PD) parameter. The PD is calculated as a percentage of the Start Price, and gets substracted from the latest auction price.
 
 The auction ends when either
 * the vault's debt was fully repaid; or
 * the auction price drops below the **Minimum Auction Price** (MAP), which is defined as a **Minimum Price Factor** (MPF) multiplied by the Start Price.
 
-Start auction can be called after auctions end without collecting all BYC debt. This process can be repeated for up to 6 hours, at which point any remaining debt becomes bad debt.
+Liquidation Auctions can be restarted when they fail to recover the vault's entire debt. This process can be repeated multiple times, until the **Maximum Liquidation Duration** (MLD) is exceeded, at which point any remaining debt becomes Bad Debt.
 
 
 ### Bid
@@ -157,7 +157,13 @@ No new liquidations may be triggered during an Emergency Shutdown.
     * updatable: yes
     * votes required: XYZ CRT
     * considerations: A higher value might prevent the auction price from reaching a level at which keepers are willing to bid if the market price continues to fall. The primary risk of a low value is that collateral gets sold below market value if unusual conditions prevent keepers from bidding. Such conditions may include extreme transaction fees or clogged blocks, technical difficulties experienced by keepers participating in auctions, etc.
-
+* **Maximum Liquidation Duration (MLD)**
+    * recorded in: Statutes
+    * initial value: 6 hours
+    * updatable: yes
+    * votes required: XYZ CRT
+    * considerations: A higher value allows keepers more time to participate in a liquidation auction, but increases the risk that more bad debt accrues. However, if there are no keepers available to participate in liquidation auctions, it is unlikely that a bad debt auction will see bids.
+    
 <!--
 MakerDAO:
 * Supports different types of auction price function. linear step, exponential, and step exponential
