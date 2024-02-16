@@ -5,50 +5,17 @@ sidebar_position: 1
 slug: /
 ---
 
-# About CircuitDAO
+# About Circuit
 
-CircuitDAO is an on-chain collateralized stablecoin protocol built on [Chia](https://www.chia.net).
+Circuit is an on-chain collateralized stablecoin protocol built on the **[Chia blockchain](https://www.chia.net)**.
 
-Users can borrow **Bytecash** (**BYC**), the stablecoin issued by CircuitDAO, against XCH deposited in vaults as collateral.
+Users can borrow **Bytecash** (**BYC**), the USD stablecoin issued by Circuit, against **XCH**, the native token of Chia.
 
-## Overview 
+![1 USD is equivalent to 1 BYC](./../static/img/1USD_equals_1BYC.png)
 
-This documentation is split into two parts, a user guide that explains how CircuitDAO works on a high-level, and a technical documentation, which delves into the details of the underlying puzzles.
+Bytecash is a [Chia Asset Token](https://chialisp.com/cats/) (CAT). You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/guides/offers-gui-tutorial/#add-a-new-cat) asset ID tbd.
 
-## Getting Started
+Circuit is in the process of being rolled out on testnet11. The [dapp](https://4d25e995.dapp-4il.pages.dev) allows you to interact with some initial components of the protocol. Check out our [Getting Started](./getting-started) guide, and give it a try!
 
-To get started, head over to the [CirduitDAO dapp](https://circuitdao.com) and connect your wallet.
+For questions, feedback, feature requests or bug reports, please contact us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.
 
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.

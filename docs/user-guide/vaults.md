@@ -6,9 +6,16 @@ sidebar_position: 10
 
 # Vaults
 
-A **vault** is a smart coin from which BYC can be borrowed if XCH has been deposited into it. XCH deposited in a vault is referred to as **collateral** as it backs any BYC borrowed. 
+A **vault** is a smart coin in which XCH can be deposited and from which BYC can be borrowed. XCH deposited in a vault is referred to as **collateral** as it backs any BYC borrowed.
 
 Vaults can be created premissionlessly by anyone. Whoever creates a vault becomes its owner.
+
+:::note
+
+Vaults are sometimes referred to as **collateral vaults** to distinguish them from [savings vaults](./savings.md), which serve a different purpose.
+
+:::
+
 
 ## Borrowing
 
@@ -18,7 +25,7 @@ Once a vault has been created and collateral deposited, the vault owner can take
 
 The BYC borrowed when a loan is taken out is called the **principal**. While a BYC loan is outstanding, it accrues a **Stability Fee** (SF). This is similar to how interest accrues on traditional loans. The sum of principal and accrued Stability Fees is the **debt** owed to the vault.
 
-The ratio of debt over collateral value of a vault is called the **loan-to-value** (LTV). There is a maximum LTV that is enforced across all vaults to ensure that BYC remains sufficiently collateralized. For additional information see the [Liquidation](.liquidation) section.
+The ratio of debt over collateral value of a vault is called the **loan-to-value** (LTV). There is a maximum LTV that is enforced across all vaults to ensure that BYC remains sufficiently overcollateralized. For additional information see the [Liquidation](.liquidation) section.
 
 :::info
 
@@ -50,7 +57,7 @@ Repaying a loan lowers the Liquidation Threshold, which frees up collateral for 
 
 ## Liquidation
 
-If the value of the collateral in a vault drops below the liquidation threshold, a vault becomes eligible for liquidation. Liquidations are intended to ensure that BYC remains overcollateralized at all times. When a liquidation is triggered, the vault gets seized from the vault owner, and the collateral auctioned off in order to recover the debt owed to the vault.
+If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation. Liquidations ensure that BYC remains overcollateralized. When a liquidation is triggered, the protocol effectively seizes the vault from its owner, and auctions off the collateral it holds to recover the debt owed to the vault.
 
 For details on the liqudation process please see the [Liquidation](./liquidation) page.
 
@@ -62,9 +69,10 @@ The protocol enforces a **minimum debt** (MD) that must be drawn when taking out
 
 :::note
 
-When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the corresponding BYC is melted by the protocol.
+When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](./protocol-treasury.md).
 
 :::
+
 
 ## Parameters
 
@@ -72,14 +80,14 @@ When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the 
     * recorded in: Statutes
     * initial value: 5% of loan principal, payable in CRT
     * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations: The SF is the main mechanism by which the peg is maintained and needs to be adjusted based on market conditions.
+    * votes requied: tbd CRT
+    * considerations: The SF is one of the key mechanisms by which the peg is maintained. The SF needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash.
 * **Minimum Debt (MD)**
     * recorded in: Statutes
     * initial value: 100 BYC
     * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations: Should be high enough so as to discourage spam attacks, in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. The MD should also be large enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > AIL / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not prevent legitimate users from taking out small loans.
+    * votes requied: tbd CRT
+    * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
 
 
 <!--The protocol charges a **Vault Creation Fee** (VCF) whenever a new vault is created. The fee protects the protocol against too many small vaults being as a way of spamming the system and resulting in excessive blockspace use in the case of liquidations.-->
