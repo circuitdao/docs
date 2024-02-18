@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'CircuitDAO Documentation',
+  title: 'Circuit protocol documentation',
   tagline: 'A Guide to the CircuitDAO Protocol',
   favicon: 'img/favicon.ico',
 
@@ -54,7 +54,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'CircuitDAO Docs',
+        title: 'Circuit - Documentation',
         logo: {
           alt: 'CircuitDAO Logo',
           src: 'img/logo.svg',
@@ -62,9 +62,9 @@ const config = {
         items: [
           {
             href: 'https://circuitdao.com',
-            label: 'CircuitDAO',
+            label: 'Circuit',
             position: 'right',
-          },	    
+          },
           {
             href: 'https://github.com/circuitdao',
             label: 'GitHub',
@@ -78,10 +78,18 @@ const config = {
           {
             title: 'Docs',
             items: [
-              {
-                label: 'Introduction',
-                to: '/docs/intro',
-              },
+                {
+                    label: 'Getting started',
+                    to: '/getting-started',
+                },
+                {
+                    label: 'User guide',
+                    to: '/category/user-guide',
+                },
+                {
+                    label: 'FAQ',
+                    to: '/faq',
+                },
             ],
           },
           {
@@ -104,18 +112,22 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'CircuitDAO',
-                href: 'https://circuitdao.com',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
+                {
+                    label: 'Website',
+                    href: 'https://circuitdao.com',
+                },
+                {
+                    label: 'Dapp',
+                    href: 'https://4d25e995.dapp-4il.pages.dev',
+                },
+                {
+                    label: 'GitHub',
+                    href: 'https://github.com/circuitdao',
+                },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} CircuitDAO`,
+        copyright: `Copyright © ${new Date().getFullYear()} Voltage Technologies Ltd`,
       },
       prism: {
         theme: lightCodeTheme,

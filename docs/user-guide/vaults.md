@@ -25,11 +25,11 @@ Once a vault has been created and collateral deposited, the vault owner can take
 
 The BYC borrowed when a loan is taken out is called the **principal**. While a BYC loan is outstanding, it accrues a **Stability Fee** (SF). This is similar to how interest accrues on traditional loans. The sum of principal and accrued Stability Fees is the **debt** owed to the vault.
 
-The ratio of debt over collateral value of a vault is called the **loan-to-value** (LTV). There is a maximum LTV that is enforced across all vaults to ensure that BYC remains sufficiently overcollateralized. For additional information see the [Liquidation](.liquidation) section.
+The ratio of outstanding debt over collateral value of a vault is the **loan-to-value** (LTV) ratio. There is a **maximum loan-to-value** (Max LTV) that is enforced across all vaults to ensure that BYC remains sufficiently overcollateralized. For additional information see the [Liquidation](.liquidation) section.
 
 :::info
 
-The loan-to-value (LTV) ratio determines how much BYC can be borrowed against the collateral in a vault.
+The Max LTV determines how much BYC can be borrowed against the collateral in a vault.
 
 :::
 
