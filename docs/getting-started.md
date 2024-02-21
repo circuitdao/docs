@@ -9,37 +9,33 @@ import WCB from './../static/img/Wallet_Connect_button.png';
 
 # Getting started
 
+To get started with Circuit, click the Connect button in the top right corner of the [app](https://app.circuitdao.com)
+
+In the pop-up that opens, select [Goby](https://goby.app) to use Goby wallet. Goby is a browser extension available for Chrome and Brave. Click the Install link if Goby isn't installed yet.
+
 :::info
 
-Circuit is on testnet11. Since the official Chia faucet still runs on testnet10, the best way to get your hands on some testnet11 TXCH is to pop into the Circuit [Discord](https://discord.gg/TMama9jTwu) and leave your address in the 🧪-txch channel.
+Circuit is currently on testnet11. You can get Testnet XCH (TXCH) from the [official faucet](testnet11-faucet.chia.net).
 
 :::
 
-To get started with Circuit, click the Connect button in the top right corner of the [dapp](https://4d25e995.dapp-4il.pages.dev).
-
-In the pop-up that opens, select [Goby](https://goby.app) to use Goby wallet, or Wallet Connect to use the official [Chia reference wallet](https://www.chia.net/downloads). We recommend using Goby as it has better support for signing multiple custom spends, which is required when using Circuit protocol.
-
-Copy the connection string shown and go to your wallet.
-
 ### Goby wallet
 
-Goby runs as a plugin in your browser. To connect to testnet, open the plugin, click on the settings cog wheel in the top right -> Advanced Options -> Networks -> Testnet11, and press Switch to confirm.
+When connecting, Goby will ask you to switch to testnet11 if you are connected to another network, and it will also automatically register the BYC asset ID for you.
 
-### Reference wallet
-
-If you are using the official reference wallet, click the Wallet Connect button near the top right.
-
-<img src={WCB} width="250"/>
-
-Select Add Connection, paste the connection string, and click Continue.
+If for some reason the automatic process fails, you can manually switch to testnet11 by clicking the settings cog wheel in the top right of the extension -> Advanced Options -> Networks -> Testnet11. To manually register BYC with Goby, click on Import Tokens -> Custom, and enter latest BYC symbol and asset ID as published in the [FAQ](https://docs.circuitdao.com/faq#what-is-bytecash).
 
 Congrats - you are now connected, and can interact with Circuit protocol!
 
+### Reference wallet
+
+The official [Chia reference wallet](https://www.chia.net/downloads) is not supported yet.
+
 ## Deposit collateral
 
-Before you can borrow Bytecash (BYC), you need to deposit XCH as **collateral**.
+Before you can borrow Bytecash (BYC), you need to deposit XCH (or TXCH on testnet) as **collateral**.
 
-Head over to the Borrow page, click the Deposit button, enter an amount of XCH, and click Deposit to Vault.
+Head over to the Borrow page, click the Deposit button, enter an amount of XCH and a fee in mojos per unit of [costs](https://docs.chia.net/coin-set-costs), and click Deposit to Vault.
 
 In your wallet, confirm the messages you are asked to sign.[^1] Wait a couple of minutes for the transaction to be confirmed by the network.
 

@@ -8,7 +8,13 @@ sidebar_position: 100
 
 ### What is Circuit?
 
-Circuit is a DeFi protocol. More specifically, Circuit is an on-chain collateralized stablecoin protocol built on [Chia](https://www.chia.net). See the [Introduction](./introduction) for additional info.
+Circuit is a DeFi protocol. More specifically, Circuit is an on-chain collateralized stablecoin protocol built on [Chia](https://www.chia.net).
+
+### Is Circuit live yet?
+
+We are live on testnet11, and expect to go live on mainnet in the next few months.
+
+You can head over directly to the [app](https://app.circuitdao.com), or check out our [Getting Started](./getting-started) guide first.
 
 ### What is Bytecash?
 
@@ -16,11 +22,22 @@ Bytecash, or BYC for short, is the stablecoin issued by the Circuit protocol. BY
 
 BYC is pronounced 'bick'.
 
+Bytecash is issued as a [Chia Asset Token](https://chialisp.com/cats) (CAT2) with custom tail. You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/guides/offers-gui-tutorial/#add-a-new-cat) the Bytecash asset ID with your wallet.
+
+:::note
+
+While on testnet, we expect the asset ID to change occassionally as the protocol remains under development and gets redeployed. In this case you'll lose access to your testnet coins via the app, and would have to recreate any vaults and register a new BYC asset ID with your wallet. Also make sure your wallet is connected to testnet11.
+
+Testnet11 BYC asset IDs - always use the latest version:
+* BYC01 - 1763a32f8a9c66f256d8b4631226870ee63dfcfd9668f83c6f75b98f82dc791f
+
+:::
+
 ### How can I get hold of Bytecash?
 
 You can obtain BYC by borrowing it directly from the protocol. The [Getting Started](./getting-started) guide shows you how.
 
-Alternatively, you can acquire BYC in the open market, for example via [offers](https://www.chia.net/offers) on bulletin boards like [Dexie](https://dexie.space) or [Offerpool](https://offerpool.io).
+Alternatively, you can acquire BYC in the open market, for example via [offers](https://www.chia.net/offers) on bulletin boards like [Dexie](https://dexie.space).
 
 ### Can I earn interest on Bytecash?
 
@@ -28,7 +45,9 @@ Yes! You can deposit BYC in a [savings vault](./user-guide/savings.md) to earn i
 
 ### What do I need to use Circuit?
 
-All you need is a Chia wallet that supports signature aggregation. We recommend [Goby](https://goby.app), but the official [reference wallet](https://www.chia.net/downloads) also works.
+All you need is a Chia wallet that supports signing of custom spends. We recommend [Goby](https://goby.app), but the official [reference wallet](https://www.chia.net/downloads) also works.
+
+Register the BYC asset ID in your wallet, so that it recog
 
 ### Can I use assets other than XCH as collateral?
 
@@ -55,6 +74,10 @@ There are a number of risks. These include, without limitation:
 ### Is the code open-source?
 
 The code has been published on [Github](https://www.github.com/circuitdao) for anyone to review and contribute to. However, note that the code is currently copyrighted and not available under an open-sourece licence. We are still evaluating what type of licence will be appropriate going forward. The most likely scenario at this point is that the code will remain copyright protected for a number of years before being released under an open-source licence. This is the approach taken by major DeFi protocols such as Uniswap and Aave.
+
+### Where can I report bugs?
+
+Contact us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.
 
 ### Do you provide an API?
 
