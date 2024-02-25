@@ -12,15 +12,15 @@ The **loan-to-value** (**LTV**) is a vault-specific value defined as the ratio o
 LTV = debt owed / value of collateral
 ```
 
-For example, if you have 100 XCH locked up in a vault, the XCH price is $30, and your debt is 1000 BYC, then the LTV is 30%.[^1]
+For example, if you have 100 XCH locked up in a vault, the XCH price is $40, and your debt is 1000 BYC, then the LTV is 25%.[^1]
 
 The **Maximum LTV** is the LTV at which your vault becomes eligible for liquidation. Whereas you can change your LTV by adding or removing collateral, or by taking out or repaying loans, the Max LTV is a protocol parameter set by governance. Its purpose is to ensure that Bytecash remains overcollateralized.
 
 Currently, the Max LTV is set to 60%.
 
-To continue the example above, if the XCH price drops from $30 to $20, your LTV would increase to 50%. This is less than the Max LTV of 60%, so you are safe from liquidation. However, you might want to consider topping up your collateral or repaying part of your debt to lower your LTV in case the price drops further.
+To continue the example above, if the XCH price drops from $40 to $20, your LTV would increase to 50%. Because this is less than the Max LTV of 60%, the vault is still safe from liquidation. However, you might want to top up your collateral or repay part of your debt to lower your LTV in case the price drops further.
 
-If the XCH price dropped by another $4 to $16, then your LTV would rise to 62.5%, and your vault would get liquidated.
+If the XCH price decreased by another $4 to $16, then the LTV would rise to 62.5%, and your vault would get liquidated.
 
 :::info
 
@@ -34,6 +34,12 @@ See the section on [collateral vaults](./user-guide/vaults) in the User Guide fo
 So what is a safe LTV when borrowing Bytecash? The first thing to note is that one can never be 100% certain that a vault won't get liquidated. There is always a risk that the XCH price drops by a large amount in a very short period of time that doesn't leave enough time to repay debt or top up collateral. Borrowing is inherently a risky activity. All one can do is minimize the risk of a liquidation occuring to a level that one is comfortable with.
 
 To get a feeling for how big the risk of a precipitous decline in the XCH price is, one can look at historical data. Shown below is the percentage difference from highest to lowest XCH price over three different rolling windows: 1 hour, 1 day, and 1 week.[^3] Included in the charts is the equivalent data for ETH for comparison.
+
+:::danger
+
+Past performance is not an indicator of future results. Prices may be more volatile in the future than they ever were in the past.
+
+:::
 
 ### One hour rolling window
 ![1hr rolling window drawdowns](./../static/img/high_to_low_1hr.png)
@@ -67,6 +73,7 @@ LTV = Max LTV * (1 - protected price decline)
 For example, if Max LTV is 60%, and you would like avoid liquidation even if the XCH price drops by 60%, then your LTV must be less than 60% * 40% = 24%. In other words, the value of your collateral must be at least 1/0.24 = 417% of your debt.
 
 When choosing your LTV, keep in mind that not only a decline in the XCH price can lead to liquidation, but also an increase in debt due to the accrual of Stability Fees over time.
+
 
 [^1]: For any LTV calculations, the protocol uses the oracle price for XCH and values 1 BYC at a fixed exchange rate of 1 USD.
 [^2]: The principal is the amount initially borrowed when a loan is taken out. The debt owed is the principal plus any accrued Stability Fees.

@@ -15,7 +15,7 @@ In the pop-up that opens, select [Goby](https://goby.app) to use Goby wallet. Go
 
 :::info
 
-Circuit is currently on testnet11. You can get Testnet XCH (TXCH) from the [official faucet](testnet11-faucet.chia.net).
+Circuit is currently on testnet11. You can get Testnet XCH (TXCH) from the [official faucet](https://testnet11-faucet.chia.net).
 
 :::
 
