@@ -37,7 +37,7 @@ To get a feeling for how big the risk of a precipitous decline in the XCH price 
 
 :::danger
 
-Past performance is not an indicator of future results. Prices may be more volatile in the future than they ever were in the past.
+Past performance is not indicative of future results. Prices may be more volatile in the future than they were in the past.
 
 :::
 
