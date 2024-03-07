@@ -1,7 +1,7 @@
 ---
 id: faq
 title: FAQ
-sidebar_position: 100
+sidebar_position: 110
 ---
 
 # FAQ
@@ -29,6 +29,7 @@ Bytecash is issued as a [Chia Asset Token](https://chialisp.com/cats) (CAT2) wit
 While on testnet, we expect the asset ID to change occassionally as the protocol remains under development and gets redeployed. In this case you'll lose access to your testnet coins via the app, and would have to recreate any vaults and register a new BYC asset ID with your wallet. Also make sure your wallet is connected to testnet11.
 
 Testnet11 BYC asset IDs - always use the latest version:
+* BYC02 - 5f202f0c4ab7b092b675e0b4dc116bbe484e7a16bc3f2ae1079e19afdcd56915
 * BYC01 - 1763a32f8a9c66f256d8b4631226870ee63dfcfd9668f83c6f75b98f82dc791f
 
 :::
