@@ -46,9 +46,7 @@ Yes! You can deposit BYC in a [savings vault](./user-guide/savings.md) to earn i
 
 ### What do I need to use Circuit?
 
-All you need is a Chia wallet that supports signing of custom spends. We recommend [Goby](https://goby.app), but the official [reference wallet](https://www.chia.net/downloads) also works.
-
-Register the BYC asset ID in your wallet, so that it recog
+All you need is a Chia wallet that supports custom spend signing. At this point [Goby](https://goby.app) is recommended, and we are planning to add support for the official [reference wallet](https://www.chia.net/downloads) soon.
 
 ### Can I use assets other than XCH as collateral?
 
@@ -62,6 +60,14 @@ CRT is the governance token of the Circuit protocol. Token holders can participa
 
 Not quite. Circuit is the protocol, i.e. the smart coins on the Chia blockchain that make up the protocol. CircuitDAO is a term used to refer to the set of all CRT token holders. However, sometimes CircuitDAO is used to refer to the protocol, usually because that way it's immediately clear that Circuit is a DeFi protocol.
 
+### Why was Circuit built on Chia?
+
+There are too many reasons for why to build on Chia to list them all here, but what perhaps stands out most from a DeFi perspective is that [XCH is an excellent store-of-value and collateral asset](https://medium.com/@circuitdao/xch-as-a-store-of-value-and-collateral-asset-6872215a07bc). It's only natural then to build a protocol that allows XCH holders to utilize their tokens by borrowing against them. For a list of additional use cases that Circuit unlocks, see the [Litepaper](https://medium.com/@circuitdao/circuitdao-an-on-chain-collateralized-stablecoin-protocol-8991e3d5f01d).
+
+### Is Circuit similar to Terra Luna?
+
+No. Terra Luna was an uncollateralized 'algorithmic' stablecoin. Circuit on the other hand is overcollateralized by XCH locked-up in [collateral vault](./user-guide/vaults) smart coins. In that sense, Circuit is more similar to the original single-collateral [Maker](https://makerdao.com) protocol on Ethereum.
+
 ### Are there any risks in using Circuit?
 
 There are a number of risks. These include, without limitation:
@@ -74,11 +80,11 @@ There are a number of risks. These include, without limitation:
 
 ### Is the code open-source?
 
-The code has been published on [Github](https://www.github.com/circuitdao) for anyone to review and contribute to. However, note that the code is currently copyrighted and not available under an open-sourece licence. We are still evaluating what type of licence will be appropriate going forward. The most likely scenario at this point is that the code will remain copyright protected for a number of years before being released under an open-source licence. This is the approach taken by major DeFi protocols such as Uniswap and Aave.
+The code will be published on [Github](https://www.github.com/circuitdao) for anyone to review and contribute to. However, note that the code is currently copyrighted and not available under an open-sourece licence. We are still evaluating what type of licence will be appropriate going forward. The most likely scenario at this point is that the code will remain copyright protected for a number of years before being released under an open-source licence. This is the approach taken by major DeFi protocols such as Uniswap and Aave.
 
 ### Where can I report bugs?
 
-Contact us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.
+Reach out to us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.
 
 ### Do you provide an API?
 
