@@ -61,8 +61,8 @@ const config = {
         },
         items: [
           {
-            href: 'https://circuitdao.com',
-            label: 'Circuit',
+            href: 'https://app.circuitdao.com',
+            label: 'Go to app',
             position: 'right',
           },
           {
@@ -113,12 +113,8 @@ const config = {
             title: 'More',
             items: [
                 {
-                    label: 'Website',
-                    href: 'https://circuitdao.com',
-                },
-                {
-                    label: 'Dapp',
-                    href: 'https://4d25e995.dapp-4il.pages.dev',
+                    label: 'App',
+                    href: 'https://app.circuitdao.com',
                 },
                 {
                     label: 'GitHub',
