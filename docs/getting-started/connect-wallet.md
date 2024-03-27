@@ -16,7 +16,7 @@ In the pop-up that opens, select [Goby](https://goby.app) to use Goby wallet. Go
 
 :::info
 
-Circuit is currently on testnet11. You can get Testnet XCH (TXCH) from the [official faucet](https://testnet11-faucet.chia.net).
+Circuit is currently on testnet11. You can get Testnet XCH (TXCH) from the [TXCH Faucet](https://txchfaucet.com).
 
 :::
 
@@ -32,7 +32,7 @@ Congrats - you are now connected, and can interact with Circuit protocol!
 
 ### Other wallets
 
-Other wallets are not supported yet. This in cludes the official [Chia reference wallet](https://www.chia.net/downloads).
+Other wallets are not supported yet. This includes the official [Chia reference wallet](https://www.chia.net/downloads).
 
 ## Next steps
 
