@@ -1,0 +1,121 @@
+---
+id: collateral_vaults
+title: Collateral Vaults
+sidebar_position: 110
+---
+
+# Collateral Vaults
+
+Collateral vaults are non-fungible coins that can be created permissionlessly by anyone.
+
+The vault puzzle enforces lineage and an eve state in which all state variables are 0.
+
+Note that a non-eve coin can be in eve state, so the eve coin of a collateral vault is the one whose parent coin isn't a vault coin.
+
+## Stability Fees
+
+Loans taken out from collateral vaults accrue Stability Fees. The debt owed to a vault increases every minute according to the **Stability Fee Discount Factor** (SFDF) from Statutes. The corresponding annualized Stability Fee percentage rate (APR), which is the figure typically shown to the user in frontends, is calculated as
+
+$$
+Stability\ Fee\ APR = SFDF^{60\cdot24\cdot365}.
+$$
+
+For example, if SFDF is set to 1.00000018133597, then the APR is 10%.
+
+If a loan is taken out, then the corresponding debt is simply the principal of that loan multiplied by all SFDFs from the time the loan was taken out ($l_0$) until the present time:
+
+$$
+debt(t_N) = principal \prod_{i=l_0}^{i=N} SFDF_{t_i},
+$$
+
+Since the SFDF can change over time, storing individual historical SFDFs in the protocol would be prohibitive from a cost perspective. Instead, the protocol keeps track of the **Cumulative Stability Fee Discount Factor** (CSFDF), which is the product of all SFDFs from protocol launch $t_{p_0}$ until the current time $t_N$:
+
+$$
+CSFDF(t_N) = \prod_{i=p_0}^{i=N} SFDF_{t_i},
+$$
+
+This parameter is stored in Statutes and automatically updated by the protocol whenever the Statutes Price is updated or the SFDF changes. The time the last such update occured is $t_M$. This ensures that the CSFDF is always reasonably up-to-date and that the applicable **Current Cumulative Stability Fee Discount Factor** (CCSFDF) up to the current time can be calculated as
+
+$$
+CCSFDF(t_N) =  SFDF^{N-M}\prod_{i=p_0}^{i=M} SFDF_{t_i}.
+$$
+
+Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a 3 minute window of flexibility to reduce the likelihood that an operation times out and will fail to be incluced in the blockchain. Since a malicious vault could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
+
+
+## Loan and debt accounting
+
+Each vault keeps track of the **principal** (P) of outstanding loans, and the **discounted principal** (DP). Both P and DP get updated whenever BYC is borrowed from or repaid to the vault.
+
+The principal is the net amount of BYC borrowed and repaid:
+
+$$
+principal = \sum_{i=1}^A B_i - \sum_{j=1}^B R_j,
+$$
+
+where $B_i$ are the principal amounts of the loans taken out, and $R_j$ the principal amounts of the loans repaid.
+
+The discounted principal is effectively the vault's principal valued at vault creation, and simply the sum of all principal amounts borrowed and repaid discounted by the respective CCSFDF at the time:
+
+$$
+discounted\ principal = \sum_{i=1}^A \frac{B_i}{CCSFDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCSFDF_{t_{R_j}}},
+$$
+
+where $t_{B_i}$ are the times when loans were taken out, and $t_{R_j}$ the times when loans were being repaid.
+
+For example, assume that the Stability Fee is 10% annualized, a vault is created, and a 1000 BYC loan taken out immediately. This is the first vertical orange line in the chart below. At this point, principal, debt, and discounted principal are all equal to 1000 BYC. As time passes, Stability Fees accrue and the debt slowly increases along the orange line. Now assume that a second loan, for 500 BYC, is taken out 36 months later. This is the second vertical orange line in the chart. Both the vault's principal and debt increase by 500 BYC. The principal is now 1500 BYC, and the debt 1000 * 1.1^3 + 500 = 1831 BYC. The discounted principal on the other hand only increases by 500 / 1.1^3 = 376 BYC, as shown by the green vertical line.
+
+![Debt and discounted principal](./../../static/img/Debt_and_discounted_principal_diagram.png)
+
+A vault does not keep track of its debt in a separate variable. Instead, it is calculated ad hoc by undiscounting the vault's discounted principal using the CCSFDF:
+
+$$
+debt(t) = discounted\ principal \cdot CCSFDF_t.
+$$
+
+Finally, it is possible to calculate accrued Stability Fees of a vault at any given time as
+
+$$
+SF = debt - principal
+$$
+
+Note that due to the coinset model, the protocol itself does not know the total principal, discounted principal or debt across all vaults. If a corresponding state variable was introduced in Statutes, it would be impossible for different vaults performing operations in the same block. Fast-forward or singleton spend aggregation could theoretically help, but since the Statues spend is rather big, this would be very costly, and ultimately not scale.
+
+## Stability Fee transfers
+
+Collateral vaults also keep track of **transferred fees** (TF), which is the net amount of BYC that was minted against accrued Stability Fees. This may be necessary when the Treasury is depleted, but the protocol needs to make a BYC payment in the following situations:
+* Savers are withdrawing interest
+* Bad debt needs to be covered
+* Treasury is below the minimum amount (?)
+
+The maximum amount of fees that can be transferred from a vault is the acrrued SF less any SFs already transferred. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
+
+It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings should not be greater than the Stability Fee rate, as otherwise there would be an arbitrage.
+
+
+## Allocation of repayment amounts
+
+When debt is being repaid, the vault needs to update the state variables it keeps to track principal, discounted principal, and transferred fees.
+
+The first step in a debt repayment is for the protocol to split the repayment amount into principal repayment amount (bright green) and SF repayment amount (dark green) proportional to the vault's principal and debt. If the SF repayment amount is greater than or equal to Transferred Fees, then an amount of BYC equal to Transferred Fees is melted, and the remaining SF repayment amount is transferred to Treasury.
+
+![Repayment allocation small TF](./../../static/img/Repayment_allocation_small_TF_diagram.png)
+
+If on the other hand the SF repayment amount is less than Transferred Fees, then the entire SF repayment amount is melted, and no BYC is paid into the Treasury.
+
+![Repayment allocation large TF](./../../static/img/Repayment_allocation_large_TF_diagram.png)
+
+In both cases, the vault is left with remaining SFs and remaining principal as shown in the diagrams. In the first case above, remaining Transferred Fees are 0, whereas in the second case, remaining Transferred Fees are equal to Transferred Fee before the debt repayment minus the SF repayment amount.
+
+
+## Operations
+
+Owner operations:
+* deposit collateral
+* withdraw collateral
+* borrow Bytecash
+* repay Bytecash
+* transfer
+
+Third-party operations:
+* transfer Stability Fees
