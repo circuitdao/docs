@@ -1,7 +1,7 @@
 ---
-id: collateral_vaults
+id: collateral-vaults
 title: Collateral Vaults
-sidebar_position: 110
+sidebar_position: 330
 ---
 
 # Collateral Vaults
@@ -83,12 +83,11 @@ Note that due to the coinset model, the protocol itself does not know the total 
 
 ## Stability Fee transfers
 
-Collateral vaults also keep track of **transferred fees** (TF), which is the net amount of BYC that was minted against accrued Stability Fees. This may be necessary when the Treasury is depleted, but the protocol needs to make a BYC payment in the following situations:
-* Savers are withdrawing interest
-* Bad debt needs to be covered
-* Treasury is below the minimum amount (?)
+It is possible to mint BYC against accrued Stability Fees. BYC minted in this way is transferred to the Treasury. Each collateral vaults keeps track of the net amount of BYC it has transferred to the Treasury in this manner in the **Transferred Fees** variable.
 
-The maximum amount of fees that can be transferred from a vault is the acrrued SF less any SFs already transferred. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
+Transferring fees is the preferred mechanism to top up the Treasury, as it is quicker and less costly than holding a recharge auction. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. That way it can be ensured that savers can be paid interest on demand and Bad Debt can be extinguished as soon as it arises.
+
+The maximum amount of fees that can be transferred from a vault is the acrrued SFs less the Transferred Fees. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
 
 It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings should not be greater than the Stability Fee rate, as otherwise there would be an arbitrage.
 
@@ -110,12 +109,17 @@ In both cases, the vault is left with remaining SFs and remaining principal as s
 
 ## Operations
 
-Owner operations:
-* deposit collateral
-* withdraw collateral
-* borrow Bytecash
-* repay Bytecash
-* transfer
+There are five collateral vault operations that can only be performed by the vault owner, and one keeper operation not related to liquidation.
 
-Third-party operations:
-* transfer Stability Fees
+Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
+
+Owner operations:
+* **Deposit**: deposit collateral - puzzle: [vault_deposit.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_deposit.clsp)
+* **Withdraw**: withdraw collateral - puzzle: [vault_withdraw.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_withdraw.clsp)
+* **Borrow**: take out a loan - puzzle: [vault_borrow.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_borrow.clsp)
+* **Repay**: repay debt - puzzle: [vault_repay.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_repay.clsp)
+* **Transfer**: transfer ownership of collateral vault by replacing inner puzzle - puzzle: [vault_transfer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
+
+Keeper operations:
+* **Transfer Stability Fees**: mint & transfer BYC to Treasury - puzzle: [vault_kepper_recover_bad_debt](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
+* See the [Liquidation](./liquidation) page for keeper operations relating to vault liquiation and Bad Debt

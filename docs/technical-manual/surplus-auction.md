@@ -1,29 +1,30 @@
 ---
-id: surplus_auction
+id: surplus-auction
 title: Surplus Auction
-sidebar_position: 141
+sidebar_position: 370
 ---
 
 
 # Surplus Auction
 
-Surplus Auction is a CRT CAT with surplus_auction.clsp puzzle as its inner puzzle.
+Surplus Auction is a CRT CAT with [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) puzzle as its inner puzzle. The inner puzzle turns the Surplus Auction into a singleton.
 
 ## Operations
 
-Puzzle: recharge_auction.clsp
-Operations:
-* Start - puzzle: surplus_start_auction.clsp
-* Bid - puzzle: surplus_bid.clsp
-* Win - puzzle: surplus_win.clsp
+Puzzle that operations are performed on: [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp)
 
-All three operations can be executed by anyone. Surplus auctions are typically run by keeper bots, but due to relatively long bid timeouts, it's also feasible to participate manually.
+Keeper operations:
+* **Start**: start a surplus auction - puzzle: [surplus_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_start_auction.clsp)
+* **Bid**: submit a bid in surplus auction - puzzle: [surplus_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_bid.clsp)
+* **Win**: melt CRT offered by winning bidder, send them BYC - puzzle: [surplus_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_win.clsp)
 
-### Start
+Surplus auctions have a relatively long bid timeout, making it feasible to participate manually.
+
+### Start
 
 To start the surplus auction, a keeper executes the start operation on a surplus auction launcher coin, which has an enforced state. At the same time, a payout coin is spent in order to make a Treasury withdrawal and transfer the **Surplus Auction BYC Lot Amount** to it.
 
-The payout coin, which is a BYC CAT with p2_surplus_auction.clsp as its inner puzzle, stays idle while during the bidding phase of the auctino. Eventually, the winner of the auction will receive the BYC amount held in the payout coin.
+The payout coin, which is a BYC CAT with [p2_surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/p2_surplus_auction.clsp) as its inner puzzle, stays idle while during the bidding phase of the auction. Eventually, the winner of the auction will receive the BYC amount held in the payout coin.
 
 ![Surplus Auction](./../../static/img/Surplus_auction_spends_diagram.png)
 

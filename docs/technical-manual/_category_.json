@@ -3,6 +3,6 @@
   "position": 200,
   "link": {
     "type": "generated-index",
-    "description": "Technical manual for Circuit protocol."
+      "description": "The technical manual gives a comprehensive overview of the components that make up Circuit protocol."
   }
 }

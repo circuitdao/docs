@@ -1,23 +1,24 @@
 ---
-id: recharge_auction
+id: recharge-auction
 title: Recharge Auction
-sidebar_position: 142
+sidebar_position: 380
 ---
 
 # Recharge Auction
 
-A Recharge Auction is a BYC CAT with recharge_auction.clsp puzzle as inner puzzle. The inner puzzle turns the Recharge Auction coin into a singleton.
+A Recharge Auction is a BYC CAT with [recharge_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp) puzzle as inner puzzle. The inner puzzle turns the Recharge Auction coin into a singleton.
 
 ## Operations
 
-Puzzle: recharge_auction.clsp
-Operations:
-* Launch - puzzle: recharge_launch.clsp
-* Start - puzzle: recharge_start_auction.clsp
-* Bid - puzzle: recharge_bid.clsp
-* Win - puzzle: recharge_win.clsp
+Puzzle that operations are performed on: [recharge_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp)
 
-All four operations can be executed by anyone. Recharge auctions are typically run by keeper bots, but due to relatively long bid timeouts, it's also feasible to participate manually.
+Keeper operations:
+* **Launch**: launch a recharge auction - puzzle: [recharge_launch.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_launch.clsp)
+* **Start**: start a recharge auction - puzzle: [recharge_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_start_auction.clsp)
+* **Bid**: submit a bid in recharge auction - puzzle: [recharge_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_bid.clsp)
+* **Win**: mint CRT into winning bidder's address, deposit BYC offered to Treasury - puzzle: [recharge_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_win.clsp)
+
+Recharge auctions have a relatively long bid timeout, making it feasible to participate manually.
 
 ### Launch
 
@@ -55,4 +56,3 @@ A new Recharge Auction Start coin is automatically created. If the Treasury bala
 ![Recharge auction win](./../../static/img/Recharge_auction_win_diagram.png)
 
 Note that the launcher ID of the Recharge Auction coin only changes if it is melted by governance (TODO: is this possible?). Governance also has the ability to launch additional Recharge Auction coins, in which case it is possible to conduct multiple Recharge Auctions in parallel (TODO: when would governance want to do that?).
-
