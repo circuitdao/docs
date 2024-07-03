@@ -65,7 +65,7 @@ If the Minimum Debt Statute get increased by governance, vaults may be left with
 
 :::note
 
-When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](./protocol-treasury.md).
+When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](./treasury.md).
 
 :::
 

@@ -8,18 +8,24 @@ sidebar_position: 245
 
 **Circuit Token** (**CRT**) is the governance token of CircuitDAO.
 
-CRT token can have standard inner puzzle in which case it acts as a normal CAT token and can be recognized by all wallets or can enter into governance mode by adding a bill layer puzzle.
-In governance mode, it can vote to change existing statutes or add a new statute. To start a process, one has to have a CRT coin with an amount that passes the proposal threshold set in statutes. They also need to generate a bill, which is structured as a list of 2 values:
-Index
--1 to add a new statutes
-0 to execute a function (shutdown, transferring funds from treasury, update oracle price)
->0 to update existing statute
-Value
-Value of a statute (for example for voting threshold it would be an integer) or function name with params
+CRT tokens are Chia Asset Tokens (CATs). The CRT tail hash (asset ID) is:
+
+```<tbd>```
+
+Wallets that have had the CRT asset ID added to them will automatically recognize CRT tokens curried with the [standard inner puzzle](https://chialisp.com/standard-transactions/).
+
+## Governance mode
+
+To use CRT tokens for governance purposes, they must be locked up with a special governance puzzle as inner puzzle.
+
+For information on the governance process, see the [governance](./governance) page in this user guide.
+
+For details on the governance puzzle and related operations, see the [governance](./../technical-manual/governance) page of the Technical Manual.
+
 
 ## Token supply
 
-Upon [protocol launch](./../technical-manual/protocol_launch), 1 billion CRT tokens will be issued.
+Upon [protocol launch](./../technical-manual/protocol-launch), 1 billion CRT tokens will be issued.
 
 Additional CRT issuances are possible only in the following two situations:
 
@@ -28,10 +34,4 @@ Additional CRT issuances are possible only in the following two situations:
 
 The CRT supply decreases when a Surplus Auction is settled:
 
-* The amount of CRT the winning bidder offered in the winning bid gets melted.
-
-
-## Governance
-
-CRT holders can use the token to update the protocol's Statutes. For details on the governance process, see the [governance](./governance) page.
-
+* The amount of CRT that was offered in the winning bid gets melted.

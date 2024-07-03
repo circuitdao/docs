@@ -16,7 +16,7 @@ The reason that Circuit requires goverance is to keep the 1:1 peg of Bytecash to
 
 ### Oracle Selection
 
-It is crucial for the functioning of the protocol that it has access to accurate and timely XCH/USD prices, as liquidations hinge on this. Governance should only whitelist trusted data providers that have a track record of publishing XCH/USD prices in an Announcer coin on-chain. Data provider performance should be monitored on an ongoing basis, and in case of poor performance, governance should unwhitelist the data provider's Announcer. For further details on Oracle and Announcers, see the [Oracle](./oracle) page.
+It is crucial for the functioning of the protocol that it has access to accurate and timely XCH/USD prices, as liquidations hinge on this. Governance should only whitelist trusted data providers that have a track record of publishing XCH/USD prices in an Announcer coin on-chain. Data provider performance should be monitored on an ongoing basis, and in case of poor performance, governance should unwhitelist the data provider's Announcer. For further details on Oracle and Announcers, see the [Oracle](./price-oracle) page.
 
 ### Monitoring Bytecash market price
 
