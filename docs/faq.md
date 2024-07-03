@@ -1,7 +1,7 @@
 ---
 id: faq
 title: FAQ
-sidebar_position: 110
+sidebar_position: 900
 ---
 
 # FAQ

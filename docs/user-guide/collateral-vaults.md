@@ -1,7 +1,7 @@
 ---
-id: collateral_vaults
+id: collateral-vaults
 title: Collateral Vaults
-sidebar_position: 10
+sidebar_position: 205
 ---
 
 # Collateral Vaults
@@ -37,7 +37,7 @@ The SF is one of the primary mechanisms by which BYC maintains its 1:1 peg to th
 
 Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, governance should closely monitor market developments and vote to adjust the SF as needed.
 
-The protocol does not directly use the SF. Instead, there is a **Stability Fee Discount Factor** (SFDF) parameter in Statutes, which is defined as SFDF = 1 + SF. Using the SFDF instead of the SF simplifies calculations.
+The protocol does not directly use the SF. Instead, there is a **Stability Fee Discount Factor** (SFDF) Statute, which is defined as SFDF = 1 + SF. Using the SFDF instead of the SF simplifies calculations within the protocol.
 
 ## Repaying loans
 
@@ -59,7 +59,7 @@ For details on the liqudation process please see the [Liquidation](./liquidation
 
 The protocol enforces a **Minimum Debt** (MD) on vaults. A vault's debt must either be zero or avove MD. This prevents too many small loans from being taken out, which could be used as an attack on the protocol by clogging up block space with liquidations.
 
-If the Minimum Debt parameter is raised by governance, vaults may be left with outstanding debt below MD. In this case the next borrow or repay operation performed on an affected vault must lift the outstanding debt above the MD or repay all outstanding debt respectively.
+If the Minimum Debt Statute get increased by governance, vaults may be left with outstanding debt below MD. In this case the next borrow or repay operation performed on an affected vault must lift the outstanding debt above the MD or repay all outstanding debt respectively.
 
 ## Notes
 
@@ -70,18 +70,12 @@ When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the 
 :::
 
 
-## Parameters
-
+## Statutes
 * **Stability Fee Discount Factor (SFDF)**
-    * Statutes index: 1
-    * initial value: 105% of loan principal, payable in CRT
-    * updatable: yes
-    * votes requied: tbd CRT
+    * Statute index: 1
+    * Statute name: STATUTE_STABILITY_FEE_DF
     * considerations: The SFDF needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash, to maintain the peg.
-
 * **Minimum Debt (MD)**
-    * Statutes index: 9
-    * initial value: 100 BYC
-    * updatable: yes
-    * votes requied: tbd CRT
+    * Statute index: 9
+    * Statute name: STATUTE_MINIMUM_VAULT_DEBT_AMOUNT
     * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.

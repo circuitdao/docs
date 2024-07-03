@@ -1,7 +1,7 @@
 ---
-id: savings_vaults
+id: savings-vaults
 title: Savings Vaults
-sidebar_position: 30
+sidebar_position: 215
 ---
 
 

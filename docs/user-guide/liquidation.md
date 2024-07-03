@@ -1,7 +1,7 @@
 ---
 id: liquidation
 title: Liquidation
-sidebar_position: 20
+sidebar_position: 210
 ---
 
 
@@ -22,7 +22,7 @@ The inverse of the Liqudiation Ratio is referred to as the **maximum loan-to-val
 
 ## Liquidation Penalty
 
-The protocol incentivizes borrowers to keep their vaults in a sufficiently overcollateralized state by charging a **Liquidation Penalty** (LP) whenever a vault gets liquidated. The Liquidation Penalty is a percentage of the debt owed to the vault at the point when the liquidation is triggered.
+The protocol incentivizes borrowers to keep their vaults in a sufficiently overcollateralized state by charging a **Liquidation Penalty** (LP) whenever a vault gets liquidated. The Liquidation Penalty is a percentage of the debt owed to the vault at the point when the liquidation is triggered. The sum of debt and Liquidation Penalty is the ```total debt```.
 
 :::warning
 
@@ -33,15 +33,15 @@ When a vault gets liquidated, borrowers are charged a Liquidation Penalty, which
 ## Liquidation Process
 
 The liquidation process consists of three steps:
-1. Liquidation gets triggered by a keeper. Collateral in the vault is seized by the protocol.
-2. Keepers bid on collateral until the debt, incl LP, has been recovered.
-3. Leftover collateral is returned to Borrower.
+1. Liquidation gets triggered by a [keeper](./../technical-manual/keepers). The vault is seized by the protocol
+2. Keepers bid on collateral in an attempt to recover the vault's total debt
+3. Once the total debt is recovered, the vault is released back to the borrower
 
-If a liquidation auction fails to recover all BYC owed to a vault, it will eventually time out and get repeated. This continues until either either all BYC owed is paid back or all collateral has been sold, in which case the protocol incurs [Bad Debt](./bad-debt).
+If a liquidation auction fails to recover the total debt, it will eventually time out and can be restarted. This continues until either the total debt does get recovered or all collateral has been sold off. In the former case, the vault and any remaining collateral in it is released back to the borrower. In the latter case, the protocol is said to incur **bad debt**. Bad debt can be extinguished by melting an equivalent amount of BYC from the [Treasury](./treasury).
 
 ![Liquidation process](./../../static/img/Liquidation_diagram.png)
 
-Liquidations are a crucial feature of the protocol, as they ensure that vaults remain overcollateralized, i.e. that any outstanding debt is backed by collateral exceeding its own value.
+Liquidations are a crucial feature of the protocol. They ensure that vaults remain overcollateralized, so that outstanding debt is backed by collateral exceeding its value.
 
 :::info
 
@@ -49,17 +49,19 @@ Liquidation is a key mechanism by which the protocol ensures that BYC remains fu
 
 :::
 
-Collateral is valued using [Statutes Price](./price-oracle), the latest Oracle price available in [Statutes](./statutes). Debt, which is denominated in BYC, is valued at a 1:1 exchange rate to the US Dollar, independent of the market price of BYC. This ensures that if BYC depegs to the downside the effective Liquidation Ratio is higher, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio is lower, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
+Collateral is valued using the [Statutes Price](./statutes). Debt, which is denominated in BYC, is valued at a 1:1 exchange rate to the US Dollar, independent of the market price of BYC. If BYC depegs to the downside, the effective Liquidation Ratio increases, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio decreases, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
 
 
 ## Liquidation Incentives
 
-The system relies on keepers to trigger liquidations. Altough it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to trigger a liquidation. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critial nature of liquidations, keepers are paid an incentive to trigger a liquidation. The incentive consists of two components:
+The system relies on keepers to trigger liquidations. Altough it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to start a liquidation auction. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critial nature of liquidations, the triggering keeper (initiator) is paid an incentive. The incentive consists of two components:
 
 * **Absolute Liquidation Incentive** (ALI): a fixed amount of BYC (e.g. 10 BYC)
-* **Relative Liquidation Incentive** (RLI): a percentage amount of the debt owed (principal + accrued stability fees) to the vault being liquidated (e.g. 0.1%)
+* **Relative Liquidation Incentive** (RLI): a percentage of the debt owed (principal + accrued Stability Fees) to the vault being liquidated (e.g. 0.1%)
 
-ALI and RLI are paid to the keeper once the liquidation auction has concluded. ALI and RLI are to be set such that they can be paid from the liquidation penalty in case the auction concludes sucessfully. If bad debt was incurred and the liquidation penalty doesn't cover ALI + RLI, the difference owed is paid from the Protocol Treasury.
+ALI and RLI are paid to the initiator from the Stability Fee and Liquidation Penalty share of successful bids. Only when the initiator has received the full incentives amount they are entitled to, does the SF and LP share of bids get paid into the Treasury.
+
+ALI and RLI are to be set such that they can be paid from the Liquidation Penalty. If bad debt was incurred and the Liquidation Penalty share recovered doesn't cover the full ALI plus RLI, the initiator loses out on part of their incentive.
 
 
 ## Liquidation Auction
@@ -81,77 +83,42 @@ The auction ends when either
 * there is no collateral left in the vault; or
 * the auction has timed out.
 
-An auction ends when the **Liquidation Auction Timeout** has been reached. Since Start Price, Step Time Interval and Price Decrease Factor are deterministic, there is a **Minimum Auction Price** that can be reached before the auction times out. Governance should set parameters such that the Minimum Auction Price is low enough that a liquidation is highly likely even in the case of extreme price drops.
+An auction ends when the **Liquidation Auction Timeout** has been reached. Since Start Price, Step Time Interval and Price Decrease Factor are deterministic, there implicitly is a **Minimum Auction Price** that auction price cannot fall below before the auction times out. Governance should set parameters such that the Minimum Auction Price is low enough that a liquidation is highly likely even in the case of extreme price drops.
 
-A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt (incl LP) becomes Bad Debt.
+A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt (incl LP) becomes bad debt.
 
 
-## Parameters
+## Statutes
 
 * **Liquidation Ratio (LR)**
-    * Statutes index: 4
-    * initial value: 150% of outstanding debt (valued at 1 BYC = 1 USD)
-    * updatable: yes
-    * votes requied: XYZ CRT
+    * Statute index: 4
+    * Statute name: STATUTE_LIQUIDATION_RATIO
     * considerations: The higher the LR, the more overcollateralized the system becomes, and the less likely a depeg to the downside becomes. On the other hand, a higher LR makes it less attractive to borrow BYC, due to the higher associated capital costs of having to lock up more XCH.
 * **Liquidation Penalty (LP)**
-    * Statutes index: 16 (TODO: rename in Statutes? Currently: LIQUIDATION_PENALTY_PERCENT)
-    * initial value: 13% of BYC owed to vault
-    * updatable: yes
-    * votes required: XYZ CRT
+    * Statute index: 16
+    * Statute name: STATUTE_VAULT_LIQUIDATION_PENALTY_PERCENT
     * considerations: Needs to be high enough to set a strong incentive to borrowers to keep vaults sufficiently collateralized without being unreasonably punitive.
-* **Absolute Liquidation Incentive (ALI)** (TODO: rename? In Statutes: INITIATOR_FLAT_INCENTIVE)
-    * Statutes index: 14
-    * initial value: 10 BYC
-    * updatable: yes
-    * votes required: XYZ CRT
-    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below). The ALI should also cover the incentivize the first bidder in the subsequent liquidation auction (introduce a separate parameter for this, given that transaction fee cost of triggering and bidding might differ?). If trigger keeper and first bidder are different, the incentive gets split.
-* **Relative Liquidation Incentive (RLI)** (TODO: rename? In Statutes: INITIATOR_RELATIVE_INCENTIVE)
-    * Statutes index: 15
-    * initial value: 0.1% of debt owed to vault
-    * updatable: yes
-    * votes required: XYZ CRT
-    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers to use the protocol.
+* **Absolute Liquidation Incentive (ALI)**
+    * Statute index: 14
+    * Statute name: STATUTE_VAULT_INITIATOR_FLAT_INCENTIVE
+    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below).
+* **Relative Liquidation Incentive (RLI)**
+    * Statute index: 15
+    * Statute name: STATUTE_VAULT_INITIATOR_RELATIVE_INCENTIVE_PERCENT
+    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.
 * **Starting Price Factor (SPF)**
-    * Statutes index: 13
-    * initial value: 110% of latest oracle price
-    * updatable: yes
-    * votes required: XYZ CRT
-    * considerations: A higher value enables keepers to bid in more scenarios in which there's been a rebound of the market price between the latest oracle update and start of bidding. A lower value makes it more likely that the auction will finish quickly if the collateral price continues to fall after the latest oracle price was published.
+    * Statute index: 13
+    * Statute name: STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR
+    * considerations: A higher value enables keepers to place a bid in more scenarios in which there's been a rebound of the market price between the latest Statutes Price update and the beginning of the auction. A lower value makes it more likely that the auction will finish quickly if the collateral price has continued to fall after the last Statutes Price update.
 * **Step Price Decrease Factor (PD)**
-    * Statutes index: 11
-    * initial value: 2% of Starting Price
-    * updatable: yes
-    * votes required: XYZ CRT
+    * Statute index: 11
+    * Statute name: STATUTE_VAULT_AUCTION_STEP_PRICE_DECREASE_FACTOR
     * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
 * **Step Time Interval (STI)**
-    * Statutes index: 10
-    * initial value: 1 block
-    * updatable: yes
-    * votes required: XYZ CRT
+    * Statute index: 10
+    * Statute name: STATUTE_VAULT_AUCTION_STEP_TIME_INTERVAL
     * considerations: A higher value gives keepers more time to bid, but increases the risk that the value of the collateral falls further until the auction has completed. A low value might make it difficult for keepers that bid manually to keep up.
-* **Liquidation Auction Timeout (LAT)** (TODO: rename in Statutes? in Statutes: VAULT_AUCTION_TIMEOUT)
-    * Statutes index: 12
-    * initial value: 6 hours
-    * updatable: yes
-    * votes required: XYZ CRT
-    * considerations: A higher value allows keepers more time to participate in a liquidation auction, but increases the risk that more bad debt accrues. However, if there are no keepers available to participate in liquidation auctions, it is unlikely that a bad debt auction will see bids.
-
-<!--
-MakerDAO:
-* Supports different types of auction price function. linear step, exponential, and step exponential
-* Local Liquidation Limit: max amount of debt for which collateral auctions for a given collateral type can be active. -> Needed? Maybe not as long as we have just one vault type.
-* Global Liquidation Limit: max amount of debt for which collateral acutions can be active. -> Needed? Maybe not as long as we have just one vault type.
-* Breaker Price Tolerance: Limits the amount by which successive oracle prices can deviate from each other. -> Needed?
-
-
-For an analysis of possible parameter choices in the case of ETH collateral, see https://maker-report.gauntlet.network/
-
-
-* **Minimum Price Factor (MPF)**
-    * Statutes index:
-    * initial value: 20% of Starting Price
-    * updatable: yes
-    * votes required: XYZ CRT
-    * considerations: A higher value might prevent the auction price from reaching a level at which keepers are willing to bid if the market price continues to fall. The primary risk of a low value is that collateral gets sold below market value if unusual conditions prevent keepers from bidding. Such conditions may include extreme transaction fees or clogged blocks, technical difficulties experienced by keepers participating in auctions, etc.
--->
+* **Liquidation Auction Timeout (LAT)**
+    * Statute index: 12
+    * Statute name: STATUTE_VAULT_AUCTION_TIMEOUT
+    * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantional amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.

@@ -1,7 +1,7 @@
 ---
 id: choosing-your-ltv
 title: Choosing your LTV
-sidebar_position: 100
+sidebar_position: 800
 ---
 
 # Choosing your LTV

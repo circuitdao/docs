@@ -1,31 +1,32 @@
 ---
 id: price-oracle
 title: Price Oracle
-sidebar_position: 60
+sidebar_position: 235
 ---
 
 # Price Oracle
 
-The protocol needs to know the market price of XCH in US Dollars to function properly. It does this by retrieving the XCH/USD price from an Oracle, a special coin (singleton).
+The protocol needs to know the market price of XCH in US Dollars to value the XCH deposited in collateral vaults. The protocol can access the XCH/USD price from an **Oracle**, a special singleton coin that is fed price information by **data providers**.
 
 By having access to the XCH/USD price, the protocol can value XCH collateral deposited in vaults. This is crucial for two reasons:
 
 * Borrowing: If a new loan gets taken out, the resulting Liquidation Threshold must remain below the value of the vault's collateral
 * Liquidations: If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation
 
-The XCH/USD market price is an off-chain metric. As such it cannot be obtained in a fully trustless manner. Instead, the Oracle price is updated based on prices provided by **data providers**. Each data provider obtains XCH/USD prices from crypto exchanges or other trading venues and publishes them on-chain via an **Announcer** coin. Governance can whitelist up to 32 Announcers.
+The XCH/USD market price is an off-chain metric. As such it cannot be obtained in a fully trustless manner. Instead, the Oracle price is updated based on prices provided by data providers. Each data provider obtains XCH/USD prices from crypto exchanges or other trading venues and publishes them on-chain in an **Announcer** coin.
 
 ![Oracle update](./../../static/img/Oracle_update_diagram.png)
 
+Before the price of an Announcer can be used by the Oracle, governance must whitelist the respective Announcer and the data provider must register the coin with the **Announcer Registry**, another singleton coin.
 
 ## Oracle price updates
 
 The Oracle price can be updated whenever it
 
-* was last updated more than **PUAS** seconds ago; or
-* has changed by more than **PUTB** basis points
+* was last updated more than **Price Update Delay** seconds ago; or
+* has changed by more than **Price Update Delta** basis points
 
-Anyone can update the Oracle price, and when an update is performed, the new Oracle price is calculated as the median price of a number of whitelisted Announcers. Whoever performs the update can choose which Announcers to use, as long as the number of Announcers selected is no less than the **Oracle M-of-N** (M-of-N) parameter. Governance should not set the M-of-N parameter too close to the number of whitelisted Announcers in case some Announcers are expired or have published an inaccurate price. Such Announders should be used when updating the Oracle price.
+Anyone can update the Oracle price, and when an update is performed, the new Oracle price is calculated as the median price of a number of whitelisted Announcers. Whoever performs the update can choose which Announcers to use, as long as the number of Announcers selected is no less than **Oracle M-of-N**. Governance should not set the Oracle M-of-N too close to the number of whitelisted Announcers in case some Announcers are expired or have published an inaccurate price. Such Announcers should be used when updating the Oracle price.
 
 ![Statutes Price](./../../static/img/Statutes_price_diagram.png)
 
@@ -40,7 +41,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 
 ## The role of data providers
 
-Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price. In particular, Announcer prices must be updated no less often than given by the **Announcer Maximum Validity** (AMV) parameter. Otherwise the Anncouncer price is considered expired and can no longer be used to update the Oracle price.
+Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price. In particular, Announcer prices must be updated no less often than given by the **Announcer Delay**. Otherwise the Anncouncer price is considered expired and can no longer be used to update the Oracle Price.
 
 Governance should closely monitor the performance of data providers, and replace those that perform poorly or can no longer be trusted. The larger the number of high-quality whitelisted data providers, the larger M-of-N can be chosen, and the lower the risk that the Oracle price is not reflective of the market price.
 
@@ -50,6 +51,8 @@ Data providers are real-world entities that publish off-chain data on-chain. As 
 
 :::
 
+To incentivize Announcers to do their job well, the protocol lets them claim rewards in the form of CRT tokens. In addition, Announcers are required to post an XCH bond which can be slashed if they fail to publish prices on a regular basis. For details please see the [Announcer Registry](./../technical-manual/announcer_registry) page in the Technical Manual.
+
 
 ## Data sources and price calculation
 
@@ -57,51 +60,30 @@ It is up to governance to decide what data sources data providers should take in
 
 For example, as of the time of writing, the majority of XCH trading occurs on OKX. As a result, governance should require all data providers to incorporate OKX data in the XCH/USD price they publish.
 
-Given that XCH trading volumes are still relatively small, there is a risk that a nefarious actor could attempt to manipulate the XCH/USD market price in order to force or prevent the liquidation of collateral vaults. In order to mitigate this risk, the Oracle price should be based on a volume-weighted average price over a trailing time window.
+Given that XCH trading volumes are still relatively small, there is a risk that a malicious actor could attempt to manipulate the XCH/USD market price in order to force or prevent the liquidation of collateral vaults. In order to mitigate this risk, the Oracle price should be based on a volume-weighted average price over a trailing time window.
 
-The longer the window over which the average price is calculated, the more capital is required to execute a price manipulation attack. See the page on Oracle price calculation for an analysis of historical trading volumes.
-
-
-## Data provider rewards
-
-Since publishing up-to-date price information comes with costs for data providers, the protocol allocates credits to them each time the Oracle price is copied to Statutes. The amount of credits per update of the XCH/USD price in Statutes is given by the **Credits per Update** (CPU) paramter.
-
-Data providers can claim 1 CRT from the protocol for each credit received.
+The longer the window over which the average price is calculated, the more capital is required to execute a price manipulation attack.
 
 
-## Data provider penalties
+## Statutes
 
-To ensure that data providers take their job seriously, they are requied to lock up a bond in their respective Announcer coin. This bond is an amount of XCH as given by the **Announcer Minimum Amount** (AMA) parameter. If an Announcer price is expired, then the **Announcer Penalty Amount** (APA) is deducted from the bond every **Announcer Penalty Frequency** (APF) seconds, until an Announcer price is published again.
-
-
-
-## Parameters
-
-
-* **Oracle M-of-N (M-of-N)**
-    * recorded in: Statutes
-    * initial value: 2
-    * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations:
-
-* **Oracle Price Updatable after Seconds (PUAS)**
-    * recorded in: Statutes
-    * initial value: 3600 seconds
-    * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations:
-
-* **Oracle Price Updatable Threshold Bps (PUTB)**
-    * recorded in: Statutes
-    * initial value: 50 bps
-    * updatable: yes
-    * votes requied: XYZ CRT
-    * considerations:
-
-* **Oracle Price Delay (OPD)**
-    * recorded in: Statutes
-    * initial value: 3600 seconds
-    * updatable: yes
-    * votes requied: XYZ CRT
+* **Oracle M-of-N**
+    * Statute index: 5
+    * Statute name: STATUTE_ORACLE_M_OF_N
+    * considerations: should be large enough to provide suffcient redundancy if some of the Announcers fail. should not be too large that Oracle Price can no longer be updated if some of the Announcers fail
+* **Oracle Price Update Delay**
+    * Statute index: 6
+    * Statute name: STATUTE_ORACLE_PRICE_UPDATABLE_AFTER_SECONDS
+    * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the the Liquidation Ratio
+* **Oracle Price Update Delta**
+    * Statute index: 7
+    * Statute name: STATUTE_ORACLE_PRICE_UPDATABLE_PERCENT_THRESHOLD
+    * considerations: needs to be small enough so that liquidations can get triggered in a timely manner. should be large enough to prevent unnecessary oracle updates and oracle coin hogging attacks
+* **Oracle Price Delay**
+    * Statute index: 8
+    * Statute name: STATUTE_ORACLE_PRICE_EXPIRATION_SECONDS
     * considerations: a longer delay gives users of the system more time to perform mitigating actions should the oracle price be incorrect. it also gives governance more time to disable price updates in such a scenario. a shorter delay leads to more timely liquidations and more accurate limits on borrowing, both of which reduce risk of the system becoming insufficiently or under-collateralised.
+* **Announcer Delay**
+    * Statute index: 31
+    * Statute name: STATUTE_ANNOUNCER_DELAY
+    * considerations:
