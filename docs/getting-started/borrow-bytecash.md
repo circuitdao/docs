@@ -28,7 +28,7 @@ On the website, you will see your new collateral balance together with the amoun
 
 Click the Borrow button, enter an amount of BYC to borrow, and click Borrow. Wait a couple of mintues for the transaction to be confirmed on-chain, and ta-da, you have taken out your first BYC loan!
 
-To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID 0xdeadbeef with your wallet.
+To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID with your wallet. You can find the asset ID at the bottom of the [Intro](./../intro) page.
 
 Note that the amount you can borrow is capped by the **maximum loan-to-value** (**Max LTV**) set by governance. The Max LTV is shown near to top right of the Borrow page next to the APR.
 
