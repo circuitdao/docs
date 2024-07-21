@@ -13,7 +13,7 @@ When a collateral vault liquidation is triggered, owner operations can no longer
 Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
 
 Keeper operations:
-* **Start liquidation auction**: trigger a liquidation auction - puzzle: [vault_keeper_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_start_auction.clsp)
+* **(Re-)start liquidation auction**: trigger a liquidation auction - puzzle: [vault_keeper_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_start_auction.clsp)
 * **Bid in liquidation auction**: submit a bid in liquidation auction - puzzle: [vault_keeper_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_bid.clsp)
 * **Recover bad debt**: burn BYC from Treasury to extinguish Bad Debt - puzzle: [vault_keeper_recover_bad_debt.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
 
@@ -21,7 +21,7 @@ Keeper operations:
 
 Starts or restarts a liquidation auction. A liquidation auction can be started if the value of the collateral, valued at the Statutes Price, is less than or equal to the vault's outstanding debt.
 
-Liquidation auctions are Dutch auctions that either recover all debt or eventually time out. If a timeout occurs without all debt having been recovered but with collateral left in the vault, then a liquidation auction can be restarted. If a timeout occurs without all debt having been recovered and with no collateral left in the vault, then a restart is no longer possible, and the vault is said to have incurred Bad Debt.
+Liquidation auctions are Dutch auctions that either recover all debt or eventually time out. If a timeout occurs without all debt having been recovered but with collateral left in the vault, then a liquidation auction can be restarted by calling the start operation again. If a timeout occurs without all debt having been recovered and with no collateral left in the vault, then a restart is no longer possible, and the vault is said to have incurred **Bad Debt**.
 
 ### Bid
 
@@ -40,7 +40,7 @@ For bid to succeed it needs to:
 
 If a liquidation auction has timed out and all the debt has been recovered, the liquidation was successful. The vault is released back to the borrower together with any collateral that wasn't claimed in the auction.
 
-If a liquidation auction has timed out without all debt having been recovered it can be restarted via the start auction operation, unless there is no collateral left in the vault, in which case the vault is said to have incurred **Bad Debt**.
+If a liquidation auction has timed out without all debt having been recovered it can be restarted via the start auction operation, unless there is no collateral left in the vault, in which case the vault is said to have incurred Bad Debt.
 
 ### Recover Bad Debt
 

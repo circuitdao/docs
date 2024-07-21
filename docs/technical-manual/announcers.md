@@ -47,19 +47,6 @@ Governance can approve and disapprove Announcers. An approved Announcer may be r
 
 ### Penalize
 
-To ensure that data providers take their job seriously, they are requied to lock up a bond in their respective Announcer coin. This bond is an amount of XCH as given by the **Announcer Minimum Deposit**. If an Announcer price is expired, then the **Announcer Penalty Amount** (APA) is deducted from the bond every **Announcer Penalty Frequency** (APF) seconds, until an Announcer price is published again.
+Keepers can penalize Announcers whose prices have expired. A price expires if the last update occured longer ago than the Announcer Delay. The amount claimed is dependent on the 
 
-
-## Statutes
-* **Announcer Minimum Deposit**
-    * Statute index: 30
-    * Statute name: STATUTE_ANNOUNCER_MIN_DEPOSIT
-    * considerations: should be high enough to set a strong incentive for Announcers to run high availablity infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
-* **Announcer Penalty Interval**
-    * Statute index: 32
-    * Statute name: STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES
-    * considerations: similar considerations as with Announcer Minimum Deposit.
-* **Announcer Penalty Factor per Interval**
-    * Statute index: 33
-    * Statute name: STATUTE_ANNOUNCER_PENALTY_FACTOR_PER_INTERVAL
-    * considerations: similar considerations as with Announcer Minimum Deposit.
+unt of XCH as given by the **Announcer Minimum Deposit**. If an Announcer price is expired, then the **Announcer Penalty Amount** (APA) is deducted from the bond every **Announcer Penalty Frequency** (APF) seconds, until an Announcer price is published again.

@@ -6,12 +6,12 @@ sidebar_position: 320
 
 # Statutes
 
-**Statutes** are a set of mutable parameters, that define the behaviour of Circuit protocol. Statutes are the global state variables of the protocol.
+**Statutes** are a set of mutable parameters that determine the behaviour of Circuit protocol. They are effectively the global state variables of the protocol.
 
 There are three different types of Statutes:
 * protocol-updated
 * governance-updated
-* the [Statutes Price](./price-oracle)
+* the [Statutes Price](./../user-guide/price-oracle)
 
 Protocol-updated Statutes are those that the protocol keeps track of automatically by enforcing updates as part of certain protocol coin spends. Governance-updated Statutes require a governance vote to be updated. For details see the [governance](./governance) page. The Statutes Price is a delayed version of the Oracle Price.
 
