@@ -22,25 +22,35 @@ $$
 
 For example, if SFDF is set to 1.00000018133597, then the APR is 10%.
 
-If a loan is taken out, then the corresponding debt is simply the principal of that loan multiplied by all SFDFs from the time the loan was taken out ($l_0$) until the present time:
+If a loan is taken out, then the corresponding debt is simply the principal of that loan multiplied by all SFDFs from the time the loan was taken out, $t_L$, until the current time, $t_C$:
 
 $$
-debt(t_N) = principal \prod_{i=l_0}^{i=N} SFDF_{t_i},
+debt(t_N) = principal \prod_{i=L}^{C} SFDF_{t_i},
 $$
 
-Since the SFDF can change over time, storing individual historical SFDFs in the protocol would be prohibitive from a cost perspective. Instead, the protocol keeps track of the **Cumulative Stability Fee Discount Factor** (CSFDF), which is the product of all SFDFs from protocol launch $t_{p_0}$ until the current time $t_N$:
+The SFDF can change over time. Storing individual historical SFDFs in the protocol would be prohibitive from a cost perspective. Instead, the protocol keeps track of the **Cumulative Stability Fee Discount Factor** (CSFDF), which is the product of all SFDFs from protocol launch $t_{P}$ until the timestamp of the current Statutes Price, $t_S$:
 
 $$
-CSFDF(t_N) = \prod_{i=p_0}^{i=N} SFDF_{t_i},
+CSFDF(t_S) = \prod_{i=P}^{S} SFDF_{t_i},
 $$
 
-This parameter is stored in Statutes and automatically updated by the protocol whenever the Statutes Price is updated or the SFDF changes. The time the last such update occured is $t_M$. This ensures that the CSFDF is always reasonably up-to-date and that the applicable **Current Cumulative Stability Fee Discount Factor** (CCSFDF) up to the current time can be calculated as
+This parameter is stored in Statutes and automatically updated by the protocol whenever the Statutes Price is updated. This ensures that the CSFDF is always reasonably up-to-date.
+
+The **Current Cumulative Stability Fee Discount Factor** (CCSFDF), which is the discount factor up to the current time, $t_C$, and the discount factor most commonly used in protocol-internal calculations, is given by
 
 $$
-CCSFDF(t_N) =  SFDF^{N-M}\prod_{i=p_0}^{i=M} SFDF_{t_i}.
+CCSFDF(t_C) = CSFDF(t_S)\; SFDF^{C-S}.
 $$
 
-Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a 3 minute window of flexibility to reduce the likelihood that an operation times out and will fail to be incluced in the blockchain. Since a malicious vault could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
+:::warning
+A change to SFDF does not automatically cause an update of the Statutes Price and hence the CSFDF. This means that in the calculation of CCSFDF, the new SFDF may be used retroactively from $t_S$ onwards.
+
+Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by Oracle Price Delay (STATUTE_ORACLE_PRICE_EXPIRATION_SECONDS), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
+
+Users should keep in mind that although any change in the CCSFDF caused by a retroactive application of the SFDF is generally fairly small due to the limited period over which any retroactivity applies, it can in theory **unexpectedly push the debt of a vault past the Liquidation Threshold**. Users with vaults close to liquidation should therefore monitor the protocol for governance proposals to modify the SFDF.
+:::
+
+Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a three minute window of flexibility vs the actual block timestamp to reduce the likelihood that an operation times out and will fail to be incluced in the blockchain. Since a malicious vault owner could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
 
 
 ## Loan and debt accounting

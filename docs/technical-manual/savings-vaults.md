@@ -11,19 +11,35 @@ Savings vaults are BYC CAT with inner puzzle savings_vault.clsp. The savings vau
 
 Savings vaults can be created on a standalone basis, i.e. without requiring a simultaneous spend of any protocol coins.
 
-## Interest accrual
+## Interest accrual and accounting
 
-Savings interest compounds by the minute, i.e. the Interest Discount Factor is applied to the aggregate of net deposits and accrued savings interest. Net deposits are the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the **discounted deposits** state variable.
+Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of net deposits and accrued savings interest. Net deposits are the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the **discounted deposits** state variable.
 
-Discounted deposits are effectivley the vault's net deposits valued at vault creation, and are calculated as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
+Discounted deposits are effectivley the vault's net deposits valued at vault creation, and are defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 
 $$
 discounted\ deposits = \sum_{i=1}^A \frac{B_i}{CCIDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCIDF_{t_{R_j}}},
 $$
 
-where $t_{B_i}$ are the times when deposits were made, and $t_{R_j}$ the times when withdrawal occurred.
+where $t_{B_i}$ are the times when deposits were made, and $t_{R_j}$ the times when withdrawals occurred.
 
-This is analogous to how the collateral vault accounts for accrued Stability Fees. See the [collateral vault](./collateral_vaults) page for further into and a chart.
+This is analogous to how [collateral vaults](./collateral_vault) account for accrued Stability Fees. Accordingly, the Current Cumulative Interest Discount Factor is calculated as
+
+$$
+CCIDF(t_C) = CIDF(t_S)\; IDF^{C-S},
+$$
+
+where $t_C$ is the current time, $t_S$ is the timestamp of the current Statutes Price, and the **Cumulative Interest Discount Factor** (CIDF) at time $t_S$ is defined as
+
+$$
+CIDF(t_S) = \prod_{i=P}^{S} IDF_{t_i}
+$$
+
+:::info
+Similarly to the situation with collateral vaults, it is possible for CCIDF to change retroactively when the IDF is updated by governance. However, since there is no risk of liquidation with savings vault, the impact is limited to the amount of interest earned, which is generally uncritical. See the Danger box on the [collateral vaults](./collateral_vaults) page for additional info.
+:::
+
+As with collateral vaults, savers are given a three minute window of flexibility for specifiying the current timestamp vs the actual block timestamp when making depsoits or withdrawals to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by making deposits in the past and withdrawing in the future to boost their effective savings rate, the actual definition of CCIDF in the savings vault puzzle includes an additional factor IDF^(-3) to reduce the interest accrued by the maximum that can be gained from the timestamp flexibility.
 
 
 ## Operations
@@ -51,7 +67,7 @@ The number of savings vaults from which interest can be withdrawn in any given b
 To prevent depositors from having to wait for a Treasury coin to become available in times of high demand, it is possible to make a withdrawal from net deposits only, which does not require a treasury spend.
 
 ![Savings vault withdrawal with interest](./../../static/img/Savings_vault_withdrawal_spends_diagram.png)
-
+    
 :::note
-On a protocol level, savers can choose any split between net deposits and interest they like when making a withdrawal, but this is not currently supported by the app.
+On a protocol level, savers can choose any split between net deposits and interest when making a withdrawal, but this is not currently supported by the app.
 :::
