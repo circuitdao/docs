@@ -6,7 +6,7 @@ sidebar_position: 220
 
 # Treasury
 
-The **Treasury** is a component of the protocol that stores BYC. It effectively functions as a buffer which takes in and distributes BYC in response to user interactions with the protocol.
+The **Treasury** is a component of the protocol that stores BYC. It effectively functions as a buffer which takes in and distributes BYC in response to user interactions with the protocol. The amount of BYC held in the Treasury is referred to as the **Treasury balance**.
 
 The Treasury is filled by:
 * Stability Fees (including Transferred Fees)

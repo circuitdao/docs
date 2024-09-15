@@ -7,7 +7,13 @@ sidebar_position: 350
 
 # Savings Vaults
 
-Savings vaults are BYC CAT with inner puzzle savings_vault.clsp. The savings vault inner puzzle has itself an inner puzzle, which users can choose freely. This allows savings vaults to be held in using Chia's custody primitives (link?).
+Savings vaults are BYC CAT with inner puzzle savings_vault.clsp.
+
+The savings vault puzzle has itself an inner puzzle, which can be chosen freely by the savings vault owner. The inner puzzle may output multiple create coin conditions. The first of these yields the savings vault's child vault (inner puzzle, amount and memo are all preserved), whereas any other child coins created are no longer protocol coins (they can for example be coins that receive an amount withdrawn from the savings vault).
+
+:::info
+It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a savings vault.
+:::
 
 Savings vaults can be created on a standalone basis, i.e. without requiring a simultaneous spend of any protocol coins.
 

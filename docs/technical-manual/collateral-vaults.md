@@ -8,9 +8,18 @@ sidebar_position: 330
 
 Collateral vaults are non-fungible coins that can be created permissionlessly by anyone.
 
+:::warning
+Collateral vault inner puzzles must output one, and only one, protocol remark condition. The vault operation puzzle is extracted from this remark condition. Vault owners must therefore ensure their inner puzzles are designed suitably, as otherwise some or all vault operations may become inaccessible and the collateral locked up in the vault could be lost.
+
+It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a collateral vault.
+:::
+
+### Eve state and lineage
+
 The vault puzzle enforces lineage and an eve state in which all state variables are 0.
 
 Note that a non-eve coin can be in eve state, so the eve coin of a collateral vault is the one whose parent coin isn't a vault coin.
+
 
 ## Stability Fees
 
