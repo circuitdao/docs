@@ -39,13 +39,9 @@ The Chialisp code of the puzzles used by protocol coins can be found in [this](h
 
 Bytecash is a [Chia Asset Token](https://chialisp.com/cats) (CAT). You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the token's asset ID.
 
-On testnet, the BYC asset ID may occasionally change. Please use the asset ID with the highest version number:
-* BYC03 asset ID (testnet11, Circuit deployment v2):
-    91bfdb4a750308c25b12d0f787309df590a4cad80e7466accdd99b1d1759d9e4
-* BYC02 asset ID:
-    skipped
-* BYC01 asset ID (testnet11, Circuit deployment v1):
-    1763a32f8a9c66f256d8b4631226870ee63dfcfd9668f83c6f75b98f82dc791f
+On testnet, the BYC asset ID may occasionally change. The BYC asset ID corresponding to the latest deployment on testnet11 is
+
+    4eadfa450c19fa51df65eb7fbf5b61077ec80ec799a7652bb187b705bff19a90
 
 :::info
 For questions, feedback, feature requests or bug reports, please contact us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.

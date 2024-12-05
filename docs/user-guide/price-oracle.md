@@ -6,7 +6,7 @@ sidebar_position: 235
 
 # Price Oracle
 
-The protocol needs to know the market price of XCH in US Dollars to value the XCH deposited in collateral vaults. It does this by reading from an **Oracle**, a special singleton coin that keeps track of the XCH/USD price. This **Oracle Price** is regularly updated using price data supplied by **data providers**.
+The protocol needs to know the market price of XCH in US Dollars to value the XCH deposited in collateral vaults. It does this by reading from an **Oracle**, a singleton coin that keeps track of the XCH/USD price. This **Oracle Price** is regularly updated using price data supplied by **data providers**.
 
 ## Statutes Price
 
@@ -16,10 +16,11 @@ The Statutes Price is stored in the Statutes singleton. See the [Technical Manua
 
 ![Statutes Price](./../../static/img/Statutes_price_diagram.png)
 
-Using the Stautes Price, the protocol can value XCH held in collateral vaults. This is key in two situations:
+Using the Stautes Price, the protocol can value XCH held in collateral vaults. This is relevant in the following three situations:
 
-* Borrowing: If a new loan gets taken out, the Liquidation Threshold must remain below the value of the vault's collateral
-* Liquidations: If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation
+* Borrowing: When taking out a loan, the Liquidation Threshold must remain below the value of the vault's collateral
+* Withdrawing collateral: When withdrawing collateral, the Liquidation Threshold must remain below the value of the vault's collateral
+* Triggering a liquidation: If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation
 
 
 ## Oracle price updates
@@ -31,7 +32,7 @@ A new Oracle price can be calculated and added to the list Oracle prices wheneve
 * at least **Price Update Delay** seconds have passed since the previous price was added; or
 * the price has changed by more than **Price Update Delta** basis points
 
-The XCH/USD market price is an off-chain metric. As such it cannot be obtained in a fully trustless manner. Instead, Oracle prices are calculated based on prices provided by data providers. Each data provider obtains XCH/USD prices from crypto exchanges or other trading venues and publishes them on-chain in an **Announcer** singleton coin. Announcers don't keep a price history, they only store the latest price supplied by their respective data provider.
+The XCH/USD market price is an off-chain metric. As such it cannot be obtained in a fully trustless manner. Instead, Oracle prices are calculated based on prices provided by data providers. Each data provider obtains XCH/USD prices from crypto exchanges or other trading venues and publishes them on-chain in an **Announcer** singleton coin. Announcers don't keep a price history, they only store the latest price supplied by their respective data provider, the **Announcer Price**.
 
 ![Oracle update](./../../static/img/Oracle_update_diagram.png)
 
@@ -40,7 +41,13 @@ Oracle prices are calculated as the median price of a number of whitelisted Anno
 
 ## Data providers and Announcers
 
-Before the price of an Announcer can be used in an Oracle price calculation, governance must whitelist the Announcer and the corresponding data provider must register the Announcer with the **Announcer Registry**, another singleton coin. See the [Technical Manual](./../technical-manual/announcer-registry) for more information.
+Before the price of an Announcer can be used in an Oracle price calculation, governance must whitelist the Announcer and the corresponding data provider must register the Announcer with the **Announcer Registry**, another singleton coin.
+
+:::info
+
+The Technical Manual contains additional information on [Announcers](./../technical-manual/announcers) and the [Announcer Registry](./../technical-manual/announcer-registry).
+
+:::
 
 Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Validity**. Otherwise the Anncouncer price is considered expired and can no longer be used to update the Oracle Price.
 
