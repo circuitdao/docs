@@ -8,7 +8,9 @@ sidebar_position: 310
 
 The technical manual is intended for advanced users, keepers, and oracle data providers that would like to gain an in-depth understanding of the inner workings of the protocol.
 
-For every protocol component, the manual details which puzzles are involved, what operations can be performed, and what the key coin spends look like.
+For every protocol component, the manual details what their purpose is and which puzzles are involved. For each protocol coin there is a State and Lineage section which breaks down the curried args of the corresponding mod into fixed, immutable and mutable state variables. It also provides information on the eve state, the amount of a coin, and lineage proofs.
+
+Another section deals with operation that can be performed on a given protocol coin. There is a brief overview of what operations exist, grouped by who can perform them. Also shown is the corresponding [driver hint](./design-decisions#driver-hints). Dedicated sections discuss each operation in more detail, including in many cases coin spend diagrams. Each section contains a list of state variables that may be changed by the operation as well as a brief, non-exhaustive explanation, of how each of them is typically changed.
 
 A good starting point is the diagram below and the [Statutes](./statutes) page, given the central role of the Statutes singleton within the protocol.
 

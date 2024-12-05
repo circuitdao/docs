@@ -16,10 +16,11 @@ The Statutes Price is stored in the Statutes singleton. See the [Technical Manua
 
 ![Statutes Price](./../../static/img/Statutes_price_diagram.png)
 
-Using the Stautes Price, the protocol can value XCH held in collateral vaults. This is key in two situations:
+Using the Stautes Price, the protocol can value XCH held in collateral vaults. This is relevant in the following three situations:
 
-* Borrowing: If a new loan gets taken out, the Liquidation Threshold must remain below the value of the vault's collateral
-* Liquidations: If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation
+* Borrowing: When taking out a loan, the Liquidation Threshold must remain below the value of the vault's collateral
+* Withdrawing collateral: When withdrawing collateral, the Liquidation Threshold must remain below the value of the vault's collateral
+* Triggering a liquidation: If the value of collateral in a vault drops below the Liquidation Threshold, the vault becomes eligible for liquidation
 
 
 ## Oracle price updates

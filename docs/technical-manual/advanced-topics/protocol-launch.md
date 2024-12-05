@@ -1,7 +1,7 @@
 ---
 id: protocol-launch
 title: Protocol Launch
-sidebar_position: 394
+sidebar_position: 1800
 ---
 
 # Protocol launch

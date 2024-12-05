@@ -7,21 +7,23 @@ sidebar_position: 350
 
 # Savings Vaults
 
-Savings vaults are BYC CAT with inner puzzle savings_vault.clsp.
+Savings vaults are BYC CAT singletons with inner puzzle [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp). They can be permissionlessly created by anyone to earn yield on Bytecash.
 
-The savings vault puzzle has itself an inner puzzle, which can be chosen freely by the savings vault owner. The inner puzzle may output multiple create coin conditions. The first of these yields the savings vault's child vault (inner puzzle, amount and memo are all preserved), whereas any other child coins created are no longer protocol coins (they can for example be coins that receive an amount withdrawn from the savings vault).
+The amount of a savings vault coin is referred to as the **savings balance**. The amount of interest that has accrued in the vault is the **accrued interest**. Accrued interest is an accounting variable. To get paid this interest, the vault owner needs to request a payment to be made from Treasury. The app pays interest whenever an amount greater than the savings balance is being withdrawn. Otherwise, the entire withdrawal amount will be covered from the savings balance.
+
+The savings vault puzzle has itself an inner puzzle, which can be chosen freely by the savings vault owner. In case of a withdrawal, the inner puzzle may output multiple create coin conditions. The first of these yields the savings vault's child vault (inner puzzle, amount and memo are all preserved), whereas the other child coins would receive the amount withdrawn from the vault.
 
 :::info
-It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a savings vault.
+It is possible to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a savings vault.
 :::
 
-Savings vaults can be created on a standalone basis, i.e. without requiring a simultaneous spend of any protocol coins.
+Savings vaults can be created on a standalone basis, i.e. without requiring a simultaneous spend of any protocol coins. Once created, a savings vault coin remains a savings vault forever. There is no way to turn it back into a standard BYC coin or even melt the CAT.
 
 ## Interest accrual and accounting
 
-Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of net deposits and accrued savings interest. Net deposits are the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the **discounted deposits** state variable.
+Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_DEPOSIT``` state variable.
 
-Discounted deposits are effectivley the vault's net deposits valued at vault creation, and are defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
+The ```DISCOUNTED_DEPOSIT``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 
 $$
 discounted\ deposits = \sum_{i=1}^A \frac{B_i}{CCIDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCIDF_{t_{R_j}}},
@@ -56,24 +58,93 @@ Owner operations:
 * **Deposit**: deposit BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
 * **Withdraw**: withdraw BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
 
-Savings vault operations are part of the savings vault's main puzzle. The reason being that deposit and withdrawal operation have in fact the same implementation. Whether an operation on the savings vault is a deposit or withdrawal can be inferred from how it changes net deposits and accrued interest of the vault and whether an interest withdrawal from Treasury was made.
+Savings vault operations are part of the savings vault's main puzzle since deposit and withdrawal operations have the same implementation. Whether an operation on a savings vault is a deposit or withdrawal can be inferred from how it changes the savings balance and accrued interest of the vault and whether an interest withdrawal from Treasury was made.
+
+Vault owners can receive accrued interest as part of both deposit and withdrawal operations. In case of a deposit, interest is paid to the savings vault. In case of a withdrawal, interest is paid to the savings vault or directly to the user's wallet. An interest payment to a savings vault is referred to as an **interest payout**, and a payment directly to a user's wallet is referred to as an **interest withdrawal**.
+
+If interest is paid, it's always for the full accrued interest. The protocol obtains the funds for interest payments from the Treasury. The user must select one Treasury coin from which to make the withdrawal. In particular, this means that a user can only get paid interest if there is a Treasury coin with amount greater than the accrued interest.
+
+Note that no interest payment can be made if accrued interest is less than the **Minimum Interest Withdrawal Amount**. This protects the protocol Treasury coins hogging attacks.
+
+Both deposit and withdraw operations can be performed without getting paid any interest. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin. This means that many more vaults can access their savings balance per block than would be possible otherwise. Although it is possible to spend Treasury coins repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
 
 ### Deposit
 
-When depositing to a savings vault, the user needs to make a contribution spend to add to the vault's net deposits. It is also possible to increase net deposits by requesting Treasury to pay out the accrued interest. In this case, the Treasury will always pay the full accrued interest as a protective measure against coin hogging.
+When depositing to a savings vault, the user needs to make a contribution spend to top up the vault's savings balance. An additional Treasury coin spend is optional depending on whether the depositor would like to have accrued paid out to them or not.
 
-![Savings vault deposit with interest](./../../static/img/Savings_vault_deposit_spends_diagram.png)
+![Savings vault deposit with interest](./../../static/img/Savings_deposit_coin_spends_diagram.png)
+
+The deposit amount is added to the savings balance. Accrued interest remains unchanged if no interest payment from Treasury is requested.
+
+![Savings vault deposit without interest payment](./../../static/img/Savings_deposit_without_interest_payment.png)
+
+Alternatively, it is possible to make a deposit and request an interest payment at the same time. As mentioned further above, when an interest payment is made, it covers the entire accrued interest, momentarily leaving the vault without any accrued interest.
+
+![Savings vault deposit with interest payment](./../../static/img/Savings_deposit_with_interest_payment.png)
+
+#### State changes
+
+* ```DISCOUNTED_DEPOSIT```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based on interest paid out and amount deposited
+* ```INNER_PUZZLE```: can be changed by vault owner
+* amount: increases based on deposit amount and interest payment
 
 ### Withdraw
 
-The number of savings vaults from which interest can be withdrawn in any given block is limited, as each withdrawal requires its own Treasury coin spend, and there is only a fixed number of [Treasury Coins](./treasury). Although it is possible to spend Treasury coins repeatedly in the same block, the block limit still means that there's a max of about X interest withdrawals per block.
+When making a withdrawal from a savings vault, the user can choose to withdraw from their savings balance only or receive interest at the same time. If an interest payment is made, the user is free to decide how much of it to receive as standard BYC in their wallet and how much of it is getting paid to the vault, increasing the savings balance.
 
-![Savings Interest withdrawal](./../../static/img/Savings_interest_withdrawal_diagram.png)
+![Savings vault withdrawal with interest](./../../static/img/Savings_withdrawal_coin_spends_diagram.png)
 
-To prevent depositors from having to wait for a Treasury coin to become available in times of high demand, it is possible to make a withdrawal from net deposits only, which does not require a treasury spend.
+If the user withdraws an amount less than the savings balance, the app will always withdraw the withdrawal amount from savings balance and not request an interest payment from Treasury.
 
-![Savings vault withdrawal with interest](./../../static/img/Savings_vault_withdrawal_spends_diagram.png)
-    
-:::note
-On a protocol level, savers can choose any split between net deposits and interest when making a withdrawal, but this is not currently supported by the app.
-:::
+![Savings Interest withdrawal from balance only](./../../static/img/Savings_withdrawal_from_balance_only.png)
+
+On the protocol-level it would also be possible to receive an interest payout at the same time. This can lead to a situation in which despite a withdrawal being made from the vault, the savings balance actually increases, as shown in the diagram below.
+
+![Savings Interest withdrawal from balance with interest payment](./../../static/img/Savings_withdrawal_from_balance_with_interest_payment.png)
+
+If the user withdraws an amount greater than the savings balance, then an interest payment is required. This means that there must be Treasury coin available to be spent whose amount is at least as big as the accrued interest. Any accrued interest that isn't withdrawn remains in the vault as the new savings balance.
+
+![Savings Interest withdrawal from balance and accrued interest](./../../static/img/Savings_withdrawal_from_balance_and_accrued_interest.png)
+
+
+#### State changes
+
+* ```DISCOUNTED_DEPOSIT```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based interest paid out and amount withdrawn
+* ```INNER_PUZZLE```: can be changed by vault owner
+* amount: decreases based on withdrawal amount and interst payment
+
+## State and lineage
+
+Fixed state:
+
+* ```CAT_MOD_HASH```
+* ```MOD_HASH```
+
+Immutable state:
+
+* ```BYC_TAIL_HASH```
+* ```STATUTES_STRUCT```
+
+Mutable state:
+* ```DISCOUNTED DEPOSIT```
+* ```INNER PUZZLE```
+
+### Eve state
+
+Savings vaults have an enforced eve state in which ```DISCOUNTED_DEPOSIT``` is 0.
+
+By withdrawing the entire savings balance and all accrued interest from a savings vault, the vault attains its eve state. An eve savings vault coin is therefore a savings vault in eve state whose parent coin is not a savings vault.
+
+### Amount
+
+Savings vaults have an enforced eve amount of 0. After that, a savings vault's amount is whatever its savings balance is.
+
+### Lineage
+
+For the eve spend the lineage proof is nil. For non-eve spends the lineage proof is
+
+```
+lineage_proof = (parent_parent_id parent_amount parent_discounted_deposit parent_inner_puzzle_hash)
+```
+
+<!--TODO: can we simplify this to (parent_parent_id parent_amount parent_curried_args_hash)?-->

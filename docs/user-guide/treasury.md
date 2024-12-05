@@ -18,7 +18,7 @@ Treasury funds are discharged via:
 * Bad debt recovery
 * Surplus Auctions
 
-Note that funds in the Treasury cannot be directly accessed by anyone. Every deposit to or withdrawal from the Treasury must be approved by a coin with one of the **Approver Mods** as its puzzle. Approver Mods are whitelisted in the **Approver Mod Hashes** Statute. The only way in which funds can leave the Treasury are to pay Savings Interest when savers make a withdrawal or to pay the winner of a Surplus Auction.
+Note that funds in the Treasury cannot be directly accessed by anyone. Every deposit to or withdrawal from the Treasury must be approved by a coin with one of the **Approval Mods** as its puzzle. Approver Mods are whitelisted in the **Approval Mod Hashes** Statute. The only way in which funds can leave the Treasury are to pay Savings Interest when savers make a withdrawal or to pay the winner of a Surplus Auction.
 
 ![Treasury as buffer](./../../static/img/Treasury_diagram.png)
 
@@ -40,9 +40,9 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
 
 ## Statutes
 
-* **Approver Mod Hashes**:
+* **Approval Mod Hashes**:
     * Statute index: -3
-    * Statute name: STATUTE_TREASURY_COIN_APPROVER_MOD_HASHES
+    * Statute name: STATUTE_APPROVAL_MOD_HASHES_HASH
     * considerations: it is crucial that approver mods can only spend treasury funds in very specific circumstances as intended by the protocol.
 * **Treasury Minimum**:
     * Statute index: 17

@@ -6,20 +6,15 @@ sidebar_position: 330
 
 # Collateral Vaults
 
-Collateral vaults are non-fungible coins that can be created permissionlessly by anyone.
+Collateral vaults are custom singletons that can be created permissionlessly by anyone.
+
+Collateral vault inner puzzles must output one, and only one, protocol remark condition. The vault operation puzzle gets extracted from this remark condition. Vault owners must therefore ensure their inner puzzles are designed suitably, as otherwise some or all vault operations may become inaccessible and the collateral held in a vault could be lost.
 
 :::warning
-Collateral vault inner puzzles must output one, and only one, protocol remark condition. The vault operation puzzle is extracted from this remark condition. Vault owners must therefore ensure their inner puzzles are designed suitably, as otherwise some or all vault operations may become inaccessible and the collateral locked up in the vault could be lost.
-
-It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a collateral vault.
+Collateral vault inner puzzles must be designed suitably to prevent funds from getting irretrievably locked in a vault.
 :::
 
-### Eve state and lineage
-
-The vault puzzle enforces lineage and an eve state in which all state variables are 0.
-
-Note that a non-eve coin can be in eve state, so the eve coin of a collateral vault is the one whose parent coin isn't a vault coin.
-
+It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a collateral vault.
 
 ## Stability Fees
 
@@ -111,21 +106,6 @@ The maximum amount of fees that can be transferred from a vault is the acrrued S
 It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings should not be greater than the Stability Fee rate, as otherwise there would be an arbitrage.
 
 
-## Allocation of repayment amounts
-
-When debt is being repaid, the vault needs to update the state variables it keeps to track principal, discounted principal, and transferred fees.
-
-The first step in a debt repayment is for the protocol to split the repayment amount into principal repayment amount (bright green) and SF repayment amount (dark green) proportional to the vault's principal and debt. If the SF repayment amount is greater than or equal to Transferred Fees, then an amount of BYC equal to Transferred Fees is melted, and the remaining SF repayment amount is transferred to Treasury.
-
-![Repayment allocation small TF](./../../static/img/Repayment_allocation_small_TF_diagram.png)
-
-If on the other hand the SF repayment amount is less than Transferred Fees, then the entire SF repayment amount is melted, and no BYC is paid into the Treasury.
-
-![Repayment allocation large TF](./../../static/img/Repayment_allocation_large_TF_diagram.png)
-
-In both cases, the vault is left with remaining SFs and remaining principal as shown in the diagrams. In the first case above, remaining Transferred Fees are 0, whereas in the second case, remaining Transferred Fees are equal to Transferred Fee before the debt repayment minus the SF repayment amount.
-
-
 ## Operations
 
 There are five collateral vault operations that can only be performed by the vault owner, and one keeper operation not related to liquidation.
@@ -133,12 +113,123 @@ There are five collateral vault operations that can only be performed by the vau
 Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
 
 Owner operations:
-* **Deposit**: deposit collateral - puzzle: [vault_deposit.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_deposit.clsp)
-* **Withdraw**: withdraw collateral - puzzle: [vault_withdraw.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_withdraw.clsp)
-* **Borrow**: take out a loan - puzzle: [vault_borrow.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_borrow.clsp)
-* **Repay**: repay debt - puzzle: [vault_repay.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_repay.clsp)
-* **Transfer**: transfer ownership of collateral vault by replacing inner puzzle - puzzle: [vault_transfer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
+* **deposit**: deposit collateral - puzzle: [vault_deposit.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_deposit.clsp)
+* **withdraw**: withdraw collateral - puzzle: [vault_withdraw.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_withdraw.clsp)
+* **borrow**: take out a loan - puzzle: [vault_borrow.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_borrow.clsp)
+* **repay**: repay debt - puzzle: [vault_repay.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_repay.clsp)
+* **transfer**: transfer ownership of collateral vault - puzzle: [vault_transfer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
 
 Keeper operations:
-* **Transfer Stability Fees**: mint & transfer BYC to Treasury - puzzle: [vault_kepper_recover_bad_debt](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
-* See the [Liquidation](./liquidation) page for keeper operations relating to vault liquiation and Bad Debt
+* **transfer Stability Fees**: mint & transfer BYC to Treasury - puzzle: [vault_kepper_recover_bad_debt](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
+* See the [Liquidation](./liquidation#operations) page for keeper operations relating to vault liquidation and bad debt:
+    * **start auction**: start a liquidation auction
+    * **bid**: submit a bid in liquidation auction
+    * **recover bad debt**: extinguish bad debt
+
+### Deposit
+
+Deposits XCH into the collateral vault. Deposited XCH is automatically used as collateral when taking out loans.
+
+The deposit operation does not assert any Statutes and can be performed completely independently of the protocol.
+
+#### State changes
+
+* ```COLLATERAL```: increases by the amount deposited
+
+### Withdraw
+
+Withdraws XCH from the collateral vault. The operation can only succeed if after the withdrawal the vault remains sufficiently overcollateralised.
+
+#### State changes
+
+* ```COLLATERAL```: decreases by the amount withdrawn
+
+### Borrow
+
+Borrows Bytecash from the vault.
+
+Borrowed Bytecash is minted by the Protocol. Borrowing increases the debt owed to the vault as [explained above](./collateral-vaults#stability-fees).
+
+#### State changes
+
+* ```PRINCIPAL```: increases by the amount of BYC borrowed
+* ```DISCOUNTED_PRINCIPAL```: increases by the amount of BYC borrowed discounted back to Statutes launch
+
+### Repay
+
+Repays debt owed to the vault.
+
+The first step in a debt repayment is for the protocol to split the repayment amount into principal repayment amount (bright green in the diagrams below) and SF repayment amount (dark green) proportional to the vault's principal and accrued SFs. If the SF repayment amount is greater than or equal to Transferred Fees, then an amount of BYC equal to Transferred Fees is melted, and the remaining SF repayment amount is transferred to Treasury.
+
+![Repayment allocation small TF](./../../static/img/Repayment_allocation_small_TF_diagram.png)
+
+If on the other hand the SF repayment amount is less than Transferred Fees, then the entire SF repayment amount is melted, and no BYC is paid into the Treasury.
+
+![Repayment allocation large TF](./../../static/img/Repayment_allocation_large_TF_diagram.png)
+
+In both cases, the vault is left with remaining SFs and remaining principal as shown in the diagrams. In the first case above, remaining Transferred Fees are 0, whereas in the second case, remaining Transferred Fees are equal to Transferred Fees before the repayment minus the SF repayment amount.
+
+#### State changes
+
+* ```PRINCIPAL```: decreases based on amount repaid according to methodology described above
+* ```DISCOUNTED_PRINCIPAL```: decreases based on amount repaid according to methodology described above
+* ```TRANSFERRED_FEES```: decreases based on amount repaid according to methodology described above
+
+### Transfer
+
+The ownership or custody arragements or a collateral vault can be changed using the transfer operation, which replaces the vault's inner puzzle hash.
+
+#### State changes
+
+* ```INNER_PUZZLE_HASH```
+
+
+## State and lineage
+
+Fixed state:
+* ```OPERATIONS```: a two-element struct containing owner operations and keeper operation hashes
+  * ```OWNER_OPERATIONS```: a list containing deposit, withdraw, borrow, repay and transfer operation hashes
+  * ```KEEPER_OPERATIONS```: a list containing transfer Stability Fees, and liquidation-related operation hashes
+<!--Some operations have the following fixed state args curried in:
+    * ```CAT_MOD_HASH```: treehash of the [standard CAT mod](https://chialisp.com/cats/#code)
+    * ```BYC_TAIL_MOD_HASH```: treehash of the [BYC tail mod](./../technical-manual/byc-tail)
+-->
+* ```MOD_HASH```
+
+Immutable state:
+* ```STATUTES_STRUCT```
+
+Mutable state:
+* ```COLLATERAL```: amount of collateral in vault (in mojos)
+* ```PRINCIPAL```: principal amount of outstanding loans (in mBYC)
+* ```AUCTION_STATE```: state of liquidation auction (if any)
+* ```INNER_PUZZLE_HASH```: inner puzzle hash of vault
+* ```DISCOUNTED_PRINCIPAL```: discounted principal amount of oustanding loans (in mBYC)
+
+### Eve state
+
+The vault puzzle enforces an eve state in which all mutable state variables except ```INNER_PUZZLE_HASH``` are 0.
+
+Note that a non-eve collateral vault can be in eve state. This can happen either by the vault owner withdrawing all collateral from a debt-free vault, or by all bad debt being extinguished by a keeper following a failed liquidation.
+
+A collateral vault can leave eve state only by having the deposit operation performed on it.
+
+### Amount
+
+The amount of an eve vault is enforced to be 0. The amount of a non-eve vault depends on the amount of collateral held in it, which is always equal to the ```COLLATERAL``` state variable.
+
+### Lineage
+
+Collateral vaults are singletons and as such enforce lineage. The eve lineage proof is nil. Non-eve lineage proofs are
+```
+lineage_proof = (parent_parent_coin_ID parent_curried_args_hash parent_amount)
+```
+where ```parent_curried_args_hash``` is the hash generated by [curried_values_tree_hash](https://github.com/Chia-Network/chia-blockchain/blob/76e4ea6b86e10bdbc8c25e94836e636123f2e357/chia/wallet/util/curry_and_treehash.py#L60) function applied to the list of treehashes of non-fixed state variables of the parent vault coin. From this the puzzle hash of the parent vault coin can be obtained as follows:
+
+```
+parent_puzzle_hash = (tree_hash_of_apply MOD_HASH parent_curried_args_hash)
+```
+
+where [tree_hash_of_apply](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/curry.clib) is the standard function used to obtain the puzzle hash when mod hash and state hash are given.
+
+<!--[```tree_hash_of_apply```](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/curry.clib)-->

@@ -37,7 +37,7 @@ Circuit protocol governance is conducted fully on-chain. Any CRT token holder ca
 
 ![Governance timeline](./../../static/img/Governance_timeline_diagram.png)
 
-Once proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto needs to be backed by more CRT than the original proposal to be successful. If the proposal does not get vetoed, the new Statute can be implemented ('enacted') after the **Implementation Delay** has passed. A Statute must be implemented with the **Enactement Timeout** or otherwise lapses.
+Once proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto needs to be backed by more CRT than the original proposal to be successful. If the proposal does not get vetoed, the new Statute can be implemented ('enacted') after the **Implementation Delay** has passed. A Statute must be implemented within the **Enactement Period** or otherwise lapses.
 
 ## Constraints
 
