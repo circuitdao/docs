@@ -55,8 +55,8 @@ The Oracle does not have an owner.
 
 Keeper operations:
 
-* **Mutate**: updates Oracle price infos - puzzle: [oracle_mutation.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/oracle_mutation.clsp)
-* **Announce**: announces the Oracle Price Info - puzzle: [oracle.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
+* **mutate**: updates Oracle price infos - puzzle: [oracle_mutation.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/oracle_mutation.clsp)
+* **announce**: announces the Oracle Price Info - puzzle: [oracle.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
 
 ### Mutate
 

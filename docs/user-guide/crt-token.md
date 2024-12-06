@@ -25,7 +25,7 @@ For details on the governance puzzle and related operations, see the [governance
 
 ## Token supply
 
-Upon [protocol launch](./../technical-manual/protocol-launch), 1 billion CRT tokens will be issued.
+Upon [protocol launch](./../technical-manual/advanced-topics/protocol-launch), 1 billion CRT tokens will be issued.
 
 Additional CRT issuances are possible only in the following two situations:
 

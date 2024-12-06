@@ -47,7 +47,7 @@ Owner operations:
 * **announce veto**: - puzzle: [governance_veto_announcement.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_announcement.clsp)
 * **enact**: - puzzle: [governance_enact_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_enact_bill.clsp)
 
-Third-party operation:
+Governance operations:
 * **veto**: - puzzle: [governance_veto_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_bill.clsp)
 
 The operations enforce a number of rules that determine in which situations they can be applied. One needs to distinguish based on whether ```BILL``` is nil or non-nil and whether a governance coin is an eve coin or not.
@@ -92,7 +92,7 @@ To veto a bill, the veto operation must be performed on the proposal coin contai
 
 Note that proposal coins are able to veto other proposals. See the [announce veto section](./governance#announce-veto) for details.
 
-Since veto is a third-party operation, ```INNER_PUZZLE_HASH``` may not be changed. This is guaranteed by the ```validate-veto-conditions``` function.
+Since the veto operation is performed not by the owner(s) of a governance coin, but an opposing group of CRT token holders, ```INNER_PUZZLE_HASH``` may not be changed. This is guaranteed by the ```validate-veto-conditions``` function.
 
 #### State changes:
 
