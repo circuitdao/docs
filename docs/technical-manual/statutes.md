@@ -16,7 +16,6 @@ In addition, there is the [Statutes Price](./../user-guide/price-oracle), which 
 
 Protocol-updated Statutes are those that the protocol keeps track of automatically by enforcing updates as part of certain protocol coin spends.
 
-
 Governance-updated Statutes require a governance vote to be updated. For details see the [governance](./governance) page. The Statutes Price is a delayed version of the Oracle Price.
 
 ![Statutes singleton](./../../static/img/Statutes_singleton_diagram.png)
@@ -61,10 +60,12 @@ There are three operations that can be performed on the Statutes singleton.
 
 Keeper operations:
 * **announce**: announces all Statutes without doing anything else - puzzle: [statutes.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/statutes.clsp)
-* **mutate**: - puzzle: [statutes_mutation.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_mutation.clsp)
-  * **update statute**: updates a Statute value and its Constraints
-  * **pass custom conditions**: cause Statutes to output custom condition(s)
 * **update price**: updates the Statutes Price - puzzle: [statutes_update_price.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_update_price.clsp)
+
+Governance operations:
+* **mutate**: - puzzle: [statutes_mutation.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_mutation.clsp)
+  * **update Statute**: updates a Statute value and its Constraints
+  * **pass custom conditions**: cause Statutes to output custom condition(s)
 
 All operations announce pre-operation Statutes as well as post-operation Statutes Price Info.
 

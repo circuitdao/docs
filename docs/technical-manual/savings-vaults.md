@@ -55,8 +55,9 @@ As with collateral vaults, savers are given a three minute window of flexibility
 Puzzle that operations are performed on: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
 
 Owner operations:
-* **Deposit**: deposit BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
-* **Withdraw**: withdraw BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
+* **change balance**: deposit or withdraw BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
+  * **deposit**: deposit BYC
+  * **withdraw**: withdraw BYC
 
 Savings vault operations are part of the savings vault's main puzzle since deposit and withdrawal operations have the same implementation. Whether an operation on a savings vault is a deposit or withdrawal can be inferred from how it changes the savings balance and accrued interest of the vault and whether an interest withdrawal from Treasury was made.
 

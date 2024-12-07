@@ -43,14 +43,16 @@ Governance should also keep in mind that having a large number of approved Annou
 Puzzle that operations are performed on: [atom_announcer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/atom_announcer.clsp)
 
 Owner operations:
-* **Register**: register Announcer with the [Announcer Registry](./announcer-registry) - puzzle: [announcer_register.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_register.clsp)
-* **Configure**: disapprove, melt, transfer or update state of Announcer - puzzle: [announcer_configure.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_configure.clsp)
-* **Mutate**: update Announcer Price or transfer Announcer - puzzle: [announcer_mutate.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_mutate.clsp)
+* **register**: register Announcer with the [Announcer Registry](./announcer-registry) - puzzle: [announcer_register.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_register.clsp)
+* **configure**: disapprove, melt, transfer or update state of Announcer - puzzle: [announcer_configure.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_configure.clsp)
+* **mutate**: update Announcer Price or transfer Announcer - puzzle: [announcer_mutate.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_mutate.clsp)
+
+Governance operations:
+* **govern**: approve or disapprove Announcer - puzzle: [announcer_govern.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_govern.clsp)
 
 Keeper operations:
-* **Govern**: approve or disapprove Announcer - puzzle: [announcer_govern.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_govern.clsp)
-* **Penalize**: slash Announcer's bond - puzzle: [announcer_penalize.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_penalize.clsp)
-* **Announce**: announce Announcer price - puzzle: [announcer_announce.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_announce.clsp)
+* **penalize**: slash Announcer's bond - puzzle: [announcer_penalize.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_penalize.clsp)
+* **announce**: announce Announcer price - puzzle: [announcer_announce.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_announce.clsp)
 
 ![Announcer operations](./../../static/img/Announcer_diagram.png)
 

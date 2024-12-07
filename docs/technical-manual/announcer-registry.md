@@ -18,15 +18,18 @@ Data providers must re-register their Announcers every time Rewards are claimed 
 
 Puzzle that operations are performed on: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
-* **Launch**: eve spend that must be executed at protocol launch - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
-* **Register**: adds a governance-approved Announcer to the Registry - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
-* **Mint**: claims Rewards - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+Protocol deployer operations:
+* **launch**: eve spend that must be executed at protocol launch - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+
+Announcer operations:
+* **register**: adds a governance-approved Announcer to the Registry - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+* **mint**: claims Rewards - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
 Although the Registry is not owned by anyone, register and mint operations can only be performed by data providers that control an approved Announcer. The launch operation must be performed by the same entity that launches the protocol.
 
 ### Launch
 
-The Announcer Registry must be deployed and launched as part of the [protocol launch](./protocol_launch) process. As such, the launch operation is only performed once and irrelevant to protocol users and keepers.
+The Announcer Registry must be launched as part of the [protocol launch](./protocol_launch) process. As such, the launch operation is only performed once and irrelevant to protocol users and keepers.
 
 ### Register
 
