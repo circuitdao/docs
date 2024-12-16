@@ -97,13 +97,13 @@ Note that due to the coinset model, the protocol itself does not know the total 
 
 ## Stability Fee transfers
 
-It is possible to mint BYC against accrued Stability Fees. BYC minted in this way is transferred to the Treasury. Each collateral vaults keeps track of the net amount of BYC it has transferred to the Treasury in this manner in the **Transferred Fees** variable.
+It is possible to mint BYC against accrued Stability Fees. BYC minted in this way is transferred to the Treasury. Each collateral vaults keeps track of the net amount of BYC it has transferred to the Treasury in this manner, which is referred to as **Transferred Fees** and stored in the ```TRANSFERRED_FEES``` curried arg.
 
-Transferring fees is the preferred mechanism to top up the Treasury, as it is quicker and less costly than holding a recharge auction. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. That way it can be ensured that savers can be paid interest on demand and Bad Debt can be extinguished as soon as it arises.
+Transferring fees is the preferred mechanism to top up the Treasury, as it is quicker and less costly than holding a recharge auction. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. That way it can be ensured that savers can be paid interest on demand and Bad Debt can be extinguished as soon as it arises. At the same time, governance needs to take into account the possibility that keepers may transfer any non-transferred SFs to the Treasury at any time when setting the Treasury Maximum. If the Treasury Maximum is set too low, it could result in Surplus Auctions being triggered that drain the protocol of BYC that may be needed to cover liabilities towards savers.
 
-The maximum amount of fees that can be transferred from a vault is the acrrued SFs less the Transferred Fees. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
+The maximum amount of fees that can be transferred from a vault is the acrrued SFs less any existing Transferred Fees. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
 
-It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings should not be greater than the Stability Fee rate, as otherwise there would be an arbitrage.
+It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings rate should not be greater than the Stability Fee rate.
 
 
 ## Operations
@@ -182,6 +182,18 @@ The ownership or custody arragements or a collateral vault can be changed using 
 #### State changes
 
 * ```INNER_PUZZLE_HASH```
+
+### Transfer Stability Fees
+
+Mints BYC against a collateral vault's accrued Stability Fees. The BYC minted is transferred to the Treasury.
+
+When this operation is called, it mints the maximum amount of BYC possible. In other words, any accrued SFs that weren't transferred previously get transferred.
+
+The operation can only be performed if the amount of SFs transferred is no less than the Minimum Stability Fee Transfer Amount. This prevents coin hogging attacks on collateral vault coins.
+
+#### State changes
+
+* ```TRANSFERRED_FEES```: increases by the amount of SFs transferred
 
 
 ## State and lineage
