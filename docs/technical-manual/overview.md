@@ -28,7 +28,7 @@ Below is a complete list of protocol coin types. All protocol coins are singleto
 * [Recharge Auction coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp) - BYC CAT singleton
 * [Surplus Auction coin](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) - CRT CAT singleton
 * [Payout coin](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp) - BYC CAT singleton
-* [Collateral vaults](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp) - singleton with owner
+* [Collateral vaults](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp) - custom singleton with owner
 * [Savings vaults](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp) - BYC CAT singleton with owner
 * [Governance coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) - CRT CAT singleton with owner
 
@@ -44,7 +44,7 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Savings vaults
   * Announcers
   * Governance
-* **Keeper**: This can be anyone, but are often professional trading firms that operate bots or automated trading infrastructure. Applies to:
+* **Keeper**: This can be anyone, but in practice are often professional trading firms that operate bots or automated trading infrastructure. Applies to:
   * Statutes
   * Oracle
   * Announcers

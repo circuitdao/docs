@@ -22,7 +22,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **CAT.** A [Chia Asset Token](https://chialisp.com/cats).
 
-**CAT singleton.** A CAT whose inner puzzle ensures that the coin is also a singleton.
+**CAT singleton.** A CAT whose inner puzzle ensures that the coin is also a singleton. CAT singletons are custom singletons.
 
 **Coin.** A [coin](https://chialisp.com/chialisp-first-smart-coin/#coins) on Chia blockchain.
 
