@@ -59,27 +59,27 @@ Owner operations:
   * **deposit**: deposit BYC
   * **withdraw**: withdraw BYC
 
-Savings vault operations are part of the savings vault's main puzzle since deposit and withdrawal operations have the same implementation. Whether an operation on a savings vault is a deposit or withdrawal can be inferred from how it changes the savings balance and accrued interest of the vault and whether an interest withdrawal from Treasury was made.
+Savings vault operations are part of the savings vault's main puzzle since deposit and withdrawal operations have the same implementation. Whether an operation on a savings vault is a deposit or withdrawal can be inferred from how it changes the savings balance and accrued interest of the vault.
 
-Vault owners can receive accrued interest as part of both deposit and withdrawal operations. In case of a deposit, interest is paid to the savings vault. In case of a withdrawal, interest is paid to the savings vault or directly to the user's wallet. An interest payment to a savings vault is referred to as an **interest payout**, and a payment directly to a user's wallet is referred to as an **interest withdrawal**.
+Vault owners can receive accrued interest as part of both deposit and withdrawal operations. In case of a deposit, interest is paid to the savings vault. In case of a withdrawal, interest is paid to the savings vault or to the user's wallet. An interest payment to a savings vault is referred to as an **interest deposit**, whereas an interest payment directly to a user's wallet is referred to as an **interest withdrawal**.
 
-If interest is paid, it's always for the full accrued interest. The protocol obtains the funds for interest payments from the Treasury. The user must select one Treasury coin from which to make the withdrawal. In particular, this means that a user can only get paid interest if there is a Treasury coin with amount greater than the accrued interest.
+If interest is paid, it's always for the entire accrued interest. The protocol obtains the funds for interest payments from the Treasury. The user must select one Treasury coin from which to make the withdrawal. In particular, this means that a user can only get paid interest if there is a Treasury coin with amount at least as big as the accrued interest. When accessing the protocol via the app, a suitable Treasury coin is chosen automatically.
 
-Note that no interest payment can be made if accrued interest is less than the **Minimum Interest Withdrawal Amount**. This protects the protocol Treasury coins hogging attacks.
+An interest payment can only be made if accrued interest is less than the **Minimum Interest Withdrawal Amount**. This protects the protocol against Treasury coin hogging attacks.
 
-Both deposit and withdraw operations can be performed without getting paid any interest. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin. This means that many more vaults can access their savings balance per block than would be possible otherwise. Although it is possible to spend Treasury coins repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
+Both deposit and withdraw operations can be performed without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin. This means that many more vaults can access their savings balance per block than would be possible otherwise. Although it is possible to spend Treasury coins repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
 
 ### Deposit
 
-When depositing to a savings vault, the user needs to make a contribution spend to top up the vault's savings balance. An additional Treasury coin spend is optional depending on whether the depositor would like to have accrued paid out to them or not.
+When depositing to a savings vault, the user needs to make a contribution spend to top up the vault's savings balance. An additional Treasury coin spend is optional depending on whether the depositor would like to have accrued interest paid out to them or not.
 
 ![Savings vault deposit with interest](./../../static/img/Savings_deposit_coin_spends_diagram.png)
 
-The deposit amount is added to the savings balance. Accrued interest remains unchanged if no interest payment from Treasury is requested.
+The deposit amount is added to the savings balance. Accrued interest remains unchanged if no interest payment is requested.
 
 ![Savings vault deposit without interest payment](./../../static/img/Savings_deposit_without_interest_payment.png)
 
-Alternatively, it is possible to make a deposit and request an interest payment at the same time. As mentioned further above, when an interest payment is made, it covers the entire accrued interest, momentarily leaving the vault without any accrued interest.
+If an additional interest payment is requested, the entire accrued interest amount is withdrawn from Treasury and deposited in the savings vault, momentarily leaving the vault without any accrued interest.
 
 ![Savings vault deposit with interest payment](./../../static/img/Savings_deposit_with_interest_payment.png)
 
@@ -91,19 +91,23 @@ Alternatively, it is possible to make a deposit and request an interest payment 
 
 ### Withdraw
 
-When making a withdrawal from a savings vault, the user can choose to withdraw from their savings balance only or receive interest at the same time. If an interest payment is made, the user is free to decide how much of it to receive as standard BYC in their wallet and how much of it is getting paid to the vault, increasing the savings balance.
+On the protocol level, when making a withdrawal from a savings vault, the user can choose to withdraw from their savings balance only or to receive an interest payment at the same time. If an interest payment is requested, the user is free to decide how much of it to receive as standard BYC in their wallet as an interest withdrawal and how much of it gets paid to the savings vault as an interest deposit.
+
+If interest payment is requested, the entire accrued interest gets paid out. If accrued interest is less than the Minimum Interest Withdrawal Amount, then no interest payment can be made.
+
+Interest payments are made from Treasury. An interest payment is only possible if there is a Treasury coin whose amount is at least as big as the accrued interest.
 
 ![Savings vault withdrawal with interest](./../../static/img/Savings_withdrawal_coin_spends_diagram.png)
 
-If the user withdraws an amount less than the savings balance, the app will always withdraw the withdrawal amount from savings balance and not request an interest payment from Treasury.
+Although the savings vault puzzle gives the user flexibility over how interest is paid, the app currently does not. If the user withdraws an amount less than the savings balance, the app will always withdraw the entire amount from the savings balance and not request an interest payment from Treasury.
 
 ![Savings Interest withdrawal from balance only](./../../static/img/Savings_withdrawal_from_balance_only.png)
 
-On the protocol-level it would also be possible to receive an interest payout at the same time. This can lead to a situation in which despite a withdrawal being made from the vault, the savings balance actually increases, as shown in the diagram below.
+On the protocol-level it would also be possible to receive an interest payment at the same time. This can lead to a situation in which despite a withdrawal being made from the vault, the savings balance actually increases, as shown in the diagram below.
 
 ![Savings Interest withdrawal from balance with interest payment](./../../static/img/Savings_withdrawal_from_balance_with_interest_payment.png)
 
-If the user withdraws an amount greater than the savings balance, then an interest payment is required. This means that there must be Treasury coin available to be spent whose amount is at least as big as the accrued interest. Any accrued interest that isn't withdrawn remains in the vault as the new savings balance.
+If the user withdraws an amount greater than the savings balance, then an interest payment is required. Any accrued interest that isn't withdrawn remains in the vault as the new savings balance.
 
 ![Savings Interest withdrawal from balance and accrued interest](./../../static/img/Savings_withdrawal_from_balance_and_accrued_interest.png)
 
