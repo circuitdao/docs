@@ -8,7 +8,7 @@ sidebar_position: 381
 
 **Announcers** are custom singleton coins deployed and owned by **data providers**. Their purpose is to make the XCH/USD market price available on-chain. This XCH/USD market price is referred to as the **Announcer Price**.
 
-Announcer Prices are used to update the **Oracle price**. Each such update requires a minimum of **M-of-N** Announcer Price announcements from distinct Announcers.
+Announcer Prices are used to update the **Oracle price**. Each such update requires a minimum of **M-of-N** Announcer Price announcements from distinct Announcers that have been **approved** by governance.
 
 Announcers are also referred to as **Atom Announcers** because they are designed to announce a single [atom](https://chialisp.com/chialisp-primer/intro/#atoms) value. The atom value is stored in the ATOM_VALUE curried arg of the Announcer puzzle. In the case of Circuit protocol, the atom value is the Announcer Price.
 
@@ -51,7 +51,7 @@ Governance operations:
 * **govern**: approve or disapprove Announcer - puzzle: [announcer_govern.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_govern.clsp)
 
 Keeper operations:
-* **penalize**: slash Announcer's bond - puzzle: [announcer_penalize.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_penalize.clsp)
+* **penalize**: slash Announcer's deposit - puzzle: [announcer_penalize.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_penalize.clsp)
 * **announce**: announce Announcer price - puzzle: [announcer_announce.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_announce.clsp)
 
 ![Announcer operations](./../../static/img/Announcer_diagram.png)
@@ -88,15 +88,15 @@ The configure operation is used to update the state of an Announcer.
 State variables (curried args) that can be updated in this way are:
 * ```INNER_PUZZLE_HASH```: the inner puzzle determines how the Announcer can be spent
 * ```APPROVED```: indicates whether the Announcer is approved
-* ```DEPOSIT```: the amount of the Announcer coin, which is used as a bond that can be slashed under certain circumstances
+* ```DEPOSIT```: the amount of the Announcer coin, which is used as a deposit that can be slashed under certain circumstances
 * ```DELAY```: number of seconds for which an updated price is valid. used to calculate the expiry timestamp, TIMESTAMP_EXPIRES <!--(TODO: rename to TTL)-->
 * ```ATOM_VALUE```: XCH/USD price published by data provider
 
 Changing the inner puzzle hash can be used to transfer the Announcer.
 
-An approved announcer can be unilatally disapproved by its data provider. Before the disapproval becomes effective, the **Cooldown Period** must have passed. This gives governance time to find a replacement data provider.
+An approved Announcer can be unilatally disapproved by its data provider. Before the disapproval becomes effective, the **Cooldown Period** must have passed. This gives governance time to find a replacement data provider.
 
-The deposit is the amount of the Announcer coin. It's amount must not be smaller than the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](./announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate contribution spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
+The **deposit** is the amount of the Announcer coin, and must not be smaller than the **Minimum Deposit** for approved Announcers. The deposit can be slashed by keepers under certain circumstances. See [penalize](./announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate contribution spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
 
 The **Announcer Price TTL** Statute indicates how long an Announcer Price that's just been updated may be valid for at most. The actual validity period of an Announcer is stored in the ```DELAY``` curried arg. In practice, the only reason why an Announcer would use a shorter than necessary validity period is in case of a governance vote to reduce the Announcer Price TTL. This allows Announcers to prepare for the new Statute value ahead of time and avoid getting penalized for an expired Announcer Price upon enactment of the reduced Announcer Price TTL.
 
@@ -148,22 +148,22 @@ An approved Announcer may be registered with the Announcer Registry by its data 
 
 Announcers can be penalized if they are not well-behaved. Having a penalization mechanism in place protects the protocol as it sets a strong incentive for data providers to do their job well.
 
-When an Announcer is penalized, an amount of XCH equal to the Penalty Factor multiplied by the number of full Penalty Intervals that have passed since expiry or the previous penalization event is slashed from the Announcer coin's amount. This amount can either be claimed by the keeper performing the penalization operation or wholly or partly left to the farmer of the block.
+An Announcer is penalized by applying the **Penalty Factor** to the Announcer's deposit. This slashes XCH from the Announcer coin's amount. The slashed amount can either be claimed by the keeper performing the penalization or wholly or partly left to the farmer of the block.
 
 Keepers can penalize approved Announcers in the following circumstances:
-* Announcer Price is expired
-* DELAY curried arg is greater than Announcer Price TTL <!--(TODO: rename DELAY to TTL?)-->
-* DEPOSIT curried arg is smaller than Minimum Deposit
+* Announcer Price is expired, ie current time is greater than ```TIMESTAMP_EXPIRES```
+* ```DELAY``` is greater than Announcer Price TTL Statue <!--(TODO: rename DELAY to TTL?)-->
+* ```DEPOSIT``` is smaller than Minimum Deposit
 
-whose prices have expired by at least the Penalty Interval (STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES). A price expires if the last update, as indicated by the TIMESTAMP_EXPIRES curried arg, lies further in the past than the current time minus the Announcer Validity (STATUTE_ANNOUNCER_DELAY).
+The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of Statute enactment, in order to minimize the risk of missing the dealine and incurring penalties.
 
-Since keepers will be competing to penalize an expired Announcer, it can generally be expected that the penalty is applied at the earliest possible point in time, and that therefore the deposit (bond) of an expired Announcer will decline at an exponential rate according to the Penalty Factor.
+A penalization can occur at most once per **Penalty Interval** (STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
 
 #### State changes
 
 * ```DEPOSIT```: see amount
-* ```LAST_PENALTY_INTERVAL```: updated to current penalty interval
-* amount: deduct penalty amount
+* ```LAST_PENALTY_INTERVAL```: updated to current Penalty Interval
+* amount: reduce according to Penalty Factor
 
 ### Announce
 
