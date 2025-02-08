@@ -16,6 +16,14 @@ Wallets that have had the CRT asset ID added to them will automatically recogniz
 
 ## Governance mode
 
+CRT token holders can participate in governance as described on the [governance](./governance) page. Since the protocol is largely immutable, governance is limited to changing Statutes or outputting custom conditions from the Statutes coin.
+
+However, even these limited actions come with a high degree of responsibility as misconfigured Statutes could disrupt the functioning of the protocol and potentially result in a BYC depeg and CRT tokens to become worthless. This also opens up the possibility of governance attacks in which malicious actors could try to gain financially by borrowing CRT to pass governance proposals that would wreak havoc on the protocol, while at the same time shorting CRT.
+
+:::danger
+CRT holders should never lend out their tokens as there is a fundamental incentive misalignment. Any interest to be paid by borrowers will likely be earned by shorting CRT and attacking the protocol in an attempt to tank the CRT price.
+:::
+
 To use CRT tokens for governance purposes, they must be locked up with a special governance puzzle as inner puzzle.
 
 For information on the governance process, see the [governance](./governance) page in this user guide.
