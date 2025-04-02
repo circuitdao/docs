@@ -30,8 +30,16 @@ Generally, the aim has been to reduce the cost of coin spends as much as possibl
 
 * Conditions make use of ```sha256``` hashes instead of ```sha256tree`` hashes whenever possible as a plain hash is cheaper than a treehash. In doing so, care must be taken to prevent byte shifting attacks by checking the length of each hashed element.
 
+Frequently used numbers are defined as constants as constants are referenced whereas numbers are spun up as Chialisp programs. For example
+```
+(defconst MINUS_ONE 1)
+(defconst ZERO 0)
+(defconst ONE 1)
+```
+and so on. Note that the modern Chialisp keyword ```defconst``` is used instead of ```defconstant```.
+
 
 ## Security
 
-The protocol makes use of the Chialisp message conditions introduced by [CHIP 25](https://github.com/Chia-Network/chips/blob/main/CHIPs/chip-0025.md). Message conditions protect against mismatched announce/assert conditions, which should no longer be used.
+The protocol makes use of the Chialisp message conditions introduced by [CHIP 25](https://github.com/Chia-Network/chips/blob/main/CHIPs/chip-0025.md). Message conditions protect against mismatched announce/assert conditions, which should no longer be used unless assertion by an unknown number of coins is required as is for example the case for Statutes.
 
