@@ -60,7 +60,7 @@ The amount of mCRT paid to each registered Announcer during a Rewards distributi
 The rate at which CRT rewards can accrue is capped by the **Maximum Reward per Interval** divided by the **Minimum Reward Interval**. Both parameters are fixed args of the Registry mod that are set at protocol launch and can never be changed. This caps the annual CRT supply growth from rewarding Announcers in perpetuity, giving CRT holders a guarantee on the maximum dilution they may suffer.
 
 ```
-(mod (MAXIMUM_REWARD_PER_INTERVAL MINIMUM_REWARD_INTERVAL MOD_HASH ...) ...
+(mod (MAXIMUM_REWARD_PER_INTERVAL MINIMUM_REWARD_INTERVAL ... MOD_HASH ...) ...)
 ```
 
 :::note
@@ -70,6 +70,7 @@ Distributing Rewards increases the CRT supply.
 #### State changes
 
 * ```ANNOUNCER_REGISTRY```: gets cleared, i.e. set to nil.
+* ```CLAIM_COUNTER```: gets increased by 1
 * ```REWARDS_CLAIMABLE_AT```: gets updated to Price Update Counter plus Reward Interval.
 
 
@@ -79,9 +80,13 @@ Fixed state:
 * ```MAXIMUM_REWARD_PER_INTERVAL```
 * ```MINIMUM_REWARD_INTERVAL```
 * ```ATOM_ANNOUNCER_MOD_HASH```
-* ```MOD_HASH```
+* ```CAT_MOD_HASH```
+* ```CRT_TAIL_MOD_HASH```
+* ```RUN_TAIL_MOD_HASH```
+* ```OFFER_MOD_HASH```
 
 Immutable state:
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
 
 Mutable state:
@@ -98,7 +103,7 @@ The Announcer Registry coin amount is always 0.
 
 ### Lineage
 
-Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) CREATE_COIN_ANNOUNCMENT from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1 (TODO: and the key_value_list if used). It also means that the Registry's eve spend must occur at protocol launch.
+Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1 <!--(TODO: and the key_value_list if used)-->. It also means that the Registry's eve spend must occur at protocol launch.
 
 
 ## Statutes

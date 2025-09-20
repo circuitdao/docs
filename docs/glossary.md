@@ -8,6 +8,8 @@ sidebar_position: 850
 
 The glossary assumes familiarity with basic concepts of [Chia blockchain](https://docs.chia.net/docs-home) and [Chialisp](https://chialisp.com/).
 
+**Absorb coin.** A coin included in a spend bundle to absorb mojos released by one of more other coins. Depending on the coins spent in the transaction, an absorb coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH absorb coin is used when withdrawing collateral from a vault.
+
 **Approval mod.** One of five (?) coin types that have permission to issue and/or melt BYC or CRT. See the [corresponding section](https://docs.circuitdao.com/technical-manual/statutes#approval-mods) on the Statutes page for details.
 
 **Arg.** Short for argument. A value that is passed into a mod or function. A value passed into a mod that is considered part of the mod itself, is referred to as a curried arg.
@@ -40,6 +42,8 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Deployment.** The act of creating eve protocol coins on-chain. This can either refer to protocol deployment, the deployment of Announcers by data providers, or the deployment of collateral or savings vaults by users.
 
+**Driver.** An off-chain program used to construct coins spends and spend bundles of Chia coins. Drivers are part of the backend of the Circuit dapp. Drivers for Chialisp are often written in Python, as shown in this [tutorial](https://www.youtube.com/watch?v=dGohmAc658c).
+
 **Enactment.** The act of executing a governance proposal on-chain. Requires a final spend of the governance coin that contains the proposed bill. The proposed bill becomes effective immediately upon enactment.
 
 **Enforced state.** A coin state that is fully or partially enforced by the coin's puzzle mod. Typically used in the context of eve coins.
@@ -50,9 +54,13 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Eve state.** The state of an eve coin.
 
+**Fee coin.** An coin that is included in a spend bundle to pay transaction fees to the farmer.
+
 **Fixed arg.** An curried arg that cannot be changed by protocol operations and whose value is known prior to protocol deployment. These are typically mods or mod hashes.
 
 **Fixed state.** The fixed args of a coin's state. In case of the protocol, the fixed state always includes the treehash of the coin's mod after the other fixed args are curried, but before any immutable or mutable args are curried. In the protocol's source code, this arg is always named MOD_HASH.
+
+**Funding coin.** A coin included in a spend bundle to release mojos to be absorbed by one of more other coins. Depending on the coins spent in the transaction, a funding coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH funding coin is used when depositing collateral to a vault.
 
 **Governance.** TODO
 
@@ -66,13 +74,17 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Immutable state.** The immutable args of a coin's state.
 
-**Issue.** Bring a CAT into existence by running the CAT's tail program.
+**Issue.** To spend a CAT (the **issuance coin**) whose parent is not a CAT by running its tail program in such a way that it generates a child coin.
 
 **Keeper.** An individual or entity that performs operations on the protocol without being a user or data provider. For more details see [here](https://docs.circuitdao.com/technical-manual/keepers).
 
 **Launcher**. A coin from which another coin, typically a singleton, is created.
 
 **Lineage.** The succession of coins and coin spends that lead from a launcher or eve coin to the current singleton coin.
+
+**Melt.** To destroy a CAT (the **melt coin**) by running the CAT's tail program in such a way that it does not generate a child coin. Note that BYC and CRT tails do not allow partial melts.
+
+**Melt value.** The amount, in mojos, of a CAT coin. We also refer to this as **melt mojos**. If a CAT is fully melted, this is the amount of mojos that would get released. By general convention on Chia, 1 CAT unit has a melt value of 1000 mojos, which in turn means that CATs have 3 decimal places.
 
 **Mod.** Short for module. A Chialisp [module](https://chialisp.com/chialisp-using-modules). Essentially another word for program.
 
