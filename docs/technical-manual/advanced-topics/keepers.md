@@ -28,14 +28,20 @@ The ability for Treasury coins to be spent is crucial for surplus, recharge and 
 
 Below a list of all keeper operations of the protocol including any incentives other than the general incentive to keep the protocol operating smoothly.
 
-* Trigger collateral vault liquidiation - Incentive: receive ALI & RLI
-* Bid in liquidation auction - Incentive: acquire collateral below market price
-* Recover Bad Debt
-* Launch recharge auction
-* Start recharge auction
-* Bid in recharge auction - Incentive: acquire CRT below market price
-* Win recharge auction - Incentive (winning bidder only): receive CRT already paid for
-* Start surplus auction
-* Bid in surplus auction - Incentive: sell CRT above market price
-* Win surplus auction - Incentive (winning bidder only): receive BYC already paid for
-* Transfer SFs to Treasury - Incentive: may be required for some other operation to succeed (savings interest withdrawal, recovering Bad Debt)
+| operation                  | incentivized party                | incentive                                            |
+|----------------------------|-----------------------------------|------------------------------------------------------|
+| oracle price update        | prospective initiator/vault owner | start liquidation auction/borrow or withdraw more    |
+| statutes price update      | prospective initiator/vault owner | start liquidation auction/borrow or withdraw more    |
+| start liquidiation auction | initiator                         | receive liquidation incentives (absolute & relative) |
+| bid in liquidation auction | bidder                            | acquire collateral below market price                |
+| recover bad debt           | governance                        | make it easier to keep track of protocol liabilities |
+| launch recharge auction    | saver                             | avoid delays with interest withdrawals               |
+| start recharge auction     | prospective bidder                | opportunity to acquire CRT below market price        |
+| bid in recharge auction    | bidder                            | acquire CRT below market price                       |
+| settle recharge auction    | winning bidder                    | receive CRT already paid for (winning bidder only)   |
+| start surplus auction      | prospective bidder                | opportunity to acquire CRT below market price        |
+| bid in surplus auction     | bidder                            | sell CRT above market price                          |
+| settle surplus auction     | winning bidder                    | (winning bidder only): receive BYC already paid for  |
+| transfer stability fees    | saver                             | avoid delays with interest withdrawals               |
+| rebalance treasury         | saver                             | avoid delays with interest withdrawals               |
+| implement bill             | depends on bill                   | new Statute value becomes effective                  |

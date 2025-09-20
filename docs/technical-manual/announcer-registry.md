@@ -6,12 +6,14 @@ sidebar_position: 382
 
 # Announcer Registry
 
-The **Announcer Registry**, or **Registry** for short, is a custom singleton that approved Announcers can register with. The Registry keeps track of credits Announcers receive for Statutes Price updates. Announcers can periodically claim **Rewards** from the Registry in exchange for credits. Rewards are in the form of CRT tokens that are minted by the Registry.
+The **Announcer Registry**, or **Registry** for short, is a custom singleton that approved Announcers can register with. Registered Announcers can periodically claim **Rewards** from the Registry, which are paid in the form of newly issue CRT tokens. Rewards are intended to compensate data providers for the costs they incur by running an Announcer that publishes up-to-date price information.
 
-Any Rewards claim automatically distributes CRT tokens to all registered Announcers, not just the Announcer making the corresponding spend. When Rewards are claimed, the Registry is cleared and all Announcers are required to re-register to continue to be eligible for Rewards.
+Rewards accrue with every Statutes Price update and become claimable once the number of updates since the previous Reward distribution exceeds **Rewards Interval**.
+
+Any Rewards claim automatically distributes CRT tokens to all registered Announcers, not just the keeper executing the operation. When Rewards are distributed, the Registry is cleared and all Announcers are required to re-register to continue to be eligible for Rewards.
 
 :::warning
-Data providers must re-register their Announcers every time Rewards are claimed to remain eligible for future Rewards.
+Data providers must re-register their Announcers every time Rewards are distributed to remain eligible for future Rewards.
 :::
 
 ## Operations
@@ -23,9 +25,11 @@ Protocol deployer operations:
 
 Announcer operations:
 * **register**: adds a governance-approved Announcer to the Registry - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
-* **mint**: claims Rewards - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
-Although the Registry is not owned by anyone, register and mint operations can only be performed by data providers that control an approved Announcer. The launch operation must be performed by the same entity that launches the protocol.
+Keeper operations:
+* **reward**: distributes Rewards - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+
+Although the Registry is not owned by anyone, the register operation can only be performed by data providers that control an approved Announcer.
 
 ### Launch
 
@@ -33,68 +37,65 @@ The Announcer Registry must be launched as part of the [protocol launch](./proto
 
 ### Register
 
-The owner of an Announcer that has been approved by governance can register the Announcer with the Announcer Registry. Announcers are registered by prepending their inner puzzle hash to the ```ANNOUNCER_REGISTRY``` list. This means that approved Announcers with same inner puzzle hash as a registered Announcer are automatically registered too. Completely apart from the fact that governance should only ever approve one Announcer per data provider, even if there were multiple approved Announcers with same inner puzzle hash, this would not be to the detriment of the protocol as Rewards accrue based on puzzle hash, not Announcer coins.
+The owner of an Announcer that has been approved by governance can register the Announcer with the Announcer Registry. A registered Announcer receives Rewards the next time Rewards are distributed. All registered Announcers receive the same amount of Rewards, irrespective of when they were registered. Announcers need to re-register after Rewards are distributed in order to be eligible for the next Reward distribution.
 
-The benefit of using inner puzzle hashes instead of launcher IDs or another way of distinguishing Announcers is that only the inner puzzle hash is needed when Rewards are claimed. This avoids inflating the state of the Registry coin.
-
-A registered Announcer accrues Rewards every time the Statutes Price is updated.
+Announcers are registered by prepending a target puzzle hash to the ```ANNOUNCER_REGISTRY``` list. The target puzzle hash is where the Announcer would like to receive their Rewards. The target puzzle hash can, but need not be, the Announcer's inner puzzle hash. Using a different target puzzle hash allows data providers to separate private key management for the Announcer from custody arrangements used for Rewards.
 
 #### State changes
 
-* ```ANNOUNCER_REGISTRY```: inner puzzle hash of Announcer getting registered gets prepended.
+* ```ANNOUNCER_REGISTRY```: target puzzle hash of Announcer getting registered gets prepended
 
-### Mint
+### Reward
 
-The mint operation is used to claim Rewards. The operation can be performed by any registered Announcer, and automatically sends a Rewards payment to each registered Announcer.
+The reward operation is used to distribute Rewards to registered Announcers. Although the operation can be performed by anyone, in practice data providers that control a registered Announcer have the strongest incentive to do so.
 
-Note that because registration is based on the Announcer inner puzzle hash, data providers should ensure that they are still able to receive payments at the old inner puzzle hash if the Announcer gets transferred to a new inner puzzle hash. Alternatively, the Announcer should be re-registered with the new inner puzzle hash.
+When Rewards are distributed, the Registry is cleared, i.e. ```ANNOUNCER_REGISTRY``` is set to nil. This means that Announcers must be re-registered in order to receive Rewards during the next distribution. It is sufficient to re-register at any time before **Price Update Counter** exceeds ```REWARDS_CLAIMABLE_AT```, which is the earliest point in time when the reward operation can be performed next. This gives data providers flexibility to re-register when transaction fees are low.
 
-:::warning
-When transferring an Announcer to a new inner puzzle hash, data providers should ensure that they can still receive payments at the old inner puzzle hash or immediately re-register the Announcer. Otherwise they risk losing their Rewards for the current Rewards period.
-:::
-
-The mint operation also clears the Registry, i.e. resets ```ANNOUNCER_REGISTRY``` to nil. This means that Announcers must be re-registered after a mint operation is performed to remain eligible for Rewards. It is sufficient to re-register before ```MIN_CLAIM_INTERVAL``` has elapsed, which determines the earliest point in time when the mint operation can be performed next. This gives data providers flexibility to re-register when transaction fees are low.
+A slight disadvantage is that if Rewards aren't distributed at the earliest possible opportunity, i.e. when ```Price Update Counter = REWARDS_CLAIMABLE_AT + 1```, for example because transaction fees are high, then there is no corresponding increase in Rewards for additional Price Update Counter increases.
 
 ![Registry mint coin spends diagram](./../../static/img/Registry_mint_coin_spends_diagram.png)
 
-Since publishing up-to-date price information comes with costs for data providers, the protocol allocates credits to registered Announcers. The amount of credits allocated to an Announcer during a **CRT Claim Interval** is given by the **CRT Credits per Interval**. Announcers can claim CRT rewards that have accrued to them using the mint operation. Each credit is worth 1 CRT.
+The amount of mCRT paid to each registered Announcer during a Rewards distribution is **Rewards per Interval** divided by the number of registered Announcers rounded down to the nearest integer. Any remainder can be claimed by the keeper performing the operation by providing a puzzle hash.
 
-The rate at which CRT rewards can accrue is capped by the **Maximum Mint Amount** divided by the **Minimum Claim Interval**. Both values are curried into the announcer_registry.clsp puzzle at protocol launch and are immutable.
+The rate at which CRT rewards can accrue is capped by the **Maximum Reward per Interval** divided by the **Minimum Reward Interval**. Both parameters are fixed args of the Registry mod that are set at protocol launch and can never be changed. This caps the annual CRT supply growth from rewarding Announcers in perpetuity, giving CRT holders a guarantee on the maximum dilution they may suffer.
 
 ```
-(mod (MAX_MINT_AMOUNT MIN_CLAIM_INTERVAL MOD_HASH ...) ...
+(mod (MAXIMUM_REWARD_PER_INTERVAL MINIMUM_REWARD_INTERVAL ... MOD_HASH ...) ...)
 ```
-
-The ```MOD_HASH``` curried argument refers to the mod hash of the announcer_registry.clsp puzzle curried with the Maximum Mint Amount and Minimum Claim Interval. All other curried args are curried together with the MOD_HASH.
 
 :::note
-Miniting Rewards increases the CRT supply.
+Distributing Rewards increases the CRT supply.
 :::
 
 #### State changes
 
 * ```ANNOUNCER_REGISTRY```: gets cleared, i.e. set to nil.
-* ```CLAIM_ITERATION```: gets updated to current claim interval number.
+* ```CLAIM_COUNTER```: gets increased by 1
+* ```REWARDS_CLAIMABLE_AT```: gets updated to Price Update Counter plus Reward Interval.
 
 
 ## State and lineage
 
 Fixed state:
-* ```MAX_MINT_AMOUNT```
-* ```MIN_CLAIM_INTERVAL```
+* ```MAXIMUM_REWARD_PER_INTERVAL```
+* ```MINIMUM_REWARD_INTERVAL```
 * ```ATOM_ANNOUNCER_MOD_HASH```
-* ```MOD_HASH```
+* ```CAT_MOD_HASH```
+* ```CRT_TAIL_MOD_HASH```
+* ```RUN_TAIL_MOD_HASH```
+* ```OFFER_MOD_HASH```
 
 Immutable state:
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
 
 Mutable state:
-* ```ANNOUNCER_REGISTRY```: List of registered Announcers. Registration is by inner puzzle hash.
-* ```CLAIM_ITERATION```: Rewards claim interval number during which last claim was made. Used to prevent multiple claims per interval.
+* ```ANNOUNCER_REGISTRY```: List of puzzle hashes at which registered Announcers receive Rewards
+* ```REWARDS_CLAIMABLE_AT```: Number of Statutes price updates after which Rewards can be distributed next
 
 ### Eve state
 
-The eve state of the Registry may come without registered Announcers or with a number of pre-registered Announcers. In the former case, the ```ANNOUNCER_REGISTRY``` curried arg would be set to nil, in the latter case it would be a list of inner puzzle hashes of pre-registered Announcers.
+The eve state of the Registry may come without registered Announcers or with a number of pre-registered Announcers. In the former case, the ```ANNOUNCER_REGISTRY``` curried arg would be set to nil, in the latter case it would be a list of target puzzle hashes of pre-registered Announcers.
 
 ### Amount
 
@@ -102,15 +103,15 @@ The Announcer Registry coin amount is always 0.
 
 ### Lineage
 
-Being a singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) CREATE_COIN_ANNOUNCMENT from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1 (TODO: and the key_value_list if used). It also means that the Registry's eve spend must occur at protocol launch.
+Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1 <!--(TODO: and the key_value_list if used)-->. It also means that the Registry's eve spend must occur at protocol launch.
 
 
 ## Statutes
-* **CRT Credits per Interval**
-    * Statute index: 28
+* **Reward per Interval**
+    * Statute index: 29
     * Statute name: STATUTE_ANNOUNCER_CRT_CREDITS_PER_INTERVAL
     * considerations:
-* **CRT Claim Interval**
-    * Statute index: 29
-    * Statute name:STATUTE_ANNOUNCER_CLAIM_INTERVAL
+* **Reward Interval**
+    * Statute index: 30
+    * Statute name:STATUTE_ANNOUNCER_CREDITS_INTERVAL
     * considerations:

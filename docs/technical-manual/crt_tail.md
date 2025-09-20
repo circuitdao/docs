@@ -8,6 +8,10 @@ sidebar_position: 392
 
 The CRT tail is a [TAIL program](https://chialisp.com/cats/#tail) that determines under what conditions CRT tokens may be issued or melted. The CRT tail does not allow for minting.
 
+The tail can only be run on CRT CATs that have [Run Tail mod](./advanced-topics/run-tail-mod) as their inner puzzle.
+
+The CRT tail has one fixed arg, ```RUN_TAIL_MOD_HASH```, and one immutable arg, ```STATUTES_STRUCT```.
+
 ## Operations
 
 Puzzle operations are performed on: [crt_tail.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)

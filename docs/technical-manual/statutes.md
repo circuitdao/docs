@@ -105,9 +105,9 @@ This operation can only be performed if the previous Statutes operation was an a
 ### Pass custom conditions
 
 Passing custom conditions is required in the following situations:
-* Changing Treasury coin lineage (bitmask: ```010-010```)
-* Approving or disapproving Announcers (bitmask: ```010-000```)
-* Launching (and melting?) Recharge Auctions (bitmask: ```010-010```)
+* Launching or changing ring ordering of a Treasury coin (bitmask: ```010-010```)
+* Approving or disapproving an Announcer (bitmask: ```010-000```)
+* Launching a Recharge Auction coin (bitmask: ```010-010```)
 
 Since these are one-off operations specific to certain coins, there is no point in storing information pertaining to these operations in Statutes. Instead, custom conditions are included in their respective bills, and, upon enactment, get announced by Statutes.
 
@@ -243,7 +243,7 @@ Current Statute values are shown on the dashboard (TODO: add links for testnet a
 ## Statutes Price:
 
 * **PRICE_INFO**: copied from Oracle once Oracle Price Delay has passed
-  * **price**: XCH/USD price * 1000, e.g. 34025 means a price of 34.025 USD per XCH
+  * **price**: XCH/USD price * 100, e.g. 3402 means a price of 34.02 USD per XCH
   * **last_updated**: [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of when the price was recorded in the Oracle
 
 

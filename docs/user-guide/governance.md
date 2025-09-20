@@ -64,10 +64,10 @@ The Maximum Delta Constraint is designed to give users assurances about the size
 
 ## User considerations
 
-Before interacting with the protocol, users should consider how they intend to use the protocol and whether the Constraints are set to values that allow them to exit their positions in a timely manner should a proposal get voted through that would change one or more Statutes or Constraints to values unacceptable to the user.
+Before interacting with the protocol, users should consider how they intend to use the protocol and whether the Constraints are set to acceptable values. In particular, implementation delays should be long enough to allow users to exit their positions should a proposal get enacted that would change one or more Statutes or Constraints to values unacceptable to the user.
 
 :::warning
-Protocol users should consider whether they are comfortable with the Statutes and Constraints, and whether changes to them may adversely affect them.
+Protocol users should consider whether they are comfortable with Statutes and Constraints, and whether changes to them would adversely affect them.
 :::
 
 For example, consider a user who borrows BYC at an 8% Stability Fee to invest in a fund that offers monthly redemptions. Assume the user expects the fund to deliver a return of 10% per annum in any given month. If the Stability Fee has a Veto Period and Implementation Delay of one week each, the borrower could not be certain what the SF is going to be in the last two weeks before they have an opportunity to redeem from the fund and repay their loan. Unless they have other sources of capital to repay the BYC loan after two weeks if governance changes the SF to 12% or more, they cannot protect themselves against their investment making a loss. If on the other hand the fund offered weekly redemptions, the borrower could always exit the fund and repay their BYC debt on time before the new SF is effective.

@@ -30,9 +30,11 @@ Below is a complete list of protocol coin types. All protocol coins are singleto
 * [Payout coin](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp) - BYC CAT singleton
 * [Collateral vaults](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp) - custom singleton with owner
 * [Savings vaults](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp) - BYC CAT singleton with owner
+* [Governance launcher coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance_launcher.clsp) - ephemeral CRT CAT
 * [Governance coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) - CRT CAT singleton with owner
+* [Governance exit coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance_exit.clsp) - ephemeral CRT CAT
 
-Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) tokens are not considered protocol coins.
+Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) coins are not considered protocol coins.
 
 
 ## Operations
