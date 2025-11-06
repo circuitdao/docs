@@ -33,18 +33,18 @@ Since the CRT tail has the Statutes Struct curried in, the TGE operation must be
 
 Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](./advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There are two Approval mods that allow for issuing CRT, namely Announcer Registry and Recharge Auction.
 
-| CRT tail operation | Approval mod       | Operation | Operation program                                                                                                       |   |
-|:-------------------|:--------------------|:-----------|:-------------------------------------------------------------------------------------------------------------------------|
-| issue              | Announcer Registry | mint      | [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/vault_borrow.clsp)            |   |
-| issue              | Recharge Auction   | win       | [recharge_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_win.clsp) |   |
+| CRT tail operation | Approval mod       | Operation | Operation program                                                                                                          |   |
+|:-------------------|:-------------------|:----------|:---------------------------------------------------------------------------------------------------------------------------|---|
+| issue              | Announcer Registry | reward    | [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/vault_borrow.clsp)               |   |
+| issue              | Recharge Auction   | settle    | [recharge_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_settle.clsp) |   |
 
 ### Melt
 
 CRT tokens can only be melted with the approval of an [Approval mod](./advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There is one Approval mod that allows for issuing CRT, namely Surplus Auction.
 
-| CRT tail operation | Approval mod    | Operation | Operation program                                                                                            | CRT tail operation |
-|:-------------------|:----------------|:----------|:-------------------------------------------------------------------------------------------------------------|--------------------|
-| melt               | Surplus Auction | win       | [surplus_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_win.clsp) |                    |
+| CRT tail operation | Approval mod    | Operation | Operation program                                                                                               | CRT tail operation |
+|:-------------------|:----------------|:----------|:----------------------------------------------------------------------------------------------------------------|--------------------|
+| melt               | Surplus Auction | settle    | [surplus_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_settle.clsp) |                    |
 
 
 ## State and Lineage

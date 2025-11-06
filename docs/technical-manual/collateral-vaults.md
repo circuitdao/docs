@@ -121,10 +121,13 @@ Owner operations:
 
 Keeper operations:
 * **transfer Stability Fees**: mint & transfer BYC to Treasury - puzzle: [vault_kepper_recover_bad_debt](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
-* See the [Liquidation](./liquidation#operations) page for keeper operations relating to vault liquidation and bad debt:
+* See the [Liquidation](./liquidation) page for keeper operations relating to vault liquidation:
     * **start auction**: start a liquidation auction
     * **bid**: submit a bid in liquidation auction
+* See the [Bad Debt](./bad_debt) page for keeper operations relating to Bad Debt recovery:
     * **recover bad debt**: extinguish bad debt
+
+Owner operations and Stability Fee transfers can only be performed if post-operation the vault is sufficiently overcollateralized. This protects against griefing attacks in which a vault owner attempts to delay or prevent liquidation by repeatedly spending a liquidatable vault.
 
 ### Deposit
 
@@ -173,7 +176,6 @@ In both cases, the vault is left with remaining SFs and remaining principal as s
 
 * ```PRINCIPAL```: decreases based on amount repaid according to methodology described above
 * ```DISCOUNTED_PRINCIPAL```: decreases based on amount repaid according to methodology described above
-* ```TRANSFERRED_FEES```: decreases based on amount repaid according to methodology described above
 
 ### Transfer
 
@@ -185,15 +187,15 @@ The ownership or custody arragements or a collateral vault can be changed using 
 
 ### Transfer Stability Fees
 
-Mints BYC against a collateral vault's accrued Stability Fees. The BYC minted is transferred to the Treasury.
+Issues BYC against a collateral vault's accrued Stability Fees. The BYC issued is transferred to the Treasury.
 
-When this operation is called, it mints the maximum amount of BYC possible. In other words, any accrued SFs that weren't transferred previously get transferred.
+The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculcated by calculating the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued that debt owed to the vault.
 
-The operation can only be performed if the amount of SFs transferred is no less than the Minimum Stability Fee Transfer Amount. This prevents coin hogging attacks on collateral vault coins.
+A SF transfer is only permitted is the transfer amount exceeds the **Minimum Treasury Delta**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
 #### State changes
 
-* ```TRANSFERRED_FEES```: increases by the amount of SFs transferred
+* ```PRINCIPAL```: increases by the amount of SFs transferred
 
 
 ## State and lineage

@@ -33,6 +33,7 @@ Below is a complete list of protocol coin types. All protocol coins are singleto
 * [Governance launcher coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance_launcher.clsp) - ephemeral CRT CAT
 * [Governance coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) - CRT CAT singleton with owner
 * [Governance exit coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance_exit.clsp) - ephemeral CRT CAT
+* [Run tail coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/run_tail.clsp) - CRT or BYC CAT that forces its tail to be run
 
 Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) coins are not considered protocol coins.
 
@@ -45,11 +46,12 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Collateral vaults
   * Savings vaults
   * Announcers
-  * Governance
+  * Governance coins
 * **Keeper**: This can be anyone, but in practice are often professional trading firms that operate bots or automated trading infrastructure. Applies to:
   * Statutes
   * Oracle
   * Announcers
+  * Announcer Registry
   * Collateral vaults
   * Recharge Auction
   * Surplus Auction
@@ -63,11 +65,13 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Treasury
   * BYC Tail
   * CRT Tail
-* **Announcer**: The owner of an Announcer must authorise the operation. Applies to:
+* **Announcer**: An Announcer must authorise the operation. Excluding owner spends of the Announcer, this applies to:
   * Announcer Registry
-* **Protocol deployer**: The person deploying the protocol. These operations must be performed at protocol launch. Applies to:
+* **Protocol deployer**: The person/entity deploying the protocol. These operations must and can only be performed at protocol launch. Applies to:
   * Announcer Registry
   * CRT Tail
+  * Statutes
+  * Oracle (?)
 
 For a visualisation of all operations and their interdependencies, see the [inter-coin communication](./advanced-topics/inter-coin-communication) page.
 
