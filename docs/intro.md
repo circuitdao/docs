@@ -27,7 +27,7 @@ Governance is conducted fully on-chain via Circuit's governance token [**CRT**](
 
 ### Getting Started
 
-Circuit is live on testnet11. Head over to the [Getting Started](./category/getting-started) guide to dive right in!
+Circuit is live on Chia mainnet. Head over to the [Getting Started](./category/getting-started) guide to dive right in!
 
 The [User Guide](./category/user-guide) provides an overview of protocol functionality and terminology.
 
@@ -37,11 +37,14 @@ The Chialisp code of the puzzles used by protocol coins can be found in [this](h
 
 ### Bytecash Asset ID
 
-Bytecash is a [Chia Asset Token](https://chialisp.com/cats) (CAT). You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the token's asset ID.
+Bytecash is a [Chia Asset Token](https://chialisp.com/cats) (CAT) with asset ID
 
-On testnet, the BYC asset ID may occasionally change. The BYC asset ID corresponding to the latest deployment on testnet11 is
+```
+ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac
+```
 
-    4eadfa450c19fa51df65eb7fbf5b61077ec80ec799a7652bb187b705bff19a90
+You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the token's asset ID.
+
 
 :::info
 For questions, feedback, feature requests or bug reports, please contact us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.

@@ -6,7 +6,7 @@ sidebar_position: 800
 
 # Choosing your LTV
 
-The **loan-to-value** (**LTV**) is a vault-specific value defined as the ratio of your outstanding debt vs the value of the collateral you have locked up.
+The **loan-to-value** (**LTV**) is a vault-specific value defined as the ratio of outstanding debt vs the value of collateral locked up in the vault.
 
 ```
 LTV = debt owed / value of collateral
@@ -14,9 +14,9 @@ LTV = debt owed / value of collateral
 
 For example, if you have 100 XCH locked up in a vault, the XCH price is $40, and your debt is 1000 BYC, then the LTV is 25%.[^1]
 
-The **Maximum LTV** is the LTV at which your vault becomes eligible for liquidation. Whereas you can change your LTV by adding or removing collateral, or by taking out or repaying loans, the Max LTV is a protocol parameter set by governance. Its purpose is to ensure that Bytecash remains overcollateralized.
+The **Max LTV** is the LTV at which your vault becomes eligible for liquidation. Whereas you can change your LTV by adding or removing collateral, or by taking out or repaying loans, the Max LTV is a protocol parameter set by governance.[^2] Its purpose is to ensure that Bytecash remains overcollateralized.
 
-Currently, the Max LTV is set to 60%.
+Let's assume Max LTV is set to 60%.
 
 To continue the example above, if the XCH price drops from $40 to $20, your LTV would increase to 50%. Because this is less than the Max LTV of 60%, the vault is still safe from liquidation. However, you might want to top up your collateral or repay part of your debt to lower your LTV in case the price drops further.
 
@@ -24,7 +24,7 @@ If the XCH price decreased by another $4 to $16, then the LTV would rise to 62.5
 
 :::info
 
-In the context of Circuit protocol, the term **loan** in 'loan-to-value' refers to the amount of debt outstanding, not just the principal borrowed.[^2]
+In the context of Circuit protocol, the term **loan** in 'loan-to-value' refers to the amount of debt outstanding, not just the principal borrowed.[^3]
 See the section on [collateral vaults](./user-guide/vaults) in the User Guide for additional information.
 
 :::
@@ -33,7 +33,7 @@ See the section on [collateral vaults](./user-guide/vaults) in the User Guide fo
 
 So what is a safe LTV when borrowing Bytecash? The first thing to note is that one can never be 100% certain that a vault won't get liquidated. There is always a risk that the XCH price drops by a large amount in a very short period of time that doesn't leave enough time to repay debt or top up collateral. Borrowing is inherently a risky activity. All one can do is minimize the risk of a liquidation occuring to a level that one is comfortable with.
 
-To get a feeling for how big the risk of a precipitous decline in the XCH price is, one can look at historical data. Shown below is the percentage difference from highest to lowest XCH price over three different rolling windows: 1 hour, 1 day, and 1 week.[^3] Included in the charts is the equivalent data for ETH for comparison.
+To get a feeling for how big the risk of a precipitous decline in the XCH price is, one can look at historical data. Shown below is the percentage difference from highest to lowest XCH price over three different rolling windows: 1 hour, 1 day, and 1 week.[^4] Included in the charts is the equivalent data for ETH for comparison.
 
 :::danger
 
@@ -48,7 +48,7 @@ The one hour rolling window is interesting for those that have very short - i.e.
 
 The data is also useful for governance in setting the Max LTV as liquidations occur via Dutch auctions in which multiple sophisticated bidders, such as market making firms, compete to acquire a vault's collateral. Since liquidation auctions are designed to settle within 15-30 minutes, the 1 hour drawdown data represents a conservative basis for choosing an appropriate Max LTV.
 
-As can be seen in the chart, there were only two instances shortly after on-chain XCH transfers were enabled and trading started on 3 May 2021, where the XCH price dropped by more than 40% in an hour. Given that liquidity was very thin at that time due to the small amount of XCH that was in circulation,[^4] these can be regarded as outliers that may not repeat. So if one works on the assumption that going forward it is very unlikely for a > 40% drop to occur within an hour, then a Max LTV of 1 - 40% = 60%, should prevent Bytecash from entering an undercollateralized state.
+As can be seen in the chart, there were only two instances shortly after on-chain XCH transfers were enabled and trading started on 3 May 2021, where the XCH price dropped by more than 40% in an hour. Given that liquidity was very thin at that time due to the small amount of XCH that was in circulation,[^5] these can be regarded as outliers that may not repeat. So if one works on the assumption that going forward it is very unlikely for a > 40% drop to occur within an hour, then a Max LTV of 1 - 40% = 60%, should prevent Bytecash from entering an undercollateralized state.
 
 ### One day rolling window
 ![24hr rolling window drawdowns](./../static/img/high_to_low_24hr.png)
@@ -76,6 +76,7 @@ When choosing your LTV, keep in mind that not only a decline in the XCH price ca
 
 
 [^1]: For any LTV calculations, the protocol uses the oracle price for XCH and values 1 BYC at a fixed exchange rate of 1 USD.
+[^2]  More precisely, governance sets the Liquidation Ratio (Statute `VAULT_LIQUIDATION_RATIO_PCT`). Max LTV is defined as 1 / Liquidation Ratio. E.g. LR = 166 -> Max LTV = 60%.
 [^2]: The principal is the amount initially borrowed when a loan is taken out. The debt owed is the principal plus any accrued Stability Fees.
 [^3]: The analysis uses hourly OHLC candlestick data from OKX for the XCH/USDT and ETH/USDT spot markets.
 [^4]: Mainnet launched on 19 March 2021, i.e. there was less than two months' worth of block rewards in circulation.
