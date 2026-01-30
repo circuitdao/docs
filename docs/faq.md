@@ -24,22 +24,14 @@ BYC is pronounced 'bick'.
 
 Bytecash is issued as a [Chia Asset Token](https://chialisp.com/cats) (CAT2) with custom tail. You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/guides/offers-gui-tutorial/#add-a-new-cat) the Bytecash asset ID with your wallet.
 
-:::note
+Bytecash (BYC) asset ID: ```ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac```
 
-While on testnet, we expect the asset ID to change occassionally as the protocol remains under development and gets redeployed. In this case you'll lose access to your testnet coins via the app, and would have to recreate any vaults and register a new BYC asset ID with your wallet. Also make sure your wallet is connected to testnet11.
-
-Testnet11 BYC asset IDs - always use the latest version:
-* BYC03 - 91bfdb4a750308c25b12d0f787309df590a4cad80e7466accdd99b1d1759d9e4
-* BYC02 - skipped
-* BYC01 - 1763a32f8a9c66f256d8b4631226870ee63dfcfd9668f83c6f75b98f82dc791f
-
-:::
 
 ### How can I get hold of Bytecash?
 
 You can obtain BYC by borrowing it directly from the protocol. The [Getting Started](./getting-started) guide shows you how.
 
-Alternatively, you can acquire BYC in the open market, for example via [offers](https://www.chia.net/offers) on bulletin boards like [Dexie](https://dexie.space).
+Alternatively, you can acquire BYC in the open market, for example via [offers](https://www.chia.net/offers) on bulletin boards like [Dexie](https://dexie.space) or on [Tibetswap](https://v2.tibetswap.io).
 
 ### Can I earn interest on Bytecash?
 
@@ -85,7 +77,7 @@ The code will be published on [Github](https://www.github.com/circuitdao) for an
 
 ### Where can I report bugs?
 
-Reach out to us on [Discord](https://discord.gg/TMama9jTwu) or send an email to info@circuitdao.com.
+Reach out to us on [Discord](https://discord.com/invite/knHqg2nXca) or send an email to info@circuitdao.com.
 
 ### Do you provide an API?
 
