@@ -28,6 +28,9 @@
   "resolutions": {
     "undici": "^5.28.5"
   },
+  "overrides": {
+    "undici": "^5.28.5"
+  },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.4.3"
   },
