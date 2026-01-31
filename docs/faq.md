@@ -22,7 +22,7 @@ Bytecash, or BYC for short, is the stablecoin issued by the Circuit protocol. BY
 
 BYC is pronounced 'bick'.
 
-Bytecash is issued as a [Chia Asset Token](https://chialisp.com/cats) (CAT2) with custom tail. You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/guides/offers-gui-tutorial/#add-a-new-cat) the Bytecash asset ID with your wallet.
+Bytecash is issued as a [Chia Asset Token](https://chialisp.com/cats) (CAT2) with custom tail. You can get your wallet to recognize BYC coins by [registering](https://docs.chia.net/guides/offers-gui-tutorial/#add-a-new-cat) the asset ID with your wallet.
 
 Bytecash (BYC) asset ID: ```ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac```
 

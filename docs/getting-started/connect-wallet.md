@@ -6,6 +6,7 @@ sidebar_position: 7
 
 import WCB from './../../static/img/Wallet_Connect_button.png';
 import PendingTransaction from './../../static/img/waiting_for_tx_confirmation.png';
+import SageResync from './../../static/img/sage_resync.png';
 
 
 # Connect wallet
@@ -30,7 +31,13 @@ The app imports the wallet, and you are good to go ahead and use Circuit protoco
 
 :::info
 
-If Sage doesn't show expected balances, it's likely a syncing issue. Resync the wallet under ```Settings -> Wallet -> Resync``` and activate the ```Delete coin data``` and ```Delete all cached data``` toggles.
+If Sage doesn't show expected balances, it's likely a syncing issue.
+
+Resync the wallet under ```Settings -> Wallet -> Resync``` and activate the ```Delete coin data``` and ```Delete all cached data``` toggles.
+
+<img src={SageResync}
+     alt="Sage Resync Settings"
+     style={{width: 500}}/>
 
 :::
 
