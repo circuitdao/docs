@@ -77,7 +77,7 @@ The code will be published on [Github](https://www.github.com/circuitdao) for an
 
 ### Where can I report bugs?
 
-Reach out to us on [Discord](https://discord.com/invite/knHqg2nXca) or send an email to info@circuitdao.com.
+Reach out to us on [Discord](https://discord.com/invite/knHqg2nXca) or send an email to support@circuitdao.com.
 
 ### Do you provide an API?
 

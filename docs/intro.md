@@ -47,5 +47,5 @@ You can get your wallet to recognize BYC coins by [registering](https://docs.chi
 
 
 :::info
-For questions, feedback, feature requests or bug reports, please contact us on [Discord](https://discord.com/invite/knHqg2nXca) or send an email to info@circuitdao.com.
+For questions, feedback, feature requests or bug reports, please contact us on [Discord](https://discord.com/invite/knHqg2nXca) or send an email to support@circuitdao.com.
 :::
