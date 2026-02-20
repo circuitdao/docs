@@ -32,11 +32,19 @@ If there isn't enough BYC in the Treasury to cover the entire Bad Debt amount, k
 
 Once all bad debt has been recovered, ```AUCTION_STATE``` is set to nil. This returns the vault to eve state and hands control back to its owner.
 
-Note that the initiator is not entitled to any upaind initiator incentive once the vault is in bad debt.
+Note that the initiator is not entitled to any unpaid initiator incentive once the vault is in bad debt.
+
+:::note
+Bad debt cannot be recovered if the bad debt's principal component, curried arg ```byc_to_melt_balance``` in ```AUCTION_STATE```, is zero. Affected vault coins are permanently bricked. This is a known bug.
+
+Affected vault owners should continue to use the protocol with a new wallet.
+
+From the perspective of the protocol the bug is uncritical as any unpaid initiator incentive would not have gone to the Treasury anyway, and the accrued SF component of the debt cancels out.
+:::
 
 #### State changes
 
 * ```AUCTION_STATE```: set to nil if all bad debt extinguished
-  * ```initiator_incentive_balance```
-  * ```byc_to_treasury_balance```
-  * ```byc_to_melt_balance```
+  * ```initiator_incentive_balance```: reduced by min(recover amount, initiator incentive balance)
+  * ```byc_to_treasury_balance```: set to 0
+  * ```byc_to_melt_balance```: reduced by remainder of recover amount, ie any amount not applied against initiator incentive balance

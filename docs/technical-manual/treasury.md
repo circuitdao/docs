@@ -12,6 +12,8 @@ Having the Treasury consist of several Treasury coins is necessary for savers to
 
 Treasury coins cannot be converted back to standard BYC CATs or melted. In other words, once a Treasury coin has been launched it stays in existence forever. Governance should refrain from creating an unnecessarily large number of Treasury coins as this will irreversably increase the costs of spending the Treasury Ring.
 
+Treasury coins are the only singletons in the protocol that can have more than one child coin. If a treasury coin is spent as part of a bad debt recovery operation, it creates a child treasury coin and an additional run tail coin which absorbs the withdrawal amount and melts it.
+
 <!--
 The reason that multiple Treasury coins exist instead of just one, is to allow multiple savers and borrowers to make interest withdrawals and loan repayments, respectively, in parallel. In the case of interest withdrawals, this means faster liquidity for savers even in times of high withdrawal demand, and as such protects against bank runs (note that savers can always withdraw their savings balance independently of the availability or cost of spending a Treasury coin). <!--TODO: also mention this on the Savings Vault page Similarly, it enables more borrowers to repay their loans in a short period of time, which can be crucial to avoid liquidations when XCH prices are falling. <!--TODO: also mention this on the Collateral Vault page Governance should monitor the number of both savings and collateral vaults and choose and the number of Treasury coins accordingly, bearing in mind that too large a number of Treasury coins makes spends that require the whole ring to be spent expensive (Recharge Auction start and win). <!--TODO: mention this on Governance page.-->
 

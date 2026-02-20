@@ -7,17 +7,18 @@ sidebar_position: 350
 
 # Savings Vaults
 
-Savings vaults are BYC CAT singletons with inner puzzle [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp). They can be permissionlessly created by anyone to earn yield on Bytecash.
+Savings vaults are BYC CAT singletons that can be permissionlessly created by anyone to earn yield on Bytecash.
 
 The amount of a savings vault coin is referred to as the **savings balance**. The amount of interest that has accrued in the vault is the **accrued interest**. Accrued interest is an accounting variable. To get paid this interest, the vault owner needs to request a payment to be made from Treasury. The app pays interest whenever an amount greater than the savings balance is being withdrawn. Otherwise, the entire withdrawal amount will be covered from the savings balance.
 
-The savings vault puzzle has itself an inner puzzle, which can be chosen freely by the savings vault owner. In case of a withdrawal, the inner puzzle may output multiple create coin conditions. The first of these yields the savings vault's child vault (inner puzzle, amount and memo are all preserved), whereas the other child coins would receive the amount withdrawn from the vault.
-
-:::info
-It is possible to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a savings vault.
-:::
-
 Savings vaults can be created on a standalone basis, i.e. without requiring a simultaneous spend of any protocol coins. Once created, a savings vault coin remains a savings vault forever. There is no way to turn it back into a standard BYC coin or even melt the CAT.
+
+## Inner puzzle
+
+Savings vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE```,  which ensures that only the legitimate owner can perform operations on it.
+
+The inner puzzle must satisfy [certain minimum requirements](./advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a savings vault.
+
 
 ## Interest accrual and accounting
 

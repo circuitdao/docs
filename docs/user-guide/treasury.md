@@ -8,8 +8,8 @@ sidebar_position: 220
 
 The **Treasury** is a component of the protocol that stores BYC. It effectively functions as a buffer which takes in and distributes BYC in response to user interactions with the protocol. The amount of BYC held in the Treasury is referred to as the **Treasury balance**.
 
-The Treasury is filled by:
-* Stability Fees (including Transferred Fees)
+The Treasury is filled from:
+* Stability Fees
 * Liquidation Penalties
 * Recharge Auctions
 
@@ -28,7 +28,7 @@ If the Treasury balance is below the **Treasury Minimum** less the [Recharge Auc
 
 ![Treasury thresholds](./../../static/img/Treasury_thresholds_diagram.png)
 
-Another option to recharge the Treasury is to mint BYC against accrued Stability Fees in collateral vaults. This can be done by anyone at any time. The amount of BYC minted in this manner is kept track of in the **Transferred Fees** variable of the respective collateral vault. A fee transfer always transfers the maximum amount of fees that are eligible to be transferred. It is not possible to transfer fees in excess of accrued SFs. A fee transfer is only permitted if it is larger than the **Minimum SF Transfer Amount** and the collateral vault is not in liquidation. Fee transfers are an important mechanism to ensure that there is enough Bytecash available in the Treasury for the protocol to meet its liabilities on demand.
+Another option to top up the Treasury is to issue BYC against accrued Stability Fees in collateral vaults. This can be done by anyone at any time. The amount of BYC issued in this manner is added to the principal of the respective collateral vault. Note that this does not increase the vault's debt. A SF transfer always transfers all accrued SFs. A fee transfer is only permitted if it is larger than the **Minimum Treasury Delta** and the collateral vault is not in liquidation or bad debt. SF transfers are an important mechanism that ensures the protocol can pay interest to savers on demand.
 
 ![Stability Fee transfer](./../../static/img/Stability_Fee_transfer_diagram.png)
 
@@ -52,7 +52,7 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
     * Statute index: 18
     * Statute name: STATUTE_TREASURY_MAXIMUM
     * considerations: should be set to a value greater than accrued savings interest to have a buffer for covering bad debt. the buffer should be sufficiently large to not need constant readjustments as savings interest accrues over time. the buffer should also not be so large that it puts upwards price pressure on the BYC price.
-* **Minimum SF Transfer Amount**:
+* **Minimum Treasury Delta**:
     * Statute index: 19
-    * Statute name: STATUTE_MINIMUM_SF_TRANSFER_AMOUNT
-    * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents a large amount of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.
+    * Statute name: STATUTE_TREASURY_MINIMUM_DELTA
+    * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents large amounts of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.

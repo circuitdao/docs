@@ -8,17 +8,19 @@ sidebar_position: 330
 
 Collateral vaults are custom singletons that can be created permissionlessly by anyone.
 
-Collateral vault inner puzzles must output one, and only one, protocol remark condition. The vault operation puzzle gets extracted from this remark condition. Vault owners must therefore ensure their inner puzzles are designed suitably, as otherwise some or all vault operations may become inaccessible and the collateral held in a vault could be lost.
+Users can deposit XCH into a collateral vault to borrow BYC against it.
 
-:::warning
-Collateral vault inner puzzles must be designed suitably to prevent funds from getting irretrievably locked in a vault.
-:::
 
-It is safe to use the [standard transaction puzzle](https://chialisp.com/standard-transactions/#code) for the inner puzzle of a collateral vault.
+## Inner puzzle
+
+Collateral vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE_HASH```,  which ensures that only the legitimate owner can perform certain operations, the **owner operations**, on it.
+
+The inner puzzle must satisfy [certain minimum requirements](./advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a collateral vault.
+
 
 ## Stability Fees
 
-Loans taken out from collateral vaults accrue Stability Fees. The debt owed to a vault increases every minute according to the **Stability Fee Discount Factor** (SFDF) from Statutes. The corresponding annualized Stability Fee percentage rate (APR), which is the figure typically shown to the user in frontends, is calculated as
+Loans taken out from collateral vaults accrue interest, also known as **Stability Fees** (SFs). The debt owed to a vault increases every minute according to the **Stability Fee Discount Factor** (SFDF) from Statutes. The corresponding annualized Stability Fee percentage rate (APR), which is the figure typically shown to the user in frontends, is calculated as
 
 $$
 Stability\ Fee\ APR = SFDF^{60\cdot24\cdot365}.
@@ -59,7 +61,7 @@ Note that the vault owner passes in the current time as an argument when perform
 
 ## Loan and debt accounting
 
-Each vault keeps track of the **principal** (P) of outstanding loans, and the **discounted principal** (DP). Both P and DP get updated whenever BYC is borrowed from or repaid to the vault.
+Each vault keeps track of the **principal** (P) of outstanding loans, and the **discounted principal** (DP). Principal and discounted principal get updated whenever BYC is borrowed from or repaid to the vault. Principal also gets updated when a [Stability Fee transfer](#stability-fee-transfers) is performed.
 
 The principal is the net amount of BYC borrowed and repaid:
 
@@ -97,14 +99,13 @@ Note that due to the coinset model, the protocol itself does not know the total 
 
 ## Stability Fee transfers
 
-It is possible to mint BYC against accrued Stability Fees. BYC minted in this way is transferred to the Treasury. Each collateral vaults keeps track of the net amount of BYC it has transferred to the Treasury in this manner, which is referred to as **Transferred Fees** and stored in the ```TRANSFERRED_FEES``` curried arg.
+It is possible to issue BYC against accrued Stability Fees. Any BYC issued in this way is transferred directly to the Treasury.
 
-Transferring fees is the preferred mechanism to top up the Treasury, as it is quicker and less costly than holding a recharge auction. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. That way it can be ensured that savers can be paid interest on demand and Bad Debt can be extinguished as soon as it arises. At the same time, governance needs to take into account the possibility that keepers may transfer any non-transferred SFs to the Treasury at any time when setting the Treasury Maximum. If the Treasury Maximum is set too low, it could result in Surplus Auctions being triggered that drain the protocol of BYC that may be needed to cover liabilities towards savers.
+SF transfers ensure that as much BYC can be brought into circulation as there is debt. This is key to preventing a structural BYC shortage, which could result in BYC trading above its 1:1 peg to the US Dollar.
 
-The maximum amount of fees that can be transferred from a vault is the acrrued SFs less any existing Transferred Fees. This ensures that all BYC in circulation remains fully backed and overcollateralised as required by the Liquidation Ratio. The protocol also enforces a minimum amount to transfer, **Minimum Stability Fee Transfer Amount** (MSFTA), to prevent collateral vault coin hogging.
+SF transfers are the preferred mechanism to top up the Treasury, as it is quicker than holding a recharge auction and doesn't dilute CRT holders. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. This ensures that savers can withdraw interest on demand without first having to transfer SFs themselves.
 
-It is governance's responsibility to ensure that the savings rate is set such that the protocol's liability to savers is less than the amount of accrued Stability Fees. In particular, this means that the savings rate should not be greater than the Stability Fee rate.
-
+When setting the Treasury Maximum, governance should take into account that keepers can transfer accrued SFs to the Treasury at any time. If the Treasury Maximum is set too low, Surplus Auctions could be triggered, draining the Treasury of BYC needed to cover liabilities towards savers.
 
 ## Operations
 
@@ -120,7 +121,7 @@ Owner operations:
 * **transfer**: transfer ownership of collateral vault - puzzle: [vault_transfer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
 
 Keeper operations:
-* **transfer Stability Fees**: mint & transfer BYC to Treasury - puzzle: [vault_kepper_recover_bad_debt](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
+* **transfer Stability Fees**: issue & transfer BYC to Treasury - puzzle: [vault_keeper_transfer_sf_to_treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_transfer_sf_to_treasury.clsp)
 * See the [Liquidation](./liquidation) page for keeper operations relating to vault liquidation:
     * **start auction**: start a liquidation auction
     * **bid**: submit a bid in liquidation auction
@@ -131,9 +132,9 @@ Owner operations and Stability Fee transfers can only be performed if post-opera
 
 ### Deposit
 
-Deposits XCH into the collateral vault. Deposited XCH is automatically used as collateral when taking out loans.
+Deposits XCH into the collateral vault. All deposited XCH is automatically used as collateral to secure the vault's debt.
 
-The deposit operation does not assert any Statutes and can be performed completely independently of the protocol.
+The operation can only succeed if after the deposit the vault is sufficiently overcollateralised. The only situation in which this may not be the case is if the vault is liquidatable but liquidation has not been started yet.
 
 #### State changes
 
@@ -141,7 +142,9 @@ The deposit operation does not assert any Statutes and can be performed complete
 
 ### Withdraw
 
-Withdraws XCH from the collateral vault. The operation can only succeed if after the withdrawal the vault remains sufficiently overcollateralised.
+Withdraws XCH from the collateral vault.
+
+The operation only succeeds if after the withdrawal the vault remains sufficiently overcollateralised based on a liquidation ratio of LR + 1.
 
 #### State changes
 
@@ -153,6 +156,8 @@ Borrows Bytecash from the vault.
 
 Borrowed Bytecash is minted by the Protocol. Borrowing increases the debt owed to the vault as [explained above](./collateral-vaults#stability-fees).
 
+The operation only succeeds if after taking out the loan the vault remains sufficiently overcollateralised based on a liquidation ratio of LR + 1.
+
 #### State changes
 
 * ```PRINCIPAL```: increases by the amount of BYC borrowed
@@ -162,15 +167,15 @@ Borrowed Bytecash is minted by the Protocol. Borrowing increases the debt owed t
 
 Repays debt owed to the vault.
 
-The first step in a debt repayment is for the protocol to split the repayment amount into principal repayment amount (bright green in the diagrams below) and SF repayment amount (dark green) proportional to the vault's principal and accrued SFs. If the SF repayment amount is greater than or equal to Transferred Fees, then an amount of BYC equal to Transferred Fees is melted, and the remaining SF repayment amount is transferred to Treasury.
+The protocol allows for the repayment amount to be split in any way possible between principal and accrued Stability Fees. For any Stability Fees being repaid, an identical amount of BYC is issued and paid into the Treasury. The diagram below shows an example where some principal and some accrued SFs are repaid.
 
-![Repayment allocation small TF](./../../static/img/Repayment_allocation_small_TF_diagram.png)
+![Repayment allocation](./../../static/img/Repayment_allocation_diagram.png)
 
-If on the other hand the SF repayment amount is less than Transferred Fees, then the entire SF repayment amount is melted, and no BYC is paid into the Treasury.
+The app doesn't let borrowers decide how the repayment amount is split. If the repayment amount is not larger than the principal, then the entire amount is used to reduce the principal. Otherwise, accrued SFs are reduced as much as possible and the remaining repayment amount, if any, is applied against the principal.
 
-![Repayment allocation large TF](./../../static/img/Repayment_allocation_large_TF_diagram.png)
+The amount of SFs being repaid, if not zero, must exceed the **Minimum Treasury Delta**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
-In both cases, the vault is left with remaining SFs and remaining principal as shown in the diagrams. In the first case above, remaining Transferred Fees are 0, whereas in the second case, remaining Transferred Fees are equal to Transferred Fees before the repayment minus the SF repayment amount.
+The operation only succeeds if after the repayment the vault is sufficiently overcollateralised. The only situation in which this may not be the case is if the vault is liquidatable but liquidation has not been started yet.
 
 #### State changes
 
@@ -179,7 +184,9 @@ In both cases, the vault is left with remaining SFs and remaining principal as s
 
 ### Transfer
 
-The ownership or custody arragements or a collateral vault can be changed using the transfer operation, which replaces the vault's inner puzzle hash.
+The ownership or custody arragements of a collateral vault can be changed using the transfer operation, which replaces the vault's inner puzzle hash.
+
+The operation can only be performed if the vault is sufficiently overcollateralised.
 
 #### State changes
 
@@ -187,11 +194,13 @@ The ownership or custody arragements or a collateral vault can be changed using 
 
 ### Transfer Stability Fees
 
-Issues BYC against a collateral vault's accrued Stability Fees. The BYC issued is transferred to the Treasury.
+Issues BYC against a collateral vault's accrued Stability Fees. BYC issued is atomically transferred to Treasury. A SF transfer leaves the vault's debt unchanged.
 
-The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculcated by calculating the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued that debt owed to the vault.
+The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculcated by calculating the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued than debt owed to the vault.
 
 A SF transfer is only permitted is the transfer amount exceeds the **Minimum Treasury Delta**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
+
+The operation can only be performed if the vault is sufficiently overcollateralised.
 
 #### State changes
 
@@ -245,5 +254,3 @@ parent_puzzle_hash = (tree_hash_of_apply MOD_HASH parent_curried_args_hash)
 ```
 
 where [tree_hash_of_apply](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/curry.clib) is the standard function used to obtain the puzzle hash when mod hash and state hash are given.
-
-<!--[```tree_hash_of_apply```](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/curry.clib)-->
