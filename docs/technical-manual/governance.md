@@ -125,12 +125,14 @@ Once the Implementation Deplay has passed, the proposed bill can be enacted, i.e
 
 Fixed state:
 
+* ```CAT_MOD_HASH```
+* ```LAUNCHER_MOD_HASH```
+* ```EXIT_MOD_HASH```
 * ```OPERATIONS```
-* ```MOD_HASH```
 
 Immutable state:
 
-* ```CAT_MOD_HASH```: TODO: move to operations where it's needed?
+* ```MOD_HASH```
 * ```CRT_TAIL_HASH```
 * ```STATUTES_STRUCT```
 

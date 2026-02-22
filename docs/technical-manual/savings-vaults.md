@@ -22,12 +22,12 @@ The inner puzzle must satisfy [certain minimum requirements](./advanced-topics/i
 
 ## Interest accrual and accounting
 
-Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_DEPOSIT``` state variable.
+Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
 
-The ```DISCOUNTED_DEPOSIT``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
+The ```DISCOUNTED_BALANCE``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 
 $$
-discounted\ deposits = \sum_{i=1}^A \frac{B_i}{CCIDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCIDF_{t_{R_j}}},
+discounted\ balance = \sum_{i=1}^A \frac{B_i}{CCIDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCIDF_{t_{R_j}}},
 $$
 
 where $t_{B_i}$ are the times when deposits were made, and $t_{R_j}$ the times when withdrawals occurred.
@@ -86,7 +86,7 @@ If an additional interest payment is requested, the entire accrued interest amou
 
 #### State changes
 
-* ```DISCOUNTED_DEPOSIT```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based on interest paid out and amount deposited
+* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based on interest paid out and amount deposited
 * ```INNER_PUZZLE```: can be changed by vault owner
 * amount: increases based on deposit amount and interest payment
 
@@ -115,7 +115,7 @@ If the user withdraws an amount greater than the savings balance, then an intere
 
 #### State changes
 
-* ```DISCOUNTED_DEPOSIT```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based interest paid out and amount withdrawn
+* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based interest paid out and amount withdrawn
 * ```INNER_PUZZLE```: can be changed by vault owner
 * amount: decreases based on withdrawal amount and interst payment
 
@@ -124,20 +124,21 @@ If the user withdraws an amount greater than the savings balance, then an intere
 Fixed state:
 
 * ```CAT_MOD_HASH```
-* ```MOD_HASH```
+* ```BYC_TAIL_MOD_HASH```
+* ```TREASURY_MOD_HASH```
 
 Immutable state:
 
-* ```BYC_TAIL_HASH```
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
 
 Mutable state:
-* ```DISCOUNTED DEPOSIT```
+* ```DISCOUNTED BALANCE```
 * ```INNER PUZZLE```
 
 ### Eve state
 
-Savings vaults have an enforced eve state in which ```DISCOUNTED_DEPOSIT``` is 0.
+Savings vaults have an enforced eve state in which ```DISCOUNTED_BALANCE``` is 0.
 
 By withdrawing the entire savings balance and all accrued interest from a savings vault, the vault attains its eve state. An eve savings vault coin is therefore a savings vault in eve state whose parent coin is not a savings vault.
 
@@ -150,7 +151,7 @@ Savings vaults have an enforced eve amount of 0. After that, a savings vault's a
 For the eve spend the lineage proof is nil. For non-eve spends the lineage proof is
 
 ```
-lineage_proof = (parent_parent_id parent_amount parent_discounted_deposit parent_inner_puzzle_hash)
+lineage_proof = (parent_parent_id parent_amount parent_discounted_balance parent_inner_puzzle_hash)
 ```
 
 <!--TODO: can we simplify this to (parent_parent_id parent_amount parent_curried_args_hash)?-->

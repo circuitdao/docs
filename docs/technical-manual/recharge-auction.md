@@ -42,13 +42,22 @@ Launching a Recharge Auction sets the ```LAUNCHER_ID``` curried arg to the Launc
 
 ### Start auction
 
-Spends a Stand-by coin to create a Start auction coin. This sets the start time of the auction. The Start auction coins does not constitute a bid yet.
+Spends a Stand-by coin to create a Start auction coin. This sets the start time of the auction as well as various Statute values needed during the auction in the ```AUCTION_PARAMS``` curried arg.
 
-An Recharge Auction can only be started if the Treasury balance is below the Treasury Minimum. The operation checks this by spending the Treasury Ring. (TODO: insert coin spend diagram that includes Treasury ring spend)
+The Start auction coin does not constitute a bid yet.
+
+A Recharge Auction can only be started if the Treasury balance is below the Treasury Minimum. The operation checks this by spending the Treasury Ring. (TODO: insert coin spend diagram that includes Treasury ring spend)
 
 #### State changes
 
-* ```START_TIME```: set from 0 to current time
+* ```AUCTION_PARAMS```:
+  * ```start_time```: current timestamp
+  * ```auction_ttl```: ```STATUTE_RECHARGE_AUCTION_TTL```
+  * ```bid_ttl```: ```STATUTE_RECHARGE_AUCTION_BID_TTL```
+  * ```min_crt_price```: ```STATUTE_RECHARGE_AUCTION_MINIMUM_CRT_PRICE```
+  * ```min_byc_bid_amount```: ```STATUTE_RECHARGE_AUCTION_MINIMUM_BID```
+  * ```min_price_increase_bps```: ```STATUTE_AUCTIONS_MINIMUM_PRICE_INCREASE_BPS```
+  * ```max_byc_bid_amount```: ```STATUTE_RECHARGE_AUCTION_MAXIMUM_BID```
 
 ### Bid
 
@@ -97,15 +106,15 @@ The win operation resets the Recharge Auction coin to stand-by state. If the Tre
 
 Fixed state:
 * ```OPERATIONS```
-* ```MOD_HASH```
+* ```BYC_TAIL_MOD_HASH```
 
 Immutable state:
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
-* ```BYC_TAIL_HASH```
 
 Mutable state:
 * ```LAUNCHER_ID```: coin ID of the eve Recharge Auction coin. Equal to nil in eve state
-* ```START_TIME```: timestamp of when a Recharge Auction was started
+* ```AUCTION_PARAMS```: timestamp and various Statute values at time when Recharge Auction was started
 * ```LAST_BID```: current best bid in Recharge Auction
 
 
@@ -113,8 +122,8 @@ Mutable state:
 
 Recharge auction coins have an enforced eve state:
 
-* ```LAUNCHER_ID``` = 0
-* ```START_TIME``` = 0
+* ```LAUNCHER_ID``` = nil
+* ```AUCTION_PARAMS``` = nil
 * ```LAST_BID``` = nil
 
 ### Amount

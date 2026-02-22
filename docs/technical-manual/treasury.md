@@ -128,11 +128,12 @@ In theory, it is possible for governance to insert multiple Treasury coins at on
 
 Fixed state:
 * ```CAT_MOD_HASH```
-* ```MOD_HASH```
+* ```BYC_TAIL_MOD_HASH```
+* ```CRT_TAIL_MOD_HASH```
 
 Immutable state:
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
-* ```BYC_TAIL_HASH```
 * ```LAUNCHER_ID```: coin ID of the parent coin of the Treasury coin's eve coin.
 
 Mutable state:
