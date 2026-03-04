@@ -66,9 +66,9 @@ Vault owners can receive accrued interest as part of both deposit and withdrawal
 
 If interest is paid, it's always for the entire accrued interest. The protocol obtains the funds for interest payments from the Treasury. The user must select one Treasury coin from which to make the withdrawal. In particular, this means that a user can only get paid interest if there is a Treasury coin with amount at least as big as the accrued interest. When accessing the protocol via the app, a suitable Treasury coin is chosen automatically.
 
-An interest payment can only be made if accrued interest is less than the **Minimum Interest Withdrawal Amount**. This protects the protocol against Treasury coin hogging attacks.
+An interest payment can only be made if accrued interest is greater than **Treasury Minimum Delta**. This protects the protocol against Treasury coin hogging attacks.
 
-Both deposit and withdraw operations can be performed without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin. This means that many more vaults can access their savings balance per block than would be possible otherwise. Although it is possible to spend Treasury coins repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
+Both deposit and withdraw operations can be performed with or without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin, allowing many more vaults to access their savings balance per block than would be possible otherwise. Although Treasury coins can be spent repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
 
 ### Deposit
 

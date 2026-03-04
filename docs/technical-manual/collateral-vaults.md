@@ -217,9 +217,9 @@ Fixed state:
     * ```CAT_MOD_HASH```: treehash of the [standard CAT mod](https://chialisp.com/cats/#code)
     * ```BYC_TAIL_MOD_HASH```: treehash of the [BYC tail mod](./../technical-manual/byc-tail)
 -->
-* ```MOD_HASH```
 
 Immutable state:
+* ```MOD_HASH```
 * ```STATUTES_STRUCT```
 
 Mutable state:

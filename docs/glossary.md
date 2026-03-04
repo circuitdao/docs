@@ -18,7 +18,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Asset ID.** The treehash of a CAT's tail.
 
-**Bill.** The program version of a governance proposal. More specifically, the program curried into the BILL curried arg of a CRT coin in governance mode.
+**Bill.** The program version of a governance proposal. More specifically, the program curried into the ```BILL``` curried arg of a CRT coin in governance mode.
 
 **Burn.** Remove a CAT from existence by running the CAT's tail program. Another term for [melting](https://chialisp.com/cats/#extra-delta).
 
@@ -56,27 +56,25 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Fee coin.** An coin that is included in a spend bundle to pay transaction fees to the farmer.
 
-**Fixed arg.** An curried arg that cannot be changed by protocol operations and whose value is known prior to protocol deployment. These are typically mods or mod hashes.
+**Fixed arg.** A curried arg that cannot be changed by protocol operations and whose value is known prior to protocol deployment other than ```MOD_HASH```. These are typically mods or mod hashes.
 
-**Fixed state.** The fixed args of a coin's state. In case of the protocol, the fixed state always includes the treehash of the coin's mod after the other fixed args are curried, but before any immutable or mutable args are curried. In the protocol's source code, this arg is always named MOD_HASH.
+**Fixed state.** The fixed args of a coin's [state](./technical-manual/overview#fixed-state).
 
 **Funding coin.** A coin included in a spend bundle to release mojos to be absorbed by one of more other coins. Depending on the coins spent in the transaction, a funding coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH funding coin is used when depositing collateral to a vault.
 
-**Governance.** TODO
+**Governance.** The entirety of all CRT token holders or, more narrowly, those that participate in governance processes such as proposing or vetoing bills.
 
-**Governance mode.** A CRT coin is in governance mode when its inner puzzle is the governance.clsp mod.
-
-**Governance proposal.** See proposal.
+**Governance mode.** A CRT coin is in governance mode when its inner puzzle is the [governance.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) mod.
 
 **Hogging.** The practice of (repeatedly) spending a coin in order to deny other users the ability to perform a spend. Amounts to a denial-of-service attack.
 
-**Immutable arg.** A curried arg that cannot be changed by protocol operations and whose exact value is not known prior to deployment. Immutable args never change once the protocol is deployed. An example is the Statutes struct, which depends on the Statute's launcher ID.
+**Immutable arg.** The curried arg ```MOD_HASH``` or a curried arg that cannot be changed by protocol operations and whose exact value is not known prior to deployment. The most common example is the Statutes struct, which depends on the Statutes singleton's launcher ID.
 
-**Immutable state.** The immutable args of a coin's state.
+**Immutable state.** The immutable args of a coin's [state](./technical-manual/overview#immutable-state).
 
 **Issue.** To spend a CAT (the **issuance coin**) whose parent is not a CAT by running its tail program in such a way that it generates a child coin.
 
-**Keeper.** An individual or entity that performs operations on the protocol without being a user or data provider. For more details see [here](https://docs.circuitdao.com/technical-manual/keepers).
+**Keeper.** An individual or entity that performs operations on the protocol that are not exclusive to owners. For more details see [here](https://docs.circuitdao.com/technical-manual/keepers).
 
 **Launcher**. A coin from which another coin, typically a singleton, is created.
 
@@ -90,19 +88,19 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Module.** See mod.
 
-**```MOD_HASH```.** A fixed arg that can be found in all protocol coin mods. The treehash of the coin's mod after all other fixed args have been curried in.
+**```MOD_HASH```.** An [immutable arg](./technical-manual/overview#immutable-state) that can be found in all protocol coin mods. The treehash of a coin's mod after all fixed args have been curried in.
 
 **Mojo.** The smallest unit of the XCH cryptocurrency. 1 trillion mojos = 1 XCH.
 
 **Mutable arg.** A curried arg that can be changed by one or more protocol operations.
 
-**Mutable state.** The mutable args of a coin's state. This includes state variables with limited mutability, e.g. a launcher ID which is set once in the eve spend and immutable from then on.
+**Mutable state.** The mutable args of a coin's [state](./technical-manual/overview#mutable-state). This includes state variables with limited mutability, e.g. a launcher ID which is set once in the eve spend and immutable from then on.
 
 **Operation.** An action that a user or keeper can perform on the protocol. Examples include depositing collateral into a collateral vault, withdrawing from a savings vault, triggering a liquidation auction, or recovering bad debt. Operations require one or more protocol coins to be spent simultaneously. For example, announcing an Announcer price only requires one coin to be spent, the Announcer itself. Performing the win operation at the end of a Recharge Auction requires the Recharge Auction coin, Statutes, a CRT coin, and all Treasury coins to be spent. Operations are not to be confused with Chialisp [operators](https://chialisp.com/operators).
 
 **```OPERATIONS```.** A fixed arg that is present in most protocol coin mods. A list of program hashes, each of which corresponds to an operation.
 
-**Owner.** TODO
+**Owner.** The individual or entity that has exclusive control over certain operations of a protocol coin. For example, only the owner of a collateral vault can deposit or withdraw collateral. The protocol enforces ownership via [inner puzzles](https://docs.chia.net/guides/crash-course/inner-puzzles).
 
 **Program.** Another word for mod. Preferred over mod in the most general contexts.
 
@@ -129,7 +127,7 @@ See [here](http://localhost:3000/technical-manual/design-decisions#condition-pre
 
 **Puzzle mod.** A puzzle with all mutable args, immutable args and MOD_HASH [uncurried](https://chialisp.com/chialisp-currying).
 
-**Singleton.** A coin that can have at most one descendant of same type (TODO: not quite correct in case of savings vaults, which can squeeze out other savings vaults in eve state). Note that as opposed to the standard singleton, the parent of a singleton may not be a standard launcher, and may have launched multiple singletons, even of same type. Some singletons may live forever, whereas others are meltable.
+**Singleton.** A coin that has at most one descendant of same type. Note that as opposed to the standard singleton, the parent of a singleton may not be a standard launcher, and may have launched multiple singletons, even of same type. Some singletons live forever, whereas others are meltable.
 
 **Standard singleton.** A coin with puzzle mod [singleton_top_layer_v1_1.clsp](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/singleton_top_layer_v1_1.clsp). In general Chia parlance, [standard singletons](https://chialisp.com/singletons) are simply called singletons. However, in the context of the protocol it is more convenient to use the term singleton in a broader sense.
 
@@ -147,4 +145,4 @@ For example, Savings vaults and Treasury coins are different types of coins, eve
 
 **Unique singleton.** A singleton of a type that only exists once in the entire protocol. There are three unique singletons in the protocol: Statutes, Oracle and Announcer Registry.
 
-**User.** Somebody who uses the protocol to borrow or earn interest on Bytecash.
+**User.** Owners of collateral or savings vaults. Somebody who uses the protocol to borrow or earn interest on Bytecash.

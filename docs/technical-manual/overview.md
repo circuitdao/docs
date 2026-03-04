@@ -80,3 +80,27 @@ For a visualisation of all operations and their interdependencies, see the [inte
 ## State and Lineage
 
 On every page dedicated to a protocol coin type, there is a State and Lineage section which breaks down the curried args of the corresponding mod into fixed, immutable and mutable state variables, and provides information on eve state, amount of the coin, and required lineage proofs.
+
+### Fixed state
+
+**Fixed state** refers to mod args that are known prior to protocol deployment and are hardcoded into the mod itself. The hardcoding in done by currying **fixed args** into a **raw mod** before it is considered final.
+
+For example, the raw treasury mod, [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp), has the following args:
+
+```
+CAT_MOD_HASH BYC_TAIL_MOD_HASH CRT_TAIL_MOD_HASH ; fixed args
+MOD_HASH STATUTES_STRUCT LAUNCHER_ID ; immutable args
+RING_PREV_LAUNCHER_ID ; mutable args
+```
+
+The first three args are all known prior to protocol deployment as they are simply hashes of other (raw) mods. Currying them turns the raw treasury mod into what is considered the treasury mod for protocol purposes.
+
+### Immutable state ###
+
+The first state variable following fixed args is always ```MOD_HASH```. This is simply the hash of the mod with fixed args curried. Although ```MOD_HASH``` is known prior to protocol deployment, by convention it's not counted as a fixed arg, but considered part of the immutable state.
+
+Other than ```MOD_HASH```, immutable args are those that are not known prior to protocol deployment, but once curried cannot be changed again. This typically includes the ```STATUTES_STRUCT``` which only becomes known during protocol deployment as it contains the Statutes singleton's launcher coin ID, but can include other args as well. E.g. in the treasury mod example above, the treasury coin's launcher ID only becomes known when launching a new treasury coin.
+
+### Mutable state ###
+
+Mutable state consists of curried args that are subject to change during a coin spend. In the case of a treasury coins, there is only one such arg, but for most other protocol coins the mutable state comprises multiple curried args.
