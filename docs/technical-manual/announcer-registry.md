@@ -12,7 +12,7 @@ Rewards accrue with every Statutes Price update and become claimable once the nu
 
 Any Rewards claim automatically distributes CRT tokens to all registered Announcers, not just the keeper executing the operation. When Rewards are distributed, the Registry is cleared and all Announcers are required to re-register to continue to be eligible for Rewards.
 
-:::warning
+:::info
 Data providers must re-register their Announcers every time Rewards are distributed to remain eligible for future Rewards.
 :::
 
