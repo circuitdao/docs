@@ -127,6 +127,8 @@ See [here](http://localhost:3000/technical-manual/design-decisions#condition-pre
 
 **Puzzle mod.** A puzzle with all mutable args, immutable args and MOD_HASH [uncurried](https://chialisp.com/chialisp-currying).
 
+**Settlement coin.** An XCH coin or a CAT that has the [settlement payments mod](https://chialisp.com/offers/#code) as its puzzle or inner puzzle, respectively.
+
 **Singleton.** A coin that has at most one descendant of same type. Note that as opposed to the standard singleton, the parent of a singleton may not be a standard launcher, and may have launched multiple singletons, even of same type. Some singletons live forever, whereas others are meltable.
 
 **Standard singleton.** A coin with puzzle mod [singleton_top_layer_v1_1.clsp](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/singleton_top_layer_v1_1.clsp). In general Chia parlance, [standard singletons](https://chialisp.com/singletons) are simply called singletons. However, in the context of the protocol it is more convenient to use the term singleton in a broader sense.

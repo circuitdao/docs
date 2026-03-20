@@ -35,7 +35,7 @@ Below is a complete list of protocol coin types. All protocol coins are singleto
 * [Governance exit coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance_exit.clsp) - ephemeral CRT CAT
 * [Run tail coins](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/run_tail.clsp) - CRT or BYC CAT that forces its tail to be run
 
-Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) coins are not considered protocol coins.
+Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) coins are not considered protocol coins. **Settlement coins**, i.e. coins that have the [settlement payments mod](https://chialisp.com/offers/#code) as their puzzle (XCH) or inner puzzle (BYC, CRT), are also not considered protocol coins.
 
 
 ## Operations
