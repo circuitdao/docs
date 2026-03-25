@@ -142,21 +142,15 @@ This operation can only be performed if the previous Statutes operation was an a
 
 Below is a complete list of Statutes, including their index, name in [statutes_utils.clib](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib), and a brief explanation of their respective function and data type.
 
-Current Statute values are shown on the dashboard (TODO: add links for testnet and mainnet).
+Current Statute values are shown on the dapp's Protocol page in the 
 
 ### Fixed Statutes
-
-(-6) ```PAYOUT_MOD_HASH```: hash of the [Payout mod](./surplus-auction)
-
-(-5) ```OFFER_MOD_HASH```: hash of the [settlement payments mod](https://chialisp.com/offers/#code)
-
-(-4) ```TREASURY_MOD_HASH```: hash of the [Treasury mod](./treasury)
 
 (-3) ```APPROVAL_MOD_HASHES_HASH```: hash of list of [approval mod hashes](./statutes#approval-mods)
 
 ### Protocol-updated Statutes:
 
-(-7) ```PRICE_UPDATE_COUNTER```: number of Statue Price updates since protocol deployment
+(-4) ```PRICE_UPDATE_COUNTER```: number of Statue Price updates since protocol deployment
 
 (-2) ```PAST_CUMULATIVE_INTEREST_DF```: cumulative interest discount factor
 
