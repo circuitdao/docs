@@ -17,11 +17,19 @@ Apart from Savings vaults, all protocol coins are also **keeper coins**, i.e. ha
 
 ## Namespacing spends
 
-To spend a protocol coin, an inner puzzle and corresponding inner solution must be provided in the solution. Owner coins have a curried arg ```INNER_PUZZLE_HASH```, which is used to verify that owner operations can only be performed by the legitimate owner of the coin. This is done by asserting that the hash of the inner puzzle provided in the solution matches the curried inner puzzle hash.
+To spend a protocol coin, an inner puzzle and corresponding inner solution must be provided in the solution.
+
+### Owner spends
+Owner coins have a curried arg ```INNER_PUZZLE_HASH```, which is used to verify that owner operations can only be performed by the legitimate owner of the coin. This is done by asserting that the hash of the inner puzzle provided in the solution matches the curried inner puzzle hash.
 
 Savings vaults are an exception to the above. Since these don't have keeper operations, all spend paths require a reveal of the owner's inner puzzle. Therefore an ```INNER_PUZZLE``` curried arg holds the whole inner puzzle instead of only the inner puzzle hash.
 
-To spend the coin on an owner spend path, the inner puzzle must be revealed and a corresponding inner solution passed in. To spend a coin on a keeper spend path, an arbitary inner puzzle and corresponding solution can be passed in. The purpose of the inner puzzle in this case is not to verify the legitimacy of the spend but to namespace it, allowing a keeper to tie multiple coin spends together. A simple example would be to add a fee coin to a protocol operation bundle.
+### Keeper spends
+To spend a coin on a keeper spend path, an arbitary inner puzzle and corresponding solution can be passed in. The purpose of the inner puzzle in this case is not to verify the legitimacy of the spend but to namespace it, allowing a keeper to tie multiple coin spends together. A simple example would be to add a fee coin to a protocol operation bundle. Keepers must secure the inner puzzle they provide as it cannot be validated by the coin itself against its own state. For this purpose, coins with keeper spend paths output a condition that announces the inner puzzle:
+```
+(list CREATE_COIN_ANNOUNCEMENT (concat PROTOCOL_PREFIX inner_puzzle_hash))
+```
+Keeper should assert this announcement from a signed spend. The app for example uses a standard XCH coin from the keeper's wallet for this purpose, which typically doubles as the fee coin of the spend.
 
 ## Inner puzzle requirements
 
