@@ -14,11 +14,9 @@ Wallets that have had the CRT asset ID added to them will automatically recogniz
 
 ## Governance mode
 
-CRT token holders can participate in governance as described on the [governance](../governance) page. Since the protocol is largely immutable, governance is limited to changing Statutes or outputting custom conditions from the Statutes coin. However, even these limited actions come with a high degree of responsibility as misconfigured Statutes can disrupt the orderly functioning of the protocol.
+CRT token holders can participate in governance. Since the protocol is largely immutable, governance is limited to changing Statutes or outputting custom conditions from the Statutes coin. However, even these limited actions come with a high degree of responsibility as misconfigured Statutes can disrupt the orderly functioning of the protocol. For information on the governance process, see the [governance](./governance) page.
 
-For information on the governance process, see the [governance](../governance) page in this user guide.
-
-To use CRT tokens for governance purposes, they must use special governance puzzle as their inner puzzle. For details on the governance puzzle and related operations, see the [governance](./../technical-manual/governance) page of the Technical Manual.
+To use CRT tokens for governance purposes, they must use special governance puzzle as their inner puzzle. For details on the governance puzzle and related operations, see the [governance](./../technical-manual/governance) page in the Technical Manual.
 
 ### Governance attacks
 
