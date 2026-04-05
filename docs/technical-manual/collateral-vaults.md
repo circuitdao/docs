@@ -15,7 +15,7 @@ Users can deposit XCH into a collateral vault to borrow BYC against it.
 
 Collateral vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE_HASH```,  which ensures that only the legitimate owner can perform certain operations, the **owner operations**, on it.
 
-The inner puzzle must satisfy [certain minimum requirements](./advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a collateral vault.
+The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a collateral vault.
 
 
 ## Stability Fees

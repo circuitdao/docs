@@ -20,7 +20,7 @@ Coins that are part of the protocol are referred to as **protocol coins**. The d
 
 Below is a complete list of protocol coin types. All protocol coins are singletons. Some protocol coins are unique, i.e. only one instance of the same type exists in the entire protocol, whereas there can be multiple instances of others. Unique singletons only hold a nominal amount (0 or 1 mojos), whereas the amount of other coins can vary. Some coins have an owner, which means that some or all operations on the coin can be performed only by the owner, whereas other coins can be spent by certain third parties or, in some cases, by anyone.
 
-* [Statutes](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp) - unique [ISA](./advanced-topic/identical-spend-aggregation) singleton
+* [Statutes](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp) - unique [ISA](../advanced-topics/identical-spend-aggregation) singleton
 * [Oracle](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp) - unique standard singleton
 * [Announcer Registry](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp) - unique custom singleton
 * [Announcers](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/atom_announcer.clsp) - custom singleton with owner
@@ -61,7 +61,7 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Treasury
   * Recharge Auction
   * Governance
-* **Approval mod**: One of the [Approval mods](./advanced-topics/approval-mods) is needed to authorise the operation. The corresponding Approval coin spend can be an owner, keeper or Announcer operation. Applies to:
+* **Approval mod**: One of the [Approval mods](../advanced-topics/approval-mods) is needed to authorise the operation. The corresponding Approval coin spend can be an owner, keeper or Announcer operation. Applies to:
   * Treasury
   * BYC Tail
   * CRT Tail
@@ -73,7 +73,7 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Statutes
   * Oracle (?)
 
-For a visualisation of all operations and their interdependencies, see the [inter-coin communication](./advanced-topics/inter-coin-communication) page.
+For a visualisation of all operations and their interdependencies, see the [inter-coin communication](../advanced-topics/inter-coin-communication) page.
 
 <!--Also shown is the corresponding [driver hint](./design-decisions#driver-hints).-->
 

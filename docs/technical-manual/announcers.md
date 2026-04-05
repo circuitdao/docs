@@ -12,7 +12,7 @@ Announcer Prices are used to update the **Oracle price**. Each such update requi
 
 Announcers are also referred to as **Atom Announcers** because they are designed to announce a single [atom](https://chialisp.com/chialisp-primer/intro/#atoms) value. The atom value is stored in the ATOM_VALUE curried arg of the Announcer puzzle. In the case of Circuit protocol, the atom value is the Announcer Price.
 
-Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the TIMESTAMP_EXPIRES curried arg lies in the past. TIMESTAMP_EXPIRES is updated to the current time plus DELAY whenever the Announcer Price is updated. DELAY is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](./../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
+Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the TIMESTAMP_EXPIRES curried arg lies in the past. TIMESTAMP_EXPIRES is updated to the current time plus DELAY whenever the Announcer Price is updated. DELAY is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](../../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
 
 
 ## Governance considerations

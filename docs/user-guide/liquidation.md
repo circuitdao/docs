@@ -33,7 +33,7 @@ When a vault gets liquidated, borrowers are charged a Liquidation Penalty, which
 ## Liquidation Process
 
 The liquidation process consists of three steps:
-1. Liquidation gets triggered by a [keeper](./../technical-manual/keepers). The vault is seized by the protocol
+1. Liquidation gets triggered by a [keeper](../../technical-manual/advanced-topics/keepers). The vault is seized by the protocol
 2. Keepers bid on collateral in an attempt to recover the vault's total debt
 3. Once the total debt is recovered, the vault is released back to the borrower
 
@@ -72,7 +72,7 @@ The purpose of a Liquidation Auction is to recover debt as quickly as possible t
 
 ![Liquidation auction](./../../static/img/Liquidation_Auction_diagram.png)
 
-The auction starts with a **Start Price** (SP), calculated as the [Statutes Price](./statutes) multiplied by the **Starting Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for a potential rebound in the XCH price before the auction starts.
+The auction starts with a **Start Price** (SP), calculated as the [Statutes Price](../../technical-manual/statutes) multiplied by the **Starting Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for a potential rebound in the XCH price before the auction starts.
 
 As the auction is underway, the auction price automatically decreases step-by-step every few blocks as defined by the **Step Time Interval** (PV) parameter.
 

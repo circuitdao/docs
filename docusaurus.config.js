@@ -27,6 +27,7 @@ module.exports = async function () {
    // If you aren't using GitHub pages, you don't need these.
    organizationName: 'CircuitDAO', // Usually your GitHub org/user name.
    projectName: 'docs', // Usually your repo name.
+   trailingSlash: true,
    onBrokenLinks: 'warn',
    onBrokenMarkdownLinks: 'warn',
 

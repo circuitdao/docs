@@ -43,7 +43,7 @@ Keeper operations:
 
 Starts or restarts a liquidation auction. A liquidation auction can be started if the value of the collateral, valued at the **Statutes Price**, is less than or equal to the vault's outstanding debt. A liquidation auction can be restarted if it has timed out and there is both debt and collateral left.
 
-The keeper that executes the start operation is referred to as the **initiator**. Executing the start operation entitles the initiator to the [initiator incentive](./../user-guide/liquidation#liquidation-incentives), which will get paid to the ```initiator_puzzle_hash``` supplied by the initiator.
+The keeper that executes the start operation is referred to as the **initiator**. Executing the start operation entitles the initiator to the [initiator incentive](../../user-guide/liquidation#liquidation-incentives), which will get paid to the ```initiator_puzzle_hash``` supplied by the initiator.
 
 When a collateral vault is liquidated, Stability Fees stop accruing and a **Liquidation Penalty** is added on top of the pre-liquidation debt. The Liquidation Penalty is defined to be a number of basis points of the pre-liquidation debt as given by ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```.
 
@@ -92,7 +92,7 @@ If it is currently possible to place a bid in a liquidation auction, the auction
 
 Bidders specify how much of the remaining debt they would like to repay. This is the **BYC bid amount**. The collateral vault puzzle calculates the **XCH bid amount**, which is the amount of collateral that the bidder receives in return based on the current auction price.
 
-The auction price is calculated based on the time that has passed since the start of the auction, **Price Validity** (```step_time_interval```) and **Price Decrease Factor** (```step_price_decrease_factor```). See the [Liquidation Auction](./../user-guide/liquidation#liquidation-auction) section in the User Guide for a diagram.
+The auction price is calculated based on the time that has passed since the start of the auction, **Price Validity** (```step_time_interval```) and **Price Decrease Factor** (```step_price_decrease_factor```). See the [Liquidation Auction](../../user-guide/liquidation#liquidation-auction) section in the User Guide for a diagram.
 
 BYC bid amounts are applied against any remaining debt in the following order:
 * Initiator Incentive balance

@@ -28,7 +28,7 @@ On the website, you will see your new collateral balance together with the amoun
 
 Click the Borrow button, enter an amount of BYC to borrow, and click Borrow. Wait a couple of mintues for the transaction to be confirmed on-chain, and ta-da, you have taken out your first BYC loan!
 
-To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID with your wallet. You can find the asset ID at the bottom of the [Intro](./../intro) page.
+To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID with your wallet. You can find the asset ID at the bottom of the [Intro](../../intro) page.
 
 Note that the amount you can borrow is capped by the **maximum loan-to-value** (**Max LTV**) set by governance. The Max LTV is shown near to top right of the Borrow page next to the APR.
 
@@ -52,7 +52,7 @@ Your collateral will be liquidated if your vault's LTV exceeds the Max LTV.
 
 You generally want to borrow at an LTV much lower than the Max LTV to reduce the likelihood that your vault will get liquidated even if the XCH price drops sharply.
 
-For additional information, see the page on [choosing your LTV](./choosing-your-ltv).
+For additional information, see the page on [choosing your LTV](../choosing-your-ltv).
 
 ## Repay loan
 

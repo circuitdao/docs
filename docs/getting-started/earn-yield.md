@@ -27,7 +27,7 @@ On the website, you will see your new savings balance. To the right, you can see
 
 If you would like to withdraw BYC from a savings vault, click on Withdraw, enter the desired amount and a transaction fee, and click Withdraw.
 
-Note that accrued interest will automatically be added to your balance with each deposit and withdrawal. You are always able to withdraw the savings balance instantly. Withdrawing interest instantly is only possible if there is a sufficient amount of BYC in the [Protocol Treasury](./../user-guide/protocol-treasury). Otherwise one needs to wait for a keeper to refill the Treasury.
+Note that accrued interest will automatically be added to your balance with each deposit and withdrawal. You are always able to withdraw the savings balance instantly. Withdrawing interest instantly is only possible if there is a sufficient amount of BYC in the [Protocol Treasury](../../user-guide/treasury). Otherwise one needs to wait for a keeper to refill the Treasury.
 
 
 [^1]: Depositing borrowed BYC in a savings vault is fine on testnet where economics don't matter, but on mainnet this will generally be unprofitable as the borrow APR is greater than the savings APY.

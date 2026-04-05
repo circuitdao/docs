@@ -7,7 +7,7 @@ sidebar_position: 370
 
 # Surplus Auction
 
-Surplus Auction is a CRT CAT with [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) puzzle as its inner puzzle. The inner puzzle turns the Surplus Auction into a singleton, and is one of the [approval mods](./advanced-topics/approval-mods).
+Surplus Auction is a CRT CAT with [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) puzzle as its inner puzzle. The inner puzzle turns the Surplus Auction into a singleton, and is one of the [approval mods](../advanced-topics/approval-mods).
 
 A Surplus Auction coin is accompanied by a **Payout coin**. The Payout coin is a BYC CAT singleton with [payout.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp) as its inner puzzle. The Payout coin receives the amount of BYC being auctioned off from the Treasury when a Surplus Auction is started.
 

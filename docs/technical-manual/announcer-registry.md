@@ -33,7 +33,7 @@ Although the Registry is not owned by anyone, the register operation can only be
 
 ### Launch
 
-The Announcer Registry must be launched as part of the [protocol launch](./protocol_launch) process. As such, the launch operation is only performed once and irrelevant to protocol users and keepers.
+The Announcer Registry must be launched as part of the [protocol launch](../advanced-topics/protocol-launch) process. As such, the launch operation is only performed once and irrelevant to protocol users and keepers.
 
 ### Register
 

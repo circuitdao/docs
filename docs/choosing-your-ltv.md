@@ -25,7 +25,7 @@ If the XCH price decreased by another $4 to $16, then the LTV would rise to 62.5
 :::info
 
 In the context of Circuit protocol, the term **loan** in 'loan-to-value' refers to the amount of debt outstanding, not just the principal borrowed.[^3]
-See the section on [collateral vaults](./user-guide/vaults) in the User Guide for additional information.
+See the section on [collateral vaults](../user-guide/collateral-vaults) in the User Guide for additional information.
 
 :::
 

@@ -12,7 +12,7 @@ There are two different types of Statutes:
 * protocol-updated:
 * governance-updated
 
-In addition, there is the [Statutes Price](./../user-guide/price-oracle), which is provided by the Oracle and used value the XCH held in collateral vaults.
+In addition, there is the [Statutes Price](../../user-guide/price-oracle), which is provided by the Oracle and used value the XCH held in collateral vaults.
 
 Protocol-updated Statutes are those that the protocol keeps track of automatically by enforcing updates as part of certain protocol coin spends.
 
@@ -69,7 +69,7 @@ Governance operations:
 
 All operations announce pre-operation Statutes as well as post-operation Statutes Price Info.
 
-The Statutes singleton enforces certain restrictions on the order in which these operations can be executed. For details see the page on [Statutes operations ordering](./advanced-topics/statutes-operations-ordering).
+The Statutes singleton enforces certain restrictions on the order in which these operations can be executed. For details see the page on [Statutes operations ordering](../advanced-topics/statutes-operations-ordering).
 
 In practice, the Statutes Price would typically be updated by a Data Provider as they get rewarded for this. See the [Oracle](./oracle) page for details. Since the protocol offers no direct incentives for performing the other operations, those are typically performed by parties that benefit indirectly from them. Announcement spends are required by various protocol operations that assert Statutes announcements, and a Statute update would typically be paid for by a CRT holder that initiated or supported the corresponding governance vote.
 
@@ -146,7 +146,7 @@ Current Statute values are shown on the dapp's Protocol page in the
 
 ### Fixed Statutes
 
-(-3) ```APPROVAL_MOD_HASHES_HASH```: hash of list of [approval mod hashes](./statutes#approval-mods)
+(-3) ```APPROVAL_MOD_HASHES_HASH```: hash of list of [approval mod hashes](../advanced-topics/approval-mods)
 
 ### Protocol-updated Statutes:
 
@@ -257,7 +257,7 @@ Current Statute values are shown on the dapp's Protocol page in the
 ## State and lineage
 
 Fixed state:
-* ```APPROVAL_MOD_HASHES_HASH```: hash of list of [Approval mod](./advanced-topics/approval-mods) hashes
+* ```APPROVAL_MOD_HASHES_HASH```: hash of list of [Approval mod](../advanced-topics/approval-mods) hashes
 * ```OPERATIONS```
 
 Immutable state:
@@ -265,7 +265,7 @@ Immutable state:
 * ```MOD_HASH```
 
 Mutable state:
-* ```PREV_ANNOUNCE ```: indicates whether [previous operation was an announce or not](./advanced-topics/statutes-operations-ordering)
+* ```PREV_ANNOUNCE ```: indicates whether [previous operation was an announce or not](../advanced-topics/statutes-operations-ordering)
 * ```STATUTES```: list of governance-updated Statutes
 * ```PRICE_INFO```: Statutes Price Info
 * ```PAST_CUMULATIVE_STABILITY_FEE_DF```

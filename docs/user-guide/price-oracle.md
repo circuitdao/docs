@@ -12,7 +12,7 @@ The protocol needs to know the market price of XCH in US Dollars to value the XC
 
 The Oracle Price is not used directly by the protocol. Instead, it stores its own copy of the Oracle Price, the **Statutes Price**, with a delay of **Oracle Price Delay** seconds. The Oracle Price Delay is a safety feature that allows protocol users to anticipate the next Statutes Price.
 
-The Statutes Price is stored in the Statutes singleton. See the [Technical Manual](./../technical-manual/statutes) for more information.
+The Statutes Price is stored in the Statutes singleton. See the [Technical Manual](../../technical-manual/statutes) for more information.
 
 ![Statutes Price](./../../static/img/Statutes_price_diagram.png)
 
@@ -45,7 +45,7 @@ Before the price of an Announcer can be used in an Oracle price calculation, gov
 
 :::info
 
-The Technical Manual contains additional information on [Announcers](./../technical-manual/announcers) and the [Announcer Registry](./../technical-manual/announcer-registry).
+The Technical Manual contains additional information on [Announcers](../../technical-manual/announcers) and the [Announcer Registry](../../technical-manual/announcer-registry).
 
 :::
 
@@ -59,7 +59,7 @@ Data providers are real-world entities that publish off-chain data on-chain. As 
 
 :::
 
-To incentivize data providers to do their job well, the protocol lets them claim rewards in the form of CRT tokens. For details please see the [**Announcer Registry**](./../technical-manual/announcer_registry) page in the Technical Manual.
+To incentivize data providers to do their job well, the protocol lets them claim rewards in the form of CRT tokens. For details please see the [**Announcer Registry**](../../technical-manual/announcer-registry) page in the Technical Manual.
 
 In addition, data providers are required to post a bond in their respective Announcer coins. The bond is an amount of XCH no less than the **Announcer Minimum Deposit**. If an Announcer price is expired, an Announcer can be penalized by slashing an amount of XCH equal to the **Penalty Factor** multiplied by the share of the **Penalty Interval** that has passed since expiry or the last penalization event from the bond.
 

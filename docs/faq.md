@@ -35,7 +35,7 @@ Alternatively, you can acquire BYC in the open market, for example via [offers](
 
 ### Can I earn interest on Bytecash?
 
-Yes! You can deposit BYC in a [savings vault](./user-guide/savings.md) to earn interest. The interest rate is variable and financed from Stability Fees paid by borrowers.
+Yes! You can deposit BYC in a [savings vault](./user-guide/savings-vaults) to earn interest. The interest rate is variable and financed from Stability Fees paid by borrowers.
 
 ### What do I need to use Circuit?
 
@@ -59,7 +59,7 @@ There are too many reasons for why to build on Chia to list them all here, but w
 
 ### Is Circuit similar to Terra Luna?
 
-No. Terra Luna was an uncollateralized 'algorithmic' stablecoin. Circuit on the other hand is overcollateralized by XCH locked-up in [collateral vault](./user-guide/vaults) smart coins. In that sense, Circuit is more similar to the original single-collateral [Maker](https://makerdao.com) protocol on Ethereum.
+No. Terra Luna was an uncollateralized 'algorithmic' stablecoin. Circuit on the other hand is overcollateralized by XCH locked-up in [collateral vault](../user-guide/collateral-vaults) smart coins. In that sense, Circuit is more similar to the original single-collateral [Maker](https://makerdao.com) protocol on Ethereum.
 
 ### Are there any risks in using Circuit?
 

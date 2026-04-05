@@ -37,7 +37,7 @@ The **Oracle Price Info** is defined to be the matured price info with the most 
 
 The Oracle is tied to Circuit protocol more loosely than other components. Conceptually, this makes sense because providing off-chain data on-chain is at its core a standalone activity that could be performed independently of Circuit protocol.
 
-The main contact point between the Oracle and the rest of Circuit is the [update price operation](./statutes#update-price) of Statutes. This is a fairly generic operation which could also be implemented by other protocols that want to use the prices provided by the Oracle. The operation asserts the following message from a puzzle announcement:
+The main contact point between the Oracle and the rest of Circuit is the [update price operation](../statutes#update-price) of Statutes. This is a fairly generic operation which could also be implemented by other protocols that want to use the prices provided by the Oracle. The operation asserts the following message from a puzzle announcement:
 
 ```
 (sha256tree (c price (c updated_timestamp (c current_timestamp STATUTE_PRICE_DELAY)))))

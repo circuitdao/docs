@@ -17,7 +17,7 @@ Savings vaults can be created on a standalone basis, i.e. without requiring a si
 
 Savings vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE```,  which ensures that only the legitimate owner can perform operations on it.
 
-The inner puzzle must satisfy [certain minimum requirements](./advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a savings vault.
+The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a savings vault.
 
 
 ## Interest accrual and accounting
@@ -32,7 +32,7 @@ $$
 
 where $t_{B_i}$ are the times when deposits were made, and $t_{R_j}$ the times when withdrawals occurred.
 
-This is analogous to how [collateral vaults](./collateral_vault) account for accrued Stability Fees. Accordingly, the Current Cumulative Interest Discount Factor is calculated as
+This is analogous to how [collateral vaults](../collateral-vaults) account for accrued Stability Fees. Accordingly, the Current Cumulative Interest Discount Factor is calculated as
 
 $$
 CCIDF(t_C) = CIDF(t_S)\; IDF^{C-S},
@@ -45,7 +45,7 @@ CIDF(t_S) = \prod_{i=P}^{S} IDF_{t_i}
 $$
 
 :::info
-Similarly to the situation with collateral vaults, it is possible for CCIDF to change retroactively when the IDF is updated by governance. However, since there is no risk of liquidation with savings vault, the impact is limited to the amount of interest earned, which is generally uncritical. See the Danger box on the [collateral vaults](./collateral_vaults) page for additional info.
+Similarly to the situation with collateral vaults, it is possible for CCIDF to change retroactively when the IDF is updated by governance. However, since there is no risk of liquidation with savings vault, the impact is limited to the amount of interest earned, which is generally uncritical. See the Danger box on the [collateral vaults](../collateral-vaults) page for additional info.
 :::
 
 As with collateral vaults, savers are given a three minute window of flexibility for specifiying the current timestamp vs the actual block timestamp when making depsoits or withdrawals to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by making deposits in the past and withdrawing in the future to boost their effective savings rate, the actual definition of CCIDF in the savings vault puzzle includes an additional factor IDF^(-3) to reduce the interest accrued by the maximum that can be gained from the timestamp flexibility.
@@ -86,7 +86,7 @@ If an additional interest payment is requested, the entire accrued interest amou
 
 #### State changes
 
-* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based on interest paid out and amount deposited
+* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](#interest-accrual-and-accounting) based on interest paid out and amount deposited
 * ```INNER_PUZZLE```: can be changed by vault owner
 * amount: increases based on deposit amount and interest payment
 
@@ -115,7 +115,7 @@ If the user withdraws an amount greater than the savings balance, then an intere
 
 #### State changes
 
-* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](./savings-vault#interest-accrual-and-accounting) based interest paid out and amount withdrawn
+* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](#interest-accrual-and-accounting) based interest paid out and amount withdrawn
 * ```INNER_PUZZLE```: can be changed by vault owner
 * amount: decreases based on withdrawal amount and interst payment
 

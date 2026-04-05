@@ -6,7 +6,7 @@ sidebar_position: 240
 
 # Governance
 
-Circuit protocol is goverend by CRT token holders. Token holders can use their CRT tokens to vote on changes to **Statutes**, which are global state parameters that define the protocol's behaviour. Statutes are stored in the [Statutes singleton](./statutes). Other than the Statutes, Circuit protocol is fully immutable.
+Circuit protocol is goverend by CRT token holders. Token holders can use their CRT tokens to vote on changes to **Statutes**, which are global state parameters that define the protocol's behaviour. Statutes are stored in the [Statutes singleton](../../technical-manual/statutes). Other than the Statutes, Circuit protocol is fully immutable.
 
 The reason that Circuit requires goverance is to keep the 1:1 peg of Bytecash to the US Dollar. This cannot be fully automated, as the protocol needs to respond to changing market conditions. Governance's responsibilities consist of the following:
 

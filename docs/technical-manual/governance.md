@@ -29,13 +29,13 @@ BILL =  ((veto_period . implementation_delay) bill_proper)
 
 There are two different modes governance coins can be in, **proposal mode** and **veto mode**. A governance coin is in proposal mode if a propose operation was performed on it and ```BILL``` is not nil. Otherwise the governance coin is in veto mode.
 
-A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be enacted only if both Veto Period and Implementation Delay have passed, and only as long as the **Enactment Period** has not ended. See the [governance process section](./governance#governance-process) in the User Guide for an illustration.
+A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be enacted only if both Veto Period and Implementation Delay have passed, and only as long as the **Enactment Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
 
 The owner of a governance coin can disable governance mode and get back a standard CRT coin by having the inner layer inner puzzle output a ```CREATE_COIN``` conditions with nil for its puzzle hash.
 
 ## Participating in governance
 
-See the [Participating in Governance](./../category/participating-in-governance) section for information on how to participate in governance processes and considerations that should be taken into account when modifying Statutes.
+See the [Participating in Governance](../../category/participating-in-governance) section for information on how to participate in governance processes and considerations that should be taken into account when modifying Statutes.
 
 ## Operations
 
@@ -90,7 +90,7 @@ To veto a bill, the veto operation must be performed on the proposal coin contai
 
 ![Governance veto coin spends diagram](./../../static/img/Governance_veto_coin_spends_diagram.png)
 
-Note that proposal coins are able to veto other proposals. See the [announce veto section](./governance#announce-veto) for details.
+Note that proposal coins are able to veto other proposals. See the [announce veto section](#announce-veto) for details.
 
 Since the veto operation is performed not by the owner(s) of a governance coin, but an opposing group of CRT token holders, ```INNER_PUZZLE_HASH``` may not be changed. This is guaranteed by the ```validate-veto-conditions``` function.
 
@@ -100,7 +100,7 @@ Since the veto operation is performed not by the owner(s) of a governance coin, 
 
 ### Announce veto
 
-An announce veto operation is performed from a veto coin to veto the bill of a proposal coin. The veto succeeds if the amount of the veto coin is greater than the amount of the proposal coin. For details on the required coin spends see the [Veto section](./governance#veto) as both operations must be performed in parallel.
+An announce veto operation is performed from a veto coin to veto the bill of a proposal coin. The veto succeeds if the amount of the veto coin is greater than the amount of the proposal coin. For details on the required coin spends see the [Veto section](#veto) as both operations must be performed in parallel.
 
 Note that it is possible to perform the announce veto operation not only from governance coins in veto mode, but also from those in proposal mode. This prevents outcomes to governance votes that do not reflect the view of all CRT holders due to CRT tokens being tied up in an existing proposal. In a worst case scenario this could be exploited by an attacker, by creating innocuous proposals only to then try to push through a nefarious proposal when a large amount of CRT is tied up in support of the innocuous proposals.
 

@@ -8,7 +8,7 @@ sidebar_position: 392
 
 The CRT tail is a [TAIL program](https://chialisp.com/cats/#tail) that determines under what conditions CRT tokens may be issued or melted. The CRT tail does not allow for minting.
 
-The tail can only be run on CRT CATs that have [Run Tail mod](./advanced-topics/run-tail-mod) as their inner puzzle.
+The tail can only be run on CRT CATs that have [Run Tail mod](../advanced-topics/run-tail-mod) as their inner puzzle.
 
 The CRT tail has one fixed arg, ```RUN_TAIL_MOD_HASH```, and one immutable arg, ```STATUTES_STRUCT```.
 
@@ -31,7 +31,7 @@ Since the CRT tail has the Statutes Struct curried in, the TGE operation must be
 
 ### Issue
 
-Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](./advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There are two Approval mods that allow for issuing CRT, namely Announcer Registry and Recharge Auction.
+Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There are two Approval mods that allow for issuing CRT, namely Announcer Registry and Recharge Auction.
 
 | CRT tail operation | Approval mod       | Operation | Operation program                                                                                                          |   |
 |:-------------------|:-------------------|:----------|:---------------------------------------------------------------------------------------------------------------------------|---|
@@ -40,7 +40,7 @@ Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](.
 
 ### Melt
 
-CRT tokens can only be melted with the approval of an [Approval mod](./advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There is one Approval mod that allows for issuing CRT, namely Surplus Auction.
+CRT tokens can only be melted with the approval of an [Approval mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There is one Approval mod that allows for issuing CRT, namely Surplus Auction.
 
 | CRT tail operation | Approval mod    | Operation | Operation program                                                                                               | CRT tail operation |
 |:-------------------|:----------------|:----------|:----------------------------------------------------------------------------------------------------------------|--------------------|

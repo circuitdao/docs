@@ -10,7 +10,7 @@ The BYC tail is a [TAIL program](https://chialisp.com/cats/#tail) that determine
 
 Running the BYC tail requires approval from a Collateral vault as Approval mod. Approval is enforced by a ```RECEIVE_MESSAGE``` condition in the tail that must have a matching ```SEND_MESSAGE``` condition output by a Collateral vault coin.
 
-The tail can only be run on BYC CATs that have [Run Tail mod](./advanced-topics/run-tail-mod) as their inner puzzle.
+The tail can only be run on BYC CATs that have [Run Tail mod](../advanced-topics/run-tail-mod) as their inner puzzle.
 
 The BYC tail has one fixed arg, ```RUN_TAIL_MOD_HASH```, and one immutable arg, ```STATUTES_STRUCT```.
 
@@ -24,7 +24,7 @@ Approval mod operations:
 
 ### Issue
 
-Any issuance of BYC tokens requires the approval of a Collateral vault coin as [Approval mod](./advanced-topics/approval-mods). Approval is enforced by a ```RECEIVE_MESSAGE``` condition in the tail that must have a matching ```SEND_MESSAGE``` from the corresponding Collateral vault coin.
+Any issuance of BYC tokens requires the approval of a Collateral vault coin as [Approval mod](../advanced-topics/approval-mods). Approval is enforced by a ```RECEIVE_MESSAGE``` condition in the tail that must have a matching ```SEND_MESSAGE``` from the corresponding Collateral vault coin.
 
 There are two Collateral vault operations that allow for issuing BYC:
 
@@ -37,7 +37,7 @@ There are no restrictions on the child coins of the issuance coin other than tha
 
 ### Melt
 
-Any melting of BYC tokens requires the approval of a Collateral vault coin as [Approval mod](./advanced-topics/approval-mods).
+Any melting of BYC tokens requires the approval of a Collateral vault coin as [Approval mod](../advanced-topics/approval-mods).
 
 There are three Collateral vault operations that allow for melting BYC:
 
