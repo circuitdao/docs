@@ -26,7 +26,7 @@ First, make sure that Sage is on the correct network.
 
 ```Settings -> Network -> Default Network```: ```mainnet```
 
-Sage knows the [BYC asset ID](../#bytecash-asset-id). There is no need to register it manually.
+Sage knows the [BYC asset ID](../../#bytecash-asset-id). There is no need to register it manually.
 
 When connecting, either scan the QR code displayed or copy & paste the Wallet Connect URI string to Sage
 
@@ -64,7 +64,7 @@ When using hardened keys, it is recommended to set the change address in Sage to
 
 ## Goby
 
-When connecting, Goby will ask you to switch to Chia mainnet if you are connected to another network. It will also automatically register the [BYC asset ID](../#bytecash-asset-id) for you.
+When connecting, Goby will ask you to switch to Chia mainnet if you are connected to another network. It will also automatically register the [BYC asset ID](../../#bytecash-asset-id) for you.
 
 If the automatic process fails, you can manually switch to mainnet by clicking on the settings cog wheel in the top right of the extension and then
 
@@ -84,7 +84,7 @@ Other wallets are not supported yet. This includes the official [Chia reference 
 
 ## Next steps
 
-Once you have connected your wallet of choice, you can either [borrow Bytecash](./borrow-bytecash) or start [earning yield](./earn-yield).
+Once you have connected your wallet of choice, you can either [borrow Bytecash](../borrow-bytecash) or start [earning yield](../earn-yield).
 
 Note that you can only perform one operation per block via the app. If there is a pending transaction, a corresponding message gets displayed near the top right of the webpage. Wait for the pending transaction to get confirmed before performing another operation.
 

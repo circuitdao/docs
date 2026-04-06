@@ -37,7 +37,7 @@ The liquidation process consists of three steps:
 2. Keepers bid on collateral in an attempt to recover the vault's total debt
 3. Once the total debt is recovered, the vault is released back to the borrower
 
-If a liquidation auction fails to recover the total debt, it will eventually time out and can be restarted. This continues until either the total debt does get recovered or all collateral has been sold off. In the former case, the vault and any remaining collateral in it is released back to the borrower. In the latter case, the protocol is said to incur **bad debt**. Bad debt can be extinguished by melting an equivalent amount of BYC from the [Treasury](./treasury).
+If a liquidation auction fails to recover the total debt, it will eventually time out and can be restarted. This continues until either the total debt does get recovered or all collateral has been sold off. In the former case, the vault and any remaining collateral in it is released back to the borrower. In the latter case, the protocol is said to incur **bad debt**. Bad debt can be extinguished by melting an equivalent amount of BYC from the [Treasury](../treasury).
 
 ![Liquidation process](./../../static/img/Liquidation_diagram.png)
 
@@ -49,7 +49,7 @@ Liquidation is a key mechanism by which the protocol ensures that BYC remains fu
 
 :::
 
-Collateral is valued using the [Statutes Price](./price-oracle#statutes-price). Debt, which is denominated in BYC, is valued at a 1:1 exchange rate to the US Dollar, independent of the market price of BYC. If BYC depegs to the downside, the effective Liquidation Ratio increases, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio decreases, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
+Collateral is valued using the [Statutes Price](../price-oracle#statutes-price). Debt, which is denominated in BYC, is valued at a 1:1 exchange rate to the US Dollar, independent of the market price of BYC. If BYC depegs to the downside, the effective Liquidation Ratio increases, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio decreases, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
 
 
 ## Liquidation Incentives

@@ -43,7 +43,7 @@ Governance should also keep in mind that having a large number of approved Annou
 Puzzle that operations are performed on: [atom_announcer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/atom_announcer.clsp)
 
 Owner operations:
-* **register**: register Announcer with the [Announcer Registry](./announcer-registry) - puzzle: [announcer_register.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_register.clsp)
+* **register**: register Announcer with the [Announcer Registry](../announcer-registry) - puzzle: [announcer_register.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_register.clsp)
 * **configure**: disapprove, melt, transfer or update state of Announcer - puzzle: [announcer_configure.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_configure.clsp)
 * **mutate**: update Announcer Price or transfer Announcer - puzzle: [announcer_mutate.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/announcer_mutate.clsp)
 
@@ -96,7 +96,7 @@ Changing the inner puzzle hash can be used to transfer the Announcer.
 
 An approved Announcer can be unilatally disapproved by its data provider. Before the disapproval becomes effective, the **Cooldown Period** must have passed. This gives governance time to find a replacement data provider.
 
-The **deposit** is the amount of the Announcer coin. In case of an approved Announcer, the data provider must keep the deposit at or above the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](./announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
+The **deposit** is the amount of the Announcer coin. In case of an approved Announcer, the data provider must keep the deposit at or above the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](../announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
 
 The **Announcer Price TTL** Statute indicates how long an Announcer Price that's just been updated may be valid for at most. The actual validity period of an Announcer is stored in the ```DELAY``` curried arg. In practice, the only reason why an Announcer would use a shorter than necessary validity period is in case of a governance vote to reduce the Announcer Price TTL. This allows Announcers to prepare for the new Statute value ahead of time and avoid getting penalized for an expired Announcer Price upon enactment of the reduced Announcer Price TTL.
 
@@ -214,7 +214,7 @@ The announcer owner is free to set ```INNER_PUZZLE_HASH``` as they desire.
 
 ### Amount
 
-The amount of an eve Announcer is enforced to be 0. After that, it's up to the Announcer's owner how big the amount is, subject to certain limitations. See [configure](./announcers#configure) for details.
+The amount of an eve Announcer is enforced to be 0. After that, it's up to the Announcer's owner how big the amount is, subject to certain limitations. See [configure](../announcers#configure) for details.
 
 ### Lineage
 

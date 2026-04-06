@@ -16,7 +16,7 @@ In addition, there is the [Statutes Price](../../user-guide/price-oracle), which
 
 Protocol-updated Statutes are those that the protocol keeps track of automatically by enforcing updates as part of certain protocol coin spends.
 
-Governance-updated Statutes require a governance vote to be updated. For details see the [governance](./governance) page. The Statutes Price is a delayed version of the Oracle Price.
+Governance-updated Statutes require a governance vote to be updated. For details see the [governance](../governance) page. The Statutes Price is a delayed version of the Oracle Price.
 
 ![Statutes singleton](./../../static/img/Statutes_singleton_diagram.png)
 
@@ -51,7 +51,7 @@ Governance-updated Statutes come with Constraints that define limitations on how
 * **Implemenation Delay**: time (in seconds) that needs to pass before the new Statute value becomes effective after the end of the veto period
 * **Maximum Delta**: the maximum absolute amount by which the Statute value may change
 
-For further information on Constraints, see the [governance](./governance) page.
+For further information on Constraints, see the [governance](../governance) page.
 
 
 ## Operations
@@ -71,7 +71,7 @@ All operations announce pre-operation Statutes as well as post-operation Statute
 
 The Statutes singleton enforces certain restrictions on the order in which these operations can be executed. For details see the page on [Statutes operations ordering](../advanced-topics/statutes-operations-ordering).
 
-In practice, the Statutes Price would typically be updated by a Data Provider as they get rewarded for this. See the [Oracle](./oracle) page for details. Since the protocol offers no direct incentives for performing the other operations, those are typically performed by parties that benefit indirectly from them. Announcement spends are required by various protocol operations that assert Statutes announcements, and a Statute update would typically be paid for by a CRT holder that initiated or supported the corresponding governance vote.
+In practice, the Statutes Price would typically be updated by a Data Provider as they get rewarded for this. See the [Oracle](../oracle) page for details. Since the protocol offers no direct incentives for performing the other operations, those are typically performed by parties that benefit indirectly from them. Announcement spends are required by various protocol operations that assert Statutes announcements, and a Statute update would typically be paid for by a CRT holder that initiated or supported the corresponding governance vote.
 
 ### Announce
 

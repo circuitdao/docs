@@ -37,7 +37,7 @@ The outer puzzle of any protocol coin can then filter all conditions generated b
 
 Assert conditions are not prefixable as these can only restrict the spend of the coin that outputs them, but have no effect on other coins.
 
-For a diagram showing how protocol coins communicate with each other, see the [Inter-Coin Communication](./inter-coin-communication) section.
+For a diagram showing how protocol coins communicate with each other, see the [Inter-Coin Communication](../inter-coin-communication) section.
 
 
 ## Driver hints

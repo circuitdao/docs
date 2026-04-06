@@ -12,7 +12,7 @@ The process of liquidating a vault involves one or more liquidation auctions. Li
 
 If all debt has been recovered, the vault it returned to the control of its owner with any remaining collateral in it.
 
-If debt remains to be recovered and there is no collateral left in the vault, then a restart is no longer possible, and the vault is said to have incurred **[Bad Debt](./bad_debt)**.
+If debt remains to be recovered and there is no collateral left in the vault, then a restart is no longer possible, and the vault is said to have incurred **[Bad Debt](../bad_debt)**.
 
 Since liquidation auctions are Dutch auctions, there is an initial **auction price**, the **Start Price**, which reduces at fixed time intervals by a fixed amount. The Start Price is defined as
 

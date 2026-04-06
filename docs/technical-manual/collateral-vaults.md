@@ -122,10 +122,10 @@ Owner operations:
 
 Keeper operations:
 * **transfer Stability Fees**: issue & transfer BYC to Treasury - puzzle: [vault_keeper_transfer_sf_to_treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_transfer_sf_to_treasury.clsp)
-* See the [Liquidation](./liquidation) page for keeper operations relating to vault liquidation:
+* See the [Liquidation](../liquidation) page for keeper operations relating to vault liquidation:
     * **start auction**: start a liquidation auction
     * **bid**: submit a bid in liquidation auction
-* See the [Bad Debt](./bad_debt) page for keeper operations relating to Bad Debt recovery:
+* See the [Bad Debt](../bad_debt) page for keeper operations relating to Bad Debt recovery:
     * **recover bad debt**: extinguish bad debt
 
 Owner operations and Stability Fee transfers can only be performed if post-operation the vault is sufficiently overcollateralized. This protects against griefing attacks in which a vault owner attempts to delay or prevent liquidation by repeatedly spending a liquidatable vault.
@@ -154,7 +154,7 @@ The operation only succeeds if after the withdrawal the vault remains sufficient
 
 Borrows Bytecash from the vault.
 
-Borrowed Bytecash is minted by the Protocol. Borrowing increases the debt owed to the vault as [explained above](./collateral-vaults#stability-fees).
+Borrowed Bytecash is minted by the Protocol. Borrowing increases the debt owed to the vault as [explained above](../collateral-vaults#stability-fees).
 
 The operation only succeeds if after taking out the loan the vault remains sufficiently overcollateralised based on a liquidation ratio of LR + 1.
 
@@ -215,7 +215,7 @@ Fixed state:
   * ```KEEPER_OPERATIONS```: a list containing transfer Stability Fees, and liquidation-related operation hashes
 <!--Some operations have the following fixed state args curried in:
     * ```CAT_MOD_HASH```: treehash of the [standard CAT mod](https://chialisp.com/cats/#code)
-    * ```BYC_TAIL_MOD_HASH```: treehash of the [BYC tail mod](./../technical-manual/byc-tail)
+    * ```BYC_TAIL_MOD_HASH```: treehash of the [BYC tail mod](../byc-tail)
 -->
 
 Immutable state:

@@ -59,7 +59,7 @@ If the LTV of the vault drops below Max LTV, the vault will be liquidated.
 
 :::
 
-For details on the liqudation process please see the [Liquidation](./liquidation) page.
+For details on the liqudation process please see the [Liquidation](../liquidation) page.
 
 ## Vault constraints
 
@@ -71,7 +71,7 @@ If the Minimum Debt Statute get increased by governance, vaults may be left with
 
 :::note
 
-When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](./treasury.md).
+When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](../treasury.md).
 
 :::
 

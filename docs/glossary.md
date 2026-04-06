@@ -10,7 +10,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Absorb coin.** A coin included in a spend bundle to absorb mojos released by one of more other coins. Depending on the coins spent in the transaction, an absorb coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH absorb coin is used when withdrawing collateral from a vault.
 
-**Approval mod.** One of five (?) coin types that have permission to issue and/or melt BYC or CRT. See the [corresponding section](https://docs.circuitdao.com/technical-manual/statutes#approval-mods) on the Statutes page for details.
+**Approval mod.** One of five (?) coin types that have permission to issue and/or melt BYC or CRT. See the [corresponding section](../technical-manual/statutes#approval-mods) on the Statutes page for details.
 
 **Arg.** Short for argument. A value that is passed into a mod or function. A value passed into a mod that is considered part of the mod itself, is referred to as a curried arg.
 
@@ -58,7 +58,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Fixed arg.** A curried arg that cannot be changed by protocol operations and whose value is known prior to protocol deployment other than ```MOD_HASH```. These are typically mods or mod hashes.
 
-**Fixed state.** The fixed args of a coin's [state](./technical-manual/overview#fixed-state).
+**Fixed state.** The fixed args of a coin's [state](../technical-manual/overview#fixed-state).
 
 **Funding coin.** A coin included in a spend bundle to release mojos to be absorbed by one of more other coins. Depending on the coins spent in the transaction, a funding coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH funding coin is used when depositing collateral to a vault.
 
@@ -70,7 +70,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Immutable arg.** The curried arg ```MOD_HASH``` or a curried arg that cannot be changed by protocol operations and whose exact value is not known prior to deployment. The most common example is the Statutes struct, which depends on the Statutes singleton's launcher ID.
 
-**Immutable state.** The immutable args of a coin's [state](./technical-manual/overview#immutable-state).
+**Immutable state.** The immutable args of a coin's [state](../technical-manual/overview#immutable-state).
 
 **Issue.** To spend a CAT (the **issuance coin**) whose parent is not a CAT by running its tail program in such a way that it generates a child coin.
 
@@ -88,13 +88,13 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Module.** See mod.
 
-**```MOD_HASH```.** An [immutable arg](./technical-manual/overview#immutable-state) that can be found in all protocol coin mods. The treehash of a coin's mod after all fixed args have been curried in.
+**```MOD_HASH```.** An [immutable arg](../technical-manual/overview#immutable-state) that can be found in all protocol coin mods. The treehash of a coin's mod after all fixed args have been curried in.
 
 **Mojo.** The smallest unit of the XCH cryptocurrency. 1 trillion mojos = 1 XCH.
 
 **Mutable arg.** A curried arg that can be changed by one or more protocol operations.
 
-**Mutable state.** The mutable args of a coin's [state](./technical-manual/overview#mutable-state). This includes state variables with limited mutability, e.g. a launcher ID which is set once in the eve spend and immutable from then on.
+**Mutable state.** The mutable args of a coin's [state](../technical-manual/overview#mutable-state). This includes state variables with limited mutability, e.g. a launcher ID which is set once in the eve spend and immutable from then on.
 
 **Operation.** An action that a user or keeper can perform on the protocol. Examples include depositing collateral into a collateral vault, withdrawing from a savings vault, triggering a liquidation auction, or recovering bad debt. Operations require one or more protocol coins to be spent simultaneously. For example, announcing an Announcer price only requires one coin to be spent, the Announcer itself. Performing the win operation at the end of a Recharge Auction requires the Recharge Auction coin, Statutes, a CRT coin, and all Treasury coins to be spent. Operations are not to be confused with Chialisp [operators](https://chialisp.com/operators).
 

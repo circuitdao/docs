@@ -23,15 +23,15 @@ As a DeFi protocol, Circuit is:
 * censorship-resistant
 * immutable, with the exception of certain parameters that can be adjusted by governance
 
-Governance is conducted fully on-chain via Circuit's governance token [**CRT**](./user-guide/crt-token). In particular, **CircuitDAO**, the set of all CRT tokenholders, is a true decentalized autonomous organization without any legal entity behind it.
+Governance is conducted fully on-chain via Circuit's governance token [**CRT**](../user-guide/crt-token). In particular, **CircuitDAO**, the set of all CRT tokenholders, is a true decentalized autonomous organization without any legal entity behind it.
 
 ### Getting Started
 
-Circuit is live on Chia mainnet. Head over to the [Getting Started](./category/getting-started) guide to dive right in!
+Circuit is live on Chia mainnet. Head over to the [Getting Started](../category/getting-started) guide to dive right in!
 
-The [User Guide](./category/user-guide) provides an overview of protocol functionality and terminology.
+The [User Guide](../category/user-guide) provides an overview of protocol functionality and terminology.
 
-The [Technical Manual](./category/technical-manual) was written for advanced users that want to gain a deeper understanding of the protocol's inner workings.
+The [Technical Manual](../category/technical-manual) was written for advanced users that want to gain a deeper understanding of the protocol's inner workings.
 
 The Chialisp code of the puzzles used by protocol coins can be found in [this](https://github.com/circuitdao/puzzles/) Github repo.
 

@@ -28,7 +28,7 @@ A liquidation fails if all collateral has been sold off to bidders without all d
 
 ![Recover bad debt](./../../static/img/Recover_bad_debt_diagram.png)
 
-If there isn't enough BYC in the Treasury to cover the entire Bad Debt amount, keepers can refill the Treasury by [transferring Stability Fees](./collateral-vault#transfer-stability-fees) from collateral vaults that are neither in liquidation nor have incurred Bad Debt. Alternatively, it is possible to hold [Recharge Auctions](./recharge-auction) to refill the Treasury. It is also possible to extinguish only part of the Bad Debt and wait for the Treasury to refill as borrowers repay Stability Fees that have accrued on their loans.
+If there isn't enough BYC in the Treasury to cover the entire Bad Debt amount, keepers can refill the Treasury by [transferring Stability Fees](../collateral-vault#transfer-stability-fees) from collateral vaults that are neither in liquidation nor have incurred Bad Debt. Alternatively, it is possible to hold [Recharge Auctions](../recharge-auction) to refill the Treasury. It is also possible to extinguish only part of the Bad Debt and wait for the Treasury to refill as borrowers repay Stability Fees that have accrued on their loans.
 
 Once all bad debt has been recovered, ```AUCTION_STATE``` is set to nil. This returns the vault to eve state and hands control back to its owner.
 

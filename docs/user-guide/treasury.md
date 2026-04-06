@@ -22,9 +22,9 @@ Note that funds in the Treasury cannot be directly accessed by anyone. Every dep
 
 ![Treasury as buffer](./../../static/img/Treasury_diagram.png)
 
-If the Treasury balance exceeds the **Treasury Maximum** plus the [Surplus Auction Lot Amount](./surplus-auction), a **Surplus Auction** can be held that auctions off an amount of BYC equal to the Surplus Auction Lot Amount for [CRT](../crt-token). If the Treasury balance remains above the Treasury Maximum plus the Surplus Auction Lot Amount, another Surplus Auction can be started right away.
+If the Treasury balance exceeds the **Treasury Maximum** plus the [Surplus Auction Lot Amount](../surplus-auction), a **Surplus Auction** can be held that auctions off an amount of BYC equal to the Surplus Auction Lot Amount for [CRT](../crt-token). If the Treasury balance remains above the Treasury Maximum plus the Surplus Auction Lot Amount, another Surplus Auction can be started right away.
 
-If the Treasury balance is below the **Treasury Minimum** less the [Recharge Auction Lot Amount](./recharge-auction), a **Recharge Auction** can be held. The protocol auctions off CRT that it mints in return for an amount of BYC equal to the Recharge Auction Lot Amount to refill the Treasury. If the Treasury balance remains below the Treasury Minimum minus the Recharge Auction Lot Amount, another Recharge Auction can be started right away.
+If the Treasury balance is below the **Treasury Minimum** less the [Recharge Auction Lot Amount](../recharge-auction), a **Recharge Auction** can be held. The protocol auctions off CRT that it mints in return for an amount of BYC equal to the Recharge Auction Lot Amount to refill the Treasury. If the Treasury balance remains below the Treasury Minimum minus the Recharge Auction Lot Amount, another Recharge Auction can be started right away.
 
 ![Treasury thresholds](./../../static/img/Treasury_thresholds_diagram.png)
 

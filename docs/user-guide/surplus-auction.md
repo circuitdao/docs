@@ -8,7 +8,7 @@ sidebar_position: 225
 
 In a Surplus Auction, the protocol auctions off a fixed amount of BYC as specified by the **Surplus Auction Lot Amount** parameter for CRT in an English auction.
 
-A Surplus Auction can be started whenever the BYC balance of the Treasury exceeds the **Surplus Auction Threshold**, which is defined to be the [Treasury Maximum](./treasury) plus the Surplus Auction Lot Amount.
+A Surplus Auction can be started whenever the BYC balance of the Treasury exceeds the **Surplus Auction Threshold**, which is defined to be the [Treasury Maximum](../treasury) plus the Surplus Auction Lot Amount.
 
 Once the auction has started, bidders can bid increasing amounts of CRT for the Surplus Auction Lot Amount. Each bid needs to exceed the previous bid by a certain percentage as given by **Minimum Bid Increase**.
 
