@@ -41,13 +41,18 @@ The protocol does not directly use the SF. Instead, there is a **Stability Fee D
 
 ## Repaying loans
 
-A borrower can repay their debt partially or fully by returning BYC to the vault. A partial repayment will be applied to principal and accrued SFs proportionally to their respective sizes.
-
-For example, if a vault is owed 1000 BYC in principal and has accrued 20 BYC in SFs, the borrower can reduce their debt of 1020 BYC by 25% by repaying 255 BYC. This will recude the principal by 250 BYC and accrued SFs by 5 BYC.
+A borrower can repay their debt partially or fully by returning BYC to the vault. Repaying loans lowers the Liquidation Threshold, freeing up collateral for the vault owner to withdraw.
 
 ![Repaying a BYC loan](./../../static/img/Repay_diagram.png)
 
-Repaying loans lowers the Liquidation Threshold, which frees up collateral for the vault owner to withdraw.
+:::info
+
+Debt can only be fully repaid if accrued Stability Fees exceed the Treasury Minimum Delta.
+
+:::
+
+Until accrued Stability Fees of a vault do not exceed the **Treasury Minimum Delta**, the borrower cannot repay more than the principal amount of the loan. This also means that not all collateral can be withdrawn from the vault.
+
 
 ## Liquidation
 
@@ -63,25 +68,25 @@ For details on the liqudation process please see the [Liquidation](../liquidatio
 
 ## Vault constraints
 
-The protocol enforces a **Minimum Debt** (MD) on vaults. A vault's debt must either be zero or avove MD. This prevents too many small loans from being taken out, which could be used as an attack on the protocol by clogging up block space with liquidations.
+The protocol enforces a **Minimum Debt** on vaults. A vault's debt must either be zero or above Minimum Debt. This prevents too many small loans from being taken out, which could be used as an attack on the protocol by clogging up block space with liquidations.
 
-If the Minimum Debt Statute get increased by governance, vaults may be left with outstanding debt below MD. In this case the next borrow or repay operation performed on an affected vault must lift the outstanding debt above the MD or repay all outstanding debt respectively.
+If Minimum Debt gets increased by governance, vaults may be left with outstanding debt below Minimum Debt. In this case the next borrow or repay operation performed on an affected vault must lift the outstanding debt above Minimum Debt or repay all outstanding debt, respectively.
 
-## Notes
+## BYC lifecycle
 
-:::note
-
-When a loan is taken out from a vault, the BYC borrowed is minted ad hoc by the protocol. When a loan is repaid, the principal gets melted and the Stability Fees goes to the [Protocol Treasury](../treasury.md).
-
-:::
+When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad hoc by the protocol. When a loan is repaid, the BYC allocated to the principal component of the debt gets melted and that allocated to the Stability Fees component gets paid into the [Treasury](../treasury.md). BYC cannot be issued or melted any other way.
 
 
 ## Statutes
 * **Stability Fee Discount Factor (SFDF)**
     * Statute index: 1
-    * Statute name: STATUTE_STABILITY_FEE_DF
+    * Statute name: `STATUTE_STABILITY_FEE_DF`
     * considerations: The SFDF needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash, to maintain the peg.
 * **Minimum Debt (MD)**
     * Statute index: 9
-    * Statute name: STATUTE_MINIMUM_VAULT_DEBT_AMOUNT
+    * Statute name: `STATUTE_VAULT_MINIMUM_DEBT`
     * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
+* **Treasury Minimum Delta**
+    * Statutes index: 22
+    * Statutes name: `STATUTE_TREASURY_MINIMUM_DELTA`
+    * considerations: Choose large enough to prevent Treausry coin hogging. Choose small enough to allow small scale borrowers to repay most of their loans.

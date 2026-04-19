@@ -11,31 +11,32 @@ By depositing BYC into a **savings vault**, BYC holders can earn interest on the
 
 ![Saving BYC](./../../static/img/Savings_diagram.png)
 
-### Balance
+### Savings
 
-The balance in a savings vault consists of two components, **net deposits** and accrued **savings interest**. Net deposits is the amount of 'physical' BYC locked up in a savings vault. It is the sum of all BYC deposited in the vault minus the sum of all BYC withdrawn from the vault. Savings interest is the interest that has accrued to the vault less any withdrawn interest.
+The **savings** in a savings vault consist of two components, **savings balance** and **accrued interest**. The savings balance is the amount of "physical" BYC locked up in a savings vault, i.e. the amount of the savings vault coin. This is the sum of all BYC deposited into the vault minus the sum of all BYC withdrawn from the vault. Accrued interest is the amount of interest that has accrued to the vault.
 
-```Savings vault balance = net deposits + accrued savings interest```
+```Savings = savings balance + accrued interest```
 
-Savings interest compounds, i.e. accrues on the entire vault balance. The protocol does not directly use the SR. Instead, there is an **Interest Discount Factor** (IDF) parameter in Stautes, which is defined as IDF = 1 + SR. Using the IDF instead of the SR simplifies calculations.
+Interest compounds, i.e. accrues on the vault's entire savings. The protocol does not directly use the SR. Instead, there is an **Interest Discount Factor** (IDF) parameter in Statutes, which is defined as IDF = 1 + SR. Using the IDF instead of the SR simplifies calculations.
 
 ### Deposits
 
-When making a deposit, the user can choose to either not receive an interest payment at all, or to get Treasury to pay out the entire accrued interest. In the former case, net deposits is increased by the amount of BYC deposited, and the amount of accrued interest remains the same. In the latter case, net deposits is increased by the amount of accrued interest.
+When making a deposit the savings balance is increased by the amount of BYC deposited, while accrued interest remains unchanged.
 
 ### Withdrawals
 
-When a withdrawal is made, by default as much BYC as possible is taken from accrued interest, with the remainder taken from net deposits. If interest is withdrawn, it must be no less than the **Savings Minimum Interest Amount To Withdraw**.
+When making a withdrawal, the user automatically receives an interest payment from the Treasury for the entire accrued interest. The savings balance is increased by the amount of BYC deposited plus the accrued interest, while accrued interest is reset to 0. This is true unless accrued interest does not exceed the **Treasury Minimum Delta**, in which case the user can withdraw at most the savings balance.
 
-To give some examples, assume 1000 BYC were deposited in a savings vault, and that after half a year 20 BYC in interest have accrued:
-* If a withdrawal for 500 BYC is made, then 20 BYC would be taken from Protocol Treasury, and 480 BYC from the savings vault. Immediately after the withdrawal, the vault would have net deposits of 520 BYC and no accrued interest;
-* If on the other hand the Protocol Treasury only had a balance of 10 BYC at the time of the withdrawal, then those 10 BYC would be withdrawn together with 490 BYC from the savings vault, leaving the vault with 510 BYC in net deposits and 10 BYC in accrued interest;
-* If the Protocol Treasury is empty, all 500 BYC would come from net deposits, leaving the vault with 500 BYC in net deposits and 20 BYC in accrued interest.
+:::info
+
+Savings can only be fully withdrawn if accrued interest exceeds the Treasury Minimum Delta.
+
+:::
 
 
 ## Savings Rate
 
-The Savings Rate is a mechanism by which the protocol passes on Stability Fees from borrowers to savers. It sets an incentive for savers to buy BYC and deposit it in a savings vault, which supports the BYC peg from below.
+The Savings Rate is a mechanism by which the protocol passes on Stability Fees received from borrowers to savers. It sets an incentive for savers to buy BYC and deposit it in a savings vault, which supports the BYC peg from below.
 
 The Savings Rate is set by governance. Although it is not directly tied to the Stability Fee, both parameters play an important role in balancing supply and demand for BYC, and therefore in maintaining the peg. This should be the primary consideration for governance when setting the SR.
 
@@ -44,9 +45,9 @@ The Savings Rate is set by governance. Although it is not directly tied to the S
 
 * **Interest Discount Factor**
     * Statute index: 2
-    * Statute name: STATUTE_INTEREST_DF
+    * Statute name: `STATUTE_INTEREST_DF`
     * considerations: The higher this value is set, the more support is given to the BYC-USD peg from below. If the value is set too high, it may slow down the rate at which the System Buffer fills up. The SR should not be greater than the Stabiliy Fee, as this would present an arbitrage that could lead to unlimited losses to the protocol.
-* **Savings Minimum Interest Amount To Withdraw**
-    * Statutes index: 27
-    * Statutes name: SAVINGS_MINIMUM_INTEREST_AMOUNT_TO_WITHDRAW
-    * considerations: choose large enough to prevent Treausry coin hogging. Choose small enough to allow small scale savers to make regular withdrawals
+* **Treasury Minimum Delta**
+    * Statutes index: 22
+    * Statutes name: `STATUTE_TREASURY_MINIMUM_DELTA`
+    * considerations: Choose large enough to prevent Treausry coin hogging. Choose small enough to allow small scale savers to make regular interest withdrawals

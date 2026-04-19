@@ -7,17 +7,18 @@ sidebar_position: 210
 
 # Liquidation
 
-In a **liquidation**, the system recovers debt from a vault by auctioning off its collateral. A vault becomes eligible for liquidation if the value of the collateral locked-up in the vault drops below the **Liquidation Threshold** (LT).
+In a **liquidation**, the system recovers debt from a vault by auctioning off its collateral. A vault becomes eligible for liquidation if the value of the collateral locked up in the vault drops below the **Liquidation Threshold**.
 
 ![Liquidation threshold](./../../static/img/Collateralization_diagram.png)
 
-The Liquidation Threshold is calculated as the **Liquidation Ratio** (LR) multiplied by the debt of the vault. The Liquidation Ratio is a global parameter that applies to all vaults.
+The Liquidation Threshold is the **Liquidation Ratio** (LR) multiplied by the debt of the vault. The Liquidation Ratio is a global parameter that applies to all vaults and can be changed by governance. The inverse of the Liqudiation Ratio is referred to as the **maximum loan-to-value** or **Max LTV** ratio.
 
-:::info
+The **Liquidation Price** is the XCH price at which a collateral vault with given amount of debt becomes liquidatable. It is appproximately equal to
 
-The inverse of the Liqudiation Ratio is referred to as the **maximum loan-to-value** (Max LTV) ratio.
-
-:::
+```
+Liquidation Ratio * debt / collateral
+```
+Borrowers should keep in mind that Stability Fee accrual slowly increases debt over time, so that the Liquidation Price also slowly increases over time even when no new loans are taken out.
 
 
 ## Liquidation Penalty
@@ -26,7 +27,7 @@ The protocol incentivizes borrowers to keep their vaults in a sufficiently overc
 
 :::warning
 
-When a vault gets liquidated, borrowers are charged a Liquidation Penalty, which is added to the vault's debt. Borrowers can avoid getting liquidated by repaying loans or topping up collateral.
+When a vault gets liquidated, borrowers are charged a **Liquidation Penalty**, which is added to the vault's debt. Borrowers can avoid getting liquidated by repaying loans or topping up collateral.
 
 :::
 
@@ -52,16 +53,18 @@ Liquidation is a key mechanism by which the protocol ensures that BYC remains fu
 Collateral is valued using the [Statutes Price](../price-oracle#statutes-price). Debt, which is denominated in BYC, is valued at a 1:1 exchange rate to the US Dollar, independent of the market price of BYC. If BYC depegs to the downside, the effective Liquidation Ratio increases, which is desirable. If BYC depegs to the upside, the effective Liquidation Ratio decreases, which is acceptable since BYC trading above its peg indicates high confidence in the protocol and the amount of collateral backing BYC.
 
 
-## Liquidation Incentives
+## Initiator Incentives
 
-The system relies on keepers to trigger liquidations. Altough it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to start a liquidation auction. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critial nature of liquidations, the triggering keeper (initiator) is paid an incentive. The incentive consists of two components:
+The keeper that triggers a liquidation is referred to as the **initiator**. Altough it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to start a liquidation auction. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critial nature of liquidations, the initiator is paid an **initiator incentive**, which consists of two components:
 
-* **Absolute Liquidation Incentive** (ALI): a fixed amount of BYC (e.g. 10 BYC)
-* **Relative Liquidation Incentive** (RLI): a percentage of the debt owed (principal + accrued Stability Fees) to the vault being liquidated (e.g. 0.1%)
+* **Absolute Initiator Incentive** (AII): a fixed amount of BYC (e.g. 10 BYC)
+* **Relative Initiator Incentive** (RII): a percentage of the debt owed to the vault (e.g. 8%)
 
-ALI and RLI are paid to the initiator from the Stability Fee and Liquidation Penalty share of successful bids. Only when the initiator has received the full incentives amount they are entitled to, does the SF and LP share of bids get paid into the Treasury.
+When bids are placed in a liquidaiton auction, the initiator incentive is paid before any of the debt owed to the vault is repaid.
 
-ALI and RLI are to be set such that they can be paid from the Liquidation Penalty. If bad debt was incurred and the Liquidation Penalty share recovered doesn't cover the full ALI plus RLI, the initiator loses out on part of their incentive.
+AII and RII must be set such that they can be paid from the Liquidation Penalty in all circumstances, which requires the Minimum Debt Statute to be taken into account.
+
+If bad debt is incurred, the initiator loses out on any unpaid initiator incentive.
 
 
 ## Liquidation Auction
@@ -79,46 +82,50 @@ As the auction is underway, the auction price automatically decreases step-by-st
 The amount by which the auction price is lowered in each step is specified by the **Price Decrease Factor** parameter. The PD is calculated as a percentage of the Start Price, and gets substracted from the previous auction price at each step.
 
 The auction ends when either
-* the vault's debt was fully repaid
+* the vault's debt is fully repaid
 * there is no collateral left in the vault; or
 * the auction has timed out.
 
-An auction ends when the **Liquidation Auction Timeout** has been reached. Since Start Price, Step Time Interval and Price Decrease Factor are deterministic, there implicitly is a **Minimum Auction Price** that auction price cannot fall below before the auction times out. Governance should set parameters such that the Minimum Auction Price is low enough that a liquidation is highly likely even in the case of extreme price drops.
+An auction ends the latest when the **Liquidation Auction Timeout** has been reached. Since Start Price, Step Time Interval and Price Decrease Factor are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
 
-A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt (incl LP) becomes bad debt.
+A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt becomes bad debt.
 
 
 ## Statutes
 
 * **Liquidation Ratio (LR)**
-    * Statute index: 4
-    * Statute name: STATUTE_LIQUIDATION_RATIO
+    * Statute index: 9
+    * Statute name: `STATUTE_VAULT_LIQUIDATION_RATIO_PCT`
     * considerations: The higher the LR, the more overcollateralized the system becomes, and the less likely a depeg to the downside becomes. On the other hand, a higher LR makes it less attractive to borrow BYC, due to the higher associated capital costs of having to lock up more XCH.
 * **Liquidation Penalty (LP)**
-    * Statute index: 16
-    * Statute name: STATUTE_VAULT_LIQUIDATION_PENALTY_PERCENT
-    * considerations: Needs to be high enough to set a strong incentive to borrowers to keep vaults sufficiently collateralized without being unreasonably punitive.
-* **Absolute Liquidation Incentive (ALI)**
-    * Statute index: 14
-    * Statute name: STATUTE_VAULT_INITIATOR_FLAT_INCENTIVE
-    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below).
-* **Relative Liquidation Incentive (RLI)**
-    * Statute index: 15
-    * Statute name: STATUTE_VAULT_INITIATOR_RELATIVE_INCENTIVE_PERCENT
-    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.
-* **Starting Price Factor (SPF)**
-    * Statute index: 13
-    * Statute name: STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR
-    * considerations: A higher value enables keepers to place a bid in more scenarios in which there's been a rebound of the market price between the latest Statutes Price update and the beginning of the auction. A lower value makes it more likely that the auction will finish quickly if the collateral price has continued to fall after the last Statutes Price update.
-* **Step Price Decrease Factor (PD)**
-    * Statute index: 11
-    * Statute name: STATUTE_VAULT_AUCTION_STEP_PRICE_DECREASE_FACTOR
-    * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
-* **Step Time Interval (STI)**
     * Statute index: 10
-    * Statute name: STATUTE_VAULT_AUCTION_STEP_TIME_INTERVAL
-    * considerations: A higher value gives keepers more time to bid, but increases the risk that the value of the collateral falls further until the auction has completed. A low value might make it difficult for keepers that bid manually to keep up.
-* **Liquidation Auction Timeout (LAT)**
+    * Statute name: `STATUTE_VAULT_LIQUIDATION_PENALTY_BPS`
+    * considerations: Needs to be high enough to set a strong incentive to borrowers to keep vaults sufficiently collateralized without being unreasonably punitive.
+* **Absolute Initiator Incentive**
+    * Statute index: 11
+    * Statute name: `STATUTE_VAULT_INITIATOR_INCENTIVE_FLAT`
+    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below).
+* **Relative Initiator Incentive**
     * Statute index: 12
-    * Statute name: STATUTE_VAULT_AUCTION_TIMEOUT
+    * Statute name: `STATUTE_VAULT_INITIATOR_INCENTIVE_BPS`
+    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.
+* **Liquidation Auction Timeout (LAT)**
+    * Statute index: 13
+    * Statute name: `STATUTE_VAULT_AUCTION_TTL`
     * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantional amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.
+* **Starting Price Factor (SPF)**
+    * Statute index: 14
+    * Statute name: `STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR_BPS`
+    * considerations: A higher value enables keepers to place a bid in more scenarios in which there's been a rebound of the market price between the latest Statutes Price update and the beginning of the auction. A lower value makes it more likely that the auction will finish quickly if the collateral price has continued to fall after the last Statutes Price update.
+* **Step Time Interval (STI)**
+    * Statute index: 15
+    * Statute name: `STATUTE_VAULT_AUCTION_PRICE_TTL`
+    * considerations: A higher value gives keepers more time to bid, but increases the risk that the value of the collateral falls further until the auction has completed. A low value might make it difficult for keepers that bid manually to keep up.
+* **Step Price Decrease Factor (PD)**
+    * Statute index: 16
+    * Statute name: `STATUTE_VAULT_AUCTION_STEP_PRICE_DECREASE_BPS`
+    * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
+* **Minimum Auction Price**
+    * Statute index: 17
+    * Statute name: `STATUTE_VAULT_AUCTION_MINIMUM_PRICE_FACTOR`
+    * considerations: This value serves as an easily verifiable backstop to the implicit minimum auction price. As such it should be identical or very close to the implicit value.
