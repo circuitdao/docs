@@ -23,7 +23,7 @@ Borrowers should keep in mind that Stability Fee accrual slowly increases debt o
 
 ## Liquidation Penalty
 
-The protocol incentivizes borrowers to keep their vaults in a sufficiently overcollateralized state by charging a **Liquidation Penalty** (LP) whenever a vault gets liquidated. The Liquidation Penalty is a percentage of the debt owed to the vault at the point when the liquidation is triggered. The sum of debt and Liquidation Penalty is the **total debt**.
+The protocol incentivizes borrowers to keep their vaults in a sufficiently overcollateralized state by charging a **Liquidation Penalty** (LP) whenever a vault gets liquidated. The Liquidation Penalty is a percentage of the debt owed to the vault at the point when the liquidation is triggered, and gets added to the existing debt.
 
 :::warning
 
@@ -35,10 +35,10 @@ When a vault gets liquidated, borrowers are charged a **Liquidation Penalty**, w
 
 The liquidation process consists of three steps:
 1. Liquidation gets triggered by a [keeper](../../technical-manual/advanced-topics/keepers). The vault is seized by the protocol
-2. Keepers bid on collateral in an attempt to recover the vault's total debt
-3. Once the total debt is recovered, the vault is released back to the borrower
+2. Keepers bid on collateral in an attempt to recover the vault's debt
+3. Once the debt is recovered, the vault is released back to the borrower
 
-If a liquidation auction fails to recover the total debt, it will eventually time out and can be restarted. This continues until either the total debt does get recovered or all collateral has been sold off. In the former case, the vault and any remaining collateral in it is released back to the borrower. In the latter case, the protocol is said to incur **bad debt**. Bad debt can be extinguished by melting an equivalent amount of BYC from the [Treasury](../treasury).
+If a liquidation auction fails to recover all debt, it will eventually time out and can be restarted. This continues until either all debt does get recovered or all collateral has been sold off. In the former case, the vault, including any remaining collateral, is released back to the borrower. In the latter case, the protocol is said to incur **bad debt**. Bad debt can be [recovered](../../technical-manual/bad-debt) by melting an equivalent amount of BYC from the [Treasury](../treasury).
 
 ![Liquidation process](./../../static/img/Liquidation_diagram.png)
 

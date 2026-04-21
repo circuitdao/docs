@@ -1,5 +1,5 @@
 ---
-id: bad_debt
+id: bad-debt
 title: Bad Debt
 sidebar_position: 345
 ---

@@ -44,7 +44,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Driver.** An off-chain program used to construct coins spends and spend bundles of Chia coins. Drivers are part of the backend of the Circuit dapp. Drivers for Chialisp are often written in Python, as shown in this [tutorial](https://www.youtube.com/watch?v=dGohmAc658c).
 
-**Enactment.** The act of executing a governance proposal on-chain. Requires a final spend of the governance coin that contains the proposed bill. The proposed bill becomes effective immediately upon enactment.
+**Implementation.** The act of implementing a bill. This replaces the existing value and Constraints of a Statute with the proposed bill. The bill becomes effective in the first block after the implementation spend.
 
 **Enforced state.** A coin state that is fully or partially enforced by the coin's puzzle mod. Typically used in the context of eve coins.
 

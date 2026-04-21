@@ -109,11 +109,11 @@ Passing custom conditions is required in the following situations:
 * Approving or disapproving an Announcer (bitmask: ```010-000```)
 * Launching a Recharge Auction coin (bitmask: ```010-010```)
 
-Since these are one-off operations specific to certain coins, there is no point in storing information pertaining to these operations in Statutes. Instead, custom conditions are included in their respective bills, and, upon enactment, get announced by Statutes.
+Since these are one-off operations specific to certain coins, there is no point in storing information pertaining to these operations in Statutes. Instead, custom conditions are included in their respective bills, and, upon implementation, get announced by Statutes.
 
 The only custom condition type required by the protocol is ```SEND_MESSAGE```, which is enforced by the Statutes mutation operation.
 
-The bitmasks used by custom announcements cannot be coin-specific since both sending coin (Statutes) as well as receiving coins may be spent before the corresponding governance proposal is enacted. In the case of Announcers, even the state of the coin may change before enactment, which means that the puzzle-to-none bitmask should be used when (dis)approving Announcers. That the state of Statutes may change is uncritical as the keeper enacting a custom condition bill can provide the provide the Statutes state in form of an inner puzzle hash to the receiving coin in the enactment spend.
+The bitmasks used by custom announcements cannot be coin-specific since both sending coin (Statutes) as well as receiving coins may be spent before the corresponding governance proposal is implemented. In the case of Announcers, even the state of the coin may change before implementation, which means that the puzzle-to-none bitmask should be used when (dis)approving Announcers. That the state of the Statutes singleton itself may change is not an issue as the Statutes state can be provided in form of an inner puzzle hash to the receiving coin in the implementation spend.
 
 This operation announces all Statutes, Statutes Price Info, and the custom condition(s) as per the corresponding governance proposal.
 

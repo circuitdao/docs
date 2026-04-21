@@ -10,9 +10,9 @@ sidebar_position: 381
 
 Announcer Prices are used to update the **Oracle price**. Each such update requires a minimum of **M-of-N** Announcer Price announcements from distinct Announcers that have been **approved** by governance.
 
-Announcers are also referred to as **Atom Announcers** because they are designed to announce a single [atom](https://chialisp.com/chialisp-primer/intro/#atoms) value. The atom value is stored in the ATOM_VALUE curried arg of the Announcer puzzle. In the case of Circuit protocol, the atom value is the Announcer Price.
+Announcers are also referred to as **Atom Announcers** because they are designed to announce a single [atom](https://chialisp.com/chialisp-primer/intro/#atoms) value. The atom value is stored in the `VALUE` curried arg of the Announcer puzzle. In the case of Circuit protocol, the atom value is the Announcer Price.
 
-Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the TIMESTAMP_EXPIRES curried arg lies in the past. TIMESTAMP_EXPIRES is updated to the current time plus DELAY whenever the Announcer Price is updated. DELAY is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](../../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
+Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the `TIMESTAMP_EXPIRES` curried arg lies in the past. `TIMESTAMP_EXPIRES` is updated to the current time plus `VALUE_TTL` whenever the Announcer Price is updated. `VALUE_TTL` is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](../../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
 
 
 ## Governance considerations
@@ -89,8 +89,8 @@ State variables (curried args) that can be updated in this way are:
 * ```INNER_PUZZLE_HASH```: the inner puzzle determines how the Announcer can be spent
 * ```APPROVED```: indicates whether the Announcer is approved
 * ```DEPOSIT```: the amount of the Announcer coin, which is used as a deposit that can be slashed under certain circumstances
-* ```DELAY```: number of seconds for which an updated price is valid. used to calculate the expiry timestamp, TIMESTAMP_EXPIRES <!--(TODO: rename to TTL)-->
-* ```ATOM_VALUE```: XCH/USD price published by data provider
+* ```VALUE_TTL```: number of seconds for which an updated price is valid. used to calculate the expiry timestamp, `TIMESTAMP_EXPIRES`
+* ```VALUE```: atom value to be announced. an integer representing the XCH/USD market price
 
 Changing the inner puzzle hash can be used to transfer the Announcer.
 
@@ -98,7 +98,7 @@ An approved Announcer can be unilatally disapproved by its data provider. Before
 
 The **deposit** is the amount of the Announcer coin. In case of an approved Announcer, the data provider must keep the deposit at or above the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](../announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
 
-The **Announcer Price TTL** Statute indicates how long an Announcer Price that's just been updated may be valid for at most. The actual validity period of an Announcer is stored in the ```DELAY``` curried arg. In practice, the only reason why an Announcer would use a shorter than necessary validity period is in case of a governance vote to reduce the Announcer Price TTL. This allows Announcers to prepare for the new Statute value ahead of time and avoid getting penalized for an expired Announcer Price upon enactment of the reduced Announcer Price TTL.
+The **Announcer Price TTL** Statute indicates how long an Announcer Price that's just been updated may be valid for at most. The actual validity period of an Announcer's price is stored in the ```VALUE_TTL``` curried arg. In practice, the only reason why an Announcer would use a shorter than necessary validity period is in case of a governance vote to reduce the Announcer Price TTL. This allows Announcers to prepare for the new Statute value ahead of time and avoid getting penalized for an expired Announcer Price upon implementation of the reduced Announcer Price TTL.
 
 If desired, the Announcer Price may also be updated in a configure operation.
 
@@ -109,8 +109,8 @@ Lastly, it is possible to **melt** an unapproved Announcer using the configure o
 * ```INNER_PUZZLE_HASH```: can be set to desired value
 * ```APPROVED```: can be set to nil
 * ```DEPOSIT```: see amount
-* ```DELAY```: can be set to any value smaller than Announcer Price TTL. <!--(TODO: rename to TTL)-->
-* ```ATOM_VALUE```: can be set to any atom value. should be XCH/USD market price
+* ```VALUE_TTL```: can be set to any value smaller than Announcer Price TTL
+* ```VALUE```: atom value to be announced. an integer representing the XCH/USD market price
 * ```MIN_DEPOSIT```: can be set to any value greater than Minimum Deposit
 * ```COOLDOWN_START```: set by puzzle
 * ```TIMESTAMP_EXPIRES```: set by puzzle
@@ -152,10 +152,10 @@ An Announcer is penalized by applying the **Penalty Factor** to the Announcer's 
 
 Keepers can penalize approved Announcers in the following circumstances:
 * Announcer Price is expired, ie current time is greater than ```TIMESTAMP_EXPIRES```
-* ```DELAY``` is greater than Announcer Price TTL Statue <!--(TODO: rename DELAY to TTL?)-->
+* ```VALUE_TTL``` is greater than Announcer Price TTL Statue
 * ```DEPOSIT``` is smaller than Minimum Deposit
 
-The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of Statute enactment, in order to minimize the risk of missing the dealine and incurring penalties.
+The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the Implementation Period, in order to minimize the risk of missing the dealine and incurring penalties.
 
 A penalization can occur at most once per **Penalty Interval** (STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
 
@@ -189,8 +189,8 @@ Mutable state:
 * ```INNER_PUZZLE_HASH```
 * ```APPROVED```
 * ```DEPOSIT```: amount of the Announcer coin
-* ```DELAY```: <!--TODO: rename to expiration?-->
-* ```ATOM_VALUE```: value to be announced. must be an atom
+* ```VALUE_TTL```: amount of time before an updated value expires
+* ```VALUE```: atom value to be announced. an integer representing the XCH/USD market price
 * ```MIN_DEPOSIT```: minimum amount of Announcer coin that should be maintained
 * ```COOLDOWN_START```: timestamp of when a cooldown was initiated. 0 if not in cooldown
 * ```LAST_PENALTY_INTERVAL```: <!--TODO-->
@@ -202,8 +202,8 @@ Announcers have an enforced eve state in which the following curried args are al
 
 * ```APPROVED```
 * ```DEPOSIT```
-* ```DELAY```
-* ```ATOM_VALUE```
+* ```VALUE_TTL```
+* ```VALUE```
 * ```COOLDOWN_START```
 * ```LAST_PENALTY_INTERVAL```
 * ```TIMESTAMP_EXPIRES```

@@ -8,7 +8,7 @@ sidebar_position: 390
 
 Governance coins are CRT CAT singletons with the [governance.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) puzzle as their inner puzzle. Governance coins are created from standard CRT coins on an ad hoc basis.
 
-Governance can change all Statutes with a non-negative index. Governance is conducted by proposing, and vetoing or enacting, **bills**. A bill specifies exactly one Statute to be changed, its proposed new value, and the proposed new Constraints. This is also referred to as the **bill proper**.
+Governance can change all Statutes with a non-negative index. Governance is conducted by proposing, vetoing or implementing **bills**. A bill specifies exactly one Statute to be changed, its proposed new value, and the proposed new Constraints. This is also referred to as the **bill proper**.
 
 ```
 bill_proper = (
@@ -29,7 +29,7 @@ BILL =  ((veto_period . implementation_delay) bill_proper)
 
 There are two different modes governance coins can be in, **proposal mode** and **veto mode**. A governance coin is in proposal mode if a propose operation was performed on it and ```BILL``` is not nil. Otherwise the governance coin is in veto mode.
 
-A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be enacted only if both Veto Period and Implementation Delay have passed, and only as long as the **Enactment Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
+A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be implemented only if both Veto Period and Implementation Delay have passed, and only as long as the **Implementation Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
 
 The owner of a governance coin can disable governance mode and get back a standard CRT coin by having the inner layer inner puzzle output a ```CREATE_COIN``` conditions with nil for its puzzle hash.
 
@@ -45,7 +45,7 @@ Owner operations:
 * **propose**: - puzzle: [governance_propose_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_propose_bill.clsp)
 * **reset**: - puzzle: [governance_reset_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_reset_bill.clsp)
 * **announce veto**: - puzzle: [governance_veto_announcement.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_announcement.clsp)
-* **enact**: - puzzle: [governance_enact_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_enact_bill.clsp)
+* **implement**: - puzzle: [governance_implement_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_implement_bill.clsp)
 
 Governance operations:
 * **veto**: - puzzle: [governance_veto_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_bill.clsp)
@@ -56,15 +56,15 @@ If a governance coin has ```BILL``` equal to nil, then the only operation that w
 
 ![Governance operations when BILL is nil](./../../static/img/Governance_bill_nil_diagram.png)
 
-When ```BILL``` is not nil, it is always possible to either propose, reset or veto. If the parent coin of the coin to be spent was a governance coin, then it is also possible to perform an announce veto or enact operation.
+When ```BILL``` is not nil, it is always possible to either propose, reset or veto. If the parent coin of the coin to be spent was a governance coin, then it is also possible to perform an announce veto or implement operation.
 
 ![Governance operations when BILL is not nil](./../../static/img/Governance_bill_not_nil_diagram.png)
 
-Combining the two diagrams it is clear that a bill can only be enacted if it was previously proposed. This prevents the creation of an eve governance coin with bill curried in and subsequent enactment without a prior proposal spend. Having a proposal spend is crucial as they place certain constraints on when enactment can take place, which for example ensures that there is veto period as defined in Statutes.
+Combining the two diagrams it is clear that a bill can only be implemented if it was previously proposed. This prevents the creation of an eve governance coin with bill curried in and subsequent implementation without a prior proposal spend. Having a proposal spend is crucial as they place certain constraints on when implementation can take place, which for example ensures that there is veto period as defined in Statutes.
 
 ![Governance eve spend diagram](./../../static/img/Governance_eve_spend_diagram.png)
 
-In the diagram above, a governance eve coin is shown at the top, with non-eve governance coins one level below. Enacting a bill is only possible if a propose operation was previously performed, possibly with one or more announce veto operations in between, which leave the proposed bill proper unchange and only affect the associated proposal periods.
+In the diagram above, a governance eve coin is shown at the top, with non-eve governance coins one level below. Implementing a bill is only possible if a propose operation was previously performed, possibly with one or more announce veto operations in between, which leave the proposed bill proper unchange and only affect the associated proposal periods.
 
 ### Propose
 
@@ -110,9 +110,9 @@ When an announce veto operation is performed on a proposal coin, the proposal pe
 * ```BILL```: proposal periods get updated if Veto coin is in proposal mode
 * ```INNER_PUZZLE_HASH```: can be changed
 
-### Enact
+### Implement
 
-Once the Implementation Deplay has passed, the proposed bill can be enacted, i.e. the corresponding Statute updated as specified by the bill.
+Once the Implementation Deplay has passed, the proposed bill can be implemented, i.e. the corresponding Statute updated in the Statutes singleton as specified by the bill.
 
 ![Governance enact coin spends diagram](./../../static/img/Governance_enact_coin_spends_diagram.png)
 
@@ -153,7 +153,7 @@ The amount of a governance coin depends on the amount of backing a proposal or v
 
 By virtue of being CATs, governance coins require a standard CAT lineage proof to be spent. That governance coins are also custom singletons is enforeced by the governance mod by allowing only one ```CREATE_COIN``` condition to pass the ```filter-condition``` function.
 
-Announce veto and enact operations both require that the coin they are being applied to had a governance coin as parent. This means that an eve governance coin cannot be spent by either operation. Reset and veto operations can be applied to an eve governance coin irrespective of the value of ```BILL```, but they both set ```BILL``` to nil. This is fine because a nil bill cannot be enacted. Effectively, the resulting governance coin can be thought of as an eve coin in its own right. This leaves propose as the only operation that can spend an eve governance coin.
+Announce veto and implement operations both require that the coin they are being applied to had a governance coin as parent. This means that an eve governance coin cannot be spent by either operation. Reset and veto operations can be applied to an eve governance coin irrespective of the value of ```BILL```, but they both set ```BILL``` to nil. This is fine because a nil bill cannot be implemented. Effectively, the resulting governance coin can be thought of as an eve coin in its own right. This leaves propose as the only operation that can spend an eve governance coin.
 
 
-If a governance coin has ```BILL``` equal to nil, only propose, announce veto and enact operations can be performed.  not equal to nil, then only propose, reset and veto operations can be performed on it.
+If a governance coin has ```BILL``` equal to nil, only propose, announce veto and implement operations can be performed.  not equal to nil, then only propose, reset and veto operations can be performed on it.

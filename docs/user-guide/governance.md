@@ -33,11 +33,13 @@ In addition to Stability Fee and Savings Rate, governance is able to update a fe
 
 ## Governance process
 
-Circuit protocol governance is conducted fully on-chain. Any CRT token holder can propose to change a Statute by locking up CRT tokens with the governance puzzle, specifying the Statute to be changed and the proposed new value and Constraints. For a proposal to be valid, the number of CRT locked up in this manner must exceed the **Proposal Threshold**.
+Circuit protocol governance is conducted fully on-chain via CRT coins in **governance mode**. A CRT holder can propose to change a Statute by locking up CRT in a **proposal coin**. The CRT amount must exceed the **Proposal Threshold**. Making a proposal also requires a **Proposal Fee** to be paid. The proposal coin contains a **bill**, which either specifies the Statute to be changed and the proposed new value and Constraints, or a set of custom conditions to be announced by Statutes.
 
 ![Governance timeline](./../../static/img/Governance_timeline_diagram.png)
 
-Once proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto needs to be backed by more CRT than the original proposal to be successful. If the proposal does not get vetoed, the new Statute can be implemented ('enacted') after the **Implementation Delay** has passed. A Statute must be implemented within the **Enactement Period** or otherwise lapses.
+Once a proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto succeeds if it is backed by more CRT than the original proposal. If the bill has not been vetoed by the end of the Veto Period, it is referred to as **enacted**. Once the **Implementation Delay** has passed, the bill can be **implemented**. Implementation replaces the existing Statute in the Statutes singleton with the bill, or, in the custom conditions case, announces the bill's value. If the bill is not implemented within the **Implementation Period** it **lapses**. A bill can be **reset**, i.e. cancelled, by the proposer at any time as long as it has not been implemented yet.
+
+Once all governance operations have concluded, governance mode can be exited subject to a **Governance Cooldown** period.
 
 ## Constraints
 
@@ -56,7 +58,7 @@ Constraints are an important safety measure, as they prevent sudden Statute chan
 
 The Proposal Threshold protects the protocol against spam proposals.
 
-A proposal can be blocked if within the Veto Period the proposal is vetoed by an amount of CRT larger than is backing the proposal. Once the Veto Period has passed without a successful veto, the protocol waits until the Implementation Delay period has passed before implementing ('enacting') the new Statute value (including any changes to the corresponding Constraints).
+A proposal can be blocked if within the Veto Period the proposal is vetoed by an amount of CRT larger than is backing the proposal. Once the Veto Period has passed without a successful veto, the protocol waits until the Implementation Delay period has passed before implementing the new Statute value (including any changes to the corresponding Constraints).
 
 The Implementation Delay gives users time to withdraw their assets from the protocol in an orderly manner if they are unhappy with the changes made by the proposal. In particular, it protects users from a malicious governance takeover in which an attacker secretly accumulates a CRT stake large enough to make a proposal that cannot be vetoed. As governance takeovers are in general impossible to detect in advance, users of the protocol should keep in mind that a Statute may change to a value unacceptable to them after the Implementation Delay has passed. For example, a borrower may want to ensure that they can repay their loan within the Implementation Delay period for relevant Statutes.
 
@@ -73,7 +75,15 @@ Protocol users should consider whether they are comfortable with Statutes and Co
 For example, consider a user who borrows BYC at an 8% Stability Fee to invest in a fund that offers monthly redemptions. Assume the user expects the fund to deliver a return of 10% per annum in any given month. If the Stability Fee has a Veto Period and Implementation Delay of one week each, the borrower could not be certain what the SF is going to be in the last two weeks before they have an opportunity to redeem from the fund and repay their loan. Unless they have other sources of capital to repay the BYC loan after two weeks if governance changes the SF to 12% or more, they cannot protect themselves against their investment making a loss. If on the other hand the fund offered weekly redemptions, the borrower could always exit the fund and repay their BYC debt on time before the new SF is effective.
 
 ## Statutes
-* **Enactment Timeout**
-    * Statute index: 34
-    * Statute name: STATUTE_ENACTMENT_TIMEOUT_SECONDS
-    * considerations: should be long enough to allow manual enactment in a low-fee period. should be short enough to avoid attacks in which successful proposals are kept lingering and forgotten about only to be enacted unexpectedly in a changed environment.
+* **Proposal Fee**
+    * Statue index: 40
+    * Statute name: `STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS`
+    * considerations: should be big enough to prevent spam proposals. should be small enough to shut out all but the largest CRT holders from participation in governance processes.
+* **Implementation Period**
+    * Statute index: 41
+    * Statute name: `STATUTE_GOVERNANCE_IMPLEMENTATION_INTERVAL`
+    * considerations: should be long enough to allow manual implementation in a low-fee period. should be short enough to avoid attacks in which successful proposals are kept lingering and forgotten about only to be implemented unexpectedly in a changed environment.
+* **Governance Cooldown**
+    * Statute index: 42
+    * Statute name: `STATUTE_GOVERNANCE_COOLDOWN_INTERVAL`
+    * considerations: should be long enough to disincentivise mindless activations of governance mode. should be short enough to not unduly disincentivise participation in governance.
