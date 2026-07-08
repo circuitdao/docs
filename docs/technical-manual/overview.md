@@ -75,7 +75,7 @@ For each protocol coin page deals with operations that can be performed on a giv
 
 For a visualisation of all operations and their interdependencies, see the [inter-coin communication](../advanced-topics/inter-coin-communication) page.
 
-<!--Also shown is the corresponding [driver hint](./design-decisions#driver-hints).-->
+<!--Also shown is the corresponding [driver hint](../advanced-topics/design-decisions#driver-hints).-->
 
 ## State and Lineage
 

@@ -52,7 +52,7 @@ Your collateral will be liquidated if your vault's LTV exceeds the Max LTV.
 
 You generally want to borrow at an LTV much lower than the Max LTV to reduce the likelihood that your vault will get liquidated even if the XCH price drops sharply.
 
-For additional information, see the page on [choosing your LTV](../choosing-your-ltv).
+For additional information, see the page on [choosing your LTV](../../choosing-your-ltv).
 
 ## Repay loan
 

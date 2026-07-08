@@ -73,7 +73,7 @@ All operations announce pre-operation Statutes as well as post-operation Statute
 
 The Statutes singleton enforces certain restrictions on the order in which these operations can be executed. For details see the page on [Statutes operations ordering](../advanced-topics/statutes-operations-ordering).
 
-In practice, the Statutes Price would typically be updated by a Data Provider as they get rewarded for this. See the [Oracle](../oracle) page for details. Since the protocol offers no direct incentives for performing the other operations, those are typically performed by parties that benefit indirectly from them. Announcement spends are required by various protocol operations that assert Statutes announcements, and a Statute update would typically be paid for by a CRT holder that initiated or supported the corresponding governance vote.
+In practice, the Statutes Price would typically be updated by a Data Provider as they get rewarded for this. See the [Oracle](../price-oracle) page for details. Since the protocol offers no direct incentives for performing the other operations, those are typically performed by parties that benefit indirectly from them. Announcement spends are required by various protocol operations that assert Statutes announcements, and a Statute update would typically be paid for by a CRT holder that initiated or supported the corresponding governance vote.
 
 ### Announce
 

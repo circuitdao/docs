@@ -29,7 +29,7 @@ Governance is conducted fully on-chain via Circuit's governance token [**CRT**](
 
 Circuit is live on Chia mainnet. Head over to the [Getting Started](../category/getting-started) guide to dive right in!
 
-The [User Guide](../category/user-guide) provides an overview of protocol functionality and terminology.
+The [User Guide](../user-guide/) provides an overview of protocol functionality and terminology.
 
 The [Technical Manual](../category/technical-manual) was written for advanced users that want to gain a deeper understanding of the protocol's inner workings.
 

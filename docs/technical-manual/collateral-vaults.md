@@ -125,7 +125,7 @@ Keeper operations:
 * See the [Liquidation](../liquidation) page for keeper operations relating to vault liquidation:
     * **start auction**: start a liquidation auction
     * **bid**: submit a bid in liquidation auction
-* See the [Bad Debt](../bad_debt) page for keeper operations relating to Bad Debt recovery:
+* See the [Bad Debt](../bad-debt) page for keeper operations relating to Bad Debt recovery:
     * **recover bad debt**: extinguish bad debt
 
 Owner operations and Stability Fee transfers can only be performed if post-operation the vault is sufficiently overcollateralized. This protects against griefing attacks in which a vault owner attempts to delay or prevent liquidation by repeatedly spending a liquidatable vault.
