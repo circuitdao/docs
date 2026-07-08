@@ -22,7 +22,7 @@ The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/
 
 ## Interest accrual and accounting
 
-Savings interest compounds by the minute, i.e. the prevailing Interest Discount Factor (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
+Savings interest compounds by the minute, i.e. the prevailing **Interest Discount Factor** (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
 
 The ```DISCOUNTED_BALANCE``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 

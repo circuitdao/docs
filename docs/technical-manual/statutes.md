@@ -36,7 +36,9 @@ For example, a borrower taking out a new loan, another withdrawing collateral, a
 
 Protocol coins know how to assert Statute announcements by having the **Statutes struct** curried into them. This is the conventional singleton struct:
 
-```Statutes struct = (MOD_HASH . (LAUNCHER_ID . LAUNCHER_PUZZLE_HASH))```
+```
+Statutes struct = (MOD_HASH . (LAUNCHER_ID . LAUNCHER_PUZZLE_HASH))
+```
 
 In combination with the Statutes singleton's inner puzzle hash, which is passed in via the solution, protocol coins can construct the Statutes puzzle hash using the ```calculate-statutes-puzzle-hash``` function found in [statutes_utils.clib](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib#L52). Protocol coins use this puzzle hash to send a message to the Statutes singleton to assert the relevant Statute value.
 
@@ -142,7 +144,7 @@ This operation can only be performed if the previous Statutes operation was an a
 
 Below is a complete list of Statutes, including their index, name in [statutes_utils.clib](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib), and a brief explanation of their respective function and data type.
 
-Current Statute values are shown on the dapp's Protocol page in the 
+Current Statute values are shown on the dapp's Protocol page in the Statutes dropdown.
 
 ### Fixed Statutes
 
@@ -249,7 +251,7 @@ Current Statute values are shown on the dapp's Protocol page in the
 
 ## Statutes Price:
 
-* **PRICE_INFO**: copied from Oracle once Oracle Price Delay has passed
+* **PRICE_INFO**: copied from Oracle once **Oracle Price Delay** has passed
   * **price**: XCH/USD price * 100, e.g. 3402 means a price of 34.02 USD per XCH
   * **last_updated**: [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of when the price was recorded in the Oracle
 

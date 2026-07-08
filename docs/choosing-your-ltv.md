@@ -76,7 +76,7 @@ When choosing your LTV, keep in mind that not only a decline in the XCH price ca
 
 
 [^1]: For any LTV calculations, the protocol uses the oracle price for XCH and values 1 BYC at a fixed exchange rate of 1 USD.
-[^2]  More precisely, governance sets the Liquidation Ratio (Statute `VAULT_LIQUIDATION_RATIO_PCT`). Max LTV is defined as 1 / Liquidation Ratio. E.g. LR = 166 -> Max LTV = 60%.
+[^2]  More precisely, governance sets the **Liquidation Ratio** (Statute `VAULT_LIQUIDATION_RATIO_PCT`). Max LTV is defined as 1 / Liquidation Ratio. E.g. LR = 166 -> Max LTV = 60%.
 [^2]: The principal is the amount initially borrowed when a loan is taken out. The debt owed is the principal plus any accrued Stability Fees.
 [^3]: The analysis uses hourly OHLC candlestick data from OKX for the XCH/USDT and ETH/USDT spot markets.
 [^4]: Mainnet launched on 19 March 2021, i.e. there was less than two months' worth of block rewards in circulation.

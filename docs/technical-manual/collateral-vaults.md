@@ -51,7 +51,7 @@ $$
 :::warning
 A change to SFDF does not automatically cause an update of the Statutes Price and hence the CSFDF. This means that in the calculation of CCSFDF, the new SFDF may be used retroactively from $t_S$ onwards.
 
-Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by Oracle Price Delay (```STATUTE_PRICE_DELAY```), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
+Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by **Oracle Price Delay** (```STATUTE_PRICE_DELAY```), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
 
 Users should keep in mind that although any change in the CCSFDF caused by a retroactive application of the SFDF is generally fairly small due to the limited period over which any retroactivity applies, it can in theory **unexpectedly push the debt of a vault past the Liquidation Threshold**. Users with vaults close to liquidation should therefore monitor the protocol for governance proposals to modify the SFDF.
 :::
@@ -103,7 +103,7 @@ It is possible to issue BYC against accrued Stability Fees. Any BYC issued in th
 
 SF transfers ensure that as much BYC can be brought into circulation as there is debt. This is key to preventing a structural BYC shortage, which could result in BYC trading above its 1:1 peg to the US Dollar.
 
-SF transfers are the preferred mechanism to top up the Treasury, as it is quicker than holding a recharge auction and doesn't dilute CRT holders. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the Treasury Maximum. This ensures that savers can withdraw interest on demand without first having to transfer SFs themselves.
+SF transfers are the preferred mechanism to top up the Treasury, as it is quicker than holding a recharge auction and doesn't dilute CRT holders. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the **Treasury Maximum**. This ensures that savers can withdraw interest on demand without first having to transfer SFs themselves.
 
 When setting the Treasury Maximum, governance should take into account that keepers can transfer accrued SFs to the Treasury at any time. If the Treasury Maximum is set too low, Surplus Auctions could be triggered, draining the Treasury of BYC needed to cover liabilities towards savers.
 

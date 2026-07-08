@@ -47,7 +47,7 @@ A borrower can repay their debt partially or fully by returning BYC to the vault
 
 :::info
 
-Debt can only be fully repaid if accrued Stability Fees exceed the Treasury Delta Minimum.
+Debt can only be fully repaid if accrued Stability Fees exceed the **Treasury Delta Minimum**.
 
 :::
 

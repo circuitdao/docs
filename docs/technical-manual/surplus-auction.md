@@ -17,7 +17,7 @@ Surplus Auctions have a relatively long bid timeout, making it feasible to parti
 
 ### Starting Surplus Auctions
 
-A Surplus Auction can be started as soon as the **Surplus Auction Threshold** is exceeded, which is defined as the Treasury Maximum plus the Surplus Auction Lot Amount.
+A Surplus Auction can be started as soon as the **Surplus Auction Threshold** is exceeded, which is defined as the **Treasury Maximum** plus the **Surplus Auction Lot Amount**.
 
 It is possible for multiple Surplus Auctions to run in parallel. It is even possible to start more than one Surplus Auction in the same block as long as the Treasury has sufficient surplus and there are suitable Treasury coins available to be spent.
 

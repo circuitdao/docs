@@ -6,7 +6,7 @@ sidebar_position: 230
 
 # Recharge Auction
 
-A Recharge Auction can be launched whenever the BYC balance of the Treasury drops below the Treasury Minimum.
+A Recharge Auction can be launched whenever the BYC balance of the Treasury drops below the **Treasury Minimum**.
 
 In a Recharge Auction the protocol acquires BYC to refill the Treasury by auctioning off CRT. Bidders must submit bids offering at least the **Recharge Auction Minimum Bid Amount** of BYC. Bids must also include the CRT price at which the BYC is offered. The CRT price of a bid must be greater than the **Recharge Auction Minimum CRT Price**, and greater than the CRT price of any previous bid.
 

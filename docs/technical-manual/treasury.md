@@ -48,11 +48,11 @@ The number of coins to be spent simultaneously when changing balance depends on 
 
 **Any subset of Treasury coins:**
 
-* Surplus Auction start: keeper can select any subset of Treasury coins to prove that Treasury balance is greater than Treasury Maximum plus Surplus Auction Lot Amount. For each selected Treasury coin, must specify a withdraw amount such that the sum of all withdraw amounts equals the Surplus Auction Lot Amount.
+* Surplus Auction start: keeper can select any subset of Treasury coins to prove that Treasury balance is greater than **Treasury Maximum** plus **Surplus Auction Lot Amount**. For each selected Treasury coin, must specify a withdraw amount such that the sum of all withdraw amounts equals the Surplus Auction Lot Amount.
 
 **Whole Treasury Ring:**
 
-* Recharge auction start: must spent all Treasury coins to verify that Treasury balance is below Treasury Minimum. No funds are deposited to or withdrawn from Treasury.
+* Recharge auction start: must spent all Treasury coins to verify that Treasury balance is below **Treasury Minimum**. No funds are deposited to or withdrawn from Treasury.
 
 * Recharge auction win: must spend all Treasury coins to spread BYC amount raised (BYC lot amount) evenly across all Treasury coins
 
