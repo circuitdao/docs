@@ -85,7 +85,7 @@ When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad ho
 * **Minimum Debt (MD)**
     * Statute index: 8
     * Statute name: ```STATUTE_VAULT_MINIMUM_DEBT```
-    * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / Liquidation Penalty. Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
+    * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / [Liquidation Penalty](../liquidation). Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
 * **Treasury Delta Minimum**
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```

@@ -20,7 +20,7 @@ The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/
 
 ## Stability Fees
 
-Loans taken out from collateral vaults accrue interest, also known as **Stability Fees** (SFs). The debt owed to a vault increases every minute according to the **Stability Fee Discount Factor** (SFDF) from Statutes. The corresponding annualized Stability Fee percentage rate (APR), which is the figure typically shown to the user in frontends, is calculated as
+Loans taken out from collateral vaults accrue interest, also known as **Stability Fees** (SFs). The debt owed to a vault increases every minute according to the **[Stability Fee Discount Factor](../../user-guide/collateral-vaults)** (SFDF) from Statutes. The corresponding annualized Stability Fee percentage rate (APR), which is the figure typically shown to the user in frontends, is calculated as
 
 $$
 Stability\ Fee\ APR = SFDF^{60\cdot24\cdot365}.
@@ -51,7 +51,7 @@ $$
 :::warning
 A change to SFDF does not automatically cause an update of the Statutes Price and hence the CSFDF. This means that in the calculation of CCSFDF, the new SFDF may be used retroactively from $t_S$ onwards.
 
-Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by **Oracle Price Delay** (```STATUTE_PRICE_DELAY```), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
+Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by **[Oracle Price Delay](../../user-guide/price-oracle)** (```STATUTE_PRICE_DELAY```), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
 
 Users should keep in mind that although any change in the CCSFDF caused by a retroactive application of the SFDF is generally fairly small due to the limited period over which any retroactivity applies, it can in theory **unexpectedly push the debt of a vault past the Liquidation Threshold**. Users with vaults close to liquidation should therefore monitor the protocol for governance proposals to modify the SFDF.
 :::
@@ -103,7 +103,7 @@ It is possible to issue BYC against accrued Stability Fees. Any BYC issued in th
 
 SF transfers ensure that as much BYC can be brought into circulation as there is debt. This is key to preventing a structural BYC shortage, which could result in BYC trading above its 1:1 peg to the US Dollar.
 
-SF transfers are the preferred mechanism to top up the Treasury, as it is quicker than holding a recharge auction and doesn't dilute CRT holders. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the **Treasury Maximum**. This ensures that savers can withdraw interest on demand without first having to transfer SFs themselves.
+SF transfers are the preferred mechanism to top up the Treasury, as it is quicker than holding a recharge auction and doesn't dilute CRT holders. Keepers should transfer fees on an ongoing basis to keep the Treasury filled to near the **[Treasury Maximum](../../user-guide/treasury)**. This ensures that savers can withdraw interest on demand without first having to transfer SFs themselves.
 
 When setting the Treasury Maximum, governance should take into account that keepers can transfer accrued SFs to the Treasury at any time. If the Treasury Maximum is set too low, Surplus Auctions could be triggered, draining the Treasury of BYC needed to cover liabilities towards savers.
 
@@ -173,7 +173,7 @@ The protocol allows for the repayment amount to be split in any way possible bet
 
 The app doesn't let borrowers decide how the repayment amount is split. If the repayment amount is not larger than the principal, then the entire amount is used to reduce the principal. Otherwise, accrued SFs are reduced as much as possible and the remaining repayment amount, if any, is applied against the principal.
 
-The amount of SFs being repaid, if not zero, must exceed the **Treasury Delta Minimum**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
+The amount of SFs being repaid, if not zero, must exceed the **[Treasury Delta Minimum](../../user-guide/treasury)**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
 The operation only succeeds if after the repayment the vault is sufficiently overcollateralised. The only situation in which this may not be the case is if the vault is liquidatable but liquidation has not been started yet.
 

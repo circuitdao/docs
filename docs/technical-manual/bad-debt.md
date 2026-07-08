@@ -10,7 +10,7 @@ If all of a vault's collteral has been auctioned off in a liquidation but there 
 
 In the unlikely case that the liquidation initiator has not been paid their full initiator incentive, any remaining balance is forfeited. Any remaining accrued Stability Fees are owed to the Treasury, and as such cancel out for bad debt recovery purposes and are ignored too. This leaves the remaining principal as the bad debt that needs to be recovered. If there is a Treasury coin with amount larger than the remaining bad debt, this can be done in a single operation.
 
-Otherwise bad debt can be recovered in multiple tranches, with the only requirement being that the amount recovered per operation must exceed **Treasury Delta Minimum** or recover all remaining Bad Debt.
+Otherwise bad debt can be recovered in multiple tranches, with the only requirement being that the amount recovered per operation must exceed **[Treasury Delta Minimum](../../user-guide/treasury)** or recover all remaining Bad Debt.
 
 Once all bad debt has been recovered, the vault is returned in eve state to its owner, i.e. without any collateral or debt.
 

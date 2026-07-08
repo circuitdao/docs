@@ -148,16 +148,16 @@ An approved Announcer may be registered with the Announcer Registry by its data 
 
 Announcers can be penalized if they are not well-behaved. Having a penalization mechanism in place protects the protocol as it sets a strong incentive for data providers to do their job well.
 
-An Announcer is penalized by applying the **Penalty Factor** to the Announcer's deposit. This slashes XCH from the Announcer coin's amount. The slashed amount is paid as a transaction fee and as such accrues to be benefit of the farmer of the block. The Penalty Factor is given in basis points and indicates the share of the deposit that will remain, e.g. ```9500``` means that 95% of the deposit remains, which is equivalent to 5% getting slashed. Penalization can result in the deposit being smaller than the Minimum Deposit.
+An Announcer is penalized by applying the **[Penalty Factor](../../user-guide/price-oracle)** to the Announcer's deposit. This slashes XCH from the Announcer coin's amount. The slashed amount is paid as a transaction fee and as such accrues to be benefit of the farmer of the block. The Penalty Factor is given in basis points and indicates the share of the deposit that will remain, e.g. ```9500``` means that 95% of the deposit remains, which is equivalent to 5% getting slashed. Penalization can result in the deposit being smaller than the Minimum Deposit.
 
 Keepers can penalize approved Announcers in the following circumstances:
 * Announcer Price is expired, ie current time is greater than ```TIMESTAMP_EXPIRES```
 * ```VALUE_TTL``` is greater than Announcer Price TTL Statue
 * ```DEPOSIT``` is smaller than Minimum Deposit
 
-The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the **Implementation Period**, in order to minimize the risk of missing the dealine and incurring penalties.
+The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the **[Implementation Period](../../user-guide/governance)**, in order to minimize the risk of missing the dealine and incurring penalties.
 
-A penalization can occur at most once per **Penalty Interval** (```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
+A penalization can occur at most once per **[Penalty Interval](../../user-guide/price-oracle)** (```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
 
 #### State changes
 

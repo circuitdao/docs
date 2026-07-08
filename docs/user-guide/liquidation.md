@@ -62,7 +62,7 @@ The keeper that triggers a liquidation is referred to as the **initiator**. Alto
 
 When bids are placed in a liquidaiton auction, the initiator incentive is paid before any of the debt owed to the vault is repaid.
 
-AII and RII must be set such that they can be paid from the Liquidation Penalty in all circumstances, which requires the **Minimum Debt** Statute to be taken into account.
+AII and RII must be set such that they can be paid from the Liquidation Penalty in all circumstances, which requires the **[Minimum Debt](../collateral-vaults)** Statute to be taken into account.
 
 If bad debt is incurred, the initiator loses out on any unpaid initiator incentive.
 

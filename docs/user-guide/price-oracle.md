@@ -88,7 +88,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 * **Oracle Price Update Delay**
     * Statute index: 5
     * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_DELAY```
-    * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the the Liquidation Ratio
+    * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the the [Liquidation Ratio](../liquidation)
 * **Oracle Price Update Delta**
     * Statute index: 6
     * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_RATIO_BPS```

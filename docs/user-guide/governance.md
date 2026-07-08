@@ -62,7 +62,7 @@ A proposal can be blocked if within the Veto Period the proposal is vetoed by an
 
 The Implementation Delay gives users time to withdraw their assets from the protocol in an orderly manner if they are unhappy with the changes made by the proposal. In particular, it protects users from a malicious governance takeover in which an attacker secretly accumulates a CRT stake large enough to make a proposal that cannot be vetoed. As governance takeovers are in general impossible to detect in advance, users of the protocol should keep in mind that a Statute may change to a value unacceptable to them after the Implementation Delay has passed. For example, a borrower may want to ensure that they can repay their loan within the Implementation Delay period for relevant Statutes.
 
-The Maximum Delta Constraint is designed to give users assurances about the size of changes to Statute values that need to have a relatively short Implementation Delay, for example to respond to changing market conditions. Statutes for which this is relevant are Stability Fee, Savings Rate, and Treasury Maximum. For other Statutes, Maximum Delta would typically be set to 0, allowing updates of any size.
+The Maximum Delta Constraint is designed to give users assurances about the size of changes to Statute values that need to have a relatively short Implementation Delay, for example to respond to changing market conditions. Statutes for which this is relevant are Stability Fee, Savings Rate, and [Treasury Maximum](../treasury). For other Statutes, Maximum Delta would typically be set to 0, allowing updates of any size.
 
 ## User considerations
 

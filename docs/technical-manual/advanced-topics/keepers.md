@@ -14,7 +14,7 @@ Keepers tend to be specialised crypto trading or market making firms, but this i
 
 Keeper operations can be divided into two types, those that result in a direct financial gain for keepers, and those that don't.
 
-Triggering a liquidation auction is an example of a keeper operation that results in a direct financial gain. The triggering keeper is rewarded with Absolute and Relative Liquidation Incentives as the auction progresses. Similarly, submitting a successful bid in a liquidation auction is rewarded with a share of the **Liquidation Penalty**.
+Triggering a liquidation auction is an example of a keeper operation that results in a direct financial gain. The triggering keeper is rewarded with Absolute and Relative Liquidation Incentives as the auction progresses. Similarly, submitting a successful bid in a liquidation auction is rewarded with a share of the **[Liquidation Penalty](../../../user-guide/liquidation)**.
 
 Recovering Bad Debt is an example of an operation without direct financial gain. For these types of operation, there is only the general incentive for CRT and BYC holders as well as protocol users to ensure that CRT doesn't lose in value, BYC stays pegged, and the protocol continues to operate smoothly.
 

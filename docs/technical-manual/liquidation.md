@@ -20,13 +20,13 @@ Since liquidation auctions are Dutch auctions, there is an initial **auction pri
 Start Price = Statutes Price * Starting Price Factor
 ```
 
-Auction price reductions take place after each **Auction Price TTL** (```STATUTE_VAULT_AUCTION_PRICE_TTL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
+Auction price reductions take place after each **[Auction Price TTL](../../user-guide/liquidation)** (```STATUTE_VAULT_AUCTION_PRICE_TTL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
 
 ```
 Step Size = Start Price * Auction Price Step
 ```
 
-where **Auction Price Step** is given by ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```.
+where **[Auction Price Step](../../user-guide/liquidation)** is given by ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```.
 
 For example, if the Start Price is ```20.00 XCH/BYC``` and Auction Price Step is ```5%```, then the Step Size is ```20.00 * 5% = 1.00```, and auction prices would be ```20.00```, ```19.00```, ```18.00```, ```17.00```, and so on until the auction times out.
 
@@ -45,7 +45,7 @@ Starts or restarts a liquidation auction. A liquidation auction can be started i
 
 The keeper that executes the start operation is referred to as the **initiator**. Executing the start operation entitles the initiator to the [initiator incentive](../../user-guide/liquidation#liquidation-incentives), which will get paid to the ```initiator_puzzle_hash``` supplied by the initiator.
 
-When a collateral vault is liquidated, Stability Fees stop accruing and a **Liquidation Penalty** is added on top of the pre-liquidation debt. The Liquidation Penalty is defined to be a number of basis points of the pre-liquidation debt as given by ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```.
+When a collateral vault is liquidated, Stability Fees stop accruing and a **[Liquidation Penalty](../../user-guide/liquidation)** is added on top of the pre-liquidation debt. The Liquidation Penalty is defined to be a number of basis points of the pre-liquidation debt as given by ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```.
 
 Once the Liquidation Penalty has been added, the debt is split into three components for accounting purposes: **initiator incentive balance**, which is the initator incentive, **BYC to Treasury balance**, which is accrued Stability Fees plus any part of the Liquidation Penalty that wasn't allocated to the initiator incentive, and **BYC to melt balance**, which is the principal. These are reduced successively with each bid.
 
@@ -58,7 +58,7 @@ debt = initiator incentive balance + BYC to Treasury balance + BYC to melt balan
 A vault keeps track of the state of a Liquidation Auction in the ```AUCTION_STATE``` curried arg. Auction state variables are:
 
 * ```auction_start_time```: timestamp of when auction was (re-)started
-* ```start_price```: price at which auction starts. calculated as Statutes Price * **Starting Price Factor**
+* ```start_price```: price at which auction starts. calculated as Statutes Price * **[Starting Price Factor](../../user-guide/liquidation)**
 * ```step_price_decrease_factor```: factor by which auction price decreases in each step of auction
 * ```step_time_interval```: number of seconds for which an auction price is valid before it gets reduced again
 * ```initiator_puzzle_hash```: puzzle hash at which the initiator has opted to receive the initiator incentive
@@ -84,7 +84,7 @@ Note that the curried args ```PRINCIPAL``` and ```DISCOUNTED_PRINCIPAL``` are no
 
 ### Bid
 
-Once started, keepers can bid in the liquidation auction until it times out or the **Minimum Auction Price** is reached.
+Once started, keepers can bid in the liquidation auction until it times out or the **[Minimum Auction Price](../../user-guide/liquidation)** is reached.
 
 Although liquidation auctions have an implicit minimum auction price given by the parameters ```start_price```, ```step_price_decrease_factor```, ```step_time_interval```, and ```auction_ttl```, it needs a small calculation to determine. To make it straightforward for borrowers to verify what percentage of their collateral they can lose at most per liquidation auction, the Minimum Auction Price sets a lower bound on the auction price below which it is not possible to place bids until the auction times out and is restarted.
 
@@ -112,7 +112,7 @@ A bid requires several coin spends. Depending on how much of the total debt has 
 
 ![Liquidation Auction coin spends](./../../static/img/Liquidation_auction_bid_coin_spend_diagram.png)
 
-Note that a bid requires a Statutes coin spend only if BYC is being repaid to Treasury. If this is the case, then the amount repaid to Treasury must exceed the **Treasury Delta Minimum**.
+Note that a bid requires a Statutes coin spend only if BYC is being repaid to Treasury. If this is the case, then the amount repaid to Treasury must exceed the **[Treasury Delta Minimum](../../user-guide/treasury)**.
 
 If a liquidation auction has timed out and all the debt has been recovered, the liquidation was successful. The vault is released back to the borrower together with any collateral that wasn't claimed in the auction.
 
