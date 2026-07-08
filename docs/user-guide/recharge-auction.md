@@ -14,7 +14,7 @@ In a Recharge Auction the protocol acquires BYC to refill the Treasury by auctio
 
 Note that the amount of BYC offered in a bid can be chosen to be smaller than that of a previous bid. This ensures that keepers with only small amounts of capital can continue to participate in an auction and cannot be pushed out by better capitalised bidders.
 
-The auction concludes if a bid sees no higher bid within **Recharge Auction Bid TTL** seconds (TTL = time to live) or if there is no bid and the **Recharge Auction Timeout** has been reached. Bids can be placed only before the Recharge Auction Timeout has been reached.
+The auction concludes if a bid sees no higher bid within **Recharge Auction Bid TTL** seconds (TTL = time to live) or if there is no bid and the **Recharge Auction TTL** has been reached. Bids can be placed only before the Recharge Auction TTL has been reached.
 
 The winning bidder receives an amount of CRT equal to the BYC amount offered divided by the CRT price bid. In return, the Treasury receives the BYC amount offered.
 
@@ -32,7 +32,7 @@ Recharge Auctions increase the CRT supply.
     * Statute index: 26
     * Statute name: ```STATUTE_RECHARGE_AUCTION_MINIMUM_CRT_PRICE```
     * considerations: should be set high enough to prevent unreasonable amounts of CRT being minted (without a minimum CRT price, CRT holders could get infinitely diluted), for example in cases where only one keeper shows up to participate in the auction. should be set low enough that it is highly likely that the Treasury can be refilled. Since Recharge auctions are generally a last resort measure to cover protocol liabilities, and in particular Bad Debt, a failure to raise BYC could result in a loss of confidence in the protocol and a death spiral for BYC.
-* **Recharge Auction Timeout**
+* **Recharge Auction TTL**
     * Statute index: 25
     * Statute name: ```STATUTE_RECHARGE_AUCTION_TTL```
     * considerations: should be long enough to allow keepers to show up for the auction to achieve a competitive bidding process and minimize the amount of CRT that gets minted.

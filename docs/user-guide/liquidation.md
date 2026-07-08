@@ -86,7 +86,7 @@ The auction ends when either
 * there is no collateral left in the vault; or
 * the auction has timed out.
 
-An auction ends the latest when the **Liquidation Auction Timeout** has been reached. Since Start Price, Auction Price TTL and Auction Price Step are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
+An auction ends the latest when the **Liquidation Auction TTL** has been reached. Since Start Price, Auction Price TTL and Auction Price Step are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
 
 A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt becomes bad debt.
 
@@ -109,7 +109,7 @@ A timed out auction can be restarted. This process continues ad infinitum until 
     * Statute index: 12
     * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_BPS```
     * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.
-* **Liquidation Auction Timeout (LAT)**
+* **Liquidation Auction TTL**
     * Statute index: 13
     * Statute name: ```STATUTE_VAULT_AUCTION_TTL```
     * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantional amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.
