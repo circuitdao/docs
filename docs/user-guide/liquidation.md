@@ -77,16 +77,16 @@ The purpose of a Liquidation Auction is to recover debt as quickly as possible t
 
 The auction starts with a **Start Price** (SP), calculated as the [Statutes Price](../../technical-manual/statutes) multiplied by the **Starting Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for a potential rebound in the XCH price before the auction starts.
 
-As the auction is underway, the auction price automatically decreases step-by-step every few blocks as defined by the **Step Time Interval** (PV) parameter.
+As the auction is underway, the auction price automatically decreases step-by-step every few blocks as defined by the **Auction Price TTL** parameter.
 
-The amount by which the auction price is lowered in each step is specified by the **Price Decrease Factor** parameter. The PD is calculated as a percentage of the Start Price, and gets substracted from the previous auction price at each step.
+The amount by which the auction price is lowered in each step is specified by the **Auction Price Step** parameter. The Auction Price Step is calculated as a percentage of the Start Price, and gets substracted from the previous auction price at each step.
 
 The auction ends when either
 * the vault's debt is fully repaid
 * there is no collateral left in the vault; or
 * the auction has timed out.
 
-An auction ends the latest when the **Liquidation Auction Timeout** has been reached. Since Start Price, Step Time Interval and Price Decrease Factor are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
+An auction ends the latest when the **Liquidation Auction Timeout** has been reached. Since Start Price, Auction Price TTL and Auction Price Step are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
 
 A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt becomes bad debt.
 
@@ -117,11 +117,11 @@ A timed out auction can be restarted. This process continues ad infinitum until 
     * Statute index: 14
     * Statute name: ```STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR_BPS```
     * considerations: A higher value enables keepers to place a bid in more scenarios in which there's been a rebound of the market price between the latest Statutes Price update and the beginning of the auction. A lower value makes it more likely that the auction will finish quickly if the collateral price has continued to fall after the last Statutes Price update.
-* **Step Time Interval (STI)**
+* **Auction Price TTL**
     * Statute index: 15
     * Statute name: ```STATUTE_VAULT_AUCTION_PRICE_TTL```
     * considerations: A higher value gives keepers more time to bid, but increases the risk that the value of the collateral falls further until the auction has completed. A low value might make it difficult for keepers that bid manually to keep up.
-* **Step Price Decrease Factor (PD)**
+* **Auction Price Step**
     * Statute index: 16
     * Statute name: ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```
     * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.

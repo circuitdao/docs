@@ -20,15 +20,15 @@ Since liquidation auctions are Dutch auctions, there is an initial **auction pri
 Start Price = Statutes Price * Starting Price Factor
 ```
 
-Auction price reductions take place after each **Step Interval** (```STATUTE_VAULT_AUCTION_PRICE_TTL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
+Auction price reductions take place after each **Auction Price TTL** (```STATUTE_VAULT_AUCTION_PRICE_TTL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
 
 ```
-Step Size = Start Price * Auction Price Decrease Factor
+Step Size = Start Price * Auction Price Step
 ```
 
-where **Auction Price Decrease Factor** is given by ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```.
+where **Auction Price Step** is given by ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```.
 
-For example, if the Start Price is ```20.00 XCH/BYC``` and Auction Price Decrease Factor is ```5%```, then the Step Size is ```20.00 * 5% = 1.00```, and auction prices would be ```20.00```, ```19.00```, ```18.00```, ```17.00```, and so on until the auction times out.
+For example, if the Start Price is ```20.00 XCH/BYC``` and Auction Price Step is ```5%```, then the Step Size is ```20.00 * 5% = 1.00```, and auction prices would be ```20.00```, ```19.00```, ```18.00```, ```17.00```, and so on until the auction times out.
 
 
 ## Operations
@@ -92,7 +92,7 @@ If it is currently possible to place a bid in a liquidation auction, the auction
 
 Bidders specify how much of the remaining debt they would like to repay. This is the **BYC bid amount**. The collateral vault puzzle calculates the **XCH bid amount**, which is the amount of collateral that the bidder receives in return based on the current auction price.
 
-The auction price is calculated based on the time that has passed since the start of the auction, **Price Validity** (```step_time_interval```) and **Price Decrease Factor** (```step_price_decrease_factor```). See the [Liquidation Auction](../../user-guide/liquidation#liquidation-auction) section in the User Guide for a diagram.
+The auction price is calculated based on the time that has passed since the start of the auction, **Auction Price TTL** (```step_time_interval```) and **Auction Price Step** (```step_price_decrease_factor```). See the [Liquidation Auction](../../user-guide/liquidation#liquidation-auction) section in the User Guide for a diagram.
 
 BYC bid amounts are applied against any remaining debt in the following order:
 * Initiator Incentive balance
@@ -112,7 +112,7 @@ A bid requires several coin spends. Depending on how much of the total debt has 
 
 ![Liquidation Auction coin spends](./../../static/img/Liquidation_auction_bid_coin_spend_diagram.png)
 
-Note that a bid requires a Statutes coin spend only if BYC is being repaid to Treasury. If this is the case, then the amount repaid to Treasury must exceed the **Minimum Treasury Delta**.
+Note that a bid requires a Statutes coin spend only if BYC is being repaid to Treasury. If this is the case, then the amount repaid to Treasury must exceed the **Treasury Delta Minimum**.
 
 If a liquidation auction has timed out and all the debt has been recovered, the liquidation was successful. The vault is released back to the borrower together with any collateral that wasn't claimed in the auction.
 

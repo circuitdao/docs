@@ -28,7 +28,7 @@ If the Treasury balance is below the **Treasury Minimum** less the [Recharge Auc
 
 ![Treasury thresholds](./../../static/img/Treasury_thresholds_diagram.png)
 
-Another option to top up the Treasury is to issue BYC against accrued Stability Fees in collateral vaults. This can be done by anyone at any time. The amount of BYC issued in this manner is added to the principal of the respective collateral vault. Note that this does not increase the vault's debt. A SF transfer always transfers all accrued SFs. A fee transfer is only permitted if it is larger than the **Minimum Treasury Delta** and the collateral vault is not in liquidation or bad debt. SF transfers are an important mechanism that ensures the protocol can pay interest to savers on demand.
+Another option to top up the Treasury is to issue BYC against accrued Stability Fees in collateral vaults. This can be done by anyone at any time. The amount of BYC issued in this manner is added to the principal of the respective collateral vault. Note that this does not increase the vault's debt. A SF transfer always transfers all accrued SFs. A fee transfer is only permitted if it is larger than the **Treasury Delta Minimum** and the collateral vault is not in liquidation or bad debt. SF transfers are an important mechanism that ensures the protocol can pay interest to savers on demand.
 
 ![Stability Fee transfer](./../../static/img/Stability_Fee_transfer_diagram.png)
 
@@ -52,7 +52,7 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
     * Statute index: 21
     * Statute name: ```STATUTE_TREASURY_MAXIMUM```
     * considerations: should be set to a value greater than accrued savings interest to have a buffer for covering bad debt. the buffer should be sufficiently large to not need constant readjustments as savings interest accrues over time. the buffer should also not be so large that it puts upwards price pressure on the BYC price.
-* **Minimum Treasury Delta**:
+* **Treasury Delta Minimum**:
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
     * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents large amounts of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.

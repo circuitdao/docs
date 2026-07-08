@@ -173,7 +173,7 @@ The protocol allows for the repayment amount to be split in any way possible bet
 
 The app doesn't let borrowers decide how the repayment amount is split. If the repayment amount is not larger than the principal, then the entire amount is used to reduce the principal. Otherwise, accrued SFs are reduced as much as possible and the remaining repayment amount, if any, is applied against the principal.
 
-The amount of SFs being repaid, if not zero, must exceed the **Minimum Treasury Delta**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
+The amount of SFs being repaid, if not zero, must exceed the **Treasury Delta Minimum**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
 The operation only succeeds if after the repayment the vault is sufficiently overcollateralised. The only situation in which this may not be the case is if the vault is liquidatable but liquidation has not been started yet.
 
@@ -198,7 +198,7 @@ Issues BYC against a collateral vault's accrued Stability Fees. BYC issued is at
 
 The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculcated by calculating the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued than debt owed to the vault.
 
-A SF transfer is only permitted is the transfer amount exceeds the **Minimum Treasury Delta**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
+A SF transfer is only permitted is the transfer amount exceeds the **Treasury Delta Minimum**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
 The operation can only be performed if the vault is sufficiently overcollateralised.
 
