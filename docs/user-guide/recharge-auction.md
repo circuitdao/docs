@@ -25,19 +25,19 @@ Recharge Auctions increase the CRT supply.
 ## Statutes
 
 * **Recharge Auction Minimum Bid Amount**
-    * Statute index: 23
-    * Statute name: STATUTE_RECHARGE_AUCTION_MINIMUM_BID_AMOUNT
+    * Statute index: 28
+    * Statute name: ```STATUTE_RECHARGE_AUCTION_MINIMUM_BID```
     * considerations: should be small enough to allow keepers with little working capital to participate in the auction. should be large enough to allow the protocol to refill the Treasury at a reasonable rate so that liabilities can be covered in a timely manner.
 * **Recharge Auction Minimum CRT Price**
-    * Statute index: 21
-    * Statute name: STATUTE_RECHARGE_AUCTION_BID_TTL
+    * Statute index: 26
+    * Statute name: ```STATUTE_RECHARGE_AUCTION_MINIMUM_CRT_PRICE```
     * considerations: should be set high enough to prevent unreasonable amounts of CRT being minted (without a minimum CRT price, CRT holders could get infinitely diluted), for example in cases where only one keeper shows up to participate in the auction. should be set low enough that it is highly likely that the Treasury can be refilled. Since Recharge auctions are generally a last resort measure to cover protocol liabilities, and in particular Bad Debt, a failure to raise BYC could result in a loss of confidence in the protocol and a death spiral for BYC.
 * **Recharge Auction Timeout**
-    * Statute index: 20
-    * Statute name: STATUTE_RECHARGE_AUCTION_TIMEOUT
+    * Statute index: 25
+    * Statute name: ```STATUTE_RECHARGE_AUCTION_TTL```
     * considerations: should be long enough to allow keepers to show up for the auction to achieve a competitive bidding process and minimize the amount of CRT that gets minted.
 * **Recharge Auction Bid TTL**
-    * Statute index: 22
-    * Statute name: STATUTE_RECHARGE_AUCTION_BID_TTL
+    * Statute index: 27
+    * Statute name: ```STATUTE_RECHARGE_AUCTION_BID_TTL```
     * considerations: should be long enough to allow keepers to show up for the auction to achieve a competitive bidding process and minimize the amount of CRT that gets minted.
 

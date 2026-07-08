@@ -82,34 +82,34 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 ## Statutes
 
 * **Oracle M-of-N**
-    * Statute index: 5
-    * Statute name: STATUTE_ORACLE_M_OF_N
+    * Statute index: 4
+    * Statute name: ```STATUTE_ORACLE_M_OF_N```
     * considerations: a higher value leads to a larger sample size and hence generally better Oracle Price quality. Care must be taken to not choose M-of-N too close to the number of whitelisted Announcers so that it creates a risk that the Oracle Price can no longer be updated if multiple Announcers fail to publish a price or publish inaccurate prices.
 * **Oracle Price Update Delay**
-    * Statute index: 6
-    * Statute name: STATUTE_ORACLE_PRICE_UPDATABLE_AFTER_SECONDS
+    * Statute index: 5
+    * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_DELAY```
     * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the the Liquidation Ratio
 * **Oracle Price Update Delta**
-    * Statute index: 7
-    * Statute name: STATUTE_ORACLE_PRICE_UPDATABLE_PERCENT_THRESHOLD
+    * Statute index: 6
+    * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_RATIO_BPS```
     * considerations: needs to be small enough so that liquidations can get triggered in a timely manner. should be large enough to prevent unnecessary oracle updates and oracle coin hogging attacks
 * **Oracle Price Delay**
-    * Statute index: 8
-    * Statute name: STATUTE_ORACLE_PRICE_EXPIRATION_SECONDS
+    * Statute index: 7
+    * Statute name: ```STATUTE_PRICE_DELAY```
     * considerations: a longer delay gives users of the system more time to perform mitigating actions should the oracle price be incorrect. it also gives governance more time to disable price updates in such a scenario. a shorter delay leads to more timely liquidations and more accurate limits on borrowing, both of which reduce risk of the system becoming insufficiently or under-collateralised.
 * **Announcer Validity**
-    * Statute index: 31
-    * Statute name: STATUTE_ANNOUNCER_DELAY
+    * Statute index: 35
+    * Statute name: ```STATUTE_ANNOUNCER_MAXIMUM_VALUE_TTL```
     * considerations:
 * **Announcer Minimum Deposit**
-    * Statute index: 30
-    * Statute name: STATUTE_ANNOUNCER_MIN_DEPOSIT
+    * Statute index: 34
+    * Statute name: ```STATUTE_ANNOUNCER_MINIMUM_DEPOSIT_MOJOS```
     * considerations: should be high enough to set a strong incentive for Announcers to run high availablity infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
 * **Penalty Factor**
-    * Statute index: 33
-    * Statute name: STATUTE_ANNOUNCER_PENALTY_FACTOR_PER_INTERVAL
+    * Statute index: 37
+    * Statute name: ```STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS```
     * considerations: similar considerations as with Announcer Minimum Deposit.
 * **Penalty Interval**
-    * Statute index: 32
-    * Statute name: STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES
+    * Statute index: 36
+    * Statute name: ```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```
     * considerations: similar considerations as with Announcer Minimum Deposit.

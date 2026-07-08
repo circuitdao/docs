@@ -30,14 +30,14 @@ There can be multiple Surplus Auction at the same time. If the Surplus Auction T
 ## Statutes
 
 * **Minimum Bid Increase**
-    * Statutes index: 22
-    * Statutes name: STATUTE_MINIMUM_BID_INCREASE_BPS
+    * Statute index: 24
+    * Statute name: ```STATUTE_AUCTIONS_MINIMUM_PRICE_INCREASE_BPS```
     * considerations: should be large enough to ensure auctions don't drag on for too long.
 * **Surplus Auction Lot Amount**
-    * Statutes index: 27
-    * Statutes name: STATUTE_SURPLUS_AUCTION_LOT
+    * Statute index: 30
+    * Statute name: ```STATUTE_SURPLUS_AUCTION_LOT```
     * considerations: should be small enough to allow keepers with little working capital to participate in the auction. should be large enough to allow the protocol to discharge BYC at a reasonably fast rate so that BYC accumulation in Treasury doesn't cause upwards pressure on the BYC peg.
 * **Surplus Auction Bid TTL**
-    * Statute index: 28
-    * Statute name: STATUTE_SURPLUS_AUCTION_BID_TTL
+    * Statute index: 31
+    * Statute name: ```STATUTE_SURPLUS_AUCTION_BID_TTL```
     * considerations: should be long enough to allow even less sophisticated keepers, eg those without automated bidding tools, to submit bids. The aim is a competitive bidding process to maximize the amount of CRT that gets melted.

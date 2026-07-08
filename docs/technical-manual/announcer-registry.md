@@ -108,10 +108,10 @@ Being a custom singleton, the Announcer Registry requires a lineage proof when s
 
 ## Statutes
 * **Reward per Interval**
-    * Statute index: 29
-    * Statute name: STATUTE_ANNOUNCER_CRT_CREDITS_PER_INTERVAL
+    * Statute index: 33
+    * Statute name: ```STATUTE_ANNOUNCER_REWARDS_PER_INTERVAL```
     * considerations:
 * **Reward Interval**
-    * Statute index: 30
-    * Statute name:STATUTE_ANNOUNCER_CREDITS_INTERVAL
+    * Statute index: 32
+    * Statute name: ```STATUTE_ANNOUNCER_REWARDS_INTERVAL_PRICE_UPDATES```
     * considerations:

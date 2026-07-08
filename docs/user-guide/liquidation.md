@@ -95,37 +95,37 @@ A timed out auction can be restarted. This process continues ad infinitum until 
 
 * **Liquidation Ratio (LR)**
     * Statute index: 9
-    * Statute name: `STATUTE_VAULT_LIQUIDATION_RATIO_PCT`
+    * Statute name: ```STATUTE_VAULT_LIQUIDATION_RATIO_PCT```
     * considerations: The higher the LR, the more overcollateralized the system becomes, and the less likely a depeg to the downside becomes. On the other hand, a higher LR makes it less attractive to borrow BYC, due to the higher associated capital costs of having to lock up more XCH.
 * **Liquidation Penalty (LP)**
     * Statute index: 10
-    * Statute name: `STATUTE_VAULT_LIQUIDATION_PENALTY_BPS`
+    * Statute name: ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```
     * considerations: Needs to be high enough to set a strong incentive to borrowers to keep vaults sufficiently collateralized without being unreasonably punitive.
 * **Absolute Initiator Incentive**
     * Statute index: 11
-    * Statute name: `STATUTE_VAULT_INITIATOR_INCENTIVE_FLAT`
+    * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_FLAT```
     * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below).
 * **Relative Initiator Incentive**
     * Statute index: 12
-    * Statute name: `STATUTE_VAULT_INITIATOR_INCENTIVE_BPS`
+    * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_BPS```
     * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.
 * **Liquidation Auction Timeout (LAT)**
     * Statute index: 13
-    * Statute name: `STATUTE_VAULT_AUCTION_TTL`
+    * Statute name: ```STATUTE_VAULT_AUCTION_TTL```
     * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantional amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.
 * **Starting Price Factor (SPF)**
     * Statute index: 14
-    * Statute name: `STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR_BPS`
+    * Statute name: ```STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR_BPS```
     * considerations: A higher value enables keepers to place a bid in more scenarios in which there's been a rebound of the market price between the latest Statutes Price update and the beginning of the auction. A lower value makes it more likely that the auction will finish quickly if the collateral price has continued to fall after the last Statutes Price update.
 * **Step Time Interval (STI)**
     * Statute index: 15
-    * Statute name: `STATUTE_VAULT_AUCTION_PRICE_TTL`
+    * Statute name: ```STATUTE_VAULT_AUCTION_PRICE_TTL```
     * considerations: A higher value gives keepers more time to bid, but increases the risk that the value of the collateral falls further until the auction has completed. A low value might make it difficult for keepers that bid manually to keep up.
 * **Step Price Decrease Factor (PD)**
     * Statute index: 16
-    * Statute name: `STATUTE_VAULT_AUCTION_STEP_PRICE_DECREASE_BPS`
+    * Statute name: ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```
     * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
 * **Minimum Auction Price**
     * Statute index: 17
-    * Statute name: `STATUTE_VAULT_AUCTION_MINIMUM_PRICE_FACTOR`
+    * Statute name: ```STATUTE_VAULT_AUCTION_MINIMUM_PRICE_FACTOR_BPS```
     * considerations: This value serves as an easily verifiable backstop to the implicit minimum auction price. As such it should be identical or very close to the implicit value.

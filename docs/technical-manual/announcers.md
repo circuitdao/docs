@@ -157,7 +157,7 @@ Keepers can penalize approved Announcers in the following circumstances:
 
 The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the Implementation Period, in order to minimize the risk of missing the dealine and incurring penalties.
 
-A penalization can occur at most once per **Penalty Interval** (STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
+A penalization can occur at most once per **Penalty Interval** (```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
 
 #### State changes
 

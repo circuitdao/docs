@@ -45,9 +45,9 @@ The Savings Rate is set by governance. Although it is not directly tied to the S
 
 * **Interest Discount Factor**
     * Statute index: 2
-    * Statute name: `STATUTE_INTEREST_DF`
+    * Statute name: ```STATUTE_INTEREST_DF```
     * considerations: The higher this value is set, the more support is given to the BYC-USD peg from below. If the value is set too high, it may slow down the rate at which the System Buffer fills up. The SR should not be greater than the Stabiliy Fee, as this would present an arbitrage that could lead to unlimited losses to the protocol.
 * **Treasury Minimum Delta**
-    * Statutes index: 22
-    * Statutes name: `STATUTE_TREASURY_MINIMUM_DELTA`
+    * Statute index: 22
+    * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
     * considerations: Choose large enough to prevent Treausry coin hogging. Choose small enough to allow small scale savers to make regular interest withdrawals

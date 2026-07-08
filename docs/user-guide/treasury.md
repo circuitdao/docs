@@ -42,17 +42,17 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
 
 * **Approval Mod Hashes**:
     * Statute index: -3
-    * Statute name: STATUTE_APPROVAL_MOD_HASHES_HASH
+    * Statute name: ```STATUTE_APPROVAL_MOD_HASHES_HASH```
     * considerations: it is crucial that approver mods can only spend treasury funds in very specific circumstances as intended by the protocol.
 * **Treasury Minimum**:
-    * Statute index: 17
-    * Statute name: STATUTE_TREASURY_MINIMUM
+    * Statute index: 20
+    * Statute name: ```STATUTE_TREASURY_MINIMUM```
     * considerations: other than at protocol launch, should be set to a value greater than 0 as a buffer to cover bad debt. Should not be set too large to prevent unnecessary recharge auctions.
 * **Treasury Maximum**:
-    * Statute index: 18
-    * Statute name: STATUTE_TREASURY_MAXIMUM
+    * Statute index: 21
+    * Statute name: ```STATUTE_TREASURY_MAXIMUM```
     * considerations: should be set to a value greater than accrued savings interest to have a buffer for covering bad debt. the buffer should be sufficiently large to not need constant readjustments as savings interest accrues over time. the buffer should also not be so large that it puts upwards price pressure on the BYC price.
 * **Minimum Treasury Delta**:
-    * Statute index: 19
-    * Statute name: STATUTE_TREASURY_MINIMUM_DELTA
+    * Statute index: 22
+    * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
     * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents large amounts of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.

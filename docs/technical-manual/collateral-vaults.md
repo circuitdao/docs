@@ -51,7 +51,7 @@ $$
 :::warning
 A change to SFDF does not automatically cause an update of the Statutes Price and hence the CSFDF. This means that in the calculation of CCSFDF, the new SFDF may be used retroactively from $t_S$ onwards.
 
-Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by Oracle Price Delay (STATUTE_ORACLE_PRICE_EXPIRATION_SECONDS), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
+Keepers may be able to trigger an update of the Statutes Price in the same block or shortly after a change to SFDF, but this depends on the timestamps of the Oracle prices stored in the Oracle. If new Oracle prices were always added at the earliest opportunity, i.e. no later than indicated by Oracle Price Delay (```STATUTE_PRICE_DELAY```), then in the calculation of CCSFDF, the retroactive period over which the new SFDF is used will not be longer than twice the Oracle Price Delay.
 
 Users should keep in mind that although any change in the CCSFDF caused by a retroactive application of the SFDF is generally fairly small due to the limited period over which any retroactivity applies, it can in theory **unexpectedly push the debt of a vault past the Liquidation Threshold**. Users with vaults close to liquidation should therefore monitor the protocol for governance proposals to modify the SFDF.
 :::

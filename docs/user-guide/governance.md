@@ -77,13 +77,13 @@ For example, consider a user who borrows BYC at an 8% Stability Fee to invest in
 ## Statutes
 * **Proposal Fee**
     * Statue index: 40
-    * Statute name: `STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS`
+    * Statute name: ```STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS```
     * considerations: should be big enough to prevent spam proposals. should be small enough to shut out all but the largest CRT holders from participation in governance processes.
 * **Implementation Period**
     * Statute index: 41
-    * Statute name: `STATUTE_GOVERNANCE_IMPLEMENTATION_INTERVAL`
+    * Statute name: ```STATUTE_GOVERNANCE_IMPLEMENTATION_INTERVAL```
     * considerations: should be long enough to allow manual implementation in a low-fee period. should be short enough to avoid attacks in which successful proposals are kept lingering and forgotten about only to be implemented unexpectedly in a changed environment.
 * **Governance Cooldown**
     * Statute index: 42
-    * Statute name: `STATUTE_GOVERNANCE_COOLDOWN_INTERVAL`
+    * Statute name: ```STATUTE_GOVERNANCE_COOLDOWN_INTERVAL```
     * considerations: should be long enough to disincentivise mindless activations of governance mode. should be short enough to not unduly disincentivise participation in governance.

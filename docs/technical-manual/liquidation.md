@@ -20,13 +20,13 @@ Since liquidation auctions are Dutch auctions, there is an initial **auction pri
 Start Price = Statutes Price * Starting Price Factor
 ```
 
-Auction price reductions take place after each **Step Interval** (```STATUTE_STEP_TIME_INTERVAL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
+Auction price reductions take place after each **Step Interval** (```STATUTE_VAULT_AUCTION_PRICE_TTL``` seconds). The amount of the reduction is **Step Size**, which is a fixed amount defined as
 
 ```
 Step Size = Start Price * Auction Price Decrease Factor
 ```
 
-where **Auction Price Decrease Factor** is given by ```STATUTE_AUCTION_PRICE_DECREASE_BPS```.
+where **Auction Price Decrease Factor** is given by ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```.
 
 For example, if the Start Price is ```20.00 XCH/BYC``` and Auction Price Decrease Factor is ```5%```, then the Step Size is ```20.00 * 5% = 1.00```, and auction prices would be ```20.00```, ```19.00```, ```18.00```, ```17.00```, and so on until the auction times out.
 
