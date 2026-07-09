@@ -28,7 +28,7 @@ First, make sure that Sage is on the correct network.
 
 Sage knows the [BYC asset ID](../../#bytecash-asset-id). There is no need to register it manually.
 
-When connecting, either scan the QR code displayed or copy & paste the Wallet Connect URI string to Sage
+When connecting, either scan the QR code displayed or copy & paste the WalletConnect URI string to Sage
 
 ```Settings -> General -> WalletConnect```: ```<URI>```
 

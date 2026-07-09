@@ -26,11 +26,11 @@ On the website, you will see your new collateral balance together with the amoun
 
 ## Borrow Bytecash
 
-Click the Borrow button, enter an amount of BYC to borrow, and click Borrow. Wait a couple of mintues for the transaction to be confirmed on-chain, and ta-da, you have taken out your first BYC loan!
+Click the Borrow button, enter an amount of BYC to borrow, and click Borrow. Wait a couple of minutes for the transaction to be confirmed on-chain, and ta-da, you have taken out your first BYC loan!
 
 To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID with your wallet. You can find the asset ID at the bottom of the [Intro](/) page.
 
-Note that the amount you can borrow is capped by the **maximum loan-to-value** (**Max LTV**) set by governance. The Max LTV is shown near to top right of the Borrow page next to the APR.
+Note that the amount you can borrow is capped by the **maximum loan-to-value** (**Max LTV**) set by governance. The Max LTV is shown near the top right of the Borrow page next to the APR.
 
 ## Manage debt
 
@@ -64,5 +64,5 @@ Loans are open-ended, so you can choose to repay them whenever you like.
 
 You can withdraw collateral at any time as long as your LTV remains below the Max LTV post-withdrawal.
 
-As explained in the Manage your debt section above, in practice you'd probably want to leave a big buffer to stay well below the Max LTV even after collateral has been withdrawn. To withdraw all collateral, you must first repay your entire debt.
+As explained in the Manage debt section above, in practice you'd probably want to leave a big buffer to stay well below the Max LTV even after collateral has been withdrawn. To withdraw all collateral, you must first repay your entire debt.
 

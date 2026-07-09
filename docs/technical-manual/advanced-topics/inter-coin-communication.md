@@ -26,11 +26,11 @@ Where an operation requires a tail reveal, this is shown by a horizontal orange 
 
 ![Inter-coin communication diagram legend I](./../../../static/img/inter_coin_communication_diagram_legend_1.png)
 
-The diagram uses arrow to show how conditions are connected to each other. An arrow connecting two elements within the same coin type means that two coins of same coin type are communicating with each other. This occurs with Governance coins when vetoing and with Treasury coins when rebalancing.
+The diagram uses arrows to show how conditions are connected to each other. An arrow connecting two elements within the same coin type means that two coins of same coin type are communicating with each other. This occurs with Governance coins when vetoing and with Treasury coins when rebalancing.
 
 ![Inter-coin communication diagram legend II](./../../../static/img/inter_coin_communication_diagram_legend_2.png)
 
-The list of variables shown in the box below the condition name make up the condition's message. The message is the concatenation of the variables shown in bold with the treehash of the variables in regular font as a struct.
+The list of variables shown in the box below the condition name makes up the condition's message. The message is the concatenation of the variables shown in bold with the treehash of the variables in regular font as a struct.
 
 For example, the message in the body of the SEND_MESSAGE condition in the collateral vault borrow operation is
 

@@ -22,7 +22,7 @@ The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/
 
 Savings interest compounds by the minute, i.e. the prevailing **Interest Discount Factor** (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
 
-The ```DISCOUNTED_BALANCE``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
+The ```DISCOUNTED_BALANCE``` value is effectively the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 
 $$
 discounted\ balance = \sum_{i=1}^A \frac{B_i}{CCIDF_{t_{B_i}}} - \sum_{j=1}^B \frac{R_j}{CCIDF_{t_{R_j}}},
@@ -43,10 +43,10 @@ CIDF(t_S) = \prod_{i=P}^{S} IDF_{t_i}
 $$
 
 :::info
-Similarly to the situation with collateral vaults, it is possible for CCIDF to change retroactively when the IDF is updated by governance. However, since there is no risk of liquidation with savings vault, the impact is limited to the amount of interest earned, which is generally uncritical. See the Danger box on the [collateral vaults](../collateral-vaults) page for additional info.
+Similarly to the situation with collateral vaults, it is possible for CCIDF to change retroactively when the IDF is updated by governance. However, since there is no risk of liquidation with savings vaults, the impact is limited to the amount of interest earned, which is generally uncritical. See the Danger box on the [collateral vaults](../collateral-vaults) page for additional info.
 :::
 
-As with collateral vaults, savers are given a three minute window of flexibility for specifiying the current timestamp vs the actual block timestamp when making depsoits or withdrawals to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by making deposits in the past and withdrawing in the future to boost their effective savings rate, the actual definition of CCIDF in the savings vault puzzle includes an additional factor IDF^(-3) to reduce the interest accrued by the maximum that can be gained from the timestamp flexibility.
+As with collateral vaults, savers are given a three minute window of flexibility for specifying the current timestamp vs the actual block timestamp when making deposits or withdrawals to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by making deposits in the past and withdrawing in the future to boost their effective savings rate, the actual definition of CCIDF in the savings vault puzzle includes an additional factor IDF^(-3) to reduce the interest accrued by the maximum that can be gained from the timestamp flexibility.
 
 ## Operations
 
@@ -65,7 +65,7 @@ If interest is paid, it's always for the entire accrued interest. The protocol o
 
 An interest payment can only be made if accrued interest is greater than **Treasury Delta Minimum**. This protects the protocol against Treasury coin hogging attacks.
 
-Both deposit and withdraw operations can be performed with or without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin, allowing many more vaults to access their savings balance per block than would be possible otherwise. Although Treasury coins can be spent repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
+Both deposit and withdraw operations can be performed with or without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin, allowing many more vaults to access their savings balance per block than would be possible otherwise. Although Treasury coins can be spent repeatedly in the same block, the block limit still means that there's a maximum on the number of vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
 
 ### Deposit
 
@@ -111,9 +111,9 @@ If the user withdraws an amount greater than the savings balance, then an intere
 
 #### State changes
 
-* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](#interest-accrual-and-accounting) based interest paid out and amount withdrawn
+* ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](#interest-accrual-and-accounting) based on interest paid out and amount withdrawn
 * ```INNER_PUZZLE```: can be changed by vault owner
-* amount: decreases based on withdrawal amount and interst payment
+* amount: decreases based on withdrawal amount and interest payment
 
 ## State and lineage
 

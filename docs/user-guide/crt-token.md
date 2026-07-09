@@ -16,7 +16,7 @@ Wallets that have had the CRT asset ID added to them will automatically recogniz
 
 CRT token holders can participate in governance. Since the protocol is largely immutable, governance is limited to changing Statutes or outputting custom conditions from the Statutes coin. However, even these limited actions come with a high degree of responsibility as misconfigured Statutes can disrupt the orderly functioning of the protocol. For information on the governance process, see the [governance](../governance) page.
 
-To use CRT tokens for governance purposes, they must use special governance puzzle as their inner puzzle. For details on the governance puzzle and related operations, see the [governance](../../technical-manual/governance) page in the Technical Manual.
+To use CRT tokens for governance purposes, they must use a special governance puzzle as their inner puzzle. For details on the governance puzzle and related operations, see the [governance](../../technical-manual/governance) page in the Technical Manual.
 
 ### Governance attacks
 
@@ -25,7 +25,7 @@ The ability to change Statutes opens up the possibility of governance attacks. N
 To exclude the possibility of governance attacks, **CRT holders should refrain from lending out their CRT tokens**. Any interest offered to CRT lenders will likely be earned by borrowers by shorting CRT or BYC and attacking the protocol in an attempt to lower the CRT price or cause a BYC depeg.
 
 :::danger
-CRT holders should never lend out their tokens as there is a fundamental incentive misalignment that could encourge governance attacks.
+CRT holders should never lend out their tokens as there is a fundamental incentive misalignment that could encourage governance attacks.
 :::
 
 ### Flashloans
@@ -46,6 +46,6 @@ Issuance of additional CRT tokens is possible only in the following two situatio
 * A Recharge Auction gets settled. An amount of CRT as specified in the winning bid is issued.
 * Announcer Registry distributes Rewards. An amount of CRT tokens as specified in Rewards per Interval Statute is issued.
 
-The protocol decereases the supply of CRT tokens only in the following situation:
+The protocol decreases the supply of CRT tokens only in the following situation:
 
 * A Surplus Auction gets settled. The winning Surplus Auction coin gets melted, destroying a corresponding amount of CRT.

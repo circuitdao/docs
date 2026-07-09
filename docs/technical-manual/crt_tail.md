@@ -19,30 +19,30 @@ Puzzle operations are performed on: [*crt_tail.clsp*](https://github.com/circuit
 Protocol deployer operations:
 * **TGE**: initial issuance - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 
-Approval mod operations:
+Approval Mod operations:
 * **issue**: issuance of CRT tokens - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 * **melt**: melting of CRT tokens - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 
 ### TGE
 
-The vast majority of CRT tokens to ever exist is issued at protocol launch in a **token generation event** (**TGE**). The mainnet deployment of Circuit is expected to generate 1bn token at TGE.
+The vast majority of CRT tokens to ever exist is issued at protocol launch in a **token generation event** (**TGE**). The mainnet deployment of Circuit is expected to generate 1bn tokens at TGE.
 
 Since the CRT tail has the Statutes Struct curried in, the TGE operation must be performed at protocol launch.
 
 ### Issue
 
-Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There are two Approval mods that allow for issuing CRT, namely Announcer Registry and Recharge Auction.
+Post-TGE, CRT tokens can only be issued with the approval of an [Approval Mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There are two Approval Mods that allow for issuing CRT, namely Announcer Registry and Recharge Auction.
 
-| CRT tail operation | Approval mod       | Operation | Operation program                                                                                                          |   |
+| CRT tail operation | Approval Mod       | Operation | Operation program                                                                                                          |   |
 |:-------------------|:-------------------|:----------|:---------------------------------------------------------------------------------------------------------------------------|---|
 | issue              | Announcer Registry | reward    | [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/vault_borrow.clsp)               |   |
 | issue              | Recharge Auction   | settle    | [*recharge_auction_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_settle.clsp) |   |
 
 ### Melt
 
-CRT tokens can only be melted with the approval of an [Approval mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There is one Approval mod that allows for issuing CRT, namely Surplus Auction.
+CRT tokens can only be melted with the approval of an [Approval Mod](../advanced-topics/approval-mods). This is enforced by a ```RECEIVE_MESSAGE``` condition in the tail for which an Approval coin must output a corresponding ```SEND_MESSAGE``` condition. There is one Approval Mod that allows for melting CRT, namely Surplus Auction.
 
-| CRT tail operation | Approval mod    | Operation | Operation program                                                                                               | CRT tail operation |
+| CRT tail operation | Approval Mod    | Operation | Operation program                                                                                               | CRT tail operation |
 |:-------------------|:----------------|:----------|:----------------------------------------------------------------------------------------------------------------|--------------------|
 | melt               | Surplus Auction | settle    | [*surplus_auction_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_settle.clsp) |                    |
 

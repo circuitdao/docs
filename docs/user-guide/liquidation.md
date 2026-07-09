@@ -11,9 +11,9 @@ In a **liquidation**, the system recovers debt from a vault by auctioning off it
 
 ![Liquidation threshold](./../../static/img/Collateralization_diagram.png)
 
-The Liquidation Threshold is the **Liquidation Ratio** (LR) multiplied by the debt of the vault. The Liquidation Ratio is a global parameter that applies to all vaults and can be changed by governance. The inverse of the Liqudiation Ratio is referred to as the **maximum loan-to-value** or **Max LTV** ratio.
+The Liquidation Threshold is the **Liquidation Ratio** (LR) multiplied by the debt of the vault. The Liquidation Ratio is a global parameter that applies to all vaults and can be changed by governance. The inverse of the Liquidation Ratio is referred to as the **maximum loan-to-value** or **Max LTV** ratio.
 
-The **Liquidation Price** is the XCH price at which a collateral vault with given amount of debt becomes liquidatable. It is appproximately equal to
+The **Liquidation Price** is the XCH price at which a collateral vault with given amount of debt becomes liquidatable. It is approximately equal to
 
 ```
 Liquidation Ratio * debt / collateral
@@ -55,12 +55,12 @@ Collateral is valued using the [Statutes Price](../price-oracle#statutes-price).
 
 ## Initiator Incentives
 
-The keeper that triggers a liquidation is referred to as the **initiator**. Altough it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to start a liquidation auction. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critial nature of liquidations, the initiator is paid an **initiator incentive**, which consists of two components:
+The keeper that triggers a liquidation is referred to as the **initiator**. Although it is possible for bidders to turn a profit in a liquidation auction, there is no guarantee that this will be a sufficient incentive for keepers to start a liquidation auction. For example, in periods of high on-chain transaction costs, keepers might prefer to wait and see if somebody else is willing to trigger a liquidation. Given the system- and time-critical nature of liquidations, the initiator is paid an **initiator incentive**, which consists of two components:
 
 * **Absolute Initiator Incentive** (AII): a fixed amount of BYC (e.g. 10 BYC)
 * **Relative Initiator Incentive** (RII): a percentage of the debt owed to the vault (e.g. 8%)
 
-When bids are placed in a liquidaiton auction, the initiator incentive is paid before any of the debt owed to the vault is repaid.
+When bids are placed in a liquidation auction, the initiator incentive is paid before any of the debt owed to the vault is repaid.
 
 AII and RII must be set such that they can be paid from the Liquidation Penalty in all circumstances, which requires the **[Minimum Debt](../collateral-vaults)** Statute to be taken into account.
 
@@ -86,7 +86,7 @@ The auction ends when either
 * there is no collateral left in the vault; or
 * the auction has timed out.
 
-An auction ends the latest when the **Liquidation Auction TTL** has been reached. Since Start Price, Auction Price TTL and Auction Price Step are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succed even in the case of extreme price drops. As an easily verifiable backstop to the implicit minimum auction price serves the **Minimum Auction Price**. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
+An auction ends the latest when the **Liquidation Auction TTL** has been reached. Since Start Price, Auction Price TTL and Auction Price Step are deterministic, there is an implicit minimum auction price that the auction price cannot fall below before the auction times out. Governance should set auction parameters such that the minimum auction price is low enough that a liquidation is highly likely to succeed even in the case of extreme price drops. The **Minimum Auction Price** serves as an easily verifiable backstop to the implicit minimum auction price. This parameter should be equal to or close to the implicit price and is intended to protect against misconfigured auction parameters that result in a lower implicit price than intended.
 
 A timed out auction can be restarted. This process continues ad infinitum until either the debt gets fully repaid, or there is no collateral left, at which point any remaining debt becomes bad debt.
 
@@ -104,7 +104,7 @@ A timed out auction can be restarted. This process continues ad infinitum until 
 * **Absolute Initiator Incentive**
     * Statute index: 11
     * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_FLAT```
-    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RLI (see below).
+    * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RII (see below).
 * **Relative Initiator Incentive**
     * Statute index: 12
     * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_BPS```
@@ -112,7 +112,7 @@ A timed out auction can be restarted. This process continues ad infinitum until 
 * **Liquidation Auction TTL**
     * Statute index: 13
     * Statute name: ```STATUTE_VAULT_AUCTION_TTL```
-    * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantional amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.
+    * considerations: A higher value allows the auction price to go lower, which in some cases increases the likelihood that at least some of the debt can be recovered. However, it also increases the risk that the borrower will lose a substantial amount of assets needlessly if no bidders show up quickly enough. This is especially a risk as long as there are no professional market making firms running automated bots on Chia yet.
 * **Starting Price Factor (SPF)**
     * Statute index: 14
     * Statute name: ```STATUTE_VAULT_AUCTION_STARTING_PRICE_FACTOR_BPS```
@@ -124,7 +124,7 @@ A timed out auction can be restarted. This process continues ad infinitum until 
 * **Auction Price Step**
     * Statute index: 16
     * Statute name: ```STATUTE_VAULT_AUCTION_PRICE_DECREASE_BPS```
-    * considerations: A higher value results in a shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
+    * considerations: A higher value results in shorter auctions, which reduces the probability that the price drops further while the auction hasn't concluded. It also leaves bidders with a higher profit margin. A lower value results in longer auctions with smaller margins for keepers.
 * **Minimum Auction Price**
     * Statute index: 17
     * Statute name: ```STATUTE_VAULT_AUCTION_MINIMUM_PRICE_FACTOR_BPS```

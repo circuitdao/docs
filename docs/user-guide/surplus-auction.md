@@ -24,7 +24,7 @@ Surplus Auctions reduce the CRT supply.
 
 :::
 
-There can be multiple Surplus Auction at the same time. If the Surplus Auction Threshold is still exceeded after a Surplus Auction has started, another one can be started right away, even in the same block.
+There can be multiple Surplus Auctions at the same time. If the Surplus Auction Threshold is still exceeded after a Surplus Auction has started, another one can be started right away, even in the same block.
 
 
 ## Statutes

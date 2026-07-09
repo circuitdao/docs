@@ -13,7 +13,7 @@ The bots are written in Python and can be found in the following GitHub reposito
 
 ## List of bots
 
-Below a list of bots available for protocol users, governance participants, data providers and keepers to run.
+Below is a list of bots available for protocol users, governance participants, data providers and keepers to run.
 
 Even though the operations some bots perform are more relevant to some users than others, everyone has an interest in the protocol running smoothly and bots should ideally be run by all users and keepers.
 
@@ -26,7 +26,7 @@ Even though the operations some bots perform are more relevant to some users tha
 | announcer reward (TODO)    | data providers                         | distributes CRT rewards                                     |
 | oracle price update        | prospective initiators/vault owners    | start liquidation auction/borrow or withdraw more           |
 | statutes price update      | prospective initiators/vault owners    | start liquidation auction/borrow or withdraw more           |
-| start liquidiation auction | anyone                                 | receive liquidation incentives (absolute & relative)        |
+| start liquidation auction | anyone                                 | receive liquidation incentives (absolute & relative)        |
 | bid in liquidation auction | bidders                                | acquire collateral below market price                       |
 | recover bad debt           | governance                             | make it easier to keep track of protocol liabilities        |
 | recharge_start_settle      | bidders                                | opportunity to acquire CRT below market price               |

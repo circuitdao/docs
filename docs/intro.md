@@ -23,7 +23,7 @@ As a DeFi protocol, Circuit is:
 * censorship-resistant
 * immutable, with the exception of certain parameters that can be adjusted by governance
 
-Governance is conducted fully on-chain via Circuit's governance token [**CRT**](../user-guide/crt-token). In particular, **CircuitDAO**, the set of all CRT tokenholders, is a true decentalized autonomous organization without any legal entity behind it.
+Governance is conducted fully on-chain via Circuit's governance token [**CRT**](../user-guide/crt-token). In particular, **CircuitDAO**, the set of all CRT token holders, is a true decentralized autonomous organization without any legal entity behind it.
 
 ### Getting Started
 

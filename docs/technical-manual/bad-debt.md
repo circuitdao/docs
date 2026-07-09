@@ -6,7 +6,7 @@ sidebar_position: 345
 
 # Bad Debt
 
-If all of a vault's collteral has been auctioned off in a liquidation but there is still debt left, the vault is said to have incurred **Bad Debt**. Bad debt recovery is the process of melting BYC to extinguish the remaining debt from the vault with the aim of returning it to its owner. Since there is no collateral left to sell off, bad debt is recovered from Treasury assets, effectively socializing losses amongst CRT holders.
+If all of a vault's collateral has been auctioned off in a liquidation but there is still debt left, the vault is said to have incurred **Bad Debt**. Bad debt recovery is the process of melting BYC to extinguish the remaining debt from the vault with the aim of returning it to its owner. Since there is no collateral left to sell off, bad debt is recovered from Treasury assets, effectively socializing losses amongst CRT holders.
 
 In the unlikely case that the liquidation initiator has not been paid their full initiator incentive, any remaining balance is forfeited. Any remaining accrued Stability Fees are owed to the Treasury, and as such cancel out for bad debt recovery purposes and are ignored too. This leaves the remaining principal as the bad debt that needs to be recovered. If there is a Treasury coin with amount larger than the remaining bad debt, this can be done in a single operation.
 

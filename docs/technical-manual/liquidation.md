@@ -10,7 +10,7 @@ To liquidate a collateral vault, a **liquidation auction** can be **start**ed. A
 
 The process of liquidating a vault involves one or more liquidation auctions. Liquidation auctions are Dutch auctions in which collateral is offered for BYC at successively lower prices until a **time out** is reached. If an auction fails to recover all debt and there is collateral left in the vault, it is possible to **restart** the auction.
 
-If all debt has been recovered, the vault it returned to the control of its owner with any remaining collateral in it.
+If all debt has been recovered, the vault is returned to the control of its owner with any remaining collateral in it.
 
 If debt remains to be recovered and there is no collateral left in the vault, then a restart is no longer possible, and the vault is said to have incurred **[Bad Debt](../bad-debt)**.
 
@@ -47,7 +47,7 @@ The keeper that executes the start operation is referred to as the **initiator**
 
 When a collateral vault is liquidated, Stability Fees stop accruing and a **Liquidation Penalty** is added on top of the pre-liquidation debt. The Liquidation Penalty is defined to be a number of basis points of the pre-liquidation debt as given by ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```.
 
-Once the Liquidation Penalty has been added, the debt is split into three components for accounting purposes: **initiator incentive balance**, which is the initator incentive, **BYC to Treasury balance**, which is accrued Stability Fees plus any part of the Liquidation Penalty that wasn't allocated to the initiator incentive, and **BYC to melt balance**, which is the principal. These are reduced successively with each bid.
+Once the Liquidation Penalty has been added, the debt is split into three components for accounting purposes: **initiator incentive balance**, which is the initiator incentive, **BYC to Treasury balance**, which is accrued Stability Fees plus any part of the Liquidation Penalty that wasn't allocated to the initiator incentive, and **BYC to melt balance**, which is the principal. These are reduced successively with each bid.
 
 ```
 debt = initiator incentive balance + BYC to Treasury balance + BYC to melt balance
@@ -66,7 +66,7 @@ A vault keeps track of the state of a Liquidation Auction in the ```AUCTION_STAT
 * ```auction_ttl```: amount of time before auction times out
 * ```byc_to_treasury_balance```: remaining debt to be paid to treasury
 * ```byc_to_melt_balance```: remaining debt to be melted
-* ```minimum_bid_amount```: minimum amount of BYC that must offered in a bid
+* ```minimum_bid_amount```: minimum amount of BYC that must be offered in a bid
 * ```min_price```: auction price below which it is not possible to place bids
 
 Auction state variables are immutable until the auction finishes except for the three components that make up the remaining debt:
@@ -88,7 +88,7 @@ Once started, keepers can bid in the liquidation auction until it times out or t
 
 Although liquidation auctions have an implicit minimum auction price given by the parameters ```start_price```, ```step_price_decrease_factor```, ```step_time_interval```, and ```auction_ttl```, it needs a small calculation to determine. To make it straightforward for borrowers to verify what percentage of their collateral they can lose at most per liquidation auction, the Minimum Auction Price sets a lower bound on the auction price below which it is not possible to place bids until the auction times out and is restarted.
 
-If it is currently possible to place a bid in a liquidation auction, the auction is referred to as **biddable**. A liquidation auction that can be restarted is referred to as **restartable**. The existence of the Minimum Auction Price means that an auction can temporarily be in a state where it is neither biddable nor restartable if Minimum Auction Price is set to a value greater than the implicity minimum auction price.
+If it is currently possible to place a bid in a liquidation auction, the auction is referred to as **biddable**. A liquidation auction that can be restarted is referred to as **restartable**. The existence of the Minimum Auction Price means that an auction can temporarily be in a state where it is neither biddable nor restartable if Minimum Auction Price is set to a value greater than the implicit minimum auction price.
 
 Bidders specify how much of the remaining debt they would like to repay. This is the **BYC bid amount**. The collateral vault puzzle calculates the **XCH bid amount**, which is the amount of collateral that the bidder receives in return based on the current auction price.
 
@@ -102,9 +102,9 @@ In other words, only once the Initiator has received the full Initiator Incentiv
 
 ![Liquidation large BYC bid amount allocation](./../../static/img/Liquidation_large_bid_allocation_diagram.png)
 
-The diagram above illustrates how the BYC amount of a bid is allocated. In this concrete example, the bid is quite large, resulting in both Initiator and Treausry getting fully paid, leaving only some debt in the form of BYC to melt balance.
+The diagram above illustrates how the BYC amount of a bid is allocated. In this concrete example, the bid is quite large, resulting in both Initiator and Treasury getting fully paid, leaving only some debt in the form of BYC to melt balance.
 
-The next diagram shows a mid-auction bid. The initiator has been fully paid, but the Treasury is still owed some BYC. The bid in this example is fairly small, resulting in only some of the BYC owed to Treasury to be repaid, leaving a positive BYC to Treasury balance and and unchanged BYC to melt balance.
+The next diagram shows a mid-auction bid. The initiator has been fully paid, but the Treasury is still owed some BYC. The bid in this example is fairly small, resulting in only some of the BYC owed to Treasury to be repaid, leaving a positive BYC to Treasury balance and unchanged BYC to melt balance.
 
 ![Liquidation mid auction BYC bid allocation](./../../static/img/Liquidation_mid_auction_bid_allocation_diagram.png)
 

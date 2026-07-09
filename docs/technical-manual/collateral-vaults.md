@@ -54,7 +54,7 @@ Keepers may be able to trigger an update of the Statutes Price in the same block
 Users should keep in mind that although any change in the CCSFDF caused by a retroactive application of the SFDF is generally fairly small due to the limited period over which any retroactivity applies, it can in theory **unexpectedly push the debt of a vault past the Liquidation Threshold**. Users with vaults close to liquidation should therefore monitor the protocol for governance proposals to modify the SFDF.
 :::
 
-Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a three minute window of flexibility vs the actual block timestamp to reduce the likelihood that an operation times out and will fail to be incluced in the blockchain. Since a malicious vault owner could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
+Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a three minute window of flexibility vs the actual block timestamp to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
 
 ## Loan and debt accounting
 
@@ -92,7 +92,7 @@ $$
 SF = debt - principal
 $$
 
-Note that due to the coinset model, the protocol itself does not know the total principal, discounted principal or debt across all vaults. If a corresponding state variable was introduced in Statutes, it would be impossible for different vaults performing operations in the same block. Fast-forward or singleton spend aggregation could theoretically help, but since the Statues spend is rather big, this would be very costly, and ultimately not scale.
+Note that due to the coinset model, the protocol itself does not know the total principal, discounted principal or debt across all vaults. If a corresponding state variable was introduced in Statutes, it would be impossible for different vaults to perform operations in the same block. Fast-forward or singleton spend aggregation could theoretically help, but since the Statutes spend is rather big, this would be very costly, and ultimately not scale.
 
 ## Stability Fee transfers
 
@@ -181,7 +181,7 @@ The operation only succeeds if after the repayment the vault is sufficiently ove
 
 ### Transfer
 
-The ownership or custody arragements of a collateral vault can be changed using the transfer operation, which replaces the vault's inner puzzle hash.
+The ownership or custody arrangements of a collateral vault can be changed using the transfer operation, which replaces the vault's inner puzzle hash.
 
 The operation can only be performed if the vault is sufficiently overcollateralised.
 
@@ -193,9 +193,9 @@ The operation can only be performed if the vault is sufficiently overcollaterali
 
 Issues BYC against a collateral vault's accrued Stability Fees. BYC issued is atomically transferred to Treasury. A SF transfer leaves the vault's debt unchanged.
 
-The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculcated by calculating the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued than debt owed to the vault.
+The amount of BYC issued when transferring Stability Fees is always the maximum possible amount. This amount is calculated by computing the cumulative SF discount factor used to undiscount ```DISCOUNTED_PRINCIPAL``` using ```current_timestamp``` rather than ```current_timestamp + 3 * MAX_TX_BLOCK_TIME```. This prevents a situation where timestamp flexibility results in more BYC being issued than debt owed to the vault.
 
-A SF transfer is only permitted is the transfer amount exceeds the **Treasury Delta Minimum**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
+A SF transfer is only permitted if the transfer amount exceeds the **Treasury Delta Minimum**. This prevents coin hogging attacks on both Treasury and collateral vault coins.
 
 The operation can only be performed if the vault is sufficiently overcollateralised.
 
@@ -219,7 +219,7 @@ Mutable state:
 * ```PRINCIPAL```: principal amount of outstanding loans (in mBYC)
 * ```AUCTION_STATE```: state of liquidation auction (if any)
 * ```INNER_PUZZLE_HASH```: inner puzzle hash of vault
-* ```DISCOUNTED_PRINCIPAL```: discounted principal amount of oustanding loans (in mBYC)
+* ```DISCOUNTED_PRINCIPAL```: discounted principal amount of outstanding loans (in mBYC)
 
 ### Eve state
 

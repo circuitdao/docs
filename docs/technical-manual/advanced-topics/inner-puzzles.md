@@ -25,11 +25,11 @@ Owner coins have a curried arg ```INNER_PUZZLE_HASH```, which is used to verify 
 Savings vaults are an exception to the above. Since these don't have keeper operations, all spend paths require a reveal of the owner's inner puzzle. Therefore an ```INNER_PUZZLE``` curried arg holds the whole inner puzzle instead of only the inner puzzle hash.
 
 ### Keeper spends
-To spend a coin on a keeper spend path, an arbitary inner puzzle and corresponding solution can be passed in. The purpose of the inner puzzle in this case is not to verify the legitimacy of the spend but to namespace it, allowing a keeper to tie multiple coin spends together. A simple example would be to add a fee coin to a protocol operation bundle. Keepers must secure the inner puzzle they provide as it cannot be validated by the coin itself against its own state. For this purpose, coins with keeper spend paths output a condition that announces the inner puzzle:
+To spend a coin on a keeper spend path, an arbitrary inner puzzle and corresponding solution can be passed in. The purpose of the inner puzzle in this case is not to verify the legitimacy of the spend but to namespace it, allowing a keeper to tie multiple coin spends together. A simple example would be to add a fee coin to a protocol operation bundle. Keepers must secure the inner puzzle they provide as it cannot be validated by the coin itself against its own state. For this purpose, coins with keeper spend paths output a condition that announces the inner puzzle:
 ```
 (list CREATE_COIN_ANNOUNCEMENT (concat PROTOCOL_PREFIX inner_puzzle_hash))
 ```
-Keeper should assert this announcement from a signed spend. The app for example uses a standard XCH coin from the keeper's wallet for this purpose, which typically doubles as the fee coin of the spend.
+Keepers should assert this announcement from a signed spend. The app for example uses a standard XCH coin from the keeper's wallet for this purpose, which typically doubles as the fee coin of the spend.
 
 ## Inner puzzle requirements
 

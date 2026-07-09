@@ -6,7 +6,7 @@ sidebar_position: 382
 
 # Announcer Registry
 
-The **Announcer Registry**, or **Registry** for short, is a custom singleton that approved Announcers can register with. Registered Announcers can periodically claim **Rewards** from the Registry, which are paid in the form of newly issue CRT tokens. Rewards are intended to compensate data providers for the costs they incur by running an Announcer that publishes up-to-date price information.
+The **Announcer Registry**, or **Registry** for short, is a custom singleton that approved Announcers can register with. Registered Announcers can periodically claim **Rewards** from the Registry, which are paid in the form of newly issued CRT tokens. Rewards are intended to compensate data providers for the costs they incur by running an Announcer that publishes up-to-date price information.
 
 Rewards accrue with every Statutes Price update and become claimable once the number of updates since the previous Reward distribution exceeds **Rewards Interval**.
 
@@ -39,7 +39,7 @@ The Announcer Registry must be launched as part of the [protocol launch](../adva
 
 The owner of an Announcer that has been approved by governance can register the Announcer with the Announcer Registry. A registered Announcer receives Rewards the next time Rewards are distributed. All registered Announcers receive the same amount of Rewards, irrespective of when they were registered. Announcers need to re-register after Rewards are distributed in order to be eligible for the next Reward distribution.
 
-Announcers are registered by prepending a target puzzle hash to the ```ANNOUNCER_REGISTRY``` list. The target puzzle hash is where the Announcer would like to receive their Rewards. The target puzzle hash can, but need not be, the Announcer's inner puzzle hash. Using a different target puzzle hash allows data providers to separate private key management for the Announcer from custody arrangements used for Rewards.
+Announcers are registered by prepending a target puzzle hash to the ```ANNOUNCER_REGISTRY``` list. The target puzzle hash is where the Announcer would like to receive their Rewards. The target puzzle hash can be, but need not be, the Announcer's inner puzzle hash. Using a different target puzzle hash allows data providers to separate private key management for the Announcer from custody arrangements used for Rewards.
 
 #### State changes
 
@@ -102,7 +102,7 @@ The Announcer Registry coin amount is always 0.
 
 ### Lineage
 
-Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1. It also means that the Registry's eve spend must occur at protocol launch.
+Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzzle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1. It also means that the Registry's eve spend must occur at protocol launch.
 
 ## Statutes
 * **Reward per Interval**

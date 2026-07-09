@@ -10,17 +10,17 @@ The Treasury is a set of BYC CAT singletons with inner puzzle [*treasury.clsp*](
 
 Having the Treasury consist of several Treasury coins is necessary for savers to be able to withdraw interest simultaneously. Since each withdrawal requires a Treasury coin spend, savers would have to coordinate their withdrawals at the mempool level if they wanted to withdraw from the same Treasury coin in the same block. Although this is not impossible - even a unilateral replace-by-fee allows savers to attach their withdrawal to an existing withdrawal spend bundle in the mempool - it becomes increasingly difficult to reliably coordinate the more savers are involved. With multiple Treasury coins, these problems can be avoided as each saver can pick their own Treasury coin as long as there are no more savers wanting to withdraw interest than there are Treasury coins.
 
-Treasury coins cannot be converted back to standard BYC CATs or melted. In other words, once a Treasury coin has been launched it stays in existence forever. Governance should refrain from creating an unnecessarily large number of Treasury coins as this will irreversably increase the costs of spending the Treasury Ring.
+Treasury coins cannot be converted back to standard BYC CATs or melted. In other words, once a Treasury coin has been launched it stays in existence forever. Governance should refrain from creating an unnecessarily large number of Treasury coins as this will irreversibly increase the costs of spending the Treasury Ring.
 
 Treasury coins are the only singletons in the protocol that can have more than one child coin. If a treasury coin is spent as part of a bad debt recovery operation, it creates a child treasury coin and an additional run tail coin which absorbs the withdrawal amount and melts it.
 
 ## Treasury Ring
 
-Some operations require all Treausry coins to be spent at once. In order to allow the spender to prove that all coins are being spent, Treasury coins are linked to each other 1-by-1 via their launcher IDs in a closed loop, forming the **Treasury Ring**. Each Treasury coin stores its own launcher ID in curried arg ```LAUNCHER_ID```, as well as the launcher ID of the preceding coin in the Treasury Ring in curried arg ```RING_PREV_LAUNCHER_ID```.
+Some operations require all Treasury coins to be spent at once. In order to allow the spender to prove that all coins are being spent, Treasury coins are linked to each other 1-by-1 via their launcher IDs in a closed loop, forming the **Treasury Ring**. Each Treasury coin stores its own launcher ID in curried arg ```LAUNCHER_ID```, as well as the launcher ID of the preceding coin in the Treasury Ring in curried arg ```RING_PREV_LAUNCHER_ID```.
 
 ![Treasury ring](./../../static/img/Treasury_ring_diagram.png)
 
-## Number of Treausry coins to be spent per operation
+## Number of Treasury coins to be spent per operation
 
 The number of Treasury coins that need to be spent simultaneously depends on the operation being performed. Most operations can be performed with a single Treasury coin being spent, but those relating to certain Surplus and Recharge Auction operations require multiple and all Treasury coins to be spent respectively in order to prove whether the Treasury balance is above or below the required thresholds.
 
@@ -30,9 +30,9 @@ The number of coins to be spent simultaneously when changing balance depends on 
 
 **One Treasury coin:**
 
-* Transfer Stability Fees: a single treasury coin must be picked by to transfer Stability Fees to
+* Transfer Stability Fees: a single treasury coin must be picked to transfer Stability Fees to
 
-* Loan repayment: a single Treasury coin must be picked to deposity to when a loan repayment results in Stability Fees getting paid into Treasury. This is the case unless the amount of SFs being repaid to the vault is less than or equal to the amount of SFs that have already been transferred to the vault.
+* Loan repayment: a single Treasury coin must be picked to deposit to when a loan repayment results in Stability Fees getting paid into Treasury. This is the case unless the amount of SFs being repaid to the vault is less than or equal to the amount of SFs that have already been transferred to the vault.
 
 * Liquidation auction bid: a single Treasury coin must be picked by bidder to deposit their BYC bid amount to.
 
@@ -46,11 +46,11 @@ The number of coins to be spent simultaneously when changing balance depends on 
 
 **Whole Treasury Ring:**
 
-* Recharge auction start: must spent all Treasury coins to verify that Treasury balance is below **Treasury Minimum**. No funds are deposited to or withdrawn from Treasury.
+* Recharge auction start: must spend all Treasury coins to verify that Treasury balance is below **Treasury Minimum**. No funds are deposited to or withdrawn from Treasury.
 
 * Recharge auction win: must spend all Treasury coins to spread BYC amount raised (BYC lot amount) evenly across all Treasury coins
 
-In case where only one coin is required, that coin should be chosen which has the smallest/greatest BYC balance in case of a deposit to/withdrawal from Treasury. This is the behaviour of the dapp. Similarly, when starting a Surplus Auction, a subset of Treasury coins and withdrawal amounts should be chosen such that the Treasury ring overall is in as evenly balance a state as possible after the withdrawal. In cases where the whole Treasury ring must be spend, the deposit amount is spread evenly across all Treasury coins, with any remainder allocated to a coin that can be chosen arbitrarily.
+In case where only one coin is required, that coin should be chosen which has the smallest/greatest BYC balance in case of a deposit to/withdrawal from Treasury. This is the behaviour of the dapp. Similarly, when starting a Surplus Auction, a subset of Treasury coins and withdrawal amounts should be chosen such that the Treasury ring overall is in as evenly balanced a state as possible after the withdrawal. In cases where the whole Treasury ring must be spent, the deposit amount is spread evenly across all Treasury coins, with any remainder allocated to a coin that can be chosen arbitrarily.
 
 ### When changing Treasury Ring ordering
 
@@ -87,9 +87,9 @@ Operations that deposit to Treasury:
 * Bid in liquidation auction (SFs + LP)
 * Win Recharge Auction
 
-There is no direct incentive for transferring Stability Fees. Savers that want to withdraw interest and keepers wanting to trigger a surplus auction have an incentive to transfer Stability Fees to keep the Treasury filled. CRT holders are also incentivised to keep the the Treasury filled to prevent Recharge Auctions from being triggered as they are dilutive to them.
+There is no direct incentive for transferring Stability Fees. Savers that want to withdraw interest and keepers wanting to trigger a surplus auction have an incentive to transfer Stability Fees to keep the Treasury filled. CRT holders are also incentivised to keep the Treasury filled to prevent Recharge Auctions from being triggered as they are dilutive to them.
 
-Note that it is not possible to shift balances between Treasury coins. Protocol users and keepers should ensure that they keep Treasuy coin amounts balanced as much as possible by making withdrawals from coins with the greatest amounts, and depositing to coins with the smallest amounts. The standard drivers do this automatically.
+Note that it is not possible to shift balances between Treasury coins. Protocol users and keepers should ensure that they keep Treasury coin amounts balanced as much as possible by making withdrawals from coins with the greatest amounts, and depositing to coins with the smallest amounts. The standard drivers do this automatically.
 
 #### State changes
 
@@ -107,7 +107,7 @@ When governance launches a new Treasury coin, the coin needs to be inserted into
 
 In the diagram above, a new Treasury coin is launched and inserted into the Treasury ring between Treasury coins B and C.
 
-It is governance's responsibility to ensure that the Treasury coins do indeed continue form a ring. This is not enforced or verified by the protocol. If the Treasury coins don't form a ring, it may not be possible to start Recharge Auctions, or they could be started while the Treasury's balance is still above the Treasury Minimum.
+It is governance's responsibility to ensure that the Treasury coins do indeed continue to form a ring. This is not enforced or verified by the protocol. If the Treasury coins don't form a ring, it may not be possible to start Recharge Auctions, or they could be started while the Treasury's balance is still above the Treasury Minimum.
 
 #### State changes
 * ```RING_PREV_LAUNCHER_ID```: set to the new value approved by governance
@@ -165,4 +165,4 @@ lineage_proof = (parent_parent_ID parent_ring_prev_launcher_id parent_amount)
 
 When making a withdrawal, it is possible to pass multiple CREATE_COIN conditions via ```input_conditions``` as long as they have a different puzzle hash to that of the unique child singleton. Each such CREATE_COIN condition would create a BYC CAT that contains some of the original amount of the Treasury coin, effectively constituting a withdrawal.
 
-Not additional ```CREATE_COIN``` conditions are allowed in case of a deposit.
+No additional ```CREATE_COIN``` conditions are allowed in case of a deposit.

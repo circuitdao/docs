@@ -8,4 +8,4 @@ sidebar_position: 1820
 
 A command line interface to Circuit protocol is available on GitHub: https://github.com/circuitdao/circuit-cli.
 
-The cli providers a comprehensive interface to the protocol, supporting essentially all operations.
+The cli provides a comprehensive interface to the protocol, supporting essentially all operations.

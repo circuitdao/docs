@@ -6,9 +6,9 @@ sidebar_position: 240
 
 # Governance
 
-Circuit protocol is goverend by CRT token holders. Token holders can use their CRT tokens to vote on changes to **Statutes**, which are global state parameters that define the protocol's behaviour. Statutes are stored in the [Statutes singleton](../../technical-manual/statutes). Other than the Statutes, Circuit protocol is fully immutable.
+Circuit protocol is governed by CRT token holders. Token holders can use their CRT tokens to vote on changes to **Statutes**, which are global state parameters that define the protocol's behaviour. Statutes are stored in the [Statutes singleton](../../technical-manual/statutes). Other than the Statutes, Circuit protocol is fully immutable.
 
-The reason that Circuit requires goverance is to keep the 1:1 peg of Bytecash to the US Dollar. This cannot be fully automated, as the protocol needs to respond to changing market conditions. Governance's responsibilities consist of the following:
+The reason that Circuit requires governance is to keep the 1:1 peg of Bytecash to the US Dollar. This cannot be fully automated, as the protocol needs to respond to changing market conditions. Governance's responsibilities consist of the following:
 
 * Selecting data providers for the Oracle
 * Monitoring the market price of Bytecash for deviations from the peg
@@ -22,14 +22,14 @@ It is crucial for the functioning of the protocol that it has access to accurate
 
 As a stablecoin pegged 1:1 to the US Dollar, Bytecash is meant to be valued at 1 USD in the market. If Bytecash trades at a premium or discount to 1 USD for an extended period of time, governance should intervene to push the market price of Bytecash back to its peg.
 
-Since small oscillations of the price around the peg are to be expected, governance only needs to take action is there is a structural deviation from the peg that lasts for days or weeks. An upshot of this is that there is no need for the protocol to have a BYC/USD Oracle.
+Since small oscillations of the price around the peg are to be expected, governance only needs to take action if there is a structural deviation from the peg that lasts for days or weeks. An upshot of this is that there is no need for the protocol to have a BYC/USD Oracle.
 
 
 ### Updating Statutes
 
 The two primary tools governance has at its disposal to maintain the peg are Stability Fee and Savings Rate. Raising the Stability Fee makes it more expensive for borrowers to take out Bytecash loans, incentivising repayments and disincentivising the creation of new Bytecash. Similarly, a higher Savings Rate incentivises users to acquire Bytecash to lock it up in savings vaults, reducing the amount of Bytecash in circulation. Both measures put upwards pressure on the BYC price. Vice versa, governance can put downwards pressure on the BYC price by lowering the Stability Fee and/or Savings Rate.
 
-In addition to Stability Fee and Savings Rate, governance is able to update a few dozen additional Statutes. Those additional Statutes are not sensitive to market conditions, and are expected to rarely change, if ever. For example, M-of-N, the Statute that defines the minimum number of Announcer prices that must be included in an Oracle Price update, typically only needs to be updated when a data provider is whitelisted or unwhitelisted. Other Statutes, for example those that define auction formats may never need to be updated, although changes in the liquidity for assets being auctioned off, TVL of the protocol, as well as the number of bidders regularly participating in auctions could make occasional tweaks beneficial.
+In addition to Stability Fee and Savings Rate, governance is able to update a few dozen additional Statutes. Those additional Statutes are not sensitive to market conditions, and are expected to rarely change, if ever. For example, M-of-N, the Statute that defines the minimum number of Announcer prices that must be included in an Oracle Price update, typically only needs to be updated when a data provider is whitelisted or unwhitelisted. Other Statutes, for example, those that define auction formats, may never need to be updated, although changes in the liquidity for assets being auctioned off, TVL of the protocol, as well as the number of bidders regularly participating in auctions could make occasional tweaks beneficial.
 
 ## Governance process
 
@@ -47,10 +47,10 @@ Given that Statutes differ in terms of criticality and required update frequency
 
 * **Proposal Threshold**: minimum amount of CRT required to make a proposal
 * **Veto Period**: time period (in seconds) during which a proposal can be vetoed
-* **Implemenation Delay**: time (in seconds) that needs to pass before the new Statute value becomes effective after the end of the veto period
+* **Implementation Delay**: time (in seconds) that needs to pass before the new Statute value becomes effective after the end of the veto period
 * **Maximum Delta**: the maximum absolute amount by which the Statute value may change
 
-Just like Statutes themselves, governance can update the Constrainsts, subject to the same limitations.
+Just like Statutes themselves, governance can update the Constraints, subject to the same limitations.
 
 :::info
 Constraints are an important safety measure, as they prevent sudden Statute changes.
@@ -76,9 +76,9 @@ For example, consider a user who borrows BYC at an 8% Stability Fee to invest in
 
 ## Statutes
 * **Proposal Fee**
-    * Statue index: 40
+    * Statute index: 40
     * Statute name: ```STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS```
-    * considerations: should be big enough to prevent spam proposals. should be small enough to shut out all but the largest CRT holders from participation in governance processes.
+    * considerations: should be big enough to prevent spam proposals. otherwise should be as small as possible to let small CRT holders participate in governance.
 * **Implementation Period**
     * Statute index: 41
     * Statute name: ```STATUTE_GOVERNANCE_IMPLEMENTATION_INTERVAL```

@@ -31,7 +31,7 @@ See the section on [collateral vaults](../user-guide/collateral-vaults) in the U
 
 ## Historical XCH returns
 
-So what is a safe LTV when borrowing Bytecash? The first thing to note is that one can never be 100% certain that a vault won't get liquidated. There is always a risk that the XCH price drops by a large amount in a very short period of time that doesn't leave enough time to repay debt or top up collateral. Borrowing is inherently a risky activity. All one can do is minimize the risk of a liquidation occuring to a level that one is comfortable with.
+So what is a safe LTV when borrowing Bytecash? The first thing to note is that one can never be 100% certain that a vault won't get liquidated. There is always a risk that the XCH price drops by a large amount in a very short period of time that doesn't leave enough time to repay debt or top up collateral. Borrowing is inherently a risky activity. All one can do is minimize the risk of a liquidation occurring to a level that one is comfortable with.
 
 To get a feeling for how big the risk of a precipitous decline in the XCH price is, one can look at historical data. Shown below is the percentage difference from highest to lowest XCH price over three different rolling windows: 1 hour, 1 day, and 1 week.[^4] Included in the charts is the equivalent data for ETH for comparison.
 
@@ -53,30 +53,30 @@ As can be seen in the chart, there were only two instances shortly after on-chai
 ### One day rolling window
 ![24hr rolling window drawdowns](./../static/img/high_to_low_24hr.png)
 
-As one would expect, the longer the rolling window is, the greater the drawdawns that can occur. There are now one to two dozen instances of drawdowns in excess of 40%. However, all these drawdowns occured shortly after trading commenced.
+As one would expect, the longer the rolling window is, the greater the drawdowns that can occur. There are now one to two dozen instances of drawdowns in excess of 40%. However, all these drawdowns occurred shortly after trading commenced.
 
 One important observation, which in fact can be made from all three charts, is that ETH prices experienced significant drops in March 2020 and June 2021, many years after Ethereum mainnet launched. This is a good reminder that although one would generally expect lower volatility as a network matures and its market cap grows, sharp price declines larger than those observed historically can occur at any time.
 
 ### One week rolling window
 ![168hr rolling window drawdowns](./../static/img/high_to_low_168hr.png)
 
-The magnitude of drawdowns seen over 168 hour periods is noticeably greater than for the 1 day and 1 hour rolling windows, although the worst case scenario remains an 80% drawdown. Weekly rolling window data might be useful when leaving vaults unmoitored for longer periods of time or managing them manually.
+The magnitude of drawdowns seen over 168 hour periods is noticeably greater than for the 1 day and 1 hour rolling windows, although the worst case scenario remains an 80% drawdown. Weekly rolling window data might be useful when leaving vaults unmonitored for longer periods of time or managing them manually.
 
 ## Choosing your LTV
 
-If your aim is to avoid liquidation, keep in mind that any buffer you leave to protect against price declines needs to be come on top of the Max LTV, which is the buffer that protects the protocol against undercollateralization.
+If your aim is to avoid liquidation, keep in mind that any buffer you leave to protect against price declines needs to come on top of the Max LTV, which is the buffer that protects the protocol against undercollateralization.
 
 ```
 LTV = Max LTV * (1 - protected price decline)
 ```
 
-For example, if Max LTV is 60%, and you would like avoid liquidation even if the XCH price drops by 60%, then your LTV must be less than 60% * 40% = 24%. In other words, the value of your collateral must be at least 1/0.24 = 417% of your debt.
+For example, if Max LTV is 60%, and you would like to avoid liquidation even if the XCH price drops by 60%, then your LTV must be less than 60% * 40% = 24%. In other words, the value of your collateral must be at least 1/0.24 = 417% of your debt.
 
 When choosing your LTV, keep in mind that not only a decline in the XCH price can lead to liquidation, but also an increase in debt due to the accrual of Stability Fees over time.
 
 
 [^1]: For any LTV calculations, the protocol uses the oracle price for XCH and values 1 BYC at a fixed exchange rate of 1 USD.
-[^2]  More precisely, governance sets the **[Liquidation Ratio](../user-guide/liquidation)** (Statute `VAULT_LIQUIDATION_RATIO_PCT`). Max LTV is defined as 1 / Liquidation Ratio. E.g. LR = 166 -> Max LTV = 60%.
-[^2]: The principal is the amount initially borrowed when a loan is taken out. The debt owed is the principal plus any accrued Stability Fees.
-[^3]: The analysis uses hourly OHLC candlestick data from OKX for the XCH/USDT and ETH/USDT spot markets.
-[^4]: Mainnet launched on 19 March 2021, i.e. there was less than two months' worth of block rewards in circulation.
+[^2]: More precisely, governance sets the **[Liquidation Ratio](../user-guide/liquidation)** (Statute `VAULT_LIQUIDATION_RATIO_PCT`). Max LTV is defined as 1 / Liquidation Ratio. E.g. LR = 166 -> Max LTV = 60%.
+[^3]: The principal is the amount initially borrowed when a loan is taken out. The debt owed is the principal plus any accrued Stability Fees.
+[^4]: The analysis uses hourly OHLC candlestick data from OKX for the XCH/USDT and ETH/USDT spot markets.
+[^5]: Mainnet launched on 19 March 2021, i.e. there was less than two months' worth of block rewards in circulation.

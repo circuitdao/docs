@@ -8,9 +8,9 @@ sidebar_position: 375
 
 A Recharge Auction is a BYC CAT singleton with [*recharge_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp) puzzle as inner puzzle.
 
-Launching a new Recharge Auction coin requires governance approval. Upon launch, a Recharge Auction coin goes into standy-by mode, and can from then on be used to run Recharge Auctions. Each individual Recharge Auction is triggered via the start operation. When a Recharge Auction concludes, the Recharge Auction coin returns to its stand-by state until it gets started again for the next auction. Multiple Recharge Auctions can run in parallel.
+Launching a new Recharge Auction coin requires governance approval. Upon launch, a Recharge Auction coin goes into stand-by mode, and can from then on be used to run Recharge Auctions. Each individual Recharge Auction is triggered via the start operation. When a Recharge Auction concludes, the Recharge Auction coin returns to its stand-by state until it gets started again for the next auction. Multiple Recharge Auctions can run in parallel.
 
-Note that Recharge Auction coins cannot transformed back to standard BYC CATs or be melted. Once created, they stay in existence forever.
+Note that Recharge Auction coins cannot be transformed back to standard BYC CATs or be melted. Once created, they stay in existence forever.
 
 ## Operations
 
@@ -32,7 +32,7 @@ Launching a Recharge Auction requires a custom condition to be output by Statute
 
 ![Recharge auction launch](./../../static/img/Recharge_auction_launch_coin_spends_diagram.png)
 
-To launch a Recharge Auction, first a Recharge Auction Launcher coin must be created. The Launcher coin is the eve coin of the Recharge Auction and has an enforced eve state and amount. The Launcher coin is then spent by launch operation, which confirms with Statutes that it is permitted to be executed.
+To launch a Recharge Auction, first a Recharge Auction Launcher coin must be created. The Launcher coin is the eve coin of the Recharge Auction and has an enforced eve state and amount. The Launcher coin is then spent by the launch operation, which confirms with Statutes that it is permitted to be executed.
 
 Launching a Recharge Auction sets the ```LAUNCHER_ID``` curried arg to the Launcher coin's coin ID. The child coin of a Recharge Auction Launcher coin is a Recharge Auction Stand-by coin.
 
@@ -73,11 +73,11 @@ The target puzzle hash is a CAT inner puzzle hash. It will receive the CRT bid a
 
 The BYC bid amount of a bid may be smaller or larger than that of the previous bid as long as it is greater than the **Recharge Auction Minimum Bid Amount**. If the BYC bid amount is smaller than the previous one, the bidder must contribute the difference to the Recharge Auction coin.
 
-#![Recharge auction bid increasing BYC amount](./../../static/img/Recharge_auction_bid_increase_amount_coin_spends_diagram.png)
+![Recharge auction bid increasing BYC amount](./../../static/img/Recharge_auction_bid_increase_amount_coin_spends_diagram.png)
 
 If the new BYC bid amount is smaller than the previous one, the bidder can withdraw the difference to the previous bid from the Recharge Auction coin.
 
-#![Recharge auction bid decreasing BYC amount](./../../static/img/Recharge_auction_bid_decrease_amount_coin_spends_diagram.png)
+![Recharge auction bid decreasing BYC amount](./../../static/img/Recharge_auction_bid_decrease_amount_coin_spends_diagram.png)
 
 #### State changes
 
@@ -92,7 +92,7 @@ If the new BYC bid amount is smaller than the previous one, the bidder can withd
 
 Once the auction has concluded, the winner can mint an amount of CRT as specified in the bid by asserting the corresponding announcement from the auction coin. The BYC amount bid gets paid to the Treasury. Keepers should aim for an even distribution of BYC among Treasury coins by selecting a suitable Treasury sub-ring.
 
-#![Recharge auction win](./../../static/img/Recharge_auction_win_coin_spends_diagram.png)
+![Recharge auction win](./../../static/img/Recharge_auction_win_coin_spends_diagram.png)
 
 The win operation resets the Recharge Auction coin to stand-by state. If the Treasury balance remains below the Treasury Minimum, then a new Recharge Auction can be started immediately. Otherwise, the Recharge Auction coin remains in stand-by mode until it is needed again.
 

@@ -6,9 +6,9 @@ sidebar_position: 310
 
 # Overview
 
-The Technical Manual is intended for advanced users, keepers, and Oracle data providers that would like to gain an in-depth understanding of the inner workings of the protocol.
+The Technical Manual is intended for advanced users, keepers, and Oracle data providers who would like to gain an in-depth understanding of the inner workings of the protocol.
 
-For every protocol component, the manual explains what their purpose is and which puzzles are involved.
+For every protocol component, the manual explains what its purpose is and which puzzles are involved.
 
 ## Protocol coins
 
@@ -39,14 +39,14 @@ Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit
 
 ## Operations
 
-For each protocol coin page deals with operations that can be performed on a given protocol coin. Operations are grouped by who can perform them.
+Each protocol coin page deals with operations that can be performed on a given protocol coin. Operations are grouped by who can perform them.
 
 * **Owner**: The person that owns or controls a coin. Applies to:
   * Collateral vaults
   * Savings vaults
   * Announcers
   * Governance coins
-* **Keeper**: This can be anyone, but in practice are often professional trading firms that operate bots or automated trading infrastructure. Applies to:
+* **Keeper**: This can be anyone, but in practice they are often professional trading firms that operate bots or automated trading infrastructure. Applies to:
   * Statutes
   * Oracle
   * Announcers
@@ -80,7 +80,7 @@ On every page dedicated to a protocol coin type, there is a State and Lineage se
 
 ### Fixed state
 
-**Fixed state** refers to mod args that are known prior to protocol deployment and are hardcoded into the mod itself. The hardcoding in done by currying **fixed args** into a **raw mod** before it is considered final.
+**Fixed state** refers to mod args that are known prior to protocol deployment and are hardcoded into the mod itself. The hardcoding is done by currying **fixed args** into a **raw mod** before it is considered final.
 
 For example, the raw treasury mod, [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp), has the following args:
 
@@ -100,4 +100,4 @@ Other than ```MOD_HASH```, immutable args are those that are not known prior to 
 
 ### Mutable state ###
 
-Mutable state consists of curried args that are subject to change during a coin spend. In the case of a treasury coins, there is only one such arg, but for most other protocol coins the mutable state comprises multiple curried args.
+Mutable state consists of curried args that are subject to change during a coin spend. In the case of a treasury coin, there is only one such arg, but for most other protocol coins the mutable state comprises multiple curried args.

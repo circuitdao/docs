@@ -18,7 +18,7 @@ Treasury funds are discharged via:
 * Bad debt recovery
 * Surplus Auctions
 
-Note that funds in the Treasury cannot be directly accessed by anyone. Every deposit to or withdrawal from the Treasury must be approved by a coin with one of the **Approval Mods** as its puzzle. Approver Mods are whitelisted in the **Approval Mod Hashes** Statute. The only way in which funds can leave the Treasury are to pay Savings Interest when savers make a withdrawal or to pay the winner of a Surplus Auction.
+Note that funds in the Treasury cannot be directly accessed by anyone. Every deposit to or withdrawal from the Treasury must be approved by a coin with one of the **Approval Mods** as its puzzle. Approval Mods are whitelisted in the **Approval Mod Hashes** Statute. The only way in which funds can leave the Treasury is to pay Savings Interest when savers make a withdrawal or to pay the winner of a Surplus Auction.
 
 ![Treasury as buffer](./../../static/img/Treasury_diagram.png)
 
@@ -32,7 +32,7 @@ Another option to top up the Treasury is to issue BYC against accrued Stability 
 
 ![Stability Fee transfer](./../../static/img/Stability_Fee_transfer_diagram.png)
 
-It is governance's responsibility to continuously monitor the protocol's assets and liablities to ensure that the Treasury Maximum:
+It is governance's responsibility to continuously monitor the protocol's assets and liabilities to ensure that the Treasury Maximum:
 * is not set too low so that it prevents the Treasury from holding enough BYC to cover the outstanding Savings Interest on demand
 * is not set too high so that the amount of BYC removed from circulation is so large that it causes BYC to trade above its peg
 

@@ -8,9 +8,9 @@ sidebar_position: 385
 
 The Price Oracle, or Oracle for short, is a standard singleton with inner puzzle [*oracle.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp).
 
-It's main purpose is to provide an XCH/USD price to the Protocol. This price is referred to as the **Oracle Price**.
+Its main purpose is to provide an XCH/USD price to the Protocol. This price is referred to as the **Oracle Price**.
 
-However, the Protocol does not dirctly query the Oracle for the Oracle Price when performing operations. Instead, it keeps a copy of the Oracle Price in the state of the Statutes coin, the **Statutes Price**, and uses this value for all protocol-internal operations that require the XCH/USD price. This has the benefit of not having to spend the Oracle coin every time an operation needs access to the XCH/USD price.
+However, the Protocol does not directly query the Oracle for the Oracle Price when performing operations. Instead, it keeps a copy of the Oracle Price in the state of the Statutes coin, the **Statutes Price**, and uses this value for all protocol-internal operations that require the XCH/USD price. This has the benefit of not having to spend the Oracle coin every time an operation needs access to the XCH/USD price.
 
 Also, note that the Oracle Price, and hence the Statutes Price, is delayed vs the XCH/USD price published by the Announcers. The delay is given by the ```STATUTE_PRICE_DELAY``` Statute. This is a last-resort protection for protocol users against failing or misbehaving Announcers, and allows them to take action before an incorrect Statutes Price becomes effective. E.g. a borrower could repay all their loans before getting liquidated on the basis of an incorrect Statutes Price.
 
@@ -27,7 +27,7 @@ Price infos in the ```PRICE_INFOS``` state variable are ordered in ascending chr
 
 A price info is called **matured** if its timestamp is less than the current timestamp minus ```STATUTE_PRICE_DELAY```.
 
-Below an example where ```PRICE_INFOS``` contains four price infos, two of them matured, two of them not matured.
+Below is an example where ```PRICE_INFOS``` contains four price infos, two of them matured, two of them not matured.
 
 ![Oracle price infos](./../../static/img/Oracle_price_infos_diagram.png)
 
@@ -70,13 +70,13 @@ The mutate operation retains only the most recent matured price info as well as 
 
 ![Oracle mutate operation](./../../static/img/Oracle_mutate_operation_diagram.png)
 
-The diagram above illustrates how the mutate operation updates ```PRICE_INFOS```. Initially, ```PRICE_INFOS``` contains four price infos, two of them matured, two of them not matured. One  discarded, and a new price info appended to ```PRICE_INFOS```. In this particular example, one price info gets discarded (```price_info_1```), leaving the total number of price infos stored in ```PRICE_INFO``` unchanged.
+The diagram above illustrates how the mutate operation updates ```PRICE_INFOS```. Initially, ```PRICE_INFOS``` contains four price infos, two of them matured, two of them not matured. One is discarded, and a new price info is appended to ```PRICE_INFOS```. In this particular example, one price info gets discarded (```price_info_1```), leaving the total number of price infos stored in ```PRICE_INFO``` unchanged.
 
 Note that it is possible for there to be no matured price info. This can happen immediately after protocol deployment or if governance has increased ```STATUTE_PRICE_DELAY```.
 
 #### State changes
 
-* ```PRICE_INFOS```: The mutate operation appends exactly one new price info to the ```PRICE_INFOS``` list. It may discard zero or more price infos from the beginning or the ```PRICE_INFOS``` list.
+* ```PRICE_INFOS```: The mutate operation appends exactly one new price info to the ```PRICE_INFOS``` list. It may discard zero or more price infos from the beginning of the ```PRICE_INFOS``` list.
 
 ### Announce
 

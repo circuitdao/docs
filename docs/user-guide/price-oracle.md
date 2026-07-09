@@ -16,7 +16,7 @@ The Statutes Price is stored in the Statutes singleton. See the [Technical Manua
 
 ![Statutes Price](./../../static/img/Statutes_price_diagram.png)
 
-Using the Stautes Price, the protocol can value XCH held in collateral vaults. This is relevant in the following three situations:
+Using the Statutes Price, the protocol can value XCH held in collateral vaults. This is relevant in the following three situations:
 
 * Borrowing: When taking out a loan, the Liquidation Threshold must remain below the value of the vault's collateral
 * Withdrawing collateral: When withdrawing collateral, the Liquidation Threshold must remain below the value of the vault's collateral
@@ -27,7 +27,7 @@ Using the Stautes Price, the protocol can value XCH held in collateral vaults. T
 
 As shown in the diagram above, the Oracle may store multiple prices, which are referred to as **Oracle prices** (with a lower case 'p'). This is necessary due to the Oracle Price Delay. Whenever a new price is added to the list of Oracle prices, all but one of the prices which are older than Oracle Price Delay get discarded. This oldest price in the list is the Oracle Price (with a capital 'P'). At any given time, it is the only of the prices that can be announced and copied to Statutes to become the Statutes Price.
 
-A new Oracle price can be calculated and added to the list Oracle prices whenever
+A new Oracle price can be calculated and added to the list of Oracle prices whenever
 
 * at least **Price Update Delay** seconds have passed since the previous price was added; or
 * the price has changed by more than **Price Update Delta** basis points
@@ -49,7 +49,7 @@ The Technical Manual contains additional information on [Announcers](../../techn
 
 :::
 
-Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Validity**. Otherwise the Anncouncer price is considered expired and can no longer be used to update the Oracle Price.
+Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Validity**. Otherwise the Announcer price is considered expired and can no longer be used to update the Oracle Price.
 
 Governance should closely monitor the performance of data providers, and replace those that perform poorly or can no longer be trusted. The larger the number of high-quality whitelisted Announcers, the larger M-of-N can be chosen, and the lower the risk that the Oracle Price is not reflective of the market price.
 
@@ -88,7 +88,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 * **Oracle Price Update Delay**
     * Statute index: 5
     * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_DELAY```
-    * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the the [Liquidation Ratio](../liquidation)
+    * considerations: should give protocol users enough time to manage their positions should the value seem incorrect. should be short enough that it does not unduly delay liquidations. The delay needs to be factored into the [Liquidation Ratio](../liquidation)
 * **Oracle Price Update Delta**
     * Statute index: 6
     * Statute name: ```STATUTE_ORACLE_PRICE_UPDATE_RATIO_BPS```
@@ -104,7 +104,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 * **Announcer Minimum Deposit**
     * Statute index: 34
     * Statute name: ```STATUTE_ANNOUNCER_MINIMUM_DEPOSIT_MOJOS```
-    * considerations: should be high enough to set a strong incentive for Announcers to run high availablity infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
+    * considerations: should be high enough to set a strong incentive for Announcers to run high availability infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
 * **Penalty Factor**
     * Statute index: 37
     * Statute name: ```STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS```

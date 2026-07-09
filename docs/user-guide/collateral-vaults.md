@@ -8,7 +8,7 @@ sidebar_position: 205
 
 A **collateral vault** is a smart coin in which XCH can be deposited and from which BYC can be borrowed. XCH deposited in a vault is used as **collateral** to back any BYC borrowed.
 
-Collateral vaults can be created premissionlessly by anyone. Whoever creates a vault automatically becomes its owner.
+Collateral vaults can be created permissionlessly by anyone. Whoever creates a vault automatically becomes its owner.
 
 ## Borrowing
 
@@ -33,7 +33,7 @@ The Stability Fee can be thought of as an interest rate charged on BYC loans. It
 The SF is one of the primary mechanisms by which BYC maintains its 1:1 peg to the US Dollar.
 
 * If BYC trades at > 1 USD in the market, the price can be brought down by lowering the SF, so that borrowing BYC becomes more attractive, thereby increasing the BYC supply.
-* If BYC trades at < 1 USD in the market, the SF can be increased in order to make holding BYC more expensive, encouring repayment of BYC loans, which tightens the supply and pushes up the price of BYC.
+* If BYC trades at < 1 USD in the market, the SF can be increased in order to make holding BYC more expensive, encouraging repayment of BYC loans, which tightens the supply and pushes up the price of BYC.
 
 Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, governance should closely monitor market developments and vote to adjust the SF as needed.
 
@@ -51,7 +51,7 @@ Debt can only be fully repaid if accrued Stability Fees exceed the **Treasury De
 
 :::
 
-Until accrued Stability Fees of a vault do not exceed the **Treasury Delta Minimum**, the borrower cannot repay more than the principal amount of the loan. This also means that not all collateral can be withdrawn from the vault.
+As long as accrued Stability Fees of a vault do not exceed the **Treasury Delta Minimum**, the borrower cannot repay more than the principal amount of the loan. This also means that not all collateral can be withdrawn from the vault.
 
 
 ## Liquidation
@@ -60,11 +60,11 @@ If the value of collateral in a vault drops below the Liquidation Threshold, the
 
 :::danger
 
-If the LTV of the vault drops below Max LTV, the vault will be liquidated.
+If the LTV of the vault exceeds Max LTV, the vault will be liquidated.
 
 :::
 
-For details on the liqudation process please see the [Liquidation](../liquidation) page.
+For details on the liquidation process please see the [Liquidation](../liquidation) page.
 
 ## Vault constraints
 
@@ -89,4 +89,4 @@ When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad ho
 * **Treasury Delta Minimum**
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
-    * considerations: Choose large enough to prevent Treausry coin hogging. Choose small enough to allow small scale borrowers to repay most of their loans.
+    * considerations: Choose large enough to prevent Treasury coin hogging. Choose small enough to allow small scale borrowers to repay most of their loans.

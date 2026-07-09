@@ -9,10 +9,10 @@ sidebar_position: 320
 **Statutes** are a set of mutable parameters that determine the behaviour of Circuit protocol. They are effectively the global state variables of the protocol.
 
 There are two different types of Statutes:
-* protocol-updated:
+* protocol-updated
 * governance-updated
 
-In addition, there is the [Statutes Price](../../user-guide/price-oracle), which is provided by the Oracle and used value the XCH held in collateral vaults.
+In addition, there is the [Statutes Price](../../user-guide/price-oracle), which is provided by the Oracle and used to value the XCH held in collateral vaults.
 
 Protocol-updated Statutes are those that the protocol keeps track of automatically by enforcing updates as part of certain protocol coin spends.
 
@@ -20,11 +20,11 @@ Governance-updated Statutes require a governance vote to be updated. For details
 
 ![Statutes singleton](./../../static/img/Statutes_singleton_diagram.png)
 
-Each Statute has an index, value and a name by which it can be identified. In addition, Governance-updated Statutes have a set of **Constrainsts** associated with them, which place certain constraints on how a Statute may be updated.
+Each Statute has an index, value and a name by which it can be identified. In addition, Governance-updated Statutes have a set of **Constraints** associated with them, which place certain constraints on how a Statute may be updated.
 
 ## Statutes singleton
 
-Statutes are kept is a [standard singleton](https://chialisp.com/singletons/), referred to as the **Statutes singleton**. The Statutes singleton's inner puzzle can be found in [*statutes.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp).
+Statutes are kept in a [standard singleton](https://chialisp.com/singletons/), referred to as the **Statutes singleton**. The Statutes singleton's inner puzzle can be found in [*statutes.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp).
 
 When a protocol coin is spent, required Statutes values are passed to the coin's puzzle via its solution. Puzzles of protocol coins must be written so that for every Statute value they use, there is a statement that asserts a corresponding Statute announcement from the Statutes singleton. This ensures that Statute values passed to protocol coins cannot be faked.
 
@@ -50,7 +50,7 @@ Governance-updated Statutes come with Constraints that define limitations on how
 
 * **Proposal Threshold**: minimum amount of CRT required to make a proposal
 * **Veto Period**: time period (in seconds) during which a proposal can be vetoed
-* **Implemenation Delay**: time (in seconds) that needs to pass before the new Statute value becomes effective after the end of the veto period
+* **Implementation Delay**: time (in seconds) that needs to pass before the new Statute value becomes effective after the end of the veto period
 * **Maximum Delta**: the maximum absolute amount by which the Statute value may change
 
 For further information on Constraints, see the [governance](../governance) page.
@@ -93,9 +93,9 @@ This operation cannot be performed on an ephemeral Statutes singleton.
 
 Updates an individual Statute. Requires the Statute's index and new value to be passed. Note that only Statutes with index >= 0 can be updated.
 
-Note that the update Statute operation announces the existing (i.e. pre-update) Statutes. In other words, the mutated Statue value is only available to the protocol in the next Statute spend.
+Note that the update Statute operation announces the existing (i.e. pre-update) Statutes. In other words, the mutated Statute value is only available to the protocol in the next Statute spend.
 
-This operation announces all Statutes as they were before the update statute operation was performed. The operation also announce Statutes Price Info.
+This operation announces all Statutes as they were before the update statute operation was performed. The operation also announces Statutes Price Info.
 
 This operation can only be performed if the previous Statutes operation was an announce.
 
@@ -115,7 +115,7 @@ Since these are one-off operations specific to certain coins, there is no point 
 
 The only custom condition type required by the protocol is ```SEND_MESSAGE```, which is enforced by the Statutes mutation operation.
 
-The bitmasks used by custom announcements cannot be coin-specific since both sending coin (Statutes) as well as receiving coins may be spent before the corresponding governance proposal is implemented. In the case of Announcers, even the state of the coin may change before implementation, which means that the puzzle-to-none bitmask should be used when (dis)approving Announcers. That the state of the Statutes singleton itself may change is not an issue as the Statutes state can be provided in form of an inner puzzle hash to the receiving coin in the implementation spend.
+The bitmasks used by custom announcements cannot be coin-specific since both sending coin (Statutes) as well as receiving coins may be spent before the corresponding governance proposal is implemented. In the case of Announcers, even the state of the coin may change before implementation, which means that the puzzle-to-none bitmask should be used when (dis)approving Announcers. That the state of the Statutes singleton itself may change is not an issue as the Statutes state can be provided in the form of an inner puzzle hash to the receiving coin in the implementation spend.
 
 This operation announces all Statutes, Statutes Price Info, and the custom condition(s) as per the corresponding governance proposal.
 
@@ -135,10 +135,9 @@ This operation can only be performed if the previous Statutes operation was an a
 
 #### State changes
 
-* ```PRICE_INFO```: gets updated to the lastest Oracle Price Info
+* ```PRICE_INFO```: gets updated to the latest Oracle Price Info
 * ```PRICE_UDPATE_COUNTER```: incremented by 1
 * ```PREV_ANNOUNCE```: set to nil
-.
 
 ## Statutes
 
@@ -152,7 +151,7 @@ Current Statute values are shown on the dapp's Protocol page in the Statutes dro
 
 ### Protocol-updated Statutes:
 
-(-4) ```PRICE_UPDATE_COUNTER```: number of Statue Price updates since protocol deployment
+(-4) ```PRICE_UPDATE_COUNTER```: number of Statute Price updates since protocol deployment
 
 (-2) ```PAST_CUMULATIVE_INTEREST_DF```: cumulative interest discount factor
 

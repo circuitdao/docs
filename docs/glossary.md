@@ -8,11 +8,11 @@ sidebar_position: 850
 
 The glossary assumes familiarity with basic concepts of [Chia blockchain](https://docs.chia.net/docs-home) and [Chialisp](https://chialisp.com/).
 
-**Absorb coin.** A coin included in a spend bundle to absorb mojos released by one of more other coins. Depending on the coins spent in the transaction, an absorb coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH absorb coin is used when withdrawing collateral from a vault.
+**Absorb coin.** A coin included in a spend bundle to absorb mojos released by one or more other coins. Depending on the coins spent in the transaction, an absorb coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH absorb coin is used when withdrawing collateral from a vault.
 
 **Approval mod.** One of five protocol coin types that have permission to issue or melt BYC or CRT, or to withdraw BYC from treasury. See the [Approval Mods](../technical-manual/advanced-topics/approval-mods) page for details.
 
-**Arg.** Short for argument. A value that is passed into a mod or function. A value passed into a mod that is considered part of the mod itself, is referred to as a curried arg.
+**Arg.** Short for argument. A value that is passed into a mod or function. A value passed into a mod that is considered part of the mod itself is referred to as a curried arg.
 
 **Argument.** See arg.
 
@@ -54,13 +54,13 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Eve state.** The state of an eve coin.
 
-**Fee coin.** An coin that is included in a spend bundle to pay transaction fees to the farmer.
+**Fee coin.** A coin that is included in a spend bundle to pay transaction fees to the farmer.
 
 **Fixed arg.** A curried arg that cannot be changed by protocol operations and whose value is known prior to protocol deployment other than ```MOD_HASH```. These are typically mods or mod hashes.
 
 **Fixed state.** The fixed args of a coin's [state](../technical-manual/overview#fixed-state).
 
-**Funding coin.** A coin included in a spend bundle to release mojos to be absorbed by one of more other coins. Depending on the coins spent in the transaction, a funding coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH funding coin is used when depositing collateral to a vault.
+**Funding coin.** A coin included in a spend bundle to release mojos to be absorbed by one or more other coins. Depending on the coins spent in the transaction, a funding coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH funding coin is used when depositing collateral to a vault.
 
 **Governance.** The entirety of all CRT token holders or, more narrowly, those that participate in governance processes such as proposing or vetoing bills.
 
@@ -119,11 +119,11 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 See [here](http://localhost:3000/technical-manual/design-decisions#condition-prefixes-and-filtering) for details.
 
-**Protocol deployment.** Refers the creation of the eve coins of Statutes, Announcer Registry and Oracle.
+**Protocol deployment.** Refers to the creation of the eve coins of Statutes, Announcer Registry and Oracle.
 
 **Protocol prefix.** The 3-byte string ```CRT``` used to identify protocol conditions.
 
-**Puzzle.** A curried mod whose treehash is being used as the puzzle hash of a coin. More info [here](https://chialisp.com/chialisp-first-smart-coin/).
+**Puzzle.** A curried mod whose treehash is being used as the puzzle hash of a coin. More info [here](https://chialisp.com/chialisp-first-smart-coin/). Also used as a synonym for puzzle mod and mod.
 
 **Puzzle mod.** A puzzle with all mutable args, immutable args and MOD_HASH [uncurried](https://chialisp.com/chialisp-currying).
 

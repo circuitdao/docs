@@ -29,9 +29,9 @@ BILL =  ((veto_period . implementation_delay) bill_proper)
 
 There are two different modes governance coins can be in, **proposal mode** and **veto mode**. A governance coin is in proposal mode if a propose operation was performed on it and ```BILL``` is not nil. Otherwise the governance coin is in veto mode.
 
-A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be implemented only if both Veto Period and Implementation Delay have passed, and only as long as the **Implementation Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
+A veto operation can be performed if the time that has passed since the proposal was created is less than the Veto Period. Similarly, a proposal can be implemented only if both Veto Period and Implementation Delay have passed, and only as long as the **Implementation Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
 
-The owner of a governance coin can disable governance mode and get back a standard CRT coin by having the inner layer inner puzzle output a ```CREATE_COIN``` conditions with nil for its puzzle hash.
+The owner of a governance coin can disable governance mode and get back a standard CRT coin by having the inner layer inner puzzle output a ```CREATE_COIN``` condition with nil for its puzzle hash.
 
 ## Participating in governance
 
@@ -60,11 +60,11 @@ When ```BILL``` is not nil, it is always possible to either propose, reset or ve
 
 ![Governance operations when BILL is not nil](./../../static/img/Governance_bill_not_nil_diagram.png)
 
-Combining the two diagrams it is clear that a bill can only be implemented if it was previously proposed. This prevents the creation of an eve governance coin with bill curried in and subsequent implementation without a prior proposal spend. Having a proposal spend is crucial as they place certain constraints on when implementation can take place, which for example ensures that there is veto period as defined in Statutes.
+Combining the two diagrams it is clear that a bill can only be implemented if it was previously proposed. This prevents the creation of an eve governance coin with bill curried in and subsequent implementation without a prior proposal spend. Having a proposal spend is crucial as they place certain constraints on when implementation can take place, which for example ensures that there is a veto period as defined in Statutes.
 
 ![Governance eve spend diagram](./../../static/img/Governance_eve_spend_diagram.png)
 
-In the diagram above, a governance eve coin is shown at the top, with non-eve governance coins one level below. Implementing a bill is only possible if a propose operation was previously performed, possibly with one or more announce veto operations in between, which leave the proposed bill proper unchange and only affect the associated proposal periods.
+In the diagram above, a governance eve coin is shown at the top, with non-eve governance coins one level below. Implementing a bill is only possible if a propose operation was previously performed, possibly with one or more announce veto operations in between, which leave the proposed bill proper unchanged and only affect the associated proposal periods.
 
 ### Propose
 
@@ -102,7 +102,7 @@ Since the veto operation is performed not by the owner(s) of a governance coin, 
 
 An announce veto operation is performed from a veto coin to veto the bill of a proposal coin. The veto succeeds if the amount of the veto coin is greater than the amount of the proposal coin. For details on the required coin spends see the [Veto section](#veto) as both operations must be performed in parallel.
 
-Note that it is possible to perform the announce veto operation not only from governance coins in veto mode, but also from those in proposal mode. This prevents outcomes to governance votes that do not reflect the view of all CRT holders due to CRT tokens being tied up in an existing proposal. In a worst case scenario this could be exploited by an attacker, by creating innocuous proposals only to then try to push through a nefarious proposal when a large amount of CRT is tied up in support of the innocuous proposals.
+Note that it is possible to perform the announce veto operation not only from governance coins in veto mode, but also from those in proposal mode. This prevents outcomes of governance votes that do not reflect the view of all CRT holders due to CRT tokens being tied up in an existing proposal. In a worst case scenario this could be exploited by an attacker, by creating innocuous proposals only to then try to push through a nefarious proposal when a large amount of CRT is tied up in support of the innocuous proposals.
 
 When an announce veto operation is performed on a proposal coin, the proposal periods of the bill are updated. Since proposal periods are measured relative to the timestamp of the last spend of the proposal coin, both Veto Period and Implementation Delay must be reduced to account for the time that has passed since the previous spend of the proposal coin. Note that it is the spender's responsibility to choose the reduction as large as permitted to avoid unnecessarily extending veto period or implementation delay.
 
@@ -112,7 +112,7 @@ When an announce veto operation is performed on a proposal coin, the proposal pe
 
 ### Implement
 
-Once the Implementation Deplay has passed, the proposed bill can be implemented, i.e. the corresponding Statute updated in the Statutes singleton as specified by the bill.
+Once the Implementation Delay has passed, the proposed bill can be implemented, i.e. the corresponding Statute updated in the Statutes singleton as specified by the bill.
 
 ![Governance enact coin spends diagram](./../../static/img/Governance_enact_coin_spends_diagram.png)
 
@@ -151,9 +151,9 @@ The amount of a governance coin depends on the amount of backing a proposal or v
 
 ### Lineage
 
-By virtue of being CATs, governance coins require a standard CAT lineage proof to be spent. That governance coins are also custom singletons is enforeced by the governance mod by allowing only one ```CREATE_COIN``` condition to pass the ```filter-condition``` function.
+By virtue of being CATs, governance coins require a standard CAT lineage proof to be spent. That governance coins are also custom singletons is enforced by the governance mod by allowing only one ```CREATE_COIN``` condition to pass the ```filter-condition``` function.
 
 Announce veto and implement operations both require that the coin they are being applied to had a governance coin as parent. This means that an eve governance coin cannot be spent by either operation. Reset and veto operations can be applied to an eve governance coin irrespective of the value of ```BILL```, but they both set ```BILL``` to nil. This is fine because a nil bill cannot be implemented. Effectively, the resulting governance coin can be thought of as an eve coin in its own right. This leaves propose as the only operation that can spend an eve governance coin.
 
 
-If a governance coin has ```BILL``` equal to nil, only propose, announce veto and implement operations can be performed.  not equal to nil, then only propose, reset and veto operations can be performed on it.
+If a governance coin has ```BILL``` equal to nil, only propose, announce veto and implement operations can be performed. If ```BILL``` is not equal to nil, then only propose, reset and veto operations can be performed on it.

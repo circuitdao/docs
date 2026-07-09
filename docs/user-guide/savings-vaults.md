@@ -25,13 +25,17 @@ When making a deposit the savings balance is increased by the amount of BYC depo
 
 ### Withdrawals
 
-When making a withdrawal, the user automatically receives an interest payment from the Treasury for the entire accrued interest. The savings balance is increased by the amount of BYC deposited plus the accrued interest, while accrued interest is reset to 0. This is true unless accrued interest does not exceed the **Treasury Delta Minimum**, in which case the user can withdraw at most the savings balance.
+When making a withdrawal, the user automatically receives an interest payment from the Treasury for the entire accrued interest. The savings balance is decreased by the amount of BYC withdrawn minus the accrued interest.
+
+For example, if a user has a savings balance of 1000 BYC and 50 BYC in accrued interest and withdraws 100 BYC, the new savings balance would be 950 BYC. If on the other hand the user only withdraws 25 BYC, then the savings balance would increase to 1025 BYC. In both cases accrued interest resets to 0.
 
 :::info
 
 Savings can only be fully withdrawn if accrued interest exceeds the Treasury Delta Minimum.
 
 :::
+
+If accrued interest does not exceed the **Treasury Delta Minimum**, no accrued interest payment is made from the Treasury, and the user can withdraw at most the savings balance.
 
 
 ## Savings Rate
@@ -46,7 +50,7 @@ The Savings Rate is set by governance. Although it is not directly tied to the S
 * **Interest Discount Factor**
     * Statute index: 2
     * Statute name: ```STATUTE_INTEREST_DF```
-    * considerations: The higher this value is set, the more support is given to the BYC-USD peg from below. If the value is set too high, it may slow down the rate at which the System Buffer fills up. The SR should not be greater than the Stabiliy Fee, as this would present an arbitrage that could lead to unlimited losses to the protocol.
+    * considerations: The higher this value is set, the more support is given to the BYC-USD peg from below. If the value is set too high, it may slow down the rate at which the System Buffer fills up. The SR should not be greater than the Stability Fee, as this would present an arbitrage that could lead to unlimited losses to the protocol.
 * **Treasury Delta Minimum**
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```

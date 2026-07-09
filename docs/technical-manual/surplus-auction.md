@@ -21,9 +21,9 @@ A Surplus Auction can be started as soon as the **Surplus Auction Threshold** is
 
 It is possible for multiple Surplus Auctions to run in parallel. It is even possible to start more than one Surplus Auction in the same block as long as the Treasury has sufficient surplus and there are suitable Treasury coins available to be spent.
 
-However, having Surplus Auctions run simultaneously is not desireable as keepers may not have sufficient capital on stand-by to participate in all of them at competitive prices, and it would make it even harder for manual bidders to keep up with those using bots.
+However, having Surplus Auctions run simultaneously is not desirable as keepers may not have sufficient capital on stand-by to participate in all of them at competitive prices, and it would make it even harder for manual bidders to keep up with those using bots.
 
-Since both eve state and eve amount of the eve coin are enforced, Surplus Auction Launcher coins cannot share a parent coin. Instead, each Surplus Auction Launcher coin needs to be created from a separate parent coin spend. This is by design, in order to not set an incentive for keepers to wait until the Surplus Auction Threshold has been exceeded by such a large amount that multiple Surplus Auctions can be triggered at once, leading to a saving on transaction costs. The desired behaviour is for keepers to start a Surplus Auction as soon as possible once the Surplus Auction Threshold has been exceeded, and thereby avoiding simultaneous Surplus Auctions.
+Since both eve state and eve amount of the eve coin are enforced, Surplus Auction Launcher coins cannot share a parent coin. Instead, each Surplus Auction Launcher coin needs to be created from a separate parent coin spend. This is by design, in order to not set an incentive for keepers to wait until the Surplus Auction Threshold has been exceeded by such a large amount that multiple Surplus Auctions can be triggered at once, leading to a saving on transaction costs. The desired behaviour is for keepers to start a Surplus Auction as soon as possible once the Surplus Auction Threshold has been exceeded, and thereby avoid simultaneous Surplus Auctions.
 
 
 ## Operations
@@ -81,7 +81,7 @@ For every bid that is placed, the previous bidder is refunded their bid amount a
 
 ![Surplus Auction bid coin spends diagram](./../../static/img/Surplus_auction_bid_coin_spends_diagram.png)
 
-With each bid, the bid amount must increase by at least the percentage defined by **Minimum Bid Increase**. This, together with the Surplus Auction Bid TTL ensures that Surplus Auction, once they've received a bid, progress at a certain minimum pace.
+With each bid, the bid amount must increase by at least the percentage defined by **Minimum Bid Increase**. This, together with the Surplus Auction Bid TTL, ensures that Surplus Auctions, once they've received a bid, progress at a certain minimum pace.
 
 Note that in theory it is possible for a Surplus Auction to never receive a bid. In practice this is unlikely to happen since there is no minimum bid amount or price enforced, and a bidder can potentially earn a large profit if there are no other bidders willing to submit a bid.
 
@@ -173,7 +173,7 @@ Immutable state:
 
 * ```MOD_HASH```
 * ```CRT_TAIL_HASH```
-* ```SURPLUS_AUCTION_MOD_HASH```: hash of the Surplus Action mod
+* ```SURPLUS_AUCTION_MOD_HASH```: hash of the Surplus Auction mod
 * ```SURPLUS_AUCTION_LAUNCHER_ID```: Launcher coin ID of the Surplus Auction
 
 Mutable state:
@@ -189,4 +189,4 @@ The eve Payout coin must have an amount of 0. The fund operation increases the a
 
 ### Lineage
 
-The Payout coin does not require a lineage proof as it its operations are unambiguously tied to Surplus Auction operations.
+The Payout coin does not require a lineage proof as its operations are unambiguously tied to Surplus Auction operations.
