@@ -36,7 +36,7 @@ The XCH/USD market price is an off-chain metric. As such it cannot be obtained i
 
 ![Oracle update](./../../static/img/Oracle_update_diagram.png)
 
-Oracle prices are calculated as the median price of a number of whitelisted Announcers. Whoever performs the update is free to choose which Announcers to use, as long as the number of Announcers selected is no less than **Oracle M-of-N** (M-of-N).
+Oracle prices are calculated as the median price of a number of whitelisted Announcers. Whoever performs the update is free to choose which Announcers to use, as long as the number of Announcers selected is no less than **M-of-N**.
 
 
 ## Data providers and Announcers
@@ -49,7 +49,7 @@ The Technical Manual contains additional information on [Announcers](../../techn
 
 :::
 
-Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Validity**. Otherwise the Announcer price is considered expired and can no longer be used to update the Oracle Price.
+Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Price TTL**. Otherwise the Announcer price is considered expired and can no longer be used to update the Oracle Price.
 
 Governance should closely monitor the performance of data providers, and replace those that perform poorly or can no longer be trusted. The larger the number of high-quality whitelisted Announcers, the larger M-of-N can be chosen, and the lower the risk that the Oracle Price is not reflective of the market price.
 
@@ -61,7 +61,7 @@ Data providers are real-world entities that publish off-chain data on-chain. As 
 
 To incentivize data providers to do their job well, the protocol lets them claim rewards in the form of CRT tokens. For details please see the [**Announcer Registry**](../../technical-manual/announcer-registry) page in the Technical Manual.
 
-In addition, data providers are required to post a bond in their respective Announcer coins. The bond is an amount of XCH no less than the **Announcer Minimum Deposit**. If an Announcer price is expired, an Announcer can be penalized by slashing an amount of XCH equal to the **Penalty Factor** multiplied by the share of the **Penalty Interval** that has passed since expiry or the last penalization event from the bond.
+In addition, data providers are required to post a bond in their respective Announcer coins. The bond is an amount of XCH no less than the **Minimum Deposit**. If an Announcer price is expired, an Announcer can be penalized by slashing an amount of XCH equal to the **Penalty Factor** multiplied by the share of the **Penalty Interval** that has passed since expiry or the last penalization event from the bond.
 
 
 ## Data sources and Announcer prices
@@ -81,7 +81,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
 
 ## Statutes
 
-* **Oracle M-of-N**
+* **M-of-N**
     * Statute index: 4
     * Statute name: ```STATUTE_ORACLE_M_OF_N```
     * considerations: a higher value leads to a larger sample size and hence generally better Oracle Price quality. Care must be taken to not choose M-of-N too close to the number of whitelisted Announcers so that it creates a risk that the Oracle Price can no longer be updated if multiple Announcers fail to publish a price or publish inaccurate prices.
@@ -97,19 +97,19 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
     * Statute index: 7
     * Statute name: ```STATUTE_PRICE_DELAY```
     * considerations: a longer delay gives users of the system more time to perform mitigating actions should the oracle price be incorrect. it also gives governance more time to disable price updates in such a scenario. a shorter delay leads to more timely liquidations and more accurate limits on borrowing, both of which reduce risk of the system becoming insufficiently or under-collateralised.
-* **Announcer Validity**
+* **Announcer Price TTL**
     * Statute index: 35
     * Statute name: ```STATUTE_ANNOUNCER_MAXIMUM_VALUE_TTL```
     * considerations:
-* **Announcer Minimum Deposit**
+* **Minimum Deposit**
     * Statute index: 34
     * Statute name: ```STATUTE_ANNOUNCER_MINIMUM_DEPOSIT_MOJOS```
     * considerations: should be high enough to set a strong incentive for Announcers to run high availability infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
 * **Penalty Factor**
     * Statute index: 37
     * Statute name: ```STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS```
-    * considerations: similar considerations as with Announcer Minimum Deposit.
+    * considerations: similar considerations as with Minimum Deposit.
 * **Penalty Interval**
     * Statute index: 36
     * Statute name: ```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```
-    * considerations: similar considerations as with Announcer Minimum Deposit.
+    * considerations: similar considerations as with Minimum Deposit.
