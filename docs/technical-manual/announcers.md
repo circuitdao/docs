@@ -14,7 +14,6 @@ Announcers are also referred to as **Atom Announcers** because they are designed
 
 Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the `TIMESTAMP_EXPIRES` curried arg lies in the past. `TIMESTAMP_EXPIRES` is updated to the current time plus `VALUE_TTL` whenever the Announcer Price is updated. `VALUE_TTL` is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](../../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
 
-
 ## Governance considerations
 
 Governance is responsible for selecting data providers and monitoring the performance of their respective Announcers. Governance should require comprehensive disclosures from data providers to ensure they have the required capabilities and experience:
@@ -58,7 +57,7 @@ Keeper operations:
 
 #### Driver info
 
-```LAUNCHER_ID``` plus mutable state. <!--(TODO: change order in REMARK condition to match order in state)-->
+```LAUNCHER_ID``` plus mutable state.
 
 ### Register
 
@@ -193,7 +192,7 @@ Mutable state:
 * ```VALUE```: atom value to be announced. an integer representing the XCH/USD market price
 * ```MIN_DEPOSIT```: minimum amount of Announcer coin that should be maintained
 * ```COOLDOWN_START```: timestamp of when a cooldown was initiated. 0 if not in cooldown
-* ```LAST_PENALTY_INTERVAL```: <!--TODO-->
+* ```LAST_PENALTY_INTERVAL```:
 * ```TIMESTAMP_EXPIRES```: timestamp when atom value is no longer announceable
 
 ### Eve state
@@ -209,8 +208,6 @@ Announcers have an enforced eve state in which the following curried args are al
 * ```TIMESTAMP_EXPIRES```
 
 The announcer owner is free to set ```INNER_PUZZLE_HASH``` as they desire.
-
-<!--TODO: what is/should MIN_DEPOSIT (be) set to?-->
 
 ### Amount
 

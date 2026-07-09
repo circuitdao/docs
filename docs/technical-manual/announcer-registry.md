@@ -73,7 +73,6 @@ Distributing Rewards increases the CRT supply.
 * ```CLAIM_COUNTER```: gets increased by 1
 * ```REWARDS_CLAIMABLE_AT```: gets updated to Price Update Counter plus Reward Interval.
 
-
 ## State and lineage
 
 Fixed state:
@@ -103,8 +102,7 @@ The Announcer Registry coin amount is always 0.
 
 ### Lineage
 
-Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1 <!--(TODO: and the key_value_list if used)-->. It also means that the Registry's eve spend must occur at protocol launch.
-
+Being a custom singleton, the Announcer Registry requires a lineage proof when spent. In case of the eve spend, which must be performed using the launch operation, the Registry asserts the [standard launcher](https://chialisp.com/singletons/#launcher) ```CREATE_COIN_ANNOUNCEMENT``` from the Statutes launcher coin. This requires the lineage proof to be the treehash of a list consisting of the Statutes eve puzzle hash (corresponding to the full puzlle including the outer standard singleton layer) and the amount of the Statutes eve coin, which is always 1. It also means that the Registry's eve spend must occur at protocol launch.
 
 ## Statutes
 * **Reward per Interval**

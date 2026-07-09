@@ -10,13 +10,11 @@ Collateral vaults are custom singletons that can be created permissionlessly by 
 
 Users can deposit XCH into a collateral vault to borrow BYC against it.
 
-
 ## Inner puzzle
 
 Collateral vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE_HASH```,  which ensures that only the legitimate owner can perform certain operations, the **owner operations**, on it.
 
 The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a collateral vault.
-
 
 ## Stability Fees
 
@@ -57,7 +55,6 @@ Users should keep in mind that although any change in the CCSFDF caused by a ret
 :::
 
 Note that the vault owner passes in the current time as an argument when performing a borrow or repay operation, and is given a three minute window of flexibility vs the actual block timestamp to reduce the likelihood that an operation times out and will fail to be incluced in the blockchain. Since a malicious vault owner could exploit this flexibility by borrowing in the future and repaying in the past, the actual definition of CCSFDF in the collateral vault puzzle includes an additional factor SFDF^3 when used in repay operations.
-
 
 ## Loan and debt accounting
 
@@ -206,17 +203,12 @@ The operation can only be performed if the vault is sufficiently overcollaterali
 
 * ```PRINCIPAL```: increases by the amount of SFs transferred
 
-
 ## State and lineage
 
 Fixed state:
 * ```OPERATIONS```: a two-element struct containing owner operations and keeper operation hashes
   * ```OWNER_OPERATIONS```: a list containing deposit, withdraw, borrow, repay and transfer operation hashes
   * ```KEEPER_OPERATIONS```: a list containing transfer Stability Fees, and liquidation-related operation hashes
-<!--Some operations have the following fixed state args curried in:
-    * ```CAT_MOD_HASH```: treehash of the [standard CAT mod](https://chialisp.com/cats/#code)
-    * ```BYC_TAIL_MOD_HASH```: treehash of the [BYC tail mod](../byc-tail)
--->
 
 Immutable state:
 * ```MOD_HASH```

@@ -43,7 +43,7 @@ Keeper operations:
 
 Starts or restarts a liquidation auction. A liquidation auction can be started if the value of the collateral, valued at the **Statutes Price**, is less than or equal to the vault's outstanding debt. A liquidation auction can be restarted if it has timed out and there is both debt and collateral left.
 
-The keeper that executes the start operation is referred to as the **initiator**. Executing the start operation entitles the initiator to the [initiator incentive](../../user-guide/liquidation#liquidation-incentives), which will get paid to the ```initiator_puzzle_hash``` supplied by the initiator.
+The keeper that executes the start operation is referred to as the **initiator**. Executing the start operation entitles the initiator to the [initiator incentive](../../user-guide/liquidation#initiator-incentives), which will get paid to the ```initiator_puzzle_hash``` supplied by the initiator.
 
 When a collateral vault is liquidated, Stability Fees stop accruing and a **Liquidation Penalty** is added on top of the pre-liquidation debt. The Liquidation Penalty is defined to be a number of basis points of the pre-liquidation debt as given by ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```.
 

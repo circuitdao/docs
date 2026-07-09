@@ -14,17 +14,11 @@ Treasury coins cannot be converted back to standard BYC CATs or melted. In other
 
 Treasury coins are the only singletons in the protocol that can have more than one child coin. If a treasury coin is spent as part of a bad debt recovery operation, it creates a child treasury coin and an additional run tail coin which absorbs the withdrawal amount and melts it.
 
-<!--
-The reason that multiple Treasury coins exist instead of just one, is to allow multiple savers and borrowers to make interest withdrawals and loan repayments, respectively, in parallel. In the case of interest withdrawals, this means faster liquidity for savers even in times of high withdrawal demand, and as such protects against bank runs (note that savers can always withdraw their savings balance independently of the availability or cost of spending a Treasury coin). <!--TODO: also mention this on the Savings Vault page Similarly, it enables more borrowers to repay their loans in a short period of time, which can be crucial to avoid liquidations when XCH prices are falling. <!--TODO: also mention this on the Collateral Vault page Governance should monitor the number of both savings and collateral vaults and choose and the number of Treasury coins accordingly, bearing in mind that too large a number of Treasury coins makes spends that require the whole ring to be spent expensive (Recharge Auction start and win). <!--TODO: mention this on Governance page.-->
-
-
 ## Treasury Ring
 
 Some operations require all Treausry coins to be spent at once. In order to allow the spender to prove that all coins are being spent, Treasury coins are linked to each other 1-by-1 via their launcher IDs in a closed loop, forming the **Treasury Ring**. Each Treasury coin stores its own launcher ID in curried arg ```LAUNCHER_ID```, as well as the launcher ID of the preceding coin in the Treasury Ring in curried arg ```RING_PREV_LAUNCHER_ID```.
 
 ![Treasury ring](./../../static/img/Treasury_ring_diagram.png)
-
-
 
 ## Number of Treausry coins to be spent per operation
 
@@ -36,7 +30,7 @@ The number of coins to be spent simultaneously when changing balance depends on 
 
 **One Treasury coin:**
 
-* Transfer Stability Fees: a single treasury coin must be picked by to transfer Stability Fees to <!--TODO: would speading evenly across whole ring make more sense given that SF transfers are not time-ciritical and can be quite large for vaults with a lot of debt?-->
+* Transfer Stability Fees: a single treasury coin must be picked by to transfer Stability Fees to
 
 * Loan repayment: a single Treasury coin must be picked to deposity to when a loan repayment results in Stability Fees getting paid into Treasury. This is the case unless the amount of SFs being repaid to the vault is less than or equal to the amount of SFs that have already been transferred to the vault.
 
@@ -62,7 +56,6 @@ In case where only one coin is required, that coin should be chosen which has th
 
 Inserting a Treasury coin into the Treasury Ring requires two spends. The Treasury coin to be inserted needs to be spent to point to the desired predecessor coin. At the same time the original successor coin to this predecessor coin needs to be spent to have its pointer changed to the Treasury coin being inserted.
 
-
 ## Operations
 
 Puzzle that operations are performed on: [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
@@ -72,7 +65,6 @@ Approval mod operations:
 
 Governance operations:
 * **change ring ordering**: change Treasury coin ordering - puzzle: [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
-
 
 ### Change balance
 
@@ -103,7 +95,6 @@ Note that it is not possible to shift balances between Treasury coins. Protocol 
 
 * amount: set to new amount based on amount deposited or withdrawn
 
-
 ### Change ring ordering
 
 Treasury coins form a ring by virtue of each Treasury coin referencing the launcher ID of its predecessor in the ring in the ```RING_PREV_LAUNCHER_ID``` curried arg. See the Treasury Ring section below for more details.
@@ -122,7 +113,6 @@ It is governance's responsibility to ensure that the Treasury coins do indeed co
 * ```RING_PREV_LAUNCHER_ID```: set to the new value approved by governance
 
 In theory, it is possible for governance to insert multiple Treasury coins at once. In practice this is not recommended to keep things easier to trace on-chain.
-
 
 ## State and lineage
 

@@ -37,7 +37,6 @@ Below is a complete list of protocol coin types. All protocol coins are singleto
 
 Ordinary Bytecash ([BYC](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/byc_tail.clsp)) and governance ([CRT](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)) coins are not considered protocol coins. **Settlement coins**, i.e. coins that have the [settlement payments mod](https://chialisp.com/offers/#code) as their puzzle (XCH) or inner puzzle (BYC, CRT), are also not considered protocol coins.
 
-
 ## Operations
 
 For each protocol coin page deals with operations that can be performed on a given protocol coin. Operations are grouped by who can perform them.
@@ -74,8 +73,6 @@ For each protocol coin page deals with operations that can be performed on a giv
   * Oracle (?)
 
 For a visualisation of all operations and their interdependencies, see the [inter-coin communication](../advanced-topics/inter-coin-communication) page.
-
-<!--Also shown is the corresponding [driver hint](../advanced-topics/design-decisions#driver-hints).-->
 
 ## State and Lineage
 

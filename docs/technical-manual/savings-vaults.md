@@ -4,7 +4,6 @@ title: Savings Vaults
 sidebar_position: 350
 ---
 
-
 # Savings Vaults
 
 Savings vaults are BYC CAT singletons that can be permissionlessly created by anyone to earn yield on Bytecash.
@@ -18,7 +17,6 @@ Savings vaults can be created on a standalone basis, i.e. without requiring a si
 Savings vaults are bound to an inner puzzle, via the curried arg ```INNER_PUZZLE```,  which ensures that only the legitimate owner can perform operations on it.
 
 The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/inner-puzzles#inner-puzzle-requirements) in order to prevent funds from getting permanently locked in a savings vault.
-
 
 ## Interest accrual and accounting
 
@@ -49,7 +47,6 @@ Similarly to the situation with collateral vaults, it is possible for CCIDF to c
 :::
 
 As with collateral vaults, savers are given a three minute window of flexibility for specifiying the current timestamp vs the actual block timestamp when making depsoits or withdrawals to reduce the likelihood that an operation times out and will fail to be included in the blockchain. Since a malicious vault owner could exploit this flexibility by making deposits in the past and withdrawing in the future to boost their effective savings rate, the actual definition of CCIDF in the savings vault puzzle includes an additional factor IDF^(-3) to reduce the interest accrued by the maximum that can be gained from the timestamp flexibility.
-
 
 ## Operations
 
@@ -112,7 +109,6 @@ If the user withdraws an amount greater than the savings balance, then an intere
 
 ![Savings Interest withdrawal from balance and accrued interest](./../../static/img/Savings_withdrawal_from_balance_and_accrued_interest.png)
 
-
 #### State changes
 
 * ```DISCOUNTED_BALANCE```: gets updated according to [methodology described above](#interest-accrual-and-accounting) based interest paid out and amount withdrawn
@@ -154,4 +150,3 @@ For the eve spend the lineage proof is nil. For non-eve spends the lineage proof
 lineage_proof = (parent_parent_id parent_amount parent_discounted_balance parent_inner_puzzle_hash)
 ```
 
-<!--TODO: can we simplify this to (parent_parent_id parent_amount parent_curried_args_hash)?-->

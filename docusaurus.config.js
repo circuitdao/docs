@@ -1,15 +1,17 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const math = require('remark-math');
-const katex = require('rehype-katex');
-
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 
 module.exports = async function () {
+
+  // remark-math, rehype-katex and prism-react-renderer are ESM-only, so load
+  // them via dynamic import from this CommonJS config.
+  const math = (await import('remark-math')).default;
+  const katex = (await import('rehype-katex')).default;
+  const {themes} = await import('prism-react-renderer');
+  const lightCodeTheme = themes.github;
+  const darkCodeTheme = themes.dracula;
 
   return {
    title: 'Circuit protocol documentation',
@@ -29,7 +31,12 @@ module.exports = async function () {
    projectName: 'docs', // Usually your repo name.
    trailingSlash: true,
    onBrokenLinks: 'throw',
-   onBrokenMarkdownLinks: 'warn',
+   onBrokenAnchors: 'throw',
+   markdown: {
+     hooks: {
+       onBrokenMarkdownLinks: 'warn',
+     },
+   },
 
    // Even if you don't use internalization, you can use this field to set useful
    // metadata like html lang. For example, if your site is Chinese, you may want
@@ -57,11 +64,8 @@ module.exports = async function () {
    ],
    stylesheets: [
      {
-       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css',
        type: 'text/css',
-       integrity:
-         'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
-       crossorigin: 'anonymous',
      },
    ],
    themeConfig:
