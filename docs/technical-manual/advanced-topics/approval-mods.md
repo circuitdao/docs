@@ -25,7 +25,7 @@ The table below shows which approval mod has which rights.
 | index | approval mod       | BYC tail       | CRT tail | Treasury                                   |
 |:-----:|:-------------------|:--------------:|:--------:|:------------------------------------------:|
 | 1     | Collateral Vault   | issue and melt | :x:      | deposit (repay or transfer Stability Fees) or withdraw (bad debt recovery) |
-| 2     | Surplus Auction    | :x:            | melt     | withdraw (to Payment coin)                 |
+| 2     | Surplus Auction    | :x:            | melt     | withdraw (to Payout coin)                 |
 | 3     | Recharge Auction   | :x:            | issue    | deposit (from winning bid)                 |
 | 4     | Savings Vault      | :x:            | :x:      | withdraw (pay interest)                    |
 | 5     | Announcer Registry | :x:            | issue    | :x:                                        |
