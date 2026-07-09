@@ -17,7 +17,7 @@ Surplus Auctions have a relatively long bid timeout, making it feasible to parti
 
 ### Starting Surplus Auctions
 
-A Surplus Auction can be started as soon as the **Surplus Auction Threshold** is exceeded, which is defined as the **[Treasury Maximum](../../user-guide/treasury)** plus the **[Surplus Auction Lot Amount](../../user-guide/surplus-auction)**.
+A Surplus Auction can be started as soon as the **Surplus Auction Threshold** is exceeded, which is defined as the **Treasury Maximum** plus the **Surplus Auction Lot Amount**.
 
 It is possible for multiple Surplus Auctions to run in parallel. It is even possible to start more than one Surplus Auction in the same block as long as the Treasury has sufficient surplus and there are suitable Treasury coins available to be spent.
 
@@ -53,7 +53,7 @@ The diagram below shows how Surplus Auction coin, Payout coin and Treasury coin 
 
 ### Start and Fund
 
-To start the Surplus Auction, a keeper executes the start operation on a Surplus Auction coin in eve state, also referred to as a Surplus Auction launcher coin. The start operation obtains the latest values of **[Surplus Auction Bid TTL](../../user-guide/surplus-auction)**, **[Minimum Bid Increase](../../user-guide/surplus-auction)** and **Surplus Auction Lot Amount** from Statutes and stores them in the state of the Surplus Auction coin. These values are then immutable for the remainder of the existence of the Surplus Auction coin.
+To start the Surplus Auction, a keeper executes the start operation on a Surplus Auction coin in eve state, also referred to as a Surplus Auction launcher coin. The start operation obtains the latest values of **Surplus Auction Bid TTL**, **Minimum Bid Increase** and **Surplus Auction Lot Amount** from Statutes and stores them in the state of the Surplus Auction coin. These values are then immutable for the remainder of the existence of the Surplus Auction coin.
 
 At the same time, a Payout coin and one or more Treasury coins must be spent to transfer an amount of BYC equal to the Surplus Auction Lot Amount from the Treasury to the Payout coin.
 

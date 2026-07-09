@@ -251,7 +251,7 @@ Current Statute values are shown on the dapp's Protocol page in the Statutes dro
 
 ## Statutes Price:
 
-* **PRICE_INFO**: copied from Oracle once **[Oracle Price Delay](../../user-guide/price-oracle)** has passed
+* **PRICE_INFO**: copied from Oracle once **Oracle Price Delay** has passed
   * **price**: XCH/USD price * 100, e.g. 3402 means a price of 34.02 USD per XCH
   * **last_updated**: [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of when the price was recorded in the Oracle
 

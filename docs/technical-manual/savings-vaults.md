@@ -22,7 +22,7 @@ The inner puzzle must satisfy [certain minimum requirements](../advanced-topics/
 
 ## Interest accrual and accounting
 
-Savings interest compounds by the minute, i.e. the prevailing **[Interest Discount Factor](../../user-guide/savings-vaults)** (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
+Savings interest compounds by the minute, i.e. the prevailing **Interest Discount Factor** (IDF) is successively applied to the aggregate of the savings vault's balance and accrued savings interest. The balance is the amount locked up in the Savings Vault coin. The protocol keeps track of accrued interest only indirectly via the ```DISCOUNTED_BALANCE``` state variable.
 
 The ```DISCOUNTED_BALANCE``` value is effectivley the vault's balance valued at vault creation, and is defined as the sum of all amounts deposited and withdrawn from the Savings Vault coin discounted by the respective **Current Cumulative Interest Discount Factor** (CCIDF) at the time:
 
@@ -66,7 +66,7 @@ Vault owners can receive accrued interest as part of both deposit and withdrawal
 
 If interest is paid, it's always for the entire accrued interest. The protocol obtains the funds for interest payments from the Treasury. The user must select one Treasury coin from which to make the withdrawal. In particular, this means that a user can only get paid interest if there is a Treasury coin with amount at least as big as the accrued interest. When accessing the protocol via the app, a suitable Treasury coin is chosen automatically.
 
-An interest payment can only be made if accrued interest is greater than **[Treasury Delta Minimum](../../user-guide/treasury)**. This protects the protocol against Treasury coin hogging attacks.
+An interest payment can only be made if accrued interest is greater than **Treasury Delta Minimum**. This protects the protocol against Treasury coin hogging attacks.
 
 Both deposit and withdraw operations can be performed with or without an interest payment. This is important as it allows users to increase or decrease their savings balance without the need to spend a Treasury coin, allowing many more vaults to access their savings balance per block than would be possible otherwise. Although Treasury coins can be spent repeatedly in the same block, the block limit still means that there's a maximum on the number vaults that can make a withdrawal, and this number is greater if no simultaneous Treasury coin spend is required.
 

@@ -46,7 +46,7 @@ Spends a Stand-by coin to create a Start auction coin. This sets the start time 
 
 The Start auction coin does not constitute a bid yet.
 
-A Recharge Auction can only be started if the Treasury balance is below the **[Treasury Minimum](../../user-guide/treasury)**. The operation checks this by spending the Treasury Ring. (TODO: insert coin spend diagram that includes Treasury ring spend)
+A Recharge Auction can only be started if the Treasury balance is below the **Treasury Minimum**. The operation checks this by spending the Treasury Ring. (TODO: insert coin spend diagram that includes Treasury ring spend)
 
 #### State changes
 
@@ -71,7 +71,7 @@ The child coin has the bid placed curried into the ```LAST_BID``` curried arg.
 
 The target puzzle hash is a CAT inner puzzle hash. It will receive the CRT bid amount should the bid turn out to be the winning bid. If the bid is outbid, the BYC held in the Auction coin is refunded to the target puzzle hash. In either case, it is the bidder's responsibility to provide a target puzzle hash at which they can receive and access coins.
 
-The BYC bid amount of a bid may be smaller or larger than that of the previous bid as long as it is greater than the **[Recharge Auction Minimum Bid Amount](../../user-guide/recharge-auction)**. If the BYC bid amount is smaller than the previous one, the bidder must contribute the difference to the Recharge Auction coin.
+The BYC bid amount of a bid may be smaller or larger than that of the previous bid as long as it is greater than the **Recharge Auction Minimum Bid Amount**. If the BYC bid amount is smaller than the previous one, the bidder must contribute the difference to the Recharge Auction coin.
 
 #![Recharge auction bid increasing BYC amount](./../../static/img/Recharge_auction_bid_increase_amount_coin_spends_diagram.png)
 

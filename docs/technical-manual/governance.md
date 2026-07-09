@@ -29,7 +29,7 @@ BILL =  ((veto_period . implementation_delay) bill_proper)
 
 There are two different modes governance coins can be in, **proposal mode** and **veto mode**. A governance coin is in proposal mode if a propose operation was performed on it and ```BILL``` is not nil. Otherwise the governance coin is in veto mode.
 
-A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be implemented only if both Veto Period and Implementation Delay have passed, and only as long as the **[Implementation Period](../../user-guide/governance)** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
+A veto operation can be performed if the time that has passed since the proposal was created is less than the the Veto Period. Similarly, a proposal can be implemented only if both Veto Period and Implementation Delay have passed, and only as long as the **Implementation Period** has not ended. See the [governance process section](../../user-guide/governance#governance-process) in the User Guide for an illustration.
 
 The owner of a governance coin can disable governance mode and get back a standard CRT coin by having the inner layer inner puzzle output a ```CREATE_COIN``` conditions with nil for its puzzle hash.
 
