@@ -10,7 +10,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Absorb coin.** A coin included in a spend bundle to absorb mojos released by one of more other coins. Depending on the coins spent in the transaction, an absorb coin can be a plain XCH coin or a BYC or CRT CAT. For example, a plain XCH absorb coin is used when withdrawing collateral from a vault.
 
-**Approval mod.** One of five (?) coin types that have permission to issue and/or melt BYC or CRT. See the [corresponding section](../technical-manual/advanced-topics/approval-mods) on the Statutes page for details.
+**Approval mod.** One of five protocol coin types that have permission to issue or melt BYC or CRT, or to withdraw BYC from treasury. See the [Approval Mods](../technical-manual/advanced-topics/approval-mods) page for details.
 
 **Arg.** Short for argument. A value that is passed into a mod or function. A value passed into a mod that is considered part of the mod itself, is referred to as a curried arg.
 
