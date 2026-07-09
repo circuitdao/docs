@@ -64,7 +64,7 @@ The glossary assumes familiarity with basic concepts of [Chia blockchain](https:
 
 **Governance.** The entirety of all CRT token holders or, more narrowly, those that participate in governance processes such as proposing or vetoing bills.
 
-**Governance mode.** A CRT coin is in governance mode when its inner puzzle is the [governance.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) mod.
+**Governance mode.** A CRT coin is in governance mode when its inner puzzle is the [*governance.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) mod.
 
 **Hogging.** The practice of (repeatedly) spending a coin in order to deny other users the ability to perform a spend. Amounts to a denial-of-service attack.
 
@@ -131,7 +131,7 @@ See [here](http://localhost:3000/technical-manual/design-decisions#condition-pre
 
 **Singleton.** A coin that has at most one descendant of same type. Note that as opposed to the standard singleton, the parent of a singleton may not be a standard launcher, and may have launched multiple singletons, even of same type. Some singletons live forever, whereas others are meltable.
 
-**Standard singleton.** A coin with puzzle mod [singleton_top_layer_v1_1.clsp](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/singleton_top_layer_v1_1.clsp). In general Chia parlance, [standard singletons](https://chialisp.com/singletons) are simply called singletons. However, in the context of the protocol it is more convenient to use the term singleton in a broader sense.
+**Standard singleton.** A coin with puzzle mod [*singleton_top_layer_v1_1.clsp*](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/singleton_top_layer_v1_1.clsp). In general Chia parlance, [standard singletons](https://chialisp.com/singletons) are simply called singletons. However, in the context of the protocol it is more convenient to use the term singleton in a broader sense.
 
 **State.** The curried args of a coin's puzzle. State consists of three mutually exclusive sets of curried args: fixed state, immutable state, mutable state.
 
@@ -143,7 +143,7 @@ See [here](http://localhost:3000/technical-manual/design-decisions#condition-pre
 
 **Type.** The type of a protocol coin is defined by the innermost inner puzzle mod which is still defined by the protocol. If there is no inner puzzle, then the outer puzzle mod defines the type.
 
-For example, Savings vaults and Treasury coins are different types of coins, even though they share the same outer puzzle - the [standard CAT mod](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/cat_v2.clvm) with BYC tail curried in. An example of a coin type that's based on its outer puzzle are Announcers. An example of a coin type with multiple nested inner puzzles are savings vaults. Although a savings vault's inner puzzle (savings_vault.clsp) has itself an inner puzzle (curried into INNER_PUZZLE arg), the latter can be freely chosen by the owner of the savings vault, and hence does not subdivide savings vaults into multiple types.
+For example, Savings vaults and Treasury coins are different types of coins, even though they share the same outer puzzle - the [standard CAT mod](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/cat_v2.clvm) with BYC tail curried in. An example of a coin type that's based on its outer puzzle are Announcers. An example of a coin type with multiple nested inner puzzles are savings vaults. Although a savings vault's inner puzzle (*savings_vault.clsp*) has itself an inner puzzle (curried into INNER_PUZZLE arg), the latter can be freely chosen by the owner of the savings vault, and hence does not subdivide savings vaults into multiple types.
 
 **Unique singleton.** A singleton of a type that only exists once in the entire protocol. There are three unique singletons in the protocol: Statutes, Oracle and Announcer Registry.
 

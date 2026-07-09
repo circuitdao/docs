@@ -24,7 +24,7 @@ Each Statute has an index, value and a name by which it can be identified. In ad
 
 ## Statutes singleton
 
-Statutes are kept is a [standard singleton](https://chialisp.com/singletons/), referred to as the **Statutes singleton**. The Statutes singleton's inner puzzle can be found in [statutes.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp).
+Statutes are kept is a [standard singleton](https://chialisp.com/singletons/), referred to as the **Statutes singleton**. The Statutes singleton's inner puzzle can be found in [*statutes.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/statutes.clsp).
 
 When a protocol coin is spent, required Statutes values are passed to the coin's puzzle via its solution. Puzzles of protocol coins must be written so that for every Statute value they use, there is a statement that asserts a corresponding Statute announcement from the Statutes singleton. This ensures that Statute values passed to protocol coins cannot be faked.
 
@@ -40,7 +40,7 @@ Protocol coins know how to assert Statute announcements by having the **Statutes
 Statutes struct = (MOD_HASH . (LAUNCHER_ID . LAUNCHER_PUZZLE_HASH))
 ```
 
-In combination with the Statutes singleton's inner puzzle hash, which is passed in via the solution, protocol coins can construct the Statutes puzzle hash using the ```calculate-statutes-puzzle-hash``` function found in [statutes_utils.clib](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib#L52). Protocol coins use this puzzle hash to send a message to the Statutes singleton to assert the relevant Statute value.
+In combination with the Statutes singleton's inner puzzle hash, which is passed in via the solution, protocol coins can construct the Statutes puzzle hash using the ```calculate-statutes-puzzle-hash``` function found in [*statutes_utils.clib*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib#L52). Protocol coins use this puzzle hash to send a message to the Statutes singleton to assert the relevant Statute value.
 
 The Statutes singleton can only be spent once per block. This prevents attack vectors in which a Statute could be announced twice, but with different values, in the same block pursuant to a governance proposal to change the Statute value.
 
@@ -61,11 +61,11 @@ For further information on Constraints, see the [governance](../governance) page
 There are three operations that can be performed on the Statutes singleton.
 
 Keeper operations:
-* **announce**: announces all Statutes without doing anything else - puzzle: [statutes.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/statutes.clsp)
-* **update price**: updates the Statutes Price - puzzle: [statutes_update_price.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_update_price.clsp)
+* **announce**: announces all Statutes without doing anything else - puzzle: [*statutes.clsp*](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/statutes.clsp)
+* **update price**: updates the Statutes Price - puzzle: [*statutes_update_price.clsp*](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_update_price.clsp)
 
 Governance operations:
-* **mutate**: - puzzle: [statutes_mutation.clsp](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_mutation.clsp)
+* **mutate**: - puzzle: [*statutes_mutation.clsp*](https://github.com/circuitdao/puzzles/blob/review3_fixes/circuit_puzzles/programs/statutes_mutation.clsp)
   * **update Statute**: updates a Statute value and its Constraints
   * **pass custom conditions**: cause Statutes to output custom condition(s)
 
@@ -142,7 +142,7 @@ This operation can only be performed if the previous Statutes operation was an a
 
 ## Statutes
 
-Below is a complete list of Statutes, including their index, name in [statutes_utils.clib](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib), and a brief explanation of their respective function and data type.
+Below is a complete list of Statutes, including their index, name in [*statutes_utils.clib*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/include/statutes_utils.clib), and a brief explanation of their respective function and data type.
 
 Current Statute values are shown on the dapp's Protocol page in the Statutes dropdown.
 

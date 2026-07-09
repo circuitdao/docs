@@ -108,17 +108,17 @@ When setting the Treasury Maximum, governance should take into account that keep
 
 There are five collateral vault operations that can only be performed by the vault owner, and one keeper operation not related to liquidation.
 
-Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
+Puzzle that operations are performed on: [*collateral_vault.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
 
 Owner operations:
-* **deposit**: deposit collateral - puzzle: [vault_deposit.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_deposit.clsp)
-* **withdraw**: withdraw collateral - puzzle: [vault_withdraw.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_withdraw.clsp)
-* **borrow**: take out a loan - puzzle: [vault_borrow.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_borrow.clsp)
-* **repay**: repay debt - puzzle: [vault_repay.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_repay.clsp)
-* **transfer**: transfer ownership of collateral vault - puzzle: [vault_transfer.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
+* **deposit**: deposit collateral - puzzle: [*vault_deposit.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_deposit.clsp)
+* **withdraw**: withdraw collateral - puzzle: [*vault_withdraw.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_withdraw.clsp)
+* **borrow**: take out a loan - puzzle: [*vault_borrow.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_borrow.clsp)
+* **repay**: repay debt - puzzle: [*vault_repay.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_repay.clsp)
+* **transfer**: transfer ownership of collateral vault - puzzle: [*vault_transfer.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_transfer.clsp)
 
 Keeper operations:
-* **transfer Stability Fees**: issue & transfer BYC to Treasury - puzzle: [vault_keeper_transfer_sf_to_treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_transfer_sf_to_treasury.clsp)
+* **transfer Stability Fees**: issue & transfer BYC to Treasury - puzzle: [*vault_keeper_transfer_sf_to_treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_transfer_sf_to_treasury.clsp)
 * See the [Liquidation](../liquidation) page for keeper operations relating to vault liquidation:
     * **start auction**: start a liquidation auction
     * **bid**: submit a bid in liquidation auction

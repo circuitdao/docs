@@ -9,11 +9,11 @@ sidebar_position: 1100
 **Approval mods** are mods that allow protocol coins whose puzzles are using these mods, referred to as **approval coins**, to approve certain actions within the protocol.
 
 There are five approval mods:
-* collateral_vault.clsp
-* surplus_auction.clsp
-* recharge_auction.clsp
-* savings_vault.clsp
-* announcer_registry.clsp
+* *collateral_vault.clsp*
+* *surplus_auction.clsp*
+* *recharge_auction.clsp*
+* *savings_vault.clsp*
+* *announcer_registry.clsp*
 
 There are six actions that approval coins can approve between them. Approval coins are the only coins that are allowed to:
 * issue or melt BYC
@@ -30,7 +30,7 @@ The table below shows which approval mod has which rights.
 | 4     | Savings Vault      | :x:            | :x:      | withdraw (pay interest)                    |
 | 5     | Announcer Registry | :x:            | issue    | :x:                                        |
 
-The Treasury mod, ```treasury.clsp```, does not impose any restrictions on the size of deposits or withdrawals approved by approval coins. Similarly for BYC and CRT tails. It is the approval mods themselves that limit how they can interact with BYC tail, CRT tail, and Treasury coins.
+The Treasury mod, *treasury.clsp*, does not impose any restrictions on the size of deposits or withdrawals approved by approval coins. Similarly for BYC and CRT tails. It is the approval mods themselves that limit how they can interact with BYC tail, CRT tail, and Treasury coins.
 
 The treehash of the list of the five approval mod hashes in the order shown above is curried into the fixed arg ```APPROVAL_MOD_HASHES_HASH``` of the Statutes singleton.
 

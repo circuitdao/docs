@@ -82,7 +82,7 @@ On every page dedicated to a protocol coin type, there is a State and Lineage se
 
 **Fixed state** refers to mod args that are known prior to protocol deployment and are hardcoded into the mod itself. The hardcoding in done by currying **fixed args** into a **raw mod** before it is considered final.
 
-For example, the raw treasury mod, [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp), has the following args:
+For example, the raw treasury mod, [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp), has the following args:
 
 ```
 CAT_MOD_HASH BYC_TAIL_MOD_HASH CRT_TAIL_MOD_HASH ; fixed args

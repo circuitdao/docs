@@ -7,9 +7,9 @@ sidebar_position: 370
 
 # Surplus Auction
 
-Surplus Auction is a CRT CAT with [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) puzzle as its inner puzzle. The inner puzzle turns the Surplus Auction into a singleton, and is one of the [approval mods](../advanced-topics/approval-mods).
+Surplus Auction is a CRT CAT with [*surplus_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp) puzzle as its inner puzzle. The inner puzzle turns the Surplus Auction into a singleton, and is one of the [approval mods](../advanced-topics/approval-mods).
 
-A Surplus Auction coin is accompanied by a **Payout coin**. The Payout coin is a BYC CAT singleton with [payout.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp) as its inner puzzle. The Payout coin receives the amount of BYC being auctioned off from the Treasury when a Surplus Auction is started.
+A Surplus Auction coin is accompanied by a **Payout coin**. The Payout coin is a BYC CAT singleton with [*payout.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp) as its inner puzzle. The Payout coin receives the amount of BYC being auctioned off from the Treasury when a Surplus Auction is started.
 
 When the auction concludes, the winning bidder is paid the BYC from the Payout coin in return for burning an amount of CRT as offered in the winning bid.
 
@@ -32,20 +32,20 @@ Surplus Auctions involve two different coins, a Surplus Auction coin and a Payou
 
 ### Surplus Auction coin
 
-Puzzle that operations are performed on: [surplus_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp)
+Puzzle that operations are performed on: [*surplus_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_auction.clsp)
 
 Keeper operations:
-* **start auction**: start a Surplus Auction - puzzle: [surplus_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_start_auction.clsp)
-* **bid**: submit a bid in a Surplus Auction - puzzle: [surplus_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_bid.clsp)
-* **settle**: settle a Surplus Auction - puzzle: [surplus_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_win.clsp)
+* **start auction**: start a Surplus Auction - puzzle: [*surplus_start_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_start_auction.clsp)
+* **bid**: submit a bid in a Surplus Auction - puzzle: [*surplus_bid.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_bid.clsp)
+* **settle**: settle a Surplus Auction - puzzle: [*surplus_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/surplus_win.clsp)
 
 ### Payout coin
 
-Puzzle that operations are performed on: [payout.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
+Puzzle that operations are performed on: [*payout.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
 
 Keeper operations:
-* **fund**: receive funds from Treasury - puzzle: [payout.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
-* **pay out**: pay winner of Surplus Auction - puzzle: [payout.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
+* **fund**: receive funds from Treasury - puzzle: [*payout.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
+* **pay out**: pay winner of Surplus Auction - puzzle: [*payout.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/payout.clsp)
 
 The diagram below shows how Surplus Auction coin, Payout coin and Treasury coin interact with each other over the course of a Surplus Auction. In this example, the Payout coin is funded from only one Treasury coin. In general, the keeper starting a Surplus Auction is free to select any number of Treasury coins. In fact, this is usually necessary, since no individual Treasury coin is likely to hold an amount in excess of the Treasury Maximum, which is a prerequisite for starting a Surplus Auction. It is recommended to select Treasury coin withdrawal amounts such that they even out any imbalances between Treasury coin balances as much as possible.
 

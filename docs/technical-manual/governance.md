@@ -6,7 +6,7 @@ sidebar_position: 390
 
 # Governance
 
-Governance coins are CRT CAT singletons with the [governance.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) puzzle as their inner puzzle. Governance coins are created from standard CRT coins on an ad hoc basis.
+Governance coins are CRT CAT singletons with the [*governance.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp) puzzle as their inner puzzle. Governance coins are created from standard CRT coins on an ad hoc basis.
 
 Governance can change all Statutes with a non-negative index. Governance is conducted by proposing, vetoing or implementing **bills**. A bill specifies exactly one Statute to be changed, its proposed new value, and the proposed new Constraints. This is also referred to as the **bill proper**.
 
@@ -39,16 +39,16 @@ See the Participating in Governance section for information on how to participat
 
 ## Operations
 
-Puzzle that operations are performed on: [governance.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp)
+Puzzle that operations are performed on: [*governance.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/governance.clsp)
 
 Owner operations:
-* **propose**: - puzzle: [governance_propose_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_propose_bill.clsp)
-* **reset**: - puzzle: [governance_reset_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_reset_bill.clsp)
-* **announce veto**: - puzzle: [governance_veto_announcement.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_announcement.clsp)
-* **implement**: - puzzle: [governance_implement_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_implement_bill.clsp)
+* **propose**: - puzzle: [*governance_propose_bill.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_propose_bill.clsp)
+* **reset**: - puzzle: [*governance_reset_bill.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_reset_bill.clsp)
+* **announce veto**: - puzzle: [*governance_veto_announcement.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_announcement.clsp)
+* **implement**: - puzzle: [*governance_implement_bill.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_implement_bill.clsp)
 
 Governance operations:
-* **veto**: - puzzle: [governance_veto_bill.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_bill.clsp)
+* **veto**: - puzzle: [*governance_veto_bill.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/governance_veto_bill.clsp)
 
 The operations enforce a number of rules that determine in which situations they can be applied. One needs to distinguish based on whether ```BILL``` is nil or non-nil and whether a governance coin is an eve coin or not.
 

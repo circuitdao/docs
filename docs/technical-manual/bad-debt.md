@@ -17,10 +17,10 @@ Once all bad debt has been recovered, the vault is returned in eve state to its 
 
 ## Operations
 
-Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
+Puzzle that operations are performed on: [*collateral_vault.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
 
 Keeper operations:
-* **recover bad debt**: extinguish bad debt - puzzle: [vault_keeper_recover_bad_debt.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
+* **recover bad debt**: extinguish bad debt - puzzle: [*vault_keeper_recover_bad_debt.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_recover_bad_debt.clsp)
 
 ### Recover Bad Debt
 

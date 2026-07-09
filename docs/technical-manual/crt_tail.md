@@ -14,14 +14,14 @@ The CRT tail has one fixed arg, ```RUN_TAIL_MOD_HASH```, and one immutable arg, 
 
 ## Operations
 
-Puzzle operations are performed on: [crt_tail.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
+Puzzle operations are performed on: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 
 Protocol deployer operations:
-* **TGE**: initial issuance - puzzle: [crt_tail.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
+* **TGE**: initial issuance - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 
 Approval mod operations:
-* **issue**: issuance of CRT tokens - puzzle: [crt_tail.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
-* **melt**: melting of CRT tokens - puzzle: [crt_tail.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
+* **issue**: issuance of CRT tokens - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
+* **melt**: melting of CRT tokens - puzzle: [*crt_tail.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/crt_tail.clsp)
 
 ### TGE
 
@@ -35,8 +35,8 @@ Post-TGE, CRT tokens can only be issued with the approval of an [Approval mod](.
 
 | CRT tail operation | Approval mod       | Operation | Operation program                                                                                                          |   |
 |:-------------------|:-------------------|:----------|:---------------------------------------------------------------------------------------------------------------------------|---|
-| issue              | Announcer Registry | reward    | [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/vault_borrow.clsp)               |   |
-| issue              | Recharge Auction   | settle    | [recharge_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_settle.clsp) |   |
+| issue              | Announcer Registry | reward    | [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/vault_borrow.clsp)               |   |
+| issue              | Recharge Auction   | settle    | [*recharge_auction_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_settle.clsp) |   |
 
 ### Melt
 
@@ -44,7 +44,7 @@ CRT tokens can only be melted with the approval of an [Approval mod](../advanced
 
 | CRT tail operation | Approval mod    | Operation | Operation program                                                                                               | CRT tail operation |
 |:-------------------|:----------------|:----------|:----------------------------------------------------------------------------------------------------------------|--------------------|
-| melt               | Surplus Auction | settle    | [surplus_auction_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_settle.clsp) |                    |
+| melt               | Surplus Auction | settle    | [*surplus_auction_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/surplus_settle.clsp) |                    |
 
 
 ## State and Lineage

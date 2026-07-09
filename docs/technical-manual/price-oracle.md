@@ -6,7 +6,7 @@ sidebar_position: 385
 
 # Price Oracle
 
-The Price Oracle, or Oracle for short, is a standard singleton with inner puzzle [oracle.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp).
+The Price Oracle, or Oracle for short, is a standard singleton with inner puzzle [*oracle.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp).
 
 It's main purpose is to provide an XCH/USD price to the Protocol. This price is referred to as the **Oracle Price**.
 
@@ -49,14 +49,14 @@ In theory, it would be possible for a different Oracle to use Announcers with di
 
 ## Operations
 
-Puzzle that operations are performed on: [oracle.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
+Puzzle that operations are performed on: [*oracle.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
 
 The Oracle does not have an owner.
 
 Keeper operations:
 
-* **mutate**: update Oracle price infos - puzzle: [oracle_mutation.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/oracle_mutation.clsp)
-* **announce**: announce the Oracle Price Info - puzzle: [oracle.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
+* **mutate**: update Oracle price infos - puzzle: [*oracle_mutation.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/oracle_mutation.clsp)
+* **announce**: announce the Oracle Price Info - puzzle: [*oracle.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/oracle.clsp)
 
 ### Mutate
 

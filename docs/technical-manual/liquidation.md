@@ -33,11 +33,11 @@ For example, if the Start Price is ```20.00 XCH/BYC``` and Auction Price Step is
 
 ## Operations
 
-Puzzle that operations are performed on: [collateral_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
+Puzzle that operations are performed on: [*collateral_vault.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/collateral_vault.clsp)
 
 Keeper operations:
-* **start auction**: start or restart a liquidation auction - puzzle: [vault_keeper_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_start_auction.clsp)
-* **bid**: submit a bid in a liquidation auction - puzzle: [vault_keeper_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_bid.clsp)
+* **start auction**: start or restart a liquidation auction - puzzle: [*vault_keeper_start_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_start_auction.clsp)
+* **bid**: submit a bid in a liquidation auction - puzzle: [*vault_keeper_bid.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/vault_keeper_bid.clsp)
 
 ### Start auction
 

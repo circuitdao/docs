@@ -18,16 +18,16 @@ Data providers must re-register their Announcers every time Rewards are distribu
 
 ## Operations
 
-Puzzle that operations are performed on: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+Puzzle that operations are performed on: [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
 Protocol deployer operations:
-* **launch**: eve spend that must be executed at protocol launch - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+* **launch**: eve spend that must be executed at protocol launch - puzzle: [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
 Announcer operations:
-* **register**: adds a governance-approved Announcer to the Registry - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+* **register**: adds a governance-approved Announcer to the Registry - puzzle: [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
 Keeper operations:
-* **reward**: distributes Rewards - puzzle: [announcer_registry.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
+* **reward**: distributes Rewards - puzzle: [*announcer_registry.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/announcer_registry.clsp)
 
 Although the Registry is not owned by anyone, the register operation can only be performed by data providers that control an approved Announcer.
 

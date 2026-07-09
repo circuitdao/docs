@@ -50,10 +50,10 @@ As with collateral vaults, savers are given a three minute window of flexibility
 
 ## Operations
 
-Puzzle that operations are performed on: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
+Puzzle that operations are performed on: [*savings_vault.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
 
 Owner operations:
-* **change balance**: deposit or withdraw BYC - puzzle: [savings_vault.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
+* **change balance**: deposit or withdraw BYC - puzzle: [*savings_vault.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/savings_vault.clsp)
   * **deposit**: deposit BYC
   * **withdraw**: withdraw BYC
 

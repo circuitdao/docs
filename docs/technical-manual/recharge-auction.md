@@ -6,7 +6,7 @@ sidebar_position: 375
 
 # Recharge Auction
 
-A Recharge Auction is a BYC CAT singleton with [recharge_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp) puzzle as inner puzzle.
+A Recharge Auction is a BYC CAT singleton with [*recharge_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp) puzzle as inner puzzle.
 
 Launching a new Recharge Auction coin requires governance approval. Upon launch, a Recharge Auction coin goes into standy-by mode, and can from then on be used to run Recharge Auctions. Each individual Recharge Auction is triggered via the start operation. When a Recharge Auction concludes, the Recharge Auction coin returns to its stand-by state until it gets started again for the next auction. Multiple Recharge Auctions can run in parallel.
 
@@ -14,15 +14,15 @@ Note that Recharge Auction coins cannot transformed back to standard BYC CATs or
 
 ## Operations
 
-Puzzle that operations are performed on: [recharge_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp)
+Puzzle that operations are performed on: [*recharge_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/recharge_auction.clsp)
 
 Governance operations:
-* **launch**: launch a Recharge Auction coin - puzzle: [recharge_launch.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_launch.clsp)
+* **launch**: launch a Recharge Auction coin - puzzle: [*recharge_launch.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_launch.clsp)
 
 Keeper operations:
-* **start auction**: start a Recharge Auction - puzzle: [recharge_start_auction.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_start_auction.clsp)
-* **bid**: submit a bid in Recharge Auction - puzzle: [recharge_bid.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_bid.clsp)
-* **win**: settle a Recharge Auction - puzzle: [recharge_win.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_win.clsp)
+* **start auction**: start a Recharge Auction - puzzle: [*recharge_start_auction.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_start_auction.clsp)
+* **bid**: submit a bid in Recharge Auction - puzzle: [*recharge_bid.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_bid.clsp)
+* **win**: settle a Recharge Auction - puzzle: [*recharge_win.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/programs/recharge_win.clsp)
 
 Recharge auctions have a relatively long bid timeout, making it feasible to participate manually.
 

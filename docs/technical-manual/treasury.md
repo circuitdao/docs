@@ -6,7 +6,7 @@ sidebar_position: 360
 
 # Treasury
 
-The Treasury is a set of BYC CAT singletons with inner puzzle [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp).
+The Treasury is a set of BYC CAT singletons with inner puzzle [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp).
 
 Having the Treasury consist of several Treasury coins is necessary for savers to be able to withdraw interest simultaneously. Since each withdrawal requires a Treasury coin spend, savers would have to coordinate their withdrawals at the mempool level if they wanted to withdraw from the same Treasury coin in the same block. Although this is not impossible - even a unilateral replace-by-fee allows savers to attach their withdrawal to an existing withdrawal spend bundle in the mempool - it becomes increasingly difficult to reliably coordinate the more savers are involved. With multiple Treasury coins, these problems can be avoided as each saver can pick their own Treasury coin as long as there are no more savers wanting to withdraw interest than there are Treasury coins.
 
@@ -58,13 +58,13 @@ Inserting a Treasury coin into the Treasury Ring requires two spends. The Treasu
 
 ## Operations
 
-Puzzle that operations are performed on: [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
+Puzzle that operations are performed on: [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
 
 Approval mod operations:
-* **change balance**: withdraw from or deposit to Treasury - puzzle: [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
+* **change balance**: withdraw from or deposit to Treasury - puzzle: [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
 
 Governance operations:
-* **change ring ordering**: change Treasury coin ordering - puzzle: [treasury.clsp](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
+* **change ring ordering**: change Treasury coin ordering - puzzle: [*treasury.clsp*](https://github.com/circuitdao/puzzles/blob/main/circuit_puzzles/treasury.clsp)
 
 ### Change balance
 
