@@ -12,15 +12,15 @@ The **loan-to-value** (**LTV**) is a vault-specific value defined as the ratio o
 LTV = debt owed / value of collateral
 ```
 
-For example, if you have 100 XCH locked up in a vault, the XCH price is $40, and your debt is 1000 BYC, then the LTV is 25%.[^1]
+For example, if you have 100 XCH locked up in a vault, the XCH price is \$40, and your debt is 1000 BYC, then the LTV is 25%.[^1]
 
 The **Max LTV** is the LTV at which your vault becomes eligible for liquidation. Whereas you can change your LTV by adding or removing collateral, or by taking out or repaying loans, the Max LTV is a protocol parameter set by governance.[^2] Its purpose is to ensure that Bytecash remains overcollateralized.
 
 Let's assume Max LTV is set to 60%.
 
-To continue the example above, if the XCH price drops from $40 to $20, your LTV would increase to 50%. Because this is less than the Max LTV of 60%, the vault is still safe from liquidation. However, you might want to top up your collateral or repay part of your debt to lower your LTV in case the price drops further.
+To continue the example above, if the XCH price drops from \$40 to \$20, your LTV would increase to 50%. Because this is less than the Max LTV of 60%, the vault is still safe from liquidation. However, you might want to top up your collateral or repay part of your debt to lower your LTV in case the price drops further.
 
-If the XCH price decreased by another $4 to $16, then the LTV would rise to 62.5%, and your vault would get liquidated.
+If the XCH price decreased by another \$4 to \$16, then the LTV would rise to 62.5%, and your vault would get liquidated.
 
 :::info
 
