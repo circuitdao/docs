@@ -35,7 +35,7 @@ The owner of a governance coin can disable governance mode and get back a standa
 
 ## Participating in governance
 
-See the [Participating in Governance](../../category/participating-in-governance) section for information on how to participate in governance processes and considerations that should be taken into account when modifying Statutes.
+See the Participating in Governance section for information on how to participate in governance processes and considerations that should be taken into account when modifying Statutes.
 
 ## Operations
 

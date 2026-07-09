@@ -1,5 +1,5 @@
 ---
-id: recharge_auction
+id: recharge-auction
 title: Recharge Auction
 sidebar_position: 230
 ---

@@ -14,7 +14,7 @@ Circuit is a DeFi protocol. More specifically, Circuit is an on-chain collateral
 
 We are live on testnet11, and expect to go live on mainnet in the next few months.
 
-You can head over directly to the [app](https://app.circuitdao.com), or check out our [Getting Started](../getting-started) guide first.
+You can head over directly to the [app](https://app.circuitdao.com), or check out our [Getting Started](../category/getting-started) guide first.
 
 ### What is Bytecash?
 
@@ -29,7 +29,7 @@ Bytecash (BYC) asset ID: ```ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be77
 
 ### How can I get hold of Bytecash?
 
-You can obtain BYC by borrowing it directly from the protocol. The [Getting Started](../getting-started) guide shows you how.
+You can obtain BYC by borrowing it directly from the protocol. The [Getting Started](../category/getting-started) guide shows you how.
 
 Alternatively, you can acquire BYC in the open market, for example via [offers](https://www.chia.net/offers) on bulletin boards like [Dexie](https://dexie.space) or on [Tibetswap](https://v2.tibetswap.io).
 

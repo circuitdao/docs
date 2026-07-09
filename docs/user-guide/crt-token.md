@@ -30,7 +30,7 @@ CRT holders should never lend out their tokens as there is a fundamental incenti
 
 ### Flashloans
 
-Flashloans are loans that are taken out and repaid in the same block. Although it is not possible to borrow CRT tokens out of nowhere due to the [CRT tail](../../technical-manual/crt_tail) requiring approval from an Approval mod, and any such approval is only given in specific circumstances and for a specific amount of CRT, there may one day be large pools of CRT tokens in AMMs such as [TibetSwap](https://v2.tibetswap.io/) or other DeFi protocols.
+Flashloans are loans that are taken out and repaid in the same block. Although it is not possible to borrow CRT tokens out of nowhere due to the [CRT tail](../../technical-manual/crt-tail) requiring approval from an Approval mod, and any such approval is only given in specific circumstances and for a specific amount of CRT, there may one day be large pools of CRT tokens in AMMs such as [TibetSwap](https://v2.tibetswap.io/) or other DeFi protocols.
 
 If those pools are of CRT tokens not in governance mode, then flashloans for the purpose of interfering with governance processes are impossible since exiting governance mode requires a delay of at least one block vs the previous spend.
 

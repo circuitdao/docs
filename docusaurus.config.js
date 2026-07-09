@@ -28,7 +28,7 @@ module.exports = async function () {
    organizationName: 'CircuitDAO', // Usually your GitHub org/user name.
    projectName: 'docs', // Usually your repo name.
    trailingSlash: true,
-   onBrokenLinks: 'warn',
+   onBrokenLinks: 'throw',
    onBrokenMarkdownLinks: 'warn',
 
    // Even if you don't use internalization, you can use this field to set useful
@@ -96,11 +96,11 @@ module.exports = async function () {
              items: [
                  {
                      label: 'Getting started',
-                     to: '/getting-started',
+                     to: '/category/getting-started',
                  },
                  {
                      label: 'User guide',
-                     to: '/category/user-guide',
+                     to: '/user-guide/',
                  },
                  {
                      label: 'FAQ',

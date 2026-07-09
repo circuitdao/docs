@@ -74,7 +74,7 @@ If Minimum Debt gets increased by governance, vaults may be left with outstandin
 
 ## BYC lifecycle
 
-When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad hoc by the protocol. When a loan is repaid, the BYC allocated to the principal component of the debt gets melted and that allocated to the Stability Fees component gets paid into the [Treasury](../treasury.md). BYC cannot be issued or melted any other way.
+When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad hoc by the protocol. When a loan is repaid, the BYC allocated to the principal component of the debt gets melted and that allocated to the Stability Fees component gets paid into the [Treasury](../treasury). BYC cannot be issued or melted any other way.
 
 
 ## Statutes
