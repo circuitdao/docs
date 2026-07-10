@@ -101,27 +101,27 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
     * Statute index: 7
     * Statute name: ```STATUTE_PRICE_DELAY```
     * considerations: a longer delay gives users of the system more time to perform mitigating actions should the oracle price be incorrect. it also gives governance more time to disable price updates in such a scenario. a shorter delay leads to more timely liquidations and more accurate limits on borrowing, both of which reduce risk of the system becoming insufficiently or under-collateralised.
-* **Announcer Price TTL**
-    * Statute index: 35
-    * Statute name: ```STATUTE_ANNOUNCER_MAXIMUM_VALUE_TTL```
-    * considerations:
 * **Minimum Deposit**
     * Statute index: 34
     * Statute name: ```STATUTE_ANNOUNCER_MINIMUM_DEPOSIT_MOJOS```
     * considerations: should be high enough to set a strong incentive for Announcers to run high availability infrastructure to not fail to update the price. should not be so high as to expose Announcers to unreasonable financial risk. either way, the deposit should be commensurate with the amount of TVL that the protocol secures.
-* **Penalty Factor**
-    * Statute index: 37
-    * Statute name: ```STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS```
-    * considerations: similar considerations as with Minimum Deposit.
+* **Announcer Price TTL**
+    * Statute index: 35
+    * Statute name: ```STATUTE_ANNOUNCER_MAXIMUM_VALUE_TTL```
+    * considerations:
 * **Penalty Interval**
     * Statute index: 36
     * Statute name: ```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```
     * considerations: similar considerations as with Minimum Deposit.
-* **Announcer Cooldown**
-    * Statute index: 39
-    * Statute name: ```STATUTE_ANNOUNCER_DISAPPROVAL_COOLDOWN_INTERVAL```
-    * considerations: should be long enough to give governance time to find a replacement data provider before a unilateral disapproval becomes effective. should be short enough to not unduly restrict data providers from exiting.
+* **Penalty Factor**
+    * Statute index: 37
+    * Statute name: ```STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS```
+    * considerations: similar considerations as with Minimum Deposit.
 * **Maximum Disapproval Penalty**
     * Statute index: 38
     * Statute name: ```STATUTE_ANNOUNCER_DISAPPROVAL_MAXIMUM_PENALTY_BPS```
     * considerations: should be small enough to protect data providers from losing an unreasonable share of their deposit when disapproved. should be large enough to cover the transaction cost of a disapproval.
+* **Announcer Cooldown**
+    * Statute index: 39
+    * Statute name: ```STATUTE_ANNOUNCER_DISAPPROVAL_COOLDOWN_INTERVAL```
+    * considerations: should be long enough to give governance time to find a replacement data provider before a unilateral disapproval becomes effective. should be short enough to not unduly restrict data providers from exiting.

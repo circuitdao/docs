@@ -75,6 +75,10 @@ Protocol users should consider whether they are comfortable with Statutes and Co
 For example, consider a user who borrows BYC at an 8% Stability Fee to invest in a fund that offers monthly redemptions. Assume the user expects the fund to deliver a return of 10% per annum in any given month. If the Stability Fee has a Veto Period and Implementation Delay of one week each, the borrower could not be certain what the SF is going to be in the last two weeks before they have an opportunity to redeem from the fund and repay their loan. Unless they have other sources of capital to repay the BYC loan after two weeks if governance changes the SF to 12% or more, they cannot protect themselves against their investment making a loss. If on the other hand the fund offered weekly redemptions, the borrower could always exit the fund and repay their BYC debt on time before the new SF is effective.
 
 ## Statutes
+* **Custom Conditions**
+    * Statute index: 3
+    * Statute name: ```STATUTE_CUSTOM_CONDITIONS```
+    * considerations: only relevant as the target of custom-condition proposals; it holds no persistent value between proposals.
 * **Proposal Fee**
     * Statute index: 40
     * Statute name: ```STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS```
@@ -87,10 +91,6 @@ For example, consider a user who borrows BYC at an 8% Stability Fee to invest in
     * Statute index: 42
     * Statute name: ```STATUTE_GOVERNANCE_COOLDOWN_INTERVAL```
     * considerations: should be long enough to disincentivise mindless activations of governance mode. should be short enough to not unduly disincentivise participation in governance.
-* **Custom Conditions**
-    * Statute index: 3
-    * Statute name: ```STATUTE_CUSTOM_CONDITIONS```
-    * considerations: only relevant as the target of custom-condition proposals; it holds no persistent value between proposals.
 * **Block Issuance**
     * Statute index: 43
     * Statute name: ```STATUTE_BLOCK_ISSUANCE```
