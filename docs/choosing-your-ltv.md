@@ -6,7 +6,7 @@ sidebar_position: 800
 
 # Choosing your LTV
 
-The **loan-to-value** (**LTV**) is a vault-specific value defined as the ratio of outstanding debt vs the value of collateral locked up in the vault.
+The **loan-to-value** (LTV) is a vault-specific value defined as the ratio of outstanding debt vs the value of collateral locked up in the vault.
 
 ```
 LTV = debt owed / value of collateral

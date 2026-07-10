@@ -30,7 +30,7 @@ Click the Borrow button, enter an amount of BYC to borrow, and click Borrow. Wai
 
 To see the BYC in your wallet, you need to [register](https://docs.chia.net/getting-started/wallet-guide/#add-a-new-cat) the Bytecash asset ID with your wallet. You can find the asset ID at the bottom of the [Intro](/) page.
 
-Note that the amount you can borrow is capped by the **maximum loan-to-value** (**Max LTV**) set by governance. The Max LTV is shown near the top right of the Borrow page next to the APR.
+Note that the amount you can borrow is capped by the **maximum loan-to-value** (Max LTV) set by governance. The Max LTV is shown near the top right of the Borrow page next to the APR.
 
 ## Manage debt
 
@@ -42,7 +42,7 @@ Debt owed = Amount borrowed + Stability Fees accrued
 
 The Stability Fee is variable and may be changed by governance. The prevailing Stability Fee rate expressed as an annual percentage rate (APR) is shown near the top right of the Borrow page.
 
-You should ensure that your **loan-to-value** (**LTV**), the debt you owe divided by the value of your collateral, remains below the Max LTV to avoid liquidation.
+You should ensure that your **loan-to-value** (LTV), the debt you owe divided by the value of your collateral, remains below the Max LTV to avoid liquidation.
 
 :::danger
 

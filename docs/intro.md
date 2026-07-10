@@ -9,7 +9,7 @@ slug: /
 
 **Circuit** is a DeFi protocol built on the **[Chia blockchain](https://www.chia.net)**.
 
-Specifically, Circuit is a collateralized debt position (**CDP**) protocol that allows users to borrow **Bytecash** (**BYC**), a USD stablecoin issued by the protocol, against **XCH**, the native token of Chia.
+Specifically, Circuit is a collateralized debt position (**CDP**) protocol that allows users to borrow **Bytecash** (BYC), a USD stablecoin issued by the protocol, against **XCH**, the native token of Chia.
 
 ![1 USD is equivalent to 1 BYC](./../static/img/1USD_equals_1BYC.png)
 

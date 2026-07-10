@@ -25,7 +25,7 @@ Approval Mod operations:
 
 ### TGE
 
-The vast majority of CRT tokens to ever exist is issued at protocol launch in a **token generation event** (**TGE**). The mainnet deployment of Circuit is expected to generate 1bn tokens at TGE.
+The vast majority of CRT tokens to ever exist is issued at protocol launch in a **token generation event** (TGE). The mainnet deployment of Circuit is expected to generate 1bn tokens at TGE.
 
 Since the CRT tail has the Statutes Struct curried in, the TGE operation must be performed at protocol launch.
 

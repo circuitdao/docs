@@ -6,7 +6,7 @@ sidebar_position: 245
 
 # CRT Token
 
-**Circuit Token** (**CRT**) is the governance token of CircuitDAO. It is a [Chia Asset Token](https://chialisp.com/cats/) (CAT) with asset ID:
+**Circuit Token** (CRT) is the governance token of CircuitDAO. It is a [Chia Asset Token](https://chialisp.com/cats/) (CAT) with asset ID:
 
 ```ea3ace5525d6aaf6d921b66052afc67da11c820b676de91d61ae1a766c8ce615```
 

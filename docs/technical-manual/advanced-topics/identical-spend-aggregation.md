@@ -6,7 +6,7 @@ sidebar_position: 1300
 
 # Identical Spend Aggregation
 
-In the coinset model, if multiple coins need to access information from the state of another coin, it is desirable that there is a unique spend (ie solution) of the coin whose state is being accessed. This ensures that users interacting with the protocol can construct their spend bundles without having to inspect the mempool and attaching the spends of their own bundle to an existing bundle via RBF. Instead, they can make use of **identical spend aggregation** (**ISA**), which is a mempool feature that allows a spend to be used in multiple spend bundles in the same block.
+In the coinset model, if multiple coins need to access information from the state of another coin, it is desirable that there is a unique spend (ie solution) of the coin whose state is being accessed. This ensures that users interacting with the protocol can construct their spend bundles without having to inspect the mempool and attaching the spends of their own bundle to an existing bundle via RBF. Instead, they can make use of **identical spend aggregation** (ISA), which is a mempool feature that allows a spend to be used in multiple spend bundles in the same block.
 
 In the context of Circuit, this is particularly useful for two types of spends:
 * Statutes announce operation
