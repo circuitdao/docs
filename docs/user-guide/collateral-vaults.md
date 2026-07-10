@@ -18,7 +18,7 @@ Once collateral has been deposited in a vault, the vault owner can take out a lo
 
 The BYC borrowed when a loan is taken out is called the **principal**. While a BYC loan remains outstanding, it accrues a **Stability Fee** (SF). This is similar to how interest accrues on traditional loans. The sum of principal and accrued Stability Fees is the **debt** owed to the collateral vault.
 
-The ratio of outstanding debt over collateral value of a vault is the **loan-to-value** (LTV) ratio. There is a **maximum loan-to-value** (Max LTV) that is enforced across all vaults to ensure that BYC remains sufficiently overcollateralized.
+The ratio of outstanding debt over collateral value of a vault is the **loan-to-value** (**LTV**) ratio. There is a **maximum loan-to-value** (**Max LTV**) that is enforced across all vaults to ensure that BYC remains sufficiently overcollateralized.
 
 :::info
 
@@ -37,7 +37,7 @@ The SF is one of the primary mechanisms by which BYC maintains its 1:1 peg to th
 
 Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, governance should closely monitor market developments and vote to adjust the SF as needed.
 
-The protocol does not directly use the SF. Instead, there is a **Stability Fee Discount Factor** (SFDF) Statute, which is defined as SFDF = PRECISION × (1 + SF), where PRECISION is a large fixed integer constant that the protocol uses for fixed-point arithmetic. Using the SFDF instead of the SF simplifies calculations within the protocol.
+The protocol doesn't use the SF directly. Instead, the **Stability Fee Discount Factor** (SFDF), a per-minute accrual factor, is used at the protocol level.
 
 ## Repaying loans
 
@@ -81,11 +81,11 @@ When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad ho
 * **Stability Fee Discount Factor (SFDF)**
     * Statute index: 1
     * Statute name: ```STATUTE_STABILITY_FEE_DF```
-    * considerations: The SFDF needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash, to maintain the peg.
-* **Minimum Debt (MD)**
+    * considerations: needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash, to maintain the peg. the greater the value is set, the more support is given to the BYC-USD peg from below. must not be less than the Interest Discount Factor to prevent arbitrage against the protocol
+* **Minimum Debt**
     * Statute index: 8
     * Statute name: ```STATUTE_VAULT_MINIMUM_DEBT```
-    * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. MD should also be high enough to prevent the harvesting of Absolute Liquidation Incentives, i.e. MD > ALI / [Liquidation Penalty](../liquidation). Otherwise the MD should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
+    * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. should also be high enough to prevent the harvesting of the Absolute Initiator Incentive, i.e. Minimum Debt > AII / [Liquidation Penalty](../liquidation). Otherwise, should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
 * **Treasury Delta Minimum**
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```

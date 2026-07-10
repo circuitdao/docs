@@ -75,7 +75,7 @@ The purpose of a Liquidation Auction is to recover debt as quickly as possible t
 
 ![Liquidation auction](./../../static/img/Liquidation_Auction_diagram.png)
 
-The auction starts with a **Start Price** (SP), calculated as the [Statutes Price](../../technical-manual/statutes) multiplied by the **Starting Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for a potential rebound in the XCH price before the auction starts.
+The auction starts with a **Start Price**, calculated as the [Statutes Price](../../technical-manual/statutes) multiplied by the **Starting Price Factor** (SPF). The SPF is a factor slightly greater than 100% to account for a potential rebound in the XCH price before the auction starts.
 
 As the auction is underway, the auction price automatically decreases step-by-step every few blocks as defined by the **Auction Price TTL** parameter.
 
@@ -103,11 +103,11 @@ A timed out auction can be restarted. This process continues ad infinitum until 
     * Statute index: 10
     * Statute name: ```STATUTE_VAULT_LIQUIDATION_PENALTY_BPS```
     * considerations: Needs to be high enough to set a strong incentive to borrowers to keep vaults sufficiently collateralized without being unreasonably punitive.
-* **Absolute Initiator Incentive**
+* **Absolute Initiator Incentive (AII)**
     * Statute index: 11
     * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_FLAT```
     * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of small vaults that pay a negligible RII (see below).
-* **Relative Initiator Incentive**
+* **Relative Initiator Incentive (RII)**
     * Statute index: 12
     * Statute name: ```STATUTE_VAULT_INITIATOR_INCENTIVE_BPS```
     * considerations: Needs to be high enough to incentivize keepers to trigger liquidation of large vaults even in extremely high fee environments, without being so high that it discourages borrowers from using the protocol.

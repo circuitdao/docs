@@ -58,7 +58,7 @@ Note that the vault owner passes in the current time as an argument when perform
 
 ## Loan and debt accounting
 
-Each vault keeps track of the **principal** (P) of outstanding loans, and the **discounted principal** (DP). Principal and discounted principal get updated whenever BYC is borrowed from or repaid to the vault. Principal also gets updated when a [Stability Fee transfer](#stability-fee-transfers) is performed.
+Each vault keeps track of the **principal** of outstanding loans, and the **discounted principal**. Principal and discounted principal get updated whenever BYC is borrowed from or repaid to the vault. Principal also gets updated when a [Stability Fee transfer](#stability-fee-transfers) is performed.
 
 The principal is the net amount of BYC borrowed and repaid:
 
