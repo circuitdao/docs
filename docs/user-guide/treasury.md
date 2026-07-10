@@ -38,6 +38,8 @@ It is governance's responsibility to continuously monitor the protocol's assets 
 
 In practice, governance should set the Treasury Maximum to the amount of accrued Savings Interest plus a buffer that can be used to cover bad debt in case it arises, and similarly for the Treasury Minimum, which should be set to a value greater than 0.
 
+Internally, the Treasury is made up of several coins whose balances are kept roughly even so that individual coins can accommodate deposits and withdrawals. The **Treasury Rebalance Ratio** sets how far the largest and smallest of these balances are allowed to diverge before the coins must be rebalanced.
+
 ## Statutes
 
 * **Approval Mod Hashes**:
@@ -56,3 +58,7 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
     * Statute index: 22
     * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
     * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents large amounts of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.
+* **Treasury Rebalance Ratio**:
+    * Statute index: 23
+    * Statute name: ```STATUTE_TREASURY_REBALANCE_RATIO_PCT```
+    * considerations: should be tight enough to keep Treasury coin balances reasonably even so that individual coins can accommodate deposits and withdrawals. should be loose enough to avoid forcing rebalancing spends more often than necessary.

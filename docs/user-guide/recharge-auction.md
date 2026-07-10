@@ -8,7 +8,7 @@ sidebar_position: 230
 
 A Recharge Auction can be launched whenever the BYC balance of the Treasury drops below the **[Treasury Minimum](../treasury)**.
 
-In a Recharge Auction the protocol acquires BYC to refill the Treasury by auctioning off CRT. Bidders must submit bids offering at least the **Recharge Auction Minimum Bid Amount** of BYC. Bids must also include the CRT price at which the BYC is offered. The CRT price of a bid must be greater than the **Recharge Auction Minimum CRT Price**, and greater than the CRT price of any previous bid.
+In a Recharge Auction the protocol acquires BYC to refill the Treasury by auctioning off CRT. Bidders must submit bids offering at least the **Recharge Auction Minimum Bid Amount** and at most the **Recharge Auction Maximum Bid Amount** of BYC. Bids must also include the CRT price at which the BYC is offered. The CRT price of a bid must be greater than the **Recharge Auction Minimum CRT Price**, and greater than the CRT price of any previous bid. The Recharge Auction Maximum Bid Amount bounds how much BYC a single auction can raise, and hence how much CRT it can mint.
 
 ![Recharge auction](./../../static/img/Recharge_auction_diagram.png)
 
@@ -40,4 +40,8 @@ Recharge Auctions increase the CRT supply.
     * Statute index: 27
     * Statute name: ```STATUTE_RECHARGE_AUCTION_BID_TTL```
     * considerations: should be long enough to allow keepers to show up for the auction to achieve a competitive bidding process and minimize the amount of CRT that gets minted.
+* **Recharge Auction Maximum Bid Amount**
+    * Statute index: 29
+    * Statute name: ```STATUTE_RECHARGE_AUCTION_MAXIMUM_BID```
+    * considerations: should be large enough to allow the Treasury to be refilled at a reasonable rate. should be small enough to limit how much CRT can be minted in a single bid, protecting CRT holders from excessive dilution.
 

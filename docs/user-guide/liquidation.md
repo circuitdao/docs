@@ -81,6 +81,8 @@ As the auction is underway, the auction price automatically decreases step-by-st
 
 The amount by which the auction price is lowered in each step is specified by the **Auction Price Step** parameter. The Auction Price Step is calculated as a percentage of the Start Price, and gets substracted from the previous auction price at each step.
 
+To stop uneconomically small bids from clogging up an auction, each bid must repay at least a minimum amount of debt, given by the greater of the **Absolute Minimum Bid** (a fixed amount of BYC) and the **Relative Minimum Bid** (a percentage of the vault's debt).
+
 The auction ends when either
 * the vault's debt is fully repaid
 * there is no collateral left in the vault; or
@@ -129,3 +131,11 @@ A timed out auction can be restarted. This process continues ad infinitum until 
     * Statute index: 17
     * Statute name: ```STATUTE_VAULT_AUCTION_MINIMUM_PRICE_FACTOR_BPS```
     * considerations: This value serves as an easily verifiable backstop to the implicit minimum auction price. As such it should be identical or very close to the implicit value.
+* **Absolute Minimum Bid**
+    * Statute index: 18
+    * Statute name: ```STATUTE_VAULT_AUCTION_MINIMUM_BID_FLAT```
+    * considerations: should be large enough that bids recover a meaningful amount of debt and do not clog up auctions with dust bids. should be small enough that keepers with little capital can still participate.
+* **Relative Minimum Bid**
+    * Statute index: 19
+    * Statute name: ```STATUTE_VAULT_AUCTION_MINIMUM_BID_BPS```
+    * considerations: similar considerations as with the Absolute Minimum Bid, scaled to the size of the vault's debt.

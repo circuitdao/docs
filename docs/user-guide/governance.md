@@ -31,9 +31,11 @@ The two primary tools governance has at its disposal to maintain the peg are Sta
 
 In addition to Stability Fee and Savings Rate, governance is able to update a few dozen additional Statutes. Those additional Statutes are not sensitive to market conditions, and are expected to rarely change, if ever. For example, M-of-N, the Statute that defines the minimum number of Announcer prices that must be included in an Oracle Price update, typically only needs to be updated when a data provider is whitelisted or unwhitelisted. Other Statutes, for example, those that define auction formats, may never need to be updated, although changes in the liquidity for assets being auctioned off, TVL of the protocol, as well as the number of bidders regularly participating in auctions could make occasional tweaks beneficial.
 
+As a last-resort emergency measure, governance can also activate the **Block Issuance** Statute. When it is set, all issuance of BYC and CRT is halted and most collateral vault operations are disabled, giving the protocol a way to contain damage if a smart contract vulnerability is ever discovered.
+
 ## Governance process
 
-Circuit protocol governance is conducted fully on-chain via CRT coins in **governance mode**. A CRT holder can propose to change a Statute by locking up CRT in a **proposal coin**. The CRT amount must exceed the **Proposal Threshold**. Making a proposal also requires a **Proposal Fee** to be paid. The proposal coin contains a **bill**, which either specifies the Statute to be changed and the proposed new value and Constraints, or a set of custom conditions to be announced by Statutes.
+Circuit protocol governance is conducted fully on-chain via CRT coins in **governance mode**. A CRT holder can propose to change a Statute by locking up CRT in a **proposal coin**. The CRT amount must exceed the **Proposal Threshold**. Making a proposal also requires a **Proposal Fee** to be paid. The proposal coin contains a **bill**, which either specifies the Statute to be changed and the proposed new value and Constraints, or a set of custom conditions to be announced by Statutes. In the latter case the conditions are held in the **Custom Conditions** Statute and announced by Statutes when the bill is implemented, which lets governance authorise one-off actions that do not correspond to any other Statute.
 
 ![Governance timeline](./../../static/img/Governance_timeline_diagram.png)
 
@@ -87,3 +89,11 @@ For example, consider a user who borrows BYC at an 8% Stability Fee to invest in
     * Statute index: 42
     * Statute name: ```STATUTE_GOVERNANCE_COOLDOWN_INTERVAL```
     * considerations: should be long enough to disincentivise mindless activations of governance mode. should be short enough to not unduly disincentivise participation in governance.
+* **Custom Conditions**
+    * Statute index: 3
+    * Statute name: ```STATUTE_CUSTOM_CONDITIONS```
+    * considerations: only relevant as the target of custom-condition proposals; it holds no persistent value between proposals.
+* **Block Issuance**
+    * Statute index: 43
+    * Statute name: ```STATUTE_BLOCK_ISSUANCE```
+    * considerations: should only ever be activated as an emergency response to a discovered vulnerability, as it disables core protocol functionality. should be deactivated again as soon as the issue has been resolved.
