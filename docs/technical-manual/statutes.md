@@ -111,7 +111,7 @@ Passing custom conditions is required in the following situations:
 * Approving or disapproving an Announcer (bitmask: ```010-000```)
 * Launching a Recharge Auction coin (bitmask: ```010-010```)
 
-Since these are one-off operations specific to certain coins, there is no point in storing information pertaining to these operations in Statutes. Instead, custom conditions are included in their respective bills, and, upon implementation, get announced by Statutes.
+Since these are one-off operations specific to certain coins, there is no point in storing information pertaining to these operations in Statutes. Instead, custom conditions are included in their respective bills, and, upon implementation, get announced by Statutes. These conditions are represented by the **Custom Conditions** Statute which, unlike other Statutes, holds no persistent value and exists only as the target that custom-condition bills are proposed against.
 
 The only custom condition type required by the protocol is ```SEND_MESSAGE```, which is enforced by the Statutes mutation operation.
 

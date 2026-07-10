@@ -6,7 +6,7 @@ sidebar_position: 235
 
 # Price Oracle
 
-The protocol needs to know the market price of XCH in US Dollars to value the XCH deposited in collateral vaults. It does this by reading from an **Oracle**, a singleton coin that keeps track of the XCH/USD price. This **Oracle Price** is regularly updated using price data supplied by **data providers**. The particular Oracle singleton that the protocol trusts is identified by its launcher ID, which is stored in the **Oracle Launcher ID** Statute. Because this Statute is mutable, governance can repoint the protocol to a replacement Oracle singleton should the need ever arise.
+The protocol needs to know the market price of XCH in US Dollars to value the XCH deposited in collateral vaults. It does this by reading from an **Oracle**, a singleton coin that keeps track of the XCH/USD price. This **Oracle Price** is regularly updated using price data supplied by **data providers**.
 
 ## Statutes Price
 
@@ -51,7 +51,7 @@ The Technical Manual contains additional information on [Announcers](../../techn
 
 Data providers are expected to provide regular, timely and accurate updates of the XCH/USD market price, and publish it in their respective Announcer. In particular, Announcer prices must be updated no less often than given by the **Announcer Price TTL**. Otherwise the Announcer price is considered expired and can no longer be used to update the Oracle Price.
 
-Governance should closely monitor the performance of data providers, and replace those that perform poorly or can no longer be trusted. The larger the number of high-quality whitelisted Announcers, the larger M-of-N can be chosen, and the lower the risk that the Oracle Price is not reflective of the market price. When governance disapproves an Announcer, a portion of that Announcer's deposit may be slashed to cover the transaction cost of the operation, up to a cap given by the **Maximum Disapproval Penalty**.
+Governance should closely monitor the performance of data providers, and replace those that perform poorly or can no longer be trusted. The larger the number of high-quality whitelisted Announcers, the larger M-of-N can be chosen, and the lower the risk that the Oracle Price is not reflective of the market price.
 
 :::warning
 

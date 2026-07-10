@@ -43,7 +43,7 @@ The main contact point between the Oracle and the rest of Circuit is the [update
 (sha256tree (c price (c updated_timestamp (c current_timestamp STATUTE_PRICE_DELAY)))))
 ```
 
-It also verifies that the puzzle from which the announcement is broadcast is that of a standard singleton with launcher ID given by ```STATUTE_ORACLE_LAUNCHER_ID```. Since this Statute is mutable, governance can replace the Oracle with another standard singleton that is able to announce the above message.
+It also verifies that the puzzle from which the announcement is broadcast is that of a standard singleton with launcher ID given by the **Oracle Launcher ID** Statute (```STATUTE_ORACLE_LAUNCHER_ID```). Since this Statute is mutable, governance can replace the Oracle with another standard singleton that is able to announce the above message.
 
 In theory, it would be possible for a different Oracle to use Announcers with different announcer mod (or not have Announcers at all). In this case however a crucial feature of the Oracle design would get lost, namely the ability for the protocol to reward data providers. Since the Announcer mod hash is hardcoded in the Announcer Registry mod, which in turn is hardcoded as an Approval mod, it would no longer be possible to claim Rewards from the Announcer Registry, and would remove the incentive structure that helps retain high quality data providers.
 

@@ -50,7 +50,7 @@ The number of coins to be spent simultaneously when changing balance depends on 
 
 * Recharge auction win: must spend all Treasury coins to spread BYC amount raised (BYC lot amount) evenly across all Treasury coins
 
-In case where only one coin is required, that coin should be chosen which has the smallest/greatest BYC balance in case of a deposit to/withdrawal from Treasury. This is the behaviour of the dapp. Similarly, when starting a Surplus Auction, a subset of Treasury coins and withdrawal amounts should be chosen such that the Treasury ring overall is in as evenly balanced a state as possible after the withdrawal. In cases where the whole Treasury ring must be spent, the deposit amount is spread evenly across all Treasury coins, with any remainder allocated to a coin that can be chosen arbitrarily.
+In case where only one coin is required, that coin should be chosen which has the smallest/greatest BYC balance in case of a deposit to/withdrawal from Treasury. This is the behaviour of the dapp. Similarly, when starting a Surplus Auction, a subset of Treasury coins and withdrawal amounts should be chosen such that the Treasury ring overall is in as evenly balanced a state as possible after the withdrawal. In cases where the whole Treasury ring must be spent, the deposit amount is spread evenly across all Treasury coins, with any remainder allocated to a coin that can be chosen arbitrarily. How evenly the ring must be balanced is governed by the **Treasury Rebalance Ratio**, which caps how far the largest and smallest Treasury coin balances may diverge.
 
 ### When changing Treasury Ring ordering
 

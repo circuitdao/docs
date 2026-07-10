@@ -131,7 +131,7 @@ Apart from Announcer Price and inner puzzle hash, the mutate operation does not 
 
 ### Govern
 
-Governance can **approve** or **disapprove** Announcers. An Announcer that is not approved is referred to as **unapproved**, irrespective of whether it was never approved or was disapproved after the last time it was approved. An approved Announcer has the APPROVED curried arg set to 1, an unapproved Announcer has it set to 0.
+Governance can **approve** or **disapprove** Announcers. An Announcer that is not approved is referred to as **unapproved**, irrespective of whether it was never approved or was disapproved after the last time it was approved. An approved Announcer has the APPROVED curried arg set to 1, an unapproved Announcer has it set to 0. When governance disapproves an Announcer, up to the **Maximum Disapproval Penalty** — a fraction of the Announcer's deposit — may be slashed to cover the transaction cost of the operation.
 
 ![Announcer govern coin spends diagram](./../../static/img/Announcer_govern_coin_spends_diagram.png)
 

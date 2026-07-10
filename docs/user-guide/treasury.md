@@ -38,8 +38,6 @@ It is governance's responsibility to continuously monitor the protocol's assets 
 
 In practice, governance should set the Treasury Maximum to the amount of accrued Savings Interest plus a buffer that can be used to cover bad debt in case it arises, and similarly for the Treasury Minimum, which should be set to a value greater than 0.
 
-Internally, the Treasury is made up of several coins whose balances are kept roughly even so that individual coins can accommodate deposits and withdrawals. The **Treasury Rebalance Ratio** sets how far the largest and smallest of these balances are allowed to diverge before the coins must be rebalanced.
-
 ## Statutes
 
 * **Approval Mod Hashes**:

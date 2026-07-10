@@ -6,7 +6,7 @@ sidebar_position: 1300
 
 # Blocking Issuance of BYC and CRT
 
-The Statute ```BLOCK_ISSUANCE``` allows governance to restrict certain protocol operations. It is intended as an emergency measure when a smart contract vulnerability is discovered.
+The **Block Issuance** Statute (```BLOCK_ISSUANCE```) allows governance to restrict certain protocol operations. It is intended as an emergency measure when a smart contract vulnerability is discovered.
 
 By restricting what operations are possible, the attack surface is significantly reduced. At the same time, protocol users are still able to
 * withdraw BYC from savings vaults
