@@ -37,7 +37,7 @@ The SF is one of the primary mechanisms by which BYC maintains its 1:1 peg to th
 
 Given that supply-demand dynamics for BYC are driven by the market, the SF needs to be adjusted on an ongoing basis. For this reason, governance should closely monitor market developments and vote to adjust the SF as needed.
 
-The protocol does not directly use the SF. Instead, there is a **Stability Fee Discount Factor** (SFDF) Statute, which is defined as SFDF = 1 + SF. Using the SFDF instead of the SF simplifies calculations within the protocol.
+The protocol does not directly use the SF. Instead, there is a **Stability Fee Discount Factor** (SFDF) Statute, which is defined as SFDF = PRECISION × (1 + SF), where PRECISION is a large fixed integer constant that the protocol uses for fixed-point arithmetic. Using the SFDF instead of the SF simplifies calculations within the protocol.
 
 ## Repaying loans
 

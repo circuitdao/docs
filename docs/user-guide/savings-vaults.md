@@ -17,7 +17,7 @@ The **savings** in a savings vault consist of two components, **savings balance*
 
 ```Savings = savings balance + accrued interest```
 
-Interest compounds, i.e. accrues on the vault's entire savings. The protocol does not directly use the SR. Instead, there is an **Interest Discount Factor** (IDF) parameter in Statutes, which is defined as IDF = 1 + SR. Using the IDF instead of the SR simplifies calculations.
+Interest compounds, i.e. accrues on the vault's entire savings. The protocol does not directly use the SR. Instead, there is an **Interest Discount Factor** (IDF) parameter in Statutes, which is defined as IDF = PRECISION × (1 + SR), where PRECISION is a large fixed integer constant that the protocol uses for fixed-point arithmetic. Using the IDF instead of the SR simplifies calculations.
 
 ### Deposits
 
