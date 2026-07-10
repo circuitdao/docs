@@ -113,3 +113,7 @@ Thanks to [identical spend aggregation](https://docs.chia.net/faq/#what-is-ident
     * Statute index: 36
     * Statute name: ```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```
     * considerations: similar considerations as with Minimum Deposit.
+* **Announcer Cooldown**
+    * Statute index: 39
+    * Statute name: ```STATUTE_ANNOUNCER_DISAPPROVAL_COOLDOWN_INTERVAL```
+    * considerations: should be long enough to give governance time to find a replacement data provider before a unilateral disapproval becomes effective. should be short enough to not unduly restrict data providers from exiting.

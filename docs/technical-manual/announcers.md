@@ -93,7 +93,7 @@ State variables (curried args) that can be updated in this way are:
 
 Changing the inner puzzle hash can be used to transfer the Announcer.
 
-An approved Announcer can be unilaterally disapproved by its data provider. Before the disapproval becomes effective, the **Cooldown Period** must have passed. This gives governance time to find a replacement data provider.
+An approved Announcer can be unilaterally disapproved by its data provider. Before the disapproval becomes effective, the **Announcer Cooldown** must have passed. This gives governance time to find a replacement data provider.
 
 The **deposit** is the amount of the Announcer coin. In case of an approved Announcer, the data provider must keep the deposit at or above the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](../announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
 
@@ -154,7 +154,7 @@ Keepers can penalize approved Announcers in the following circumstances:
 * ```VALUE_TTL``` is greater than Announcer Price TTL Statute
 * ```DEPOSIT``` is smaller than Minimum Deposit
 
-The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the **Implementation Period**, in order to minimize the risk of missing the deadline and incurring penalties.
+The second and third cases above are designed to incentivize data providers to keep the configuration of their respective Announcers in line with Announcer Price TTL and Minimum Deposit whenever these Statutes are updated by governance. In practice, it is recommended that Announcer configurations are updated well in advance of the **Implementation Interval**, in order to minimize the risk of missing the deadline and incurring penalties.
 
 A penalization can occur at most once per **Penalty Interval** (```STATUTE_ANNOUNCER_PENALTY_INTERVAL_MINUTES```). Since keepers will be competing to penalize Announcers, it can generally be expected that a penalty is applied at the earliest possible point in time in each Penalty Interval, and that therefore the deposit of a penalizable Announcer will decline at an exponential rate according to the Penalty Factor.
 

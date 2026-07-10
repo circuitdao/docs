@@ -37,7 +37,7 @@ Circuit protocol governance is conducted fully on-chain via CRT coins in **gover
 
 ![Governance timeline](./../../static/img/Governance_timeline_diagram.png)
 
-Once a proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto succeeds if it is backed by more CRT than the original proposal. If the bill has not been vetoed by the end of the Veto Period, it is referred to as **enacted**. Once the **Implementation Delay** has passed, the bill can be **implemented**. Implementation replaces the existing Statute in the Statutes singleton with the bill, or, in the custom conditions case, announces the bill's value. If the bill is not implemented within the **Implementation Period** it **lapses**. A bill can be **reset**, i.e. cancelled, by the proposer at any time as long as it has not been implemented yet.
+Once a proposal has been made, a **Veto Period** starts during which other CRT holders have the opportunity to veto the proposal. A veto succeeds if it is backed by more CRT than the original proposal. If the bill has not been vetoed by the end of the Veto Period, it is referred to as **enacted**. Once the **Implementation Delay** has passed, the bill can be **implemented**. Implementation replaces the existing Statute in the Statutes singleton with the bill, or, in the custom conditions case, announces the bill's value. If the bill is not implemented within the **Implementation Interval** it **lapses**. A bill can be **reset**, i.e. cancelled, by the proposer at any time as long as it has not been implemented yet.
 
 Once all governance operations have concluded, governance mode can be exited subject to a **Governance Cooldown** period.
 
@@ -79,7 +79,7 @@ For example, consider a user who borrows BYC at an 8% Stability Fee to invest in
     * Statute index: 40
     * Statute name: ```STATUTE_GOVERNANCE_BILL_PROPOSAL_FEE_MOJOS```
     * considerations: should be big enough to prevent spam proposals. otherwise should be as small as possible to let small CRT holders participate in governance.
-* **Implementation Period**
+* **Implementation Interval**
     * Statute index: 41
     * Statute name: ```STATUTE_GOVERNANCE_IMPLEMENTATION_INTERVAL```
     * considerations: should be long enough to allow manual implementation in a low-fee period. should be short enough to avoid attacks in which successful proposals are kept lingering and forgotten about only to be implemented unexpectedly in a changed environment.
