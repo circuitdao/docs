@@ -14,6 +14,8 @@ Announcers are also referred to as **Atom Announcers** because they are designed
 
 Data providers must update the Announcer Price regularly. Otherwise the Announcer Price can **expire**, and the Announcer gets penalized. An Announcer Price is said to be expired if the `TIMESTAMP_EXPIRES` curried arg lies in the past. `TIMESTAMP_EXPIRES` is updated to the current time plus `VALUE_TTL` whenever the Announcer Price is updated. `VALUE_TTL` is a curried arg that can be set to any value less than or equal to [**Announcer Price TTL**](../../user-guide/price-oracle) by the Announcer's data provider. The Announcer Price is best updated using the mutate operation. It is best practice to also update the Announcer Price as part of a configure operation.
 
+Governance can set a minimum amount of XCH that Announcer coins must maintain, the **Minimum Deposit**. The **deposit** is the actual amount of the Announcer coin. If an Announcer misbehaves, keepers can **penalize** the Announcer by slashing the **deposit**.
+
 ## Governance considerations
 
 Governance is responsible for selecting data providers and monitoring the performance of their respective Announcers. Governance should require comprehensive disclosures from data providers to ensure they have the required capabilities and experience:
@@ -61,22 +63,19 @@ Keeper operations:
 
 ### Register
 
-An approved Announcer can be registered with the **Announcer Registry** by its data provider. Registered Announcers are eligible for **Rewards**. Although data providers are not required to register their Announcers, there is no downside in doing so other than the transaction costs associated with registration.
+Approved Announcers can register an address with the **Announcer Registry** at which to receive **Rewards**. An Announcer that has registered an address is referred to as a **registered announcer**. Although data providers are not required to register their Announcers, there is no downside in doing so other than the transaction costs associated with registration.
 
 :::warning
-Data providers need to re-register their Announcers after every Rewards claim - be it by themselves or a third party - to continue to be eligible for Rewards.
+Data providers need to re-register their Announcers every time the Registry pays out Rewards.
 :::
 
-When Rewards are claimed by one of the Announcers, an automatic Reward payment is made to all registered Announcers, and the Registry cleared. This requires Announcers to re-register if they want to continue to be eligible for Rewards.
-
-Announcers should also keep in mind that the registration is based on the Announcer's inner puzzle hash. Accordingly, Rewards payments are made in the form of CRT coins with that same inner puzzle hash. So if an Announcer gets transferred to a new inner puzzle hash, the data provider should either be comfortable to still receive payments at the old inner puzzle hash, or re-register the Announcer with its new inner puzzle hash.
+When Rewards are claimed by one of the Announcers, a Reward payment is made to all registered addresses, and the Registry cleared. This requires Announcers to re-register if they want to continue to be eligible for Rewards.
 
 ![Announcer registration](./../../static/img/Announcer_registration_coin_spends_diagram.png)
 
-The register operation leaves the state of the Announcer unchanged. Registration is effected by adding the Announcer's inner puzzle hash to the Announcer Registry.
-
 #### State changes
 
+* ```CLAIM_COUNTER```: gets updated to the registry's ```CLAIM_COUNTER```
 * ```DEPOSIT```: see amount
 * amount: can be reduced to pay for fees or increased to top up deposit
 
@@ -95,7 +94,7 @@ Changing the inner puzzle hash can be used to transfer the Announcer.
 
 An approved Announcer can be unilaterally disapproved by its data provider. Before the disapproval becomes effective, the **Announcer Cooldown** must have passed. This gives governance time to find a replacement data provider.
 
-The **deposit** is the amount of the Announcer coin. In case of an approved Announcer, the data provider must keep the deposit at or above the **Minimum Deposit**. The deposit can be slashed by keepers under certain circumstances. See [penalize](../announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
+An approved Announcer must maintain a deposit at or above the Minimum Deposit. The deposit can be slashed by keepers under certain circumstances. See [penalize](../announcers#penalize) for more details. The configure operation allows data providers to increase or decrease the deposit. Since the deposit is slashable, it is generally recommended to not exceed the Minimum Deposit by a large amount. However, a small excess on top of the Minimum Deposit can reduce costs for well-behaved Announcers as it can be used to pay for transaction fees, making a separate fee coin spend unnecessary. If governance votes to increase the Minimum Deposit, data providers should top up their deposit in a timely manner to avoid getting penalized.
 
 The **Announcer Price TTL** Statute indicates how long an Announcer Price that's just been updated may be valid for at most. The actual validity period of an Announcer's price is stored in the ```VALUE_TTL``` curried arg. In practice, the only reason why an Announcer would use a shorter than necessary validity period is in case of a governance vote to reduce the Announcer Price TTL. This allows Announcers to prepare for the new Statute value ahead of time and avoid getting penalized for an expired Announcer Price upon implementation of the reduced Announcer Price TTL.
 
@@ -147,7 +146,11 @@ An approved Announcer may be registered with the Announcer Registry by its data 
 
 Announcers can be penalized if they are not well-behaved. Having a penalization mechanism in place protects the protocol as it sets a strong incentive for data providers to do their job well.
 
-An Announcer is penalized by applying the **Penalty Factor** to the Announcer's deposit. This slashes XCH from the Announcer coin's amount. The slashed amount is paid as a transaction fee and as such accrues to the benefit of the farmer of the block. The Penalty Factor is given in basis points and indicates the share of the deposit that will remain, e.g. ```9500``` means that 95% of the deposit remains, which is equivalent to 5% getting slashed. Penalization can result in the deposit being smaller than the Minimum Deposit.
+An Announcer is penalized by applying a **penalty** to the Announcer's deposit. This slashes XCH from the Announcer's deposit. The slashed amount is paid as a transaction fee and as such accrues to the benefit of the farmer of the block. The Penalty is calculated from the corresponding Statute and Announcer deposit as follows:
+```
+penalty = deposit x STATUTE_ANNOUNCER_PENALTY_PER_INTERVAL_BPS
+```
+Penalization can result in the deposit being smaller than the Minimum Deposit.
 
 Keepers can penalize approved Announcers in the following circumstances:
 * Announcer Price is expired, ie current time is greater than ```TIMESTAMP_EXPIRES```
@@ -172,7 +175,7 @@ The announce operation leaves the state of the Announcer unchanged.
 
 #### State changes
 
-None.
+None.x
 
 ## State and lineage
 
