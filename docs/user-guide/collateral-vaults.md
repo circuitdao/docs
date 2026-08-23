@@ -88,5 +88,5 @@ When a loan is taken out from a vault, the BYC borrowed is issued (minted) ad ho
     * considerations: Should be high enough to discourage spam attacks in which an attacker creates many small vaults in the hope of them all getting liquidated at once, clogging up Chia block space, and preventing timely liquidation of vaults. should also be high enough to prevent the harvesting of the Absolute Initiator Incentive, i.e. Minimum Debt > AII / [Liquidation Penalty](../liquidation). Otherwise, should be kept as small as possible in order not to make it economically unviable for legitimate users to take out small loans.
 * **Treasury Delta Minimum**
     * Statute index: 22
-    * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
+    * Statute name: ```STATUTE_TREASURY_DELTA_MINIMUM```
     * considerations: Choose large enough to prevent Treasury coin hogging. Choose small enough to allow small scale borrowers to repay most of their loans.

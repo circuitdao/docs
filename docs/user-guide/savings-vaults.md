@@ -59,5 +59,5 @@ The Savings Rate is set by governance. Although it is not directly tied to the S
     * considerations: needs to be adjusted based on market conditions, i.e. according to supply and demand for Bytecash, to maintain the peg. the higher the value is set, the more support is given to the BYC-USD peg from below. must not be greater than the Stability Fee Discount Factor to prevent arbitrage against the protocol
 * **Treasury Delta Minimum**
     * Statute index: 22
-    * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
+    * Statute name: ```STATUTE_TREASURY_DELTA_MINIMUM```
     * considerations: choose large enough to prevent Treasury coin hogging. choose small enough to allow small scale savers to make regular interest withdrawals

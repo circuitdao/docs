@@ -54,7 +54,7 @@ In practice, governance should set the Treasury Maximum to the amount of accrued
     * considerations: should be set to a value greater than accrued savings interest to have a buffer for covering bad debt. the buffer should be sufficiently large to not need constant readjustments as savings interest accrues over time. the buffer should also not be so large that it puts upwards price pressure on the BYC price.
 * **Treasury Delta Minimum**:
     * Statute index: 22
-    * Statute name: ```STATUTE_TREASURY_MINIMUM_DELTA```
+    * Statute name: ```STATUTE_TREASURY_DELTA_MINIMUM```
     * considerations: should be large enough so that transfers to Treasury cannot occur too frequently to thwart coin hogging attacks. should not be set too high so that it prevents large amounts of accrued SFs from being transferred to Treasury, requiring unnecessary recharge auctions to be held.
 * **Treasury Rebalance Ratio**:
     * Statute index: 23

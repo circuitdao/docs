@@ -203,7 +203,7 @@ Current Statute values are shown on the dapp's Protocol page in the Statutes dro
 
 (21) ```STATUTE_TREASURY_MAXIMUM```:
 
-(22) ```STATUTE_TREASURY_MINIMUM_DELTA```:
+(22) ```STATUTE_TREASURY_DELTA_MINIMUM```:
 
 (23) ```STATUTE_TREASURY_REBALANCE_RATIO_PCT```:
 
